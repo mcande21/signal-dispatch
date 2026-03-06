@@ -1,0 +1,59 @@
+# Data sources -- all sourced from prediction-markets project
+prediction_markets_root: "/Users/cooperanderson/work/personal/code/research/prediction-markets"
+
+structured_feeds:
+  ooni:
+    adapter: "ghost_market.ooni"
+    refresh: "1h"
+    signal: "Iran internet connectivity -- leading indicator for C2 reconstitution"
+  bonbast:
+    adapter: "ghost_market.bonbast"
+    refresh: "1h"
+    signal: "Iranian rial black market rate -- economic stress indicator"
+  eia:
+    adapter: "ghost_market.eia"
+    refresh: "24h"
+    signal: "US petroleum inventory, imports, exports, SPR -- energy disruption"
+  ofac:
+    adapter: "ghost_market.ofac"
+    refresh: "24h"
+    signal: "Sanctions list changes -- policy escalation/de-escalation"
+  cloudflare_radar:
+    adapter: "ghost_market.cloudflare_radar"
+    refresh: "1h"
+    signal: "Traffic anomalies -- internet disruption confirmation"
+  tedpix:
+    adapter: "ghost_market.tedpix"
+    refresh: "4h"
+    signal: "Tehran stock exchange -- Iranian economic sentiment"
+  usaspending:
+    adapter: "ghost_market.usaspending"
+    refresh: "24h"
+    signal: "Federal procurement patterns -- government spending signals"
+
+osint_feeds:
+  federal_register:
+    adapter: "osint.federal_register"
+    signal: "Executive orders, rule changes -- policy shifts"
+  congress:
+    adapter: "osint.congress"
+    signal: "Legislative activity, hearings -- political signals"
+  fec:
+    adapter: "osint.fec"
+    signal: "Campaign finance -- political money flows"
+
+quantitative:
+  fred:
+    adapter: "data_sources.FredAdapter"
+    signal: "Economic indicators -- macro context"
+  noaa:
+    adapter: "data_sources.NoaaAdapter"
+    signal: "Weather data -- for weather-sensitive markets"
+
+prediction_markets:
+  kalshi:
+    cli: "pm search"
+    signal: "Market prices as implied probabilities"
+  polymarket:
+    status: "planned"
+    signal: "Cross-platform price comparison"

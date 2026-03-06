@@ -1,0 +1,19 @@
+name: "Signal Dispatch"
+tagline: "Structured intelligence. Explicit probabilities. Tradeable insight."
+author: "Cooper Anderson"
+
+schedule:
+  weekly_brief: "Sunday"
+  breaking_alert: "as_needed"
+  deep_dive: "first_of_month"
+
+tiers:
+  free:
+    description: "Weekly summary, high-level probabilities"
+    content_types: ["weekly_brief_summary"]
+  paid:
+    price_monthly: 20
+    description: "Full analysis, data breakdowns, market recommendations, breaking alerts"
+    content_types: ["weekly_brief", "breaking_alert", "deep_dive"]
+
+platform: "substack"  # or "beehiiv"

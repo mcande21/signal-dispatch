@@ -1,0 +1,596 @@
+---
+name: review
+description: Editorial review of a Signal Dispatch draft -- style, accuracy, calibration, persona consistency
+version: 1.0.0
+---
+
+# `/review` -- Editorial Review
+
+*"Edge requires honesty."*
+
+Quality assurance before publication. Five-pass editorial review ensuring style guide compliance, fact verification, probability calibration, and persona consistency.
+
+## Purpose
+
+Reviews a Signal Dispatch draft through five specialized passes:
+- **Style Guide Compliance** (Tali) -- Word choice, structure, format against docs/STYLE-GUIDE.md
+- **Fact Verification** (Shepard) -- Data accuracy against research brief
+- **Probability Format Validation** (Shepard) -- Completeness of probability estimates
+- **Calibration Cross-Check** (Shepard) -- Probability update consistency and staging
+- **Persona Consistency** (Kelly) -- Voice adherence to Data-Driven Practitioner archetype
+
+This is the final gate before publication. Editorial integrity protects calibration credibility. One wrong number undermines the brand.
+
+## Invocation
+
+```bash
+/review --issue <number>
+```
+
+## Arguments
+
+| Argument | Required | Description | Example |
+|----------|----------|-------------|---------|
+| `--issue` | Yes | Issue number | `--issue 003` |
+
+## Prerequisites
+
+Before running `/review`, verify these files exist:
+
+1. **Draft:** `content/drafts/{issue-number}-{type}.md`
+   - {type} is one of: weekly, breaking, deep-dive
+   - File must be complete (not stub or outline)
+
+2. **Research brief:** `content/research/{issue-number}/brief.md`
+   - Contains source data for all claims in draft
+   - Has timestamped citations for verification
+
+3. **Probability state:** `content/state/probabilities.json`
+   - Tracks all active probability estimates
+   - Contains priors for comparison
+
+If any prerequisite is missing, `/review` will error. Use `/build` to create the research brief first.
+
+## Review Protocol -- Five Passes
+
+### Pass 1: Style Guide Compliance (Tali)
+
+**Purpose:** Mechanical adherence to Signal Dispatch style rules. Tali is thorough and detail-oriented -- ideal for systematic rule-checking.
+
+**What Tali reviews:**
+
+**Word Choice:**
+- "I assess" (not "I think" or "I believe")
+- "probability" (not "chance" or "likelihood")
+- "signal" (not "indicator" or "sign")
+- "data shows" (not "data suggests")
+- "I trade this" (not "I have a position")
+- "methodology" (not "approach" or "method")
+- "calibration" (not "accuracy")
+- "resolution criteria" (not "how we'll know")
+- Specific numbers over vague quantifiers
+
+**Avoided Words:**
+- "Breaking" (unless genuinely time-sensitive)
+- "Shocking" / "stunning" / "explosive"
+- "Sources say" (we use open sources -- cite them)
+- "Experts believe" (which experts? cite them)
+- "Could" / "might" / "may" without probability
+- "Significant" without quantification
+- Passive voice in analysis sections
+- Hedge words: "somewhat," "arguably," "perhaps"
+
+**Never Allowed:**
+- "BREAKING" in all caps
+- Exclamation points in analysis
+- Rhetorical questions as clickbait
+- "You won't believe..."
+- Political labels as shorthand (use specific policy positions)
+- "My sources" or "insider knowledge"
+- Emojis in analysis
+
+**Sentence Structure:**
+- Leads with data ("Y data shows X" not "I believe X because Y")
+- Active voice for analysis ("I find" not "it was found")
+- One idea per paragraph
+- Short sentences for impact, long sentences for methodology
+
+**Probability Format:**
+- Has specific number (not "likely")
+- Has stated basis ("based on X, Y, Z")
+- Has prior when updating ("Updated from 45% to 65%")
+- Has resolution criteria ("Resolves YES if X by [date]")
+- Confidence tier matches language (see style guide table)
+
+**Citations:**
+- OSINT: Source name + timestamp ("OONI (2026-03-05T14:22 UTC)")
+- Markets: Platform + contract + price + timestamp ("Kalshi: Iran Nuclear Deal by 2027 @ $0.095 (2026-03-05)")
+- News: Publication + date, link in footnote
+- No anonymous sources
+
+**Formatting:**
+- Clean header hierarchy (H1 title, H2 sections, H3 subsections)
+- **Bold** for key data points and probability numbers
+- *Italics* for publication names and direct quotes
+- Footnotes for methodology detail and wit
+- No emojis, no all-caps except acronyms (OONI, EIA, IRGC)
+
+**Dispatch template:**
+
+```
+Task(
+  subagent_type: "tali",
+  prompt: "Editorial style review for Signal Dispatch issue #{issue-number}.
+
+Read these files:
+- Draft: /Users/cooperanderson/work/personal/code/research/signal-dispatch/content/drafts/{issue-number}-{type}.md
+- Style guide: /Users/cooperanderson/work/personal/code/research/signal-dispatch/docs/STYLE-GUIDE.md
+
+Review the draft against EVERY rule in the style guide. Check:
+- Word choice (assess not think, probability not chance, etc.)
+- Avoided words (breaking, shocking, sources say, hedge words)
+- Never-allowed patterns (all-caps, exclamation points, rhetorical questions, emojis)
+- Sentence structure (leads with data, active voice, one idea per paragraph)
+- Probability format (number + basis + prior + resolution criteria)
+- Citation format (source + timestamp for OSINT, platform + contract + price for markets)
+- Formatting (headers, bold/italics usage, footnotes, no emojis)
+
+For EACH violation found, report:
+1. Line/location in draft
+2. Rule violated (reference style guide section)
+3. Current text
+4. Suggested fix
+
+Categorize violations:
+- **Critical:** Must fix (wrong probability format, missing citations, passive analysis voice)
+- **Important:** Should fix (word choice, hedge words, structure issues)
+- **Minor:** Nice to fix (formatting consistency, footnote opportunities)
+
+Report format:
+- PASS (no violations) or NEEDS WORK (list violations by category)
+- Violation count by severity
+
+Be thorough. This is the final editorial gate before publication.",
+  description: "Style review SD #{issue-number}",
+  model: "sonnet"
+)
+```
+
+### Pass 2: Fact Verification (Shepard)
+
+**Purpose:** Ensure every data claim in the draft matches the research brief. Even small discrepancies destroy calibration credibility.
+
+**What Shepard verifies:**
+
+Read draft and research brief side by side. For every data claim:
+
+**Numbers:**
+- Does the number match research brief exactly?
+- Is the baseline context correct?
+- Are percentage changes calculated correctly?
+- Are dates and timestamps accurate?
+
+**Source Citations:**
+- Is the source name correct?
+- Is the timestamp format correct (YYYY-MM-DDTHH:MM UTC)?
+- Does the citation match the research brief?
+- Are prediction market prices and dates accurate?
+
+**Context:**
+- Is the baseline stated correctly?
+- Are historical comparisons accurate?
+- Are "X of the last Y times" patterns correct?
+
+**Workflow:**
+
+1. Open draft: `content/drafts/{issue-number}-{type}.md`
+2. Open research brief: `content/research/{issue-number}/brief.md`
+3. Extract every data claim from draft
+4. Verify each claim against research brief
+5. Flag discrepancies with:
+   - Location in draft
+   - What draft says
+   - What research brief says
+   - Severity (critical if wrong number/date, important if wrong context)
+
+**Report format:**
+
+```markdown
+## Fact Verification: SD Issue #{issue-number}
+
+### Critical Issues (wrong numbers/dates)
+- [list with location, discrepancy, correct value]
+
+### Important Issues (wrong context/baselines)
+- [list with location, discrepancy, correct value]
+
+### Verified Claims: {count}
+### Discrepancies: {count}
+
+Result: PASS / NEEDS WORK
+```
+
+If discrepancies exist, NEEDS WORK. No exceptions.
+
+### Pass 3: Probability Format Validation (Shepard)
+
+**Purpose:** Verify every probability estimate meets completeness requirements. Incomplete estimates undermine calibration tracking.
+
+**What Shepard validates:**
+
+For every probability estimate in the draft, check:
+
+**Required Elements:**
+- [ ] Specific number ("65%" not "likely")
+- [ ] Stated basis ("based on X, Y, Z signals")
+- [ ] Resolution criteria ("Resolves YES if...")
+- [ ] Resolution date ("...by 2026-06-30")
+
+**For Updates (when revising existing estimate):**
+- [ ] Prior stated ("Prior: 45%")
+- [ ] Prior date stated ("prior from 2026-02-19")
+- [ ] Change magnitude ("Updated to 65%, +20 percentage points")
+- [ ] New data that triggered update
+
+**Confidence Tier Match:**
+Verify language matches probability range per style guide:
+- 90%+ → "I assess with high confidence"
+- 70-89% → "I assess [X]% probability"
+- 50-69% → "I assess [X]% probability -- close to coin flip at low end"
+- 30-49% → "I assess [X]% probability -- more likely NOT to happen"
+- <30% → "I assess low probability ([X]%)"
+
+**Workflow:**
+
+1. Extract all probability estimates from draft
+2. For each estimate, verify checklist above
+3. Flag incomplete estimates with:
+   - Location in draft
+   - Missing element(s)
+   - Suggested format
+
+**Report format:**
+
+```markdown
+## Probability Format Validation: SD Issue #{issue-number}
+
+### Estimates Found: {count}
+
+### Complete: {count}
+- [list with probability and event]
+
+### Incomplete: {count}
+- [list with location, missing elements, suggested fix]
+
+Result: PASS / NEEDS WORK
+```
+
+If any estimate is incomplete, NEEDS WORK. Calibration tracking depends on complete format.
+
+### Pass 4: Calibration Cross-Check (Shepard)
+
+**Purpose:** Verify probability updates are consistent with evidence and stage updates to probabilities.json (without committing until publish).
+
+**What Shepard validates:**
+
+**Load probability state:**
+- Read `content/state/probabilities.json`
+- Extract all active predictions
+
+**For each probability in draft:**
+
+**Prior Correctness:**
+- Does stated prior match probabilities.json?
+- Is prior date correct?
+- If new prediction, confirm it's not duplicating existing one
+
+**Update Direction:**
+- Is update direction consistent with new evidence?
+- Example: If OONI measurements recovered AND rial spread compressed → stability UP
+- Flag if update contradicts evidence direction
+
+**Update Magnitude:**
+- Is update size reasonable given evidence strength?
+- Large updates (>20 percentage points) require strong justification
+- Multiple large updates in one issue = red flag
+
+**Calibration Red Flags:**
+- More than 2 large updates (>20pp) in single issue
+- Update without new data
+- Update contradicts evidence direction
+- Frequent updates to same prediction (signal instability)
+
+**Workflow:**
+
+1. Read `content/state/probabilities.json`
+2. Extract probability estimates from draft
+3. For each estimate:
+   - Verify prior matches state file
+   - Check update direction vs evidence
+   - Assess update magnitude reasonableness
+   - Flag calibration concerns
+4. Stage updates (create temp file, don't commit)
+
+**Report format:**
+
+```markdown
+## Calibration Cross-Check: SD Issue #{issue-number}
+
+### Estimates Reviewed: {count}
+
+### Prior Verification:
+- Correct: {count}
+- Incorrect: {count} [list with details]
+
+### Update Direction:
+- Consistent with evidence: {count}
+- Questionable: {count} [list with concerns]
+
+### Magnitude Concerns:
+- Large updates (>20pp): {count} [list with justification check]
+- Multiple large updates: {yes/no}
+
+### Calibration Red Flags:
+- [list any patterns that suggest calibration issues]
+
+### Staged Updates:
+- Written to: content/state/probabilities.json.staged
+- DO NOT commit until publish
+
+Result: PASS / NEEDS WORK / WARN
+```
+
+PASS = all checks clear
+NEEDS WORK = incorrect priors or contradictory updates
+WARN = calibration red flags but not blocking (Cooper decides)
+
+### Pass 5: Persona Consistency (Kelly)
+
+**Purpose:** Verify voice matches Data-Driven Practitioner archetype and institutional brand. Persona drift compounds over issues -- catch it early.
+
+**What Kelly reviews:**
+
+**Voice Archetype Check:**
+- First-person singular throughout? ("I assess" not "we assess")
+- Calm confidence maintained? (no panic, no hedging)
+- Methodologically rigorous? (shows work, cites sources)
+- Skin-in-the-game transparent? ("I trade this" present when appropriate)
+- Respectfully direct? (active voice, writes for intelligent outsider)
+
+**Institutional Brand:**
+- "Signal Dispatch" used for institutional references (methodology, infrastructure)?
+- Not personal blog tone?
+- No claimed credentials that don't exist?
+- Trademark phrases used naturally (not forced)?
+
+**Emotional Register:**
+- Confidence without arrogance?
+- Analytical curiosity present?
+- Measured concern when data warrants (not fear-mongering)?
+- Honest about uncertainty?
+- Dry wit in footnotes only (rare, strategic)?
+
+**Red Flags from Persona Guide:**
+- Claiming credentials that don't exist
+- Making unfalsifiable predictions
+- Fear-based language for engagement
+- Political partisanship disguised as analysis
+- Condescension toward readers
+- AI-polished generic writing
+- Clickbait headlines
+
+**Signature Phrases (check for natural usage):**
+
+Openings:
+- "Here's what moved this cycle:"
+- "Three signals shifted simultaneously:"
+- "The data changed my assessment:"
+
+Anchors:
+- "Edge requires honesty."
+- "Show your work."
+- "Calibration over conviction."
+- "Losses prove the wins are real."
+
+Recurring:
+- "I trade this."
+- "Numbers without receipts."
+- "Here's the recipe, not just the meal."
+- "Not panic. Pattern recognition."
+
+**Dispatch template:**
+
+```
+Task(
+  subagent_type: "kelly",
+  prompt: "Persona consistency review for Signal Dispatch issue #{issue-number}.
+
+Read these files:
+- Draft: /Users/cooperanderson/work/personal/code/research/signal-dispatch/content/drafts/{issue-number}-{type}.md
+- Persona guide: /Users/cooperanderson/work/personal/code/research/signal-dispatch/docs/PERSONA.md
+- Persona config: /Users/cooperanderson/work/personal/code/research/signal-dispatch/config/persona.yaml
+
+Review the draft for voice consistency with the Data-Driven Practitioner archetype.
+
+Check:
+- First-person singular throughout (\"I assess\" not \"we assess\")
+- Calm confidence maintained (no panic, no hedging)
+- Methodologically rigorous (shows work, cites sources)
+- Skin-in-the-game transparency (\"I trade this\" when appropriate)
+- Active voice for analysis
+- Institutional brand clarity (\"Signal Dispatch\" for methodology references)
+- Emotional register appropriate (confidence not arrogance, measured concern not fear)
+
+Red flags to catch:
+- Claiming credentials that don't exist
+- Fear-based engagement language
+- Political partisanship
+- Condescension toward readers
+- AI-generic polished writing
+- Clickbait patterns
+
+For signature phrases, verify:
+- Used naturally (not forced)
+- Fit context appropriately
+- Don't feel like templates
+
+For each persona drift point found, report:
+1. Location in draft
+2. Issue (voice inconsistency, red flag, forced phrasing)
+3. Current text
+4. Suggested revision to match archetype
+
+Categorize:
+- **Critical:** Breaks core archetype (wrong person, fear-mongering, credentials claimed)
+- **Important:** Voice drift (hedging, passive voice, condescension)
+- **Minor:** Refinement opportunity (signature phrase could be more natural)
+
+Report format:
+- PASS (consistent with archetype) or NEEDS WORK (list drift points)
+- Drift count by severity
+
+Voice consistency is the brand. Drift compounds over issues. Be thorough.",
+  description: "Persona review SD #{issue-number}",
+  model: "sonnet"
+)
+```
+
+## Parallel Dispatch Strategy
+
+**Passes 1 and 5 can run in parallel** (Tali style review + Kelly persona review). They're independent checks.
+
+**Passes 2-4 run sequentially** (all Shepard). They build on each other:
+- Pass 2 verifies data accuracy (foundation)
+- Pass 3 validates probability format (structure)
+- Pass 4 cross-checks calibration (consistency)
+
+**Workflow:**
+
+1. Dispatch Tali (Pass 1) and Kelly (Pass 5) in parallel
+2. Wait for both to return
+3. Run Shepard Passes 2-4 sequentially
+4. Synthesize all five pass results
+5. Present review summary to Cooper
+
+## Review Summary Format
+
+After all five passes complete, present this summary to Cooper:
+
+```markdown
+## Editorial Review: SD Issue #{issue-number}
+
+### Pass Results
+| Pass | Agent | Result | Findings |
+|------|-------|--------|----------|
+| Style Guide | Tali | PASS/NEEDS WORK | {count} violations |
+| Fact Verification | Shepard | PASS/NEEDS WORK | {count} discrepancies |
+| Probability Format | Shepard | PASS/NEEDS WORK | {count} incomplete |
+| Calibration | Shepard | PASS/NEEDS WORK/WARN | {count} concerns |
+| Persona | Kelly | PASS/NEEDS WORK | {count} drift points |
+
+### Overall: PASS / NEEDS WORK
+
+---
+
+### Critical Issues (must fix before publish)
+[List all critical findings across passes]
+
+### Important Issues (should fix before publish)
+[List all important findings across passes]
+
+### Minor Issues (optional refinements)
+[List all minor findings across passes]
+
+### Calibration Notes
+[Any red flags or patterns from Pass 4]
+
+### Staged Updates
+- Probability updates staged to: content/state/probabilities.json.staged
+- DO NOT commit until publish
+
+---
+
+Cooper: Approve for publish, or request fixes?
+```
+
+## Cooper Decision Points
+
+After review summary:
+
+**If PASS across all passes:**
+- "Approve for publish" → proceed to `/publish`
+- "Request minor fixes" → make edits, no re-review needed
+
+**If NEEDS WORK on any pass:**
+- Fix critical and important issues
+- Re-run `/review --issue {number}` after fixes
+- Iterate until PASS
+
+**If WARN on calibration:**
+- Cooper decides: accept the calibration concerns or revise probabilities
+- WARN is not blocking, but requires explicit approval
+
+## Anti-Patterns
+
+**Don't skip fact verification.**
+- "It's probably right" is not acceptable
+- One wrong number undermines calibration credibility
+- VERIFY every data point against research brief
+
+**Don't rubber-stamp persona.**
+- Voice drift is subtle and compounds over issues
+- Kelly catches patterns Shepard might miss
+- Persona consistency IS the brand
+
+**Don't approve large probability swings without justification.**
+- Updates >20 percentage points require clear evidence
+- Multiple large updates in one issue suggest overcorrection
+- This is the calibration moat -- protect it
+
+**Don't commit probabilities.json until publish.**
+- Pass 4 stages updates to .staged file
+- Only `/publish` commits to main state file
+- Prevents orphaned probability state if review fails
+
+## Error Handling
+
+**If draft doesn't exist:**
+```
+Error: Draft not found
+Expected: content/drafts/{issue-number}-{type}.md
+
+Run /build first to create draft, or check issue number.
+```
+
+**If research brief doesn't exist:**
+```
+Error: Research brief not found
+Expected: content/research/{issue-number}/brief.md
+
+Run /build --research to create research brief first.
+```
+
+**If probabilities.json doesn't exist:**
+```
+Error: Probability state not found
+Expected: content/state/probabilities.json
+
+Initialize state file:
+echo '{"predictions": []}' > content/state/probabilities.json
+```
+
+**If agent returns with errors:**
+Report to Cooper with context. Don't silently fail or skip passes.
+
+## Notes
+
+- Tali and Kelly use Sonnet (sufficient for systematic review)
+- Shepard uses current model (Opus) for judgment calls
+- Review is the final editorial gate -- be thorough
+- Calibration credibility depends on catching errors here
+- Persona drift compounds -- Kelly's role is critical
+- One wrong data point undermines the entire brand
+
+---
+
+*"Show your work."*

@@ -1,0 +1,23 @@
+{
+  "$schema": "Signal Dispatch Probability State v1",
+  "last_updated": "2026-03-05T00:00:00Z",
+  "events": [],
+  "resolved": [],
+  "calibration_summary": {
+    "total_resolved": 0,
+    "mean_brier_score": null,
+    "calibration_buckets": {
+      "0-10": { "predictions": 0, "outcomes": 0 },
+      "10-20": { "predictions": 0, "outcomes": 0 },
+      "20-30": { "predictions": 0, "outcomes": 0 },
+      "30-40": { "predictions": 0, "outcomes": 0 },
+      "40-50": { "predictions": 0, "outcomes": 0 },
+      "50-60": { "predictions": 0, "outcomes": 0 },
+      "60-70": { "predictions": 0, "outcomes": 0 },
+      "70-80": { "predictions": 0, "outcomes": 0 },
+      "80-90": { "predictions": 0, "outcomes": 0 },
+      "90-100": { "predictions": 0, "outcomes": 0 }
+    },
+    "directional_accuracy": null
+  }
+}

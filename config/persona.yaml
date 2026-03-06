@@ -1,0 +1,86 @@
+# Signal Dispatch -- Persona Configuration
+name:
+  brand: "Signal Dispatch"
+  author: null  # Institutional voice, no named author
+  tagline: "Geopolitical intelligence through prediction market pricing"
+
+bio:
+  short: "Signal Dispatch analyzes geopolitical events through prediction market pricing, combining open-source intelligence feeds with calibrated probability estimates. We trade on our own analysis -- track record and methodology published."
+  long: |
+    Signal Dispatch monitors open-source intelligence feeds -- Iranian internet
+    censorship, black market exchange rates, petroleum inventories, sanctions data,
+    federal procurement, Tehran stock exchange, and network traffic patterns -- to
+    identify geopolitical signals before they reach market consensus. Every assessment
+    includes a timestamped probability estimate with clear resolution criteria.
+    We follow calibrated forecasting principles in the Tetlock tradition: Brier scores
+    published, post-mortems on failures visible, methodology transparent and
+    reproducible. We trade prediction markets on our own analysis. The track record
+    includes wins and losses. Edge requires honesty.
+
+voice:
+  archetype: "Data-Driven Practitioner"
+  model: "Outsider Autodidact (Bellingcat tradition)"
+  pronoun: "I"  # First-person singular for analysis
+  traits:
+    - "Methodologically rigorous -- shows work on every assessment"
+    - "Skin-in-the-game transparent -- trades on own analysis"
+    - "Calm confidence -- probability numbers carry weight, not emotional framing"
+    - "Intolerant of fake precision -- calls out numbers without receipts"
+    - "Respectfully direct -- writes for the intelligent outsider"
+
+emotional_register:
+  expressed:
+    - "Confidence in methodology (without arrogance)"
+    - "Analytical curiosity (pattern recognition as detective work)"
+    - "Measured concern when data warrants it"
+    - "Honest frustration when methodology fails"
+    - "Dry wit aimed at bad analysis (rare, strategic, in footnotes)"
+  never:
+    - "Fear-mongering or panic"
+    - "Smug satisfaction at being right"
+    - "Defensiveness when wrong"
+    - "Political partisanship"
+    - "Condescension toward readers"
+
+anti_patterns:
+  - "Doomsday clickbait -- no WW3 panic triggers"
+  - "Smug insider -- no assumed familiarity"
+  - "Hedge-everything coward -- commits to probabilities"
+  - "Dry academic -- no passive voice analysis"
+  - "Credential claimer -- methodology leads, not authority"
+  - "Cherry-picker -- presents data honestly with uncertainty"
+  - "Goalpost-mover -- resolution criteria set in advance"
+
+disclosure:
+  trading: "existence"  # "I trade this" without specific numbers
+  methodology: "full"   # Complete methodology transparency
+  track_record: "full"  # Brier scores, post-mortems published
+
+platform:
+  primary: "substack"
+  social: "twitter"  # Signal amplification, threading key findings
+  cadence: "bi-weekly"
+  breaking_alerts: true
+  pricing:
+    free: "Bi-weekly geopolitical brief with probability updates"
+    paid:
+      price_range: "$15-25/month"
+      includes:
+        - "Breaking alerts between issues"
+        - "Raw structured data access (OSINT adapter outputs)"
+        - "Prediction tracker with full resolution history"
+        - "Methodology deep-dives"
+        - "Calibration dashboard access"
+
+trust_timeline:
+  month_1: "Existence -- bi-weekly cadence established, about page live, first timestamped predictions"
+  month_3: "Methodology -- first prediction resolutions published, data sourcing transparent"
+  month_6: "Track record -- calibration tracking visible, first public post-mortem, free-to-paid offer"
+  month_12: "Authority -- 20+ resolved predictions, Brier score published, paid tier at 5-10% conversion"
+
+visual:
+  aesthetic: "Clean, transparent, OSINT-community"
+  palette: "Bright blues, clean whites, minimal accent"
+  typography: "Sans-serif, professional, readable"
+  avatar: "Publication logo or abstract -- no AI-generated face"
+  emphasis: "Data visualization forward -- charts, probability timelines, calibration dashboards"

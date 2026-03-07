@@ -1,0 +1,728 @@
+{
+  "country": "IR",
+  "measurements": [
+    {
+      "date": "2026-02-27T00:00:00Z",
+      "anomaly_count": 82,
+      "confirmed_count": 188,
+      "measurement_count": 578
+    },
+    {
+      "date": "2026-02-27T01:00:00Z",
+      "anomaly_count": 43,
+      "confirmed_count": 125,
+      "measurement_count": 384
+    },
+    {
+      "date": "2026-02-27T02:00:00Z",
+      "anomaly_count": 98,
+      "confirmed_count": 150,
+      "measurement_count": 630
+    },
+    {
+      "date": "2026-02-27T03:00:00Z",
+      "anomaly_count": 59,
+      "confirmed_count": 155,
+      "measurement_count": 589
+    },
+    {
+      "date": "2026-02-27T04:00:00Z",
+      "anomaly_count": 108,
+      "confirmed_count": 123,
+      "measurement_count": 412
+    },
+    {
+      "date": "2026-02-27T05:00:00Z",
+      "anomaly_count": 84,
+      "confirmed_count": 151,
+      "measurement_count": 677
+    },
+    {
+      "date": "2026-02-27T06:00:00Z",
+      "anomaly_count": 84,
+      "confirmed_count": 62,
+      "measurement_count": 417
+    },
+    {
+      "date": "2026-02-27T07:00:00Z",
+      "anomaly_count": 178,
+      "confirmed_count": 270,
+      "measurement_count": 924
+    },
+    {
+      "date": "2026-02-27T08:00:00Z",
+      "anomaly_count": 183,
+      "confirmed_count": 228,
+      "measurement_count": 1085
+    },
+    {
+      "date": "2026-02-27T09:00:00Z",
+      "anomaly_count": 125,
+      "confirmed_count": 160,
+      "measurement_count": 717
+    },
+    {
+      "date": "2026-02-27T10:00:00Z",
+      "anomaly_count": 74,
+      "confirmed_count": 147,
+      "measurement_count": 562
+    },
+    {
+      "date": "2026-02-27T11:00:00Z",
+      "anomaly_count": 81,
+      "confirmed_count": 125,
+      "measurement_count": 582
+    },
+    {
+      "date": "2026-02-27T12:00:00Z",
+      "anomaly_count": 64,
+      "confirmed_count": 110,
+      "measurement_count": 625
+    },
+    {
+      "date": "2026-02-27T13:00:00Z",
+      "anomaly_count": 53,
+      "confirmed_count": 111,
+      "measurement_count": 464
+    },
+    {
+      "date": "2026-02-27T14:00:00Z",
+      "anomaly_count": 76,
+      "confirmed_count": 146,
+      "measurement_count": 609
+    },
+    {
+      "date": "2026-02-27T15:00:00Z",
+      "anomaly_count": 103,
+      "confirmed_count": 111,
+      "measurement_count": 556
+    },
+    {
+      "date": "2026-02-27T16:00:00Z",
+      "anomaly_count": 163,
+      "confirmed_count": 140,
+      "measurement_count": 1020
+    },
+    {
+      "date": "2026-02-27T17:00:00Z",
+      "anomaly_count": 136,
+      "confirmed_count": 220,
+      "measurement_count": 675
+    },
+    {
+      "date": "2026-02-27T18:00:00Z",
+      "anomaly_count": 145,
+      "confirmed_count": 193,
+      "measurement_count": 686
+    },
+    {
+      "date": "2026-02-27T19:00:00Z",
+      "anomaly_count": 101,
+      "confirmed_count": 84,
+      "measurement_count": 644
+    },
+    {
+      "date": "2026-02-27T20:00:00Z",
+      "anomaly_count": 26,
+      "confirmed_count": 57,
+      "measurement_count": 199
+    },
+    {
+      "date": "2026-02-27T21:00:00Z",
+      "anomaly_count": 63,
+      "confirmed_count": 138,
+      "measurement_count": 546
+    },
+    {
+      "date": "2026-02-27T22:00:00Z",
+      "anomaly_count": 81,
+      "confirmed_count": 123,
+      "measurement_count": 759
+    },
+    {
+      "date": "2026-02-27T23:00:00Z",
+      "anomaly_count": 60,
+      "confirmed_count": 119,
+      "measurement_count": 535
+    },
+    {
+      "date": "2026-02-28T00:00:00Z",
+      "anomaly_count": 96,
+      "confirmed_count": 185,
+      "measurement_count": 549
+    },
+    {
+      "date": "2026-02-28T01:00:00Z",
+      "anomaly_count": 114,
+      "confirmed_count": 293,
+      "measurement_count": 1010
+    },
+    {
+      "date": "2026-02-28T02:00:00Z",
+      "anomaly_count": 133,
+      "confirmed_count": 176,
+      "measurement_count": 724
+    },
+    {
+      "date": "2026-02-28T03:00:00Z",
+      "anomaly_count": 69,
+      "confirmed_count": 143,
+      "measurement_count": 545
+    },
+    {
+      "date": "2026-02-28T04:00:00Z",
+      "anomaly_count": 141,
+      "confirmed_count": 167,
+      "measurement_count": 675
+    },
+    {
+      "date": "2026-02-28T05:00:00Z",
+      "anomaly_count": 127,
+      "confirmed_count": 229,
+      "measurement_count": 898
+    },
+    {
+      "date": "2026-02-28T06:00:00Z",
+      "anomaly_count": 69,
+      "confirmed_count": 103,
+      "measurement_count": 468
+    },
+    {
+      "date": "2026-02-28T07:00:00Z",
+      "anomaly_count": 32,
+      "confirmed_count": 71,
+      "measurement_count": 214
+    },
+    {
+      "date": "2026-02-28T08:00:00Z",
+      "anomaly_count": 18,
+      "confirmed_count": 10,
+      "measurement_count": 237
+    },
+    {
+      "date": "2026-02-28T10:00:00Z",
+      "anomaly_count": 5,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-02-28T11:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-02-28T13:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-02-28T14:00:00Z",
+      "anomaly_count": 6,
+      "confirmed_count": 0,
+      "measurement_count": 28
+    },
+    {
+      "date": "2026-02-28T15:00:00Z",
+      "anomaly_count": 16,
+      "confirmed_count": 0,
+      "measurement_count": 25
+    },
+    {
+      "date": "2026-02-28T17:00:00Z",
+      "anomaly_count": 10,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-02-28T18:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 20
+    },
+    {
+      "date": "2026-02-28T23:00:00Z",
+      "anomaly_count": 6,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-01T01:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-01T07:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-01T08:00:00Z",
+      "anomaly_count": 6,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-01T09:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 99
+    },
+    {
+      "date": "2026-03-01T10:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-01T13:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 99
+    },
+    {
+      "date": "2026-03-01T14:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-01T15:00:00Z",
+      "anomaly_count": 5,
+      "confirmed_count": 0,
+      "measurement_count": 98
+    },
+    {
+      "date": "2026-03-01T16:00:00Z",
+      "anomaly_count": 8,
+      "confirmed_count": 0,
+      "measurement_count": 97
+    },
+    {
+      "date": "2026-03-01T17:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-01T19:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-01T20:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-01T21:00:00Z",
+      "anomaly_count": 6,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T01:00:00Z",
+      "anomaly_count": 5,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T02:00:00Z",
+      "anomaly_count": 8,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T03:00:00Z",
+      "anomaly_count": 7,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T04:00:00Z",
+      "anomaly_count": 15,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T05:00:00Z",
+      "anomaly_count": 16,
+      "confirmed_count": 0,
+      "measurement_count": 200
+    },
+    {
+      "date": "2026-03-02T07:00:00Z",
+      "anomaly_count": 5,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T08:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 99
+    },
+    {
+      "date": "2026-03-02T09:00:00Z",
+      "anomaly_count": 12,
+      "confirmed_count": 0,
+      "measurement_count": 200
+    },
+    {
+      "date": "2026-03-02T11:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 119
+    },
+    {
+      "date": "2026-03-02T12:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T16:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T17:00:00Z",
+      "anomaly_count": 0,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T18:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T19:00:00Z",
+      "anomaly_count": 0,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T20:00:00Z",
+      "anomaly_count": 0,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-02T21:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 119
+    },
+    {
+      "date": "2026-03-02T22:00:00Z",
+      "anomaly_count": 4,
+      "confirmed_count": 0,
+      "measurement_count": 181
+    },
+    {
+      "date": "2026-03-03T00:00:00Z",
+      "anomaly_count": 0,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T01:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T02:00:00Z",
+      "anomaly_count": 5,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T03:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T04:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T05:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T06:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T07:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T09:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T10:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T11:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T12:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T13:00:00Z",
+      "anomaly_count": 0,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T14:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T16:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T17:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-03T22:00:00Z",
+      "anomaly_count": 32,
+      "confirmed_count": 0,
+      "measurement_count": 200
+    },
+    {
+      "date": "2026-03-04T00:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T01:00:00Z",
+      "anomaly_count": 4,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T03:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T04:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 51
+    },
+    {
+      "date": "2026-03-04T05:00:00Z",
+      "anomaly_count": 0,
+      "confirmed_count": 0,
+      "measurement_count": 49
+    },
+    {
+      "date": "2026-03-04T06:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T08:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T09:00:00Z",
+      "anomaly_count": 7,
+      "confirmed_count": 0,
+      "measurement_count": 84
+    },
+    {
+      "date": "2026-03-04T10:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 16
+    },
+    {
+      "date": "2026-03-04T11:00:00Z",
+      "anomaly_count": 9,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T13:00:00Z",
+      "anomaly_count": 4,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T14:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T15:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 200
+    },
+    {
+      "date": "2026-03-04T16:00:00Z",
+      "anomaly_count": 5,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T17:00:00Z",
+      "anomaly_count": 5,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T18:00:00Z",
+      "anomaly_count": 6,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T20:00:00Z",
+      "anomaly_count": 4,
+      "confirmed_count": 0,
+      "measurement_count": 75
+    },
+    {
+      "date": "2026-03-04T21:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 124
+    },
+    {
+      "date": "2026-03-04T22:00:00Z",
+      "anomaly_count": 6,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-04T23:00:00Z",
+      "anomaly_count": 6,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-05T03:00:00Z",
+      "anomaly_count": 3,
+      "confirmed_count": 0,
+      "measurement_count": 67
+    },
+    {
+      "date": "2026-03-05T04:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 33
+    },
+    {
+      "date": "2026-03-05T13:00:00Z",
+      "anomaly_count": 1,
+      "confirmed_count": 0,
+      "measurement_count": 97
+    },
+    {
+      "date": "2026-03-05T14:00:00Z",
+      "anomaly_count": 0,
+      "confirmed_count": 0,
+      "measurement_count": 3
+    },
+    {
+      "date": "2026-03-05T15:00:00Z",
+      "anomaly_count": 10,
+      "confirmed_count": 0,
+      "measurement_count": 100
+    },
+    {
+      "date": "2026-03-05T16:00:00Z",
+      "anomaly_count": 8,
+      "confirmed_count": 0,
+      "measurement_count": 199
+    },
+    {
+      "date": "2026-03-05T17:00:00Z",
+      "anomaly_count": 0,
+      "confirmed_count": 0,
+      "measurement_count": 1
+    },
+    {
+      "date": "2026-03-05T18:00:00Z",
+      "anomaly_count": 6,
+      "confirmed_count": 0,
+      "measurement_count": 192
+    },
+    {
+      "date": "2026-03-05T19:00:00Z",
+      "anomaly_count": 0,
+      "confirmed_count": 0,
+      "measurement_count": 6
+    },
+    {
+      "date": "2026-03-05T20:00:00Z",
+      "anomaly_count": 2,
+      "confirmed_count": 0,
+      "measurement_count": 51
+    },
+    {
+      "date": "2026-03-05T21:00:00Z",
+      "anomaly_count": 0,
+      "confirmed_count": 0,
+      "measurement_count": 49
+    },
+    {
+      "date": "2026-03-05T22:00:00Z",
+      "anomaly_count": 4,
+      "confirmed_count": 0,
+      "measurement_count": 10
+    }
+  ],
+  "anomaly_rate": 0.1197789127544952,
+  "incidents": [],
+  "last_updated": "2026-03-06T19:03:13.731812+00:00"
+}

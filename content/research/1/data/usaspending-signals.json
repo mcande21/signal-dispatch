@@ -1,0 +1,103 @@
+{
+  "awards": [
+    {
+      "award_id": "47QFSA22F0136",
+      "recipient": "BOOZ ALLEN HAMILTON INC",
+      "obligation": 40776663.14,
+      "award_type": null,
+      "agency": "General Services Administration",
+      "start_date": "2022-09-24"
+    },
+    {
+      "award_id": "47QFLA26F0005",
+      "recipient": "REVEAL TECHNOLOGY, INC.",
+      "obligation": 9523250.0,
+      "award_type": null,
+      "agency": "General Services Administration",
+      "start_date": "2025-12-17"
+    },
+    {
+      "award_id": "15JPSS25F00000391",
+      "recipient": "PAE GOVERNMENT SERVICES, INC.",
+      "obligation": 594843.6,
+      "award_type": null,
+      "agency": "Department of Justice",
+      "start_date": "2025-03-27"
+    },
+    {
+      "award_id": "19AQMM24F1247",
+      "recipient": "GREAT HILL SOLUTIONS, LLC",
+      "obligation": 280764.58,
+      "award_type": null,
+      "agency": "Department of State",
+      "start_date": "2024-06-27"
+    },
+    {
+      "award_id": "191S7026P0339",
+      "recipient": "MISCELLANEOUS FOREIGN AWARDEES",
+      "obligation": 35695.47,
+      "award_type": null,
+      "agency": "Department of State",
+      "start_date": "2026-02-06"
+    },
+    {
+      "award_id": "191S7026F0045",
+      "recipient": "TEL AVIV HILTON LTD.",
+      "obligation": 33660.0,
+      "award_type": null,
+      "agency": "Department of State",
+      "start_date": "2025-12-08"
+    },
+    {
+      "award_id": "15JPSS25F00000146",
+      "recipient": "PAE GOVERNMENT SERVICES, INC.",
+      "obligation": 28810.54,
+      "award_type": null,
+      "agency": "Department of Justice",
+      "start_date": "2024-11-22"
+    },
+    {
+      "award_id": "19AJ2025F0418",
+      "recipient": "THE BRANCH OF LANGUAGE SOLUTIONS LIMITED IN REPUBLIC OF AZERBAIJAN",
+      "obligation": 24938.82,
+      "award_type": null,
+      "agency": "Department of State",
+      "start_date": "2025-09-29"
+    },
+    {
+      "award_id": "191S7026F0091",
+      "recipient": "TEL AVIV HILTON LTD.",
+      "obligation": 14883.0,
+      "award_type": null,
+      "agency": "Department of State",
+      "start_date": "2025-11-04"
+    },
+    {
+      "award_id": "191S7026P0152",
+      "recipient": "MISCELLANEOUS FOREIGN AWARDEES",
+      "obligation": 11549.42,
+      "award_type": null,
+      "agency": "Department of State",
+      "start_date": "2025-12-11"
+    },
+    {
+      "award_id": "191S7026F0207",
+      "recipient": "TEL AVIV HILTON LTD.",
+      "obligation": 11385.0,
+      "award_type": null,
+      "agency": "Department of State",
+      "start_date": "2026-01-09"
+    },
+    {
+      "award_id": "191S7026P0044",
+      "recipient": "MISCELLANEOUS FOREIGN AWARDEES",
+      "obligation": 10028.0,
+      "award_type": null,
+      "agency": "Department of State",
+      "start_date": "2025-10-10"
+    }
+  ],
+  "total_count": 12,
+  "total_obligation": 51346471.57,
+  "timestamp": "2026-03-06T19:03:20.724124+00:00"
+}

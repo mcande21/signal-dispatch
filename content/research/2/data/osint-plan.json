@@ -1,0 +1,73 @@
+{
+  "issue": "2",
+  "topic": "Kristi Noem fired as DHS Secretary",
+  "queries": [
+    {
+      "source": "federal_register",
+      "queries": [
+        {
+          "type": "document_search",
+          "params": {
+            "term": "Homeland Security personnel appointment acting secretary",
+            "agencies": ["homeland-security-department"],
+            "date_gte": "2026-03-01",
+            "type": ["NOTICE", "PRESDOCU"],
+            "per_page": 30
+          }
+        },
+        {
+          "type": "document_search",
+          "params": {
+            "term": "ICE enforcement operations use of force procedures",
+            "agencies": ["homeland-security-department"],
+            "date_gte": "2026-01-20",
+            "type": ["RULE", "PRORULE"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "params": {
+            "term": "FEMA disaster relief appropriations Hurricane Helene",
+            "agencies": ["homeland-security-department", "federal-emergency-management-agency"],
+            "date_gte": "2025-09-01",
+            "type": ["NOTICE"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "params": {
+            "term": "immigration enforcement sensitive locations policy",
+            "agencies": ["homeland-security-department"],
+            "date_gte": "2026-01-01",
+            "type": ["RULE", "NOTICE"],
+            "per_page": 20
+          }
+        }
+      ]
+    },
+    {
+      "source": "congress_gov",
+      "queries": [
+        {
+          "type": "list_bills",
+          "params": {
+            "congress": 119,
+            "from_date": "2026-01-20T00:00:00Z",
+            "limit": 50,
+            "sort": "updateDate+desc"
+          }
+        },
+        {
+          "type": "bill_search",
+          "params": {
+            "query": "DHS appropriations homeland security",
+            "congress": 119,
+            "limit": 30
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "ticker": "",
+  "results": [
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    }
+  ]
+}

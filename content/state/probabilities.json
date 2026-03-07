@@ -1,20 +1,136 @@
 {
   "$schema": "Signal Dispatch Probability State v1",
-  "last_updated": "2026-03-05T00:00:00Z",
-  "events": [],
+  "last_updated": "2026-03-06T00:00:00Z",
+  "events": [
+    {
+      "id": "iran-regime-change-2026",
+      "event": "Islamic Republic regime change by December 31, 2026",
+      "issue_introduced": 0,
+      "current_probability": 0.35,
+      "confidence": "medium",
+      "resolution_date": "2026-12-31",
+      "resolution_criteria": "YES if non-Islamic Republic government recognized by 3+ UNSC members OR IRGC fragments into competing territorial factions. NO if Supreme Leader position filled and IRGC maintains territorial control of Tehran, Isfahan, and Tabriz.",
+      "history": [
+        { "date": "2026-03-06", "probability": 0.35, "issue": 0, "note": "Initial assessment" }
+      ]
+    },
+    {
+      "id": "hormuz-reopen-q2-2026",
+      "event": "Strait of Hormuz reopens to normal commercial traffic by June 30, 2026",
+      "issue_introduced": 0,
+      "current_probability": 0.25,
+      "confidence": "medium",
+      "resolution_date": "2026-06-30",
+      "resolution_criteria": "YES if Lloyd's reinstates standard marine insurance for Persian Gulf transit at pre-conflict premium levels. NO if war-risk premiums remain above 5x pre-conflict baseline.",
+      "history": [
+        { "date": "2026-03-06", "probability": 0.25, "issue": 0, "note": "Initial assessment" }
+      ]
+    },
+    {
+      "id": "iran-ceasefire-apr-2026",
+      "event": "Ceasefire between US/Israel and Iran by April 30, 2026",
+      "issue_introduced": 0,
+      "current_probability": 0.15,
+      "confidence": "medium-high",
+      "resolution_date": "2026-04-30",
+      "resolution_criteria": "YES if hostilities cease for 72+ consecutive hours under a stated agreement. NO if active strikes continue past April 30.",
+      "history": [
+        { "date": "2026-03-06", "probability": 0.15, "issue": 0, "note": "Initial assessment" }
+      ]
+    },
+    {
+      "id": "brent-100-q1q2-2026",
+      "event": "Brent crude exceeds $100/barrel during Q1-Q2 2026",
+      "issue_introduced": 0,
+      "current_probability": 0.55,
+      "confidence": "medium",
+      "resolution_date": "2026-06-30",
+      "resolution_criteria": "ICE Brent crude futures closing above $100/barrel on any trading day through June 30, 2026.",
+      "history": [
+        { "date": "2026-03-06", "probability": 0.55, "issue": 0, "note": "Initial assessment" }
+      ]
+    },
+    {
+      "id": "iran-nuclear-test-2026",
+      "event": "Iran tests or deploys a nuclear weapon by December 31, 2026",
+      "issue_introduced": 0,
+      "current_probability": 0.08,
+      "confidence": "low",
+      "resolution_date": "2026-12-31",
+      "resolution_criteria": "IAEA confirmation of nuclear test, seismic detection by CTBTO consistent with nuclear detonation, or credible first-use in conflict.",
+      "history": [
+        { "date": "2026-03-06", "probability": 0.08, "issue": 0, "note": "Initial assessment" }
+      ]
+    },
+    {
+      "id": "dhs-enforcement-continuity-mullin",
+      "event": "ICE removal levels remain within 20% of Noem-era claimed figures through Q3 2026",
+      "issue_introduced": 2,
+      "current_probability": 0.60,
+      "resolution_date": "2026-09-30",
+      "resolution_criteria": "Resolves YES if ICE operational metrics remain within 20% of Noem-era claimed levels through Q3 2026. Resolves NO if metrics fall outside that range or if independent verification shows Noem-era claims were inflated by more than 20%.",
+      "history": [
+        { "date": "2026-03-06", "probability": 0.60, "issue": 2, "note": "Initial assessment" }
+      ]
+    },
+    {
+      "id": "mullin-confirmed-apr-2026",
+      "event": "Mullin confirmed as DHS Secretary by April 15, 2026",
+      "issue_introduced": 2,
+      "current_probability": 0.75,
+      "resolution_date": "2026-04-15",
+      "resolution_criteria": "Resolves YES if Senate confirmation vote occurs and Mullin receives majority by April 15, 2026. Resolves NO if vote fails, is not held by April 15, or nomination is withdrawn.",
+      "history": [
+        { "date": "2026-03-06", "probability": 0.75, "issue": 2, "note": "Initial assessment" }
+      ]
+    },
+    {
+      "id": "dhs-ad-charges-dec-2026",
+      "event": "Federal charges related to DHS advertising contracts by December 2026",
+      "issue_introduced": 2,
+      "current_probability": 0.30,
+      "resolution_date": "2026-12-31",
+      "resolution_criteria": "Resolves YES if DOJ or Inspector General announces criminal charges against any individual related to DHS advertising or communications contracts awarded during Noem's tenure by December 31, 2026. Resolves NO if no charges announced by that date.",
+      "history": [
+        { "date": "2026-03-06", "probability": 0.30, "issue": 2, "note": "Initial assessment" }
+      ]
+    },
+    {
+      "id": "dhs-ad-spending-drop-q2",
+      "event": "DHS advertising spending drops >50% Q2 vs Q1 2026",
+      "issue_introduced": 2,
+      "current_probability": 0.70,
+      "resolution_date": "2026-09-30",
+      "resolution_criteria": "Resolves YES if USAspending data shows DHS advertising and communications category spending in Q2 2026 is less than 50% of Q1 2026 spending. Resolves NO if spending remains at or above 50% of Q1 levels.",
+      "history": [
+        { "date": "2026-03-06", "probability": 0.70, "issue": 2, "note": "Initial assessment" }
+      ]
+    },
+    {
+      "id": "ice-removals-700k-2026",
+      "event": "ICE removals exceed 700,000 in calendar year 2026",
+      "issue_introduced": 2,
+      "current_probability": 0.20,
+      "resolution_date": "2026-12-31",
+      "resolution_criteria": "Resolves YES if independently verified ICE removal statistics show 700,000 or more removals in calendar year 2026. Resolves NO if verified count falls below 700,000. If no independent verification mechanism exists by December 31, 2026, defaults to NO.",
+      "history": [
+        { "date": "2026-03-06", "probability": 0.20, "issue": 2, "note": "Initial assessment" }
+      ]
+    }
+  ],
   "resolved": [],
   "calibration_summary": {
     "total_resolved": 0,
     "mean_brier_score": null,
     "calibration_buckets": {
-      "0-10": { "predictions": 0, "outcomes": 0 },
-      "10-20": { "predictions": 0, "outcomes": 0 },
-      "20-30": { "predictions": 0, "outcomes": 0 },
-      "30-40": { "predictions": 0, "outcomes": 0 },
+      "0-10": { "predictions": 1, "outcomes": 0 },
+      "10-20": { "predictions": 1, "outcomes": 0 },
+      "20-30": { "predictions": 2, "outcomes": 0 },
+      "30-40": { "predictions": 2, "outcomes": 0 },
       "40-50": { "predictions": 0, "outcomes": 0 },
-      "50-60": { "predictions": 0, "outcomes": 0 },
-      "60-70": { "predictions": 0, "outcomes": 0 },
-      "70-80": { "predictions": 0, "outcomes": 0 },
+      "50-60": { "predictions": 1, "outcomes": 0 },
+      "60-70": { "predictions": 1, "outcomes": 0 },
+      "70-80": { "predictions": 2, "outcomes": 0 },
       "80-90": { "predictions": 0, "outcomes": 0 },
       "90-100": { "predictions": 0, "outcomes": 0 }
     },

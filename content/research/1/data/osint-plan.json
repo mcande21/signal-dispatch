@@ -1,0 +1,132 @@
+{
+  "issue": "1",
+  "topic": "Iran-Venezuela axis US dual-pressure China Taiwan",
+  "queries": [
+    {
+      "source": "federal_register",
+      "queries": [
+        {
+          "type": "document_search",
+          "rationale": "OFAC sanctions designations targeting Iran-Venezuela joint networks, including shadow fleet, drone trade, and financial facilitators",
+          "params": {
+            "term": "Iran Venezuela sanctions designation",
+            "date_gte": "2025-06-01",
+            "agencies": ["treasury-department"],
+            "type": ["NOTICE", "RULE"],
+            "per_page": 50
+          }
+        },
+        {
+          "type": "document_search",
+          "rationale": "Executive orders and presidential documents on Iran maximum pressure policy, including secondary sanctions and tariff authorities",
+          "params": {
+            "term": "Iran sanctions national emergency",
+            "date_gte": "2025-01-01",
+            "type": ["PRESDOCU"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "rationale": "Venezuela-specific executive actions post-intervention, including oil sector directives and asset seizure authorities",
+          "params": {
+            "term": "Venezuela oil sanctions emergency",
+            "date_gte": "2025-09-01",
+            "type": ["PRESDOCU", "RULE"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "rationale": "OFAC SDN list updates targeting shadow fleet vessels and front companies in the Iran-Venezuela trade network",
+          "params": {
+            "term": "specially designated nationals Iran vessel tanker",
+            "date_gte": "2025-09-01",
+            "agencies": ["treasury-department"],
+            "type": ["NOTICE"],
+            "per_page": 30
+          }
+        },
+        {
+          "type": "document_search",
+          "rationale": "Cryptocurrency and digital asset sanctions enforcement related to PDVSA USDT payments and Iranian stablecoin operations",
+          "params": {
+            "term": "cryptocurrency virtual currency sanctions Iran Venezuela",
+            "date_gte": "2025-01-01",
+            "agencies": ["treasury-department"],
+            "type": ["NOTICE", "RULE"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "rationale": "DOJ forfeiture actions against vessels and cargo in the Iran-Venezuela oil smuggling network",
+          "params": {
+            "term": "forfeiture tanker crude oil Iran Venezuela",
+            "date_gte": "2025-06-01",
+            "agencies": ["justice-department"],
+            "type": ["NOTICE"],
+            "per_page": 20
+          }
+        }
+      ]
+    },
+    {
+      "source": "congress_gov",
+      "queries": [
+        {
+          "type": "list_bills",
+          "rationale": "Recent legislative activity on Iran sanctions, including maximum pressure codification and secondary sanctions expansion",
+          "params": {
+            "congress": 119,
+            "from_date": "2025-06-01T00:00:00Z",
+            "limit": 50,
+            "sort": "updateDate+desc"
+          },
+          "client_filter": "Iran sanctions"
+        },
+        {
+          "type": "list_bills",
+          "rationale": "Venezuela-related legislation post-intervention, including authorization for use of military force, oil sector governance, and sanctions modification",
+          "params": {
+            "congress": 119,
+            "from_date": "2025-09-01T00:00:00Z",
+            "limit": 50,
+            "sort": "updateDate+desc"
+          },
+          "client_filter": "Venezuela"
+        },
+        {
+          "type": "bill_search",
+          "rationale": "Search cached titles for Iran-Venezuela joint sanctions bills",
+          "params": {
+            "query": "Iran Venezuela sanctions",
+            "congress": 119,
+            "type": ["hr", "s"],
+            "limit": 20
+          }
+        },
+        {
+          "type": "bill_search",
+          "rationale": "Search for drone/UAV proliferation legislation targeting the Iran-Venezuela weapons pipeline",
+          "params": {
+            "query": "drone UAV proliferation Iran",
+            "congress": 119,
+            "type": ["hr", "s"],
+            "limit": 20
+          }
+        },
+        {
+          "type": "bill_search",
+          "rationale": "Search for cryptocurrency sanctions enforcement legislation relevant to PDVSA USDT operations",
+          "params": {
+            "query": "cryptocurrency sanctions evasion",
+            "congress": 119,
+            "type": ["hr", "s"],
+            "limit": 20
+          }
+        }
+      ]
+    }
+  ]
+}

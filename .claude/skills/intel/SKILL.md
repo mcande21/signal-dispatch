@@ -68,11 +68,25 @@ Topic-to-source routing table:
 
 | Topic Domain | Ghost Market Sources | OSINT Sources | Web Research |
 |-------------|---------------------|---------------|-------------|
-| Iran/geopolitics | OONI, Bonbast, TEDPIX, Cloudflare Radar, OFAC, USAspending | Federal Register | Yes |
-| Energy/petroleum | EIA | Federal Register | Yes |
-| Sanctions/policy | OFAC, USAspending | Federal Register, Congress | Yes |
+| Iran/geopolitics | OONI, Bonbast, TEDPIX, Cloudflare Radar, OFAC, USAspending, GDELT | Federal Register | Yes |
+| Energy/petroleum | EIA, EIA Grid, ENTSOG, AGSI | Federal Register | Yes |
+| Europe/energy | ENTSOG, AGSI, ECB | Federal Register | Yes |
+| Sanctions/policy | OFAC, USAspending, Comtrade | Federal Register, Congress | Yes |
+| Trade | Comtrade | Federal Register, Congress | Yes |
+| Venezuela | dolarVzla, GDELT | Federal Register | Yes |
+| Conflict/military | Oryx, VIIRS, GDELT | Federal Register | Yes |
+| Global events | GDELT | Federal Register, Congress, FEC | Yes |
 | Legislation | None | Federal Register, Congress, FEC | Yes |
 | Multi-topic (weekly) | ALL active | ALL applicable | Yes |
+
+**Step 0B.1: Read Adapter Documentation**
+
+For each Ghost Market source selected above, read its capability doc:
+- Path: `/Users/cooperanderson/work/personal/code/research/signal-dispatch/docs/sources/{adapter}.md`
+- These docs list available query parameters, intelligence use cases, valid values, and example queries
+- Use this to construct TARGETED queries in Phase 1A instead of bare `--source` calls
+
+For weekly briefs touching many sources, read only the docs for sources relevant to this cycle's themes. Don't read all 16.
 
 **Step 0C: Build Track Manifest**
 
@@ -117,13 +131,35 @@ Construct exact commands for each active source. Map source names to CLI argumen
 | Cloudflare Radar | `--source cloudflare_radar` | 1h refresh |
 | TEDPIX | `--source tedpix` | 4h refresh |
 | USAspending | `--source usaspending` | 24h refresh |
+| GDELT | `--source gdelt` | 15m refresh |
+| ENTSOG | `--source entsog` | 1h refresh |
+| AGSI | `--source agsi` | 12h refresh |
+| ECB SDW | `--source ecb` | 6h refresh |
+| Comtrade | `--source comtrade` | 24h refresh |
+| EIA Grid | `--source eia_grid` | 1h refresh |
+| VIIRS/FIRMS | `--source viirs` | 24h refresh |
+| dolarVzla | `--source dolarvzla` | 1h refresh |
+| Oryx | `--source oryx` | 12h refresh |
 
 Full command template:
 ```bash
 cd /Users/cooperanderson/work/personal/code/research/prediction-markets && \
 source .venv/bin/activate && \
-python -m src.cli signals --source {source} --json --output data/pipeline/sd-{issue}-{source}.json
+python -m src.cli signals --source {source} [--param key=value ...] --json --output data/pipeline/sd-{issue}-{source}.json
 ```
+
+**Parameterized queries:** Use `--param key=value` to pass query parameters to adapters. Multiple params supported. Check `docs/sources/{source}.md` for available parameters per adapter.
+
+Examples:
+- `--source gdelt --param query="Iran IAEA" --param timespan=7d` -- Keyword-targeted event search
+- `--source ecb --param flow_ref=EXR --param key=D.USD.EUR.SP00.A` -- Specific ECB data series (REQUIRED -- ECB has no defaults)
+- `--source comtrade --param reporter=TR --param commodity=2709 --param flow=M` -- Turkey crude petroleum imports
+- `--source viirs --param country=UA --param days=3` -- Ukraine satellite fire detection, 3 days
+
+**When to parameterize vs. use defaults:**
+- **Always parameterize:** ECB (required -- no defaults), Comtrade (reporter required), GDELT (keyword search is the whole point)
+- **Parameterize when focused:** VIIRS (specific country/bbox), ENTSOG/AGSI (specific country), EIA Grid (specific region)
+- **Defaults usually fine:** OONI, Bonbast, TEDPIX, Cloudflare Radar, dolarVzla, Oryx (simple endpoints, useful defaults)
 
 **Step 1B: OSINT API Doc Selection**
 
@@ -205,7 +241,7 @@ Dispatch one Geth instance per source. Parallel execution for speed.
 ```
 Task(
   subagent_type: "geth",
-  prompt: "Run: cd /Users/cooperanderson/work/personal/code/research/prediction-markets && source .venv/bin/activate && python -m src.cli signals --source {source} --json --output data/pipeline/sd-{issue}-{source}.json
+  prompt: "Run: cd /Users/cooperanderson/work/personal/code/research/prediction-markets && source .venv/bin/activate && python -m src.cli signals --source {source} {params} --json --output data/pipeline/sd-{issue}-{source}.json
 
 Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
   description: "Fetch {source} signals for SD #{issue}",
@@ -213,7 +249,9 @@ Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
 )
 ```
 
-**Replace {source} with:** ooni, bonbast, eia, ofac, cloudflare_radar, tedpix, or usaspending
+**Replace {params} with** `--param` flags based on adapter docs (read in Step 0B.1). For adapters with useful defaults (OONI, Bonbast, etc.), omit {params}. For adapters requiring parameters (ECB, Comtrade), include them.
+
+**Replace {source} with:** ooni, bonbast, eia, ofac, cloudflare_radar, tedpix, usaspending, gdelt, entsog, agsi, ecb, comtrade, eia_grid, viirs, dolarvzla, or oryx
 
 **Multiple parallel Geth dispatches:**
 
@@ -902,6 +940,15 @@ content/research/{issue-number}/
     ├── cloudflare_radar-signals.json
     ├── tedpix-signals.json
     ├── usaspending-signals.json
+    ├── gdelt-signals.json
+    ├── entsog-signals.json
+    ├── agsi-signals.json
+    ├── ecb-signals.json
+    ├── comtrade-signals.json
+    ├── eia_grid-signals.json
+    ├── viirs-signals.json
+    ├── dolarvzla-signals.json
+    ├── oryx-signals.json
     ├── osint.json
     ├── osint-plan.json
     └── markets.json

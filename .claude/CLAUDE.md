@@ -18,7 +18,7 @@ Four skills, executed in sequence for each issue via `/new-issue` mission:
 ## Data Dependency
 
 This project does NOT contain its own data adapters. It wraps the prediction-markets pipeline:
-- Ghost Market adapters (OONI, OFAC, Bonbast, EIA, Cloudflare Radar, TEDPIX, USAspending)
+- Ghost Market adapters (OONI, OFAC, Bonbast, EIA, Cloudflare Radar, TEDPIX, USAspending, GDELT, ENTSOG, AGSI, ECB, Comtrade, EIA Grid, VIIRS/FIRMS, dolarVzla, Oryx)
 - OSINT adapters (Federal Register, Congress, FEC)
 - FRED + NOAA data sources
 - Prediction market CLI (`pm signals`, `pm search`, `pm scan`)

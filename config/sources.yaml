@@ -30,6 +30,42 @@ structured_feeds:
     adapter: "ghost_market.usaspending"
     refresh: "24h"
     signal: "Federal procurement patterns -- government spending signals"
+  agsi:
+    adapter: "ghost_market.agsi"
+    refresh: "12h"
+    signal: "European gas storage inventory levels -- energy security baseline, seasonal vulnerability windows"
+  comtrade:
+    adapter: "ghost_market.comtrade"
+    refresh: "24h"
+    signal: "UN bilateral trade flows -- sanctions evasion routing, trade diversion patterns, commodity dependency shifts"
+  dolarvzla:
+    adapter: "ghost_market.dolarvzla"
+    refresh: "1h"
+    signal: "Venezuela parallel dollar exchange rate -- economic crisis severity, capital flight pressure, regime stability indicator"
+  ecb:
+    adapter: "ghost_market.ecb"
+    refresh: "6h"
+    signal: "ECB statistical data warehouse -- eurozone monetary indicators, exchange rate anchors, financial stress signals"
+  eia_grid:
+    adapter: "ghost_market.eia_grid"
+    refresh: "1h"
+    signal: "US electricity grid regional generation/demand -- infrastructure stress indicators, extreme weather impact verification"
+  entsog:
+    adapter: "ghost_market.entsog"
+    refresh: "1h"
+    signal: "European natural gas pipeline flows -- supply disruption detection, Russia-Europe energy leverage shifts"
+  gdelt:
+    adapter: "ghost_market.gdelt"
+    refresh: "15m"
+    signal: "Global event/news monitoring -- mass protest detection, conflict escalation tracking, cross-border incident alerts"
+  oryx:
+    adapter: "ghost_market.oryx"
+    refresh: "12h"
+    signal: "Verified military equipment losses with photographic evidence -- conflict attrition tracking, force capability assessment"
+  viirs:
+    adapter: "ghost_market.viirs"
+    refresh: "24h"
+    signal: "NASA satellite fire/thermal anomaly detection -- conflict damage verification, infrastructure destruction confirmation, wildfire impact"
 
 osint_feeds:
   federal_register:

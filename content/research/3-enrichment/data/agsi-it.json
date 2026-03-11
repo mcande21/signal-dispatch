@@ -1,0 +1,269 @@
+{
+  "source": "agsi",
+  "country": "IT",
+  "record_count": 29,
+  "storage_data": [
+    {
+      "gas_day": "2026-03-09",
+      "gas_in_storage": 93.1159,
+      "full_pct": 45.79,
+      "injection": 12.14,
+      "withdrawal": 624.8,
+      "consumption": 677.35,
+      "trend": -0.31
+    },
+    {
+      "gas_day": "2026-03-08",
+      "gas_in_storage": 93.7501,
+      "full_pct": 46.1,
+      "injection": 264.85,
+      "withdrawal": 296.6,
+      "consumption": 677.35,
+      "trend": -0.08
+    },
+    {
+      "gas_day": "2026-03-07",
+      "gas_in_storage": 93.9061,
+      "full_pct": 46.18,
+      "injection": 196.73,
+      "withdrawal": 293.7,
+      "consumption": 677.35,
+      "trend": -0.07
+    },
+    {
+      "gas_day": "2026-03-06",
+      "gas_in_storage": 94.0541,
+      "full_pct": 46.25,
+      "injection": 11.01,
+      "withdrawal": 583.7,
+      "consumption": 677.35,
+      "trend": -0.29
+    },
+    {
+      "gas_day": "2026-03-05",
+      "gas_in_storage": 94.6359,
+      "full_pct": 46.54,
+      "injection": 0.25,
+      "withdrawal": 663.9,
+      "consumption": 677.35,
+      "trend": -0.33
+    },
+    {
+      "gas_day": "2026-03-04",
+      "gas_in_storage": 95.3077,
+      "full_pct": 46.87,
+      "injection": 39.09,
+      "withdrawal": 611.0,
+      "consumption": 677.35,
+      "trend": -0.3
+    },
+    {
+      "gas_day": "2026-03-03",
+      "gas_in_storage": 95.9266,
+      "full_pct": 47.17,
+      "injection": 91.53,
+      "withdrawal": 493.6,
+      "consumption": 677.35,
+      "trend": -0.2
+    },
+    {
+      "gas_day": "2026-03-02",
+      "gas_in_storage": 96.3408,
+      "full_pct": 47.38,
+      "injection": 91.53,
+      "withdrawal": 498.9,
+      "consumption": 677.35,
+      "trend": -0.22
+    },
+    {
+      "gas_day": "2026-03-01",
+      "gas_in_storage": 96.7929,
+      "full_pct": 47.6,
+      "injection": 289.26,
+      "withdrawal": 177.5,
+      "consumption": 677.35,
+      "trend": -0.01
+    },
+    {
+      "gas_day": "2026-02-28",
+      "gas_in_storage": 96.812,
+      "full_pct": 47.61,
+      "injection": 314.88,
+      "withdrawal": 251.9,
+      "consumption": 677.35,
+      "trend": 0.01
+    },
+    {
+      "gas_day": "2026-02-27",
+      "gas_in_storage": 96.7999,
+      "full_pct": 47.6,
+      "injection": 242.75,
+      "withdrawal": 526.4,
+      "consumption": 677.35,
+      "trend": -0.15
+    },
+    {
+      "gas_day": "2026-02-26",
+      "gas_in_storage": 97.0954,
+      "full_pct": 47.75,
+      "injection": 176.71,
+      "withdrawal": 522.2,
+      "consumption": 677.35,
+      "trend": -0.17
+    },
+    {
+      "gas_day": "2026-02-25",
+      "gas_in_storage": 97.4493,
+      "full_pct": 47.92,
+      "injection": 76.51,
+      "withdrawal": 560.3,
+      "consumption": 677.35,
+      "trend": -0.25
+    },
+    {
+      "gas_day": "2026-02-24",
+      "gas_in_storage": 97.9496,
+      "full_pct": 48.17,
+      "injection": 59.93,
+      "withdrawal": 700.0,
+      "consumption": 677.35,
+      "trend": -0.32
+    },
+    {
+      "gas_day": "2026-02-23",
+      "gas_in_storage": 98.6012,
+      "full_pct": 48.49,
+      "injection": 41.02,
+      "withdrawal": 591.5,
+      "consumption": 677.35,
+      "trend": -0.25
+    },
+    {
+      "gas_day": "2026-02-22",
+      "gas_in_storage": 99.1193,
+      "full_pct": 48.74,
+      "injection": 299.11,
+      "withdrawal": 380.9,
+      "consumption": 677.35,
+      "trend": -0.05
+    },
+    {
+      "gas_day": "2026-02-21",
+      "gas_in_storage": 99.2214,
+      "full_pct": 48.79,
+      "injection": 179.23,
+      "withdrawal": 426.3,
+      "consumption": 677.35,
+      "trend": -0.13
+    },
+    {
+      "gas_day": "2026-02-20",
+      "gas_in_storage": 99.4925,
+      "full_pct": 48.93,
+      "injection": 0.25,
+      "withdrawal": 731.1,
+      "consumption": 677.35,
+      "trend": -0.37
+    },
+    {
+      "gas_day": "2026-02-19",
+      "gas_in_storage": 100.2358,
+      "full_pct": 49.29,
+      "injection": 0.25,
+      "withdrawal": 774.1,
+      "consumption": 677.35,
+      "trend": -0.38
+    },
+    {
+      "gas_day": "2026-02-18",
+      "gas_in_storage": 101.0053,
+      "full_pct": 49.67,
+      "injection": 0.25,
+      "withdrawal": 841.7,
+      "consumption": 677.35,
+      "trend": -0.41
+    },
+    {
+      "gas_day": "2026-02-17",
+      "gas_in_storage": 101.8467,
+      "full_pct": 50.08,
+      "injection": 0.25,
+      "withdrawal": 784.5,
+      "consumption": 677.35,
+      "trend": -0.39
+    },
+    {
+      "gas_day": "2026-02-16",
+      "gas_in_storage": 102.6302,
+      "full_pct": 50.47,
+      "injection": 0.25,
+      "withdrawal": 911.1,
+      "consumption": 677.35,
+      "trend": -0.44
+    },
+    {
+      "gas_day": "2026-02-15",
+      "gas_in_storage": 103.5315,
+      "full_pct": 50.91,
+      "injection": 105.85,
+      "withdrawal": 516.8,
+      "consumption": 677.35,
+      "trend": -0.21
+    },
+    {
+      "gas_day": "2026-02-14",
+      "gas_in_storage": 103.9568,
+      "full_pct": 51.12,
+      "injection": 95.05,
+      "withdrawal": 724.0,
+      "consumption": 677.35,
+      "trend": -0.32
+    },
+    {
+      "gas_day": "2026-02-13",
+      "gas_in_storage": 104.61,
+      "full_pct": 51.44,
+      "injection": 22.2,
+      "withdrawal": 813.5,
+      "consumption": 677.35,
+      "trend": -0.39
+    },
+    {
+      "gas_day": "2026-02-12",
+      "gas_in_storage": 105.4,
+      "full_pct": 51.83,
+      "injection": 0.25,
+      "withdrawal": 925.2,
+      "consumption": 677.35,
+      "trend": -0.45
+    },
+    {
+      "gas_day": "2026-02-11",
+      "gas_in_storage": 106.3206,
+      "full_pct": 52.28,
+      "injection": 13.13,
+      "withdrawal": 899.6,
+      "consumption": 677.35,
+      "trend": -0.44
+    },
+    {
+      "gas_day": "2026-02-10",
+      "gas_in_storage": 107.2069,
+      "full_pct": 52.72,
+      "injection": 0.25,
+      "withdrawal": 972.9,
+      "consumption": 677.35,
+      "trend": -0.47
+    },
+    {
+      "gas_day": "2026-02-09",
+      "gas_in_storage": 108.1648,
+      "full_pct": 53.19,
+      "injection": 3.9,
+      "withdrawal": 932.0,
+      "consumption": 677.35,
+      "trend": -0.46
+    }
+  ],
+  "fetched_at": "2026-03-11T00:49:43.316425+00:00"
+}

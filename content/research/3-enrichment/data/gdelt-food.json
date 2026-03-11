@@ -1,0 +1,359 @@
+{
+  "source": "gdelt",
+  "query": "food price crisis 2026",
+  "timespan": "7d",
+  "article_count": 50,
+  "articles": [
+    {
+      "url": "https://allafrica.com/stories/202603090014.html",
+      "title": "Africa : Hunger Crisis Is Set to Get Worse in West and Central Africa - Why and What to Do About It",
+      "source": "allafrica.com",
+      "language": "English",
+      "seendate": "20260309T053000Z"
+    },
+    {
+      "url": "https://www.shtfplan.com/headline-news/the-window-is-closing-how-the-iran-conflict-just-unleashed-a-global-famine-trigger",
+      "title": "The Window Is Closing : How the Iran Conflict Just Unleashed a Global Famine Trigger",
+      "source": "shtfplan.com",
+      "language": "English",
+      "seendate": "20260306T021500Z"
+    },
+    {
+      "url": "https://markets.financialcontent.com/stocks/article/marketminute-2026-3-9-agricultural-commodities-rally-as-fertilizer-crisis-looms",
+      "title": "FinancialContent - Agricultural Commodities Rally as Fertilizer Crisis Looms",
+      "source": "markets.financialcontent.com",
+      "language": "English",
+      "seendate": "20260309T141500Z"
+    },
+    {
+      "url": "https://www.mirror.co.uk/lifestyle/food-drink/compared-aldi-shop-four-years-36829460",
+      "title": "I compared my Aldi shop to four years ago and the price difference left me stunned",
+      "source": "mirror.co.uk",
+      "language": "English",
+      "seendate": "20260309T070000Z"
+    },
+    {
+      "url": "https://www.sunstar.com.ph/cebu/baricuatro-warns-retailers-vs-unjustified-price-hikes",
+      "title": "Baricuatro warns retailers vs unjustified price hikes",
+      "source": "sunstar.com.ph",
+      "language": "English",
+      "seendate": "20260304T064500Z"
+    },
+    {
+      "url": "https://tribune.com.pk/story/2596403/economic-stabilisation-visible-in-fy26-says-iqbal",
+      "title": "Economic stabilisation visible in FY26 , says Iqbal",
+      "source": "tribune.com.pk",
+      "language": "English",
+      "seendate": "20260308T021500Z"
+    },
+    {
+      "url": "https://www.sunstar.com.ph/cebu/cebu-leaders-warn-against-price-hikes-city-tightens-fuel-use",
+      "title": "Cebu Leaders Warn Against Price Hikes Amid Crisis",
+      "source": "sunstar.com.ph",
+      "language": "English",
+      "seendate": "20260304T161500Z"
+    },
+    {
+      "url": "https://reliefweb.int/report/cameroon/cameroons-silent-food-insecurity-crisis-deepens-millions-struggle-find-food",
+      "title": "Cameroon  silent food insecurity crisis  deepens as millions struggle to find food - Cameroon",
+      "source": "reliefweb.int",
+      "language": "English",
+      "seendate": "20260310T103000Z"
+    },
+    {
+      "url": "https://markets.financialcontent.com/stocks/article/marketminute-2026-3-9-global-food-security-threatened-by-fertilizer-shock-at-hormuz",
+      "title": "FinancialContent - Global Food Security Threatened by  Fertilizer Shock  at Hormuz",
+      "source": "markets.financialcontent.com",
+      "language": "English",
+      "seendate": "20260309T141500Z"
+    },
+    {
+      "url": "https://www.dailyexcelsior.com/comm-min-assures-of-restoration-of-full-rodtep-benefits-to-exporters-from-apr-1-fieo/",
+      "title": "Comm min assures of restoration of full RoDTEP benefits to exporters from Apr 1 : FIEO",
+      "source": "dailyexcelsior.com",
+      "language": "English",
+      "seendate": "20260307T113000Z"
+    },
+    {
+      "url": "http://www.econotimes.com/Global-Energy-and-Food-Chains-Fracture-as-the-Strait-of-Hormuz-Grinds-to-a-Halt-1735690",
+      "title": "Global Energy and Food Chains Fracture as the Strait of Hormuz Grinds to a Halt",
+      "source": "econotimes.com",
+      "language": "English",
+      "seendate": "20260309T071500Z"
+    },
+    {
+      "url": "https://www.pakistantoday.com.pk/2026/03/07/national-economy-demonstrated-notable-stabilization-ahsan-iqbal",
+      "title": "National Economy Stabilizes : Ahsan Iqbal Reports - Pakistan Today",
+      "source": "pakistantoday.com.pk",
+      "language": "English",
+      "seendate": "20260307T183000Z"
+    },
+    {
+      "url": "https://www.echo-news.co.uk/news/25921981.millions-uk-drivers-face-record-fuel-prices-week/",
+      "title": "Millions of united kingdom drivers face record fuel prices this week",
+      "source": "echo-news.co.uk",
+      "language": "English",
+      "seendate": "20260309T194500Z"
+    },
+    {
+      "url": "https://www.myjoyonline.com/ghanas-farms-underperforming-risking-economic-stagnation-pianim/",
+      "title": "Ghana farms underperforming , risking economic stagnation Pianim",
+      "source": "myjoyonline.com",
+      "language": "English",
+      "seendate": "20260306T161500Z"
+    },
+    {
+      "url": "https://www.livemint.com/economy/retail-inflation-likely-inched-up-to-3-1-in-february-mint-poll-food-beverages-fuel-oil-consumer-spending-11773129753518.html",
+      "title": "Retail inflation likely inched up to 3 . 1 % in February : Mint poll",
+      "source": "livemint.com",
+      "language": "English",
+      "seendate": "20260310T113000Z"
+    },
+    {
+      "url": "https://www.express.co.uk/life-style/food/2179127/cost-of-living-aldi-price-rises",
+      "title": "I bought same Aldi groceries from 2022 \u2013 here how much prices have soared",
+      "source": "express.co.uk",
+      "language": "English",
+      "seendate": "20260309T064500Z"
+    },
+    {
+      "url": "https://markets.financialcontent.com/stocks/article/marketminute-2026-3-9-palm-oil-prices-spike-as-biofuel-demand-surges-amid-crude-rally",
+      "title": "FinancialContent - Palm Oil Prices Spike as Biofuel Demand Surges Amid Crude Rally",
+      "source": "markets.financialcontent.com",
+      "language": "English",
+      "seendate": "20260309T143000Z"
+    },
+    {
+      "url": "https://www.globalsecurity.org/military/library/news/2026/03/mil-260308-wfp01.htm",
+      "title": "WFP warns rising food and fuel prices risk pushing global hunger higher as humanitarian needs grow",
+      "source": "globalsecurity.org",
+      "language": "English",
+      "seendate": "20260309T104500Z"
+    },
+    {
+      "url": "https://www.abc.net.au/news/2026-03-06/power-bills-iran-middle-east-war-compared-to-ukraine-2022/106417584",
+      "title": "Power bills surged when war broke out in 2022 . Here why the Middle East conflict may be different",
+      "source": "abc.net.au",
+      "language": "English",
+      "seendate": "20260306T000000Z"
+    },
+    {
+      "url": "https://www.sunstar.com.ph/cebu/fuel-costs-low-stock-drive-rice-price-row",
+      "title": "Fuel costs , low stock drive rice price row",
+      "source": "sunstar.com.ph",
+      "language": "English",
+      "seendate": "20260308T051500Z"
+    },
+    {
+      "url": "https://www.newkerala.com/news/a/paks-petrol-price-hike-indicates-deeper-energy-crisis-306.htm",
+      "title": "Pakistan Petrol Price Hike Reveals Energy Crisis",
+      "source": "newkerala.com",
+      "language": "English",
+      "seendate": "20260310T140000Z"
+    },
+    {
+      "url": "https://www.globalsecurity.org/military/library/news/2026/03/mil-260303-unocha02.htm",
+      "title": "UN Relief Chief : Middle East violence humanitarian fallout  increasingly daunting  ",
+      "source": "globalsecurity.org",
+      "language": "English",
+      "seendate": "20260304T140000Z"
+    },
+    {
+      "url": "https://retail.economictimes.indiatimes.com/news/e-commerce/e-tailing/chinas-jd-com-misses-revenue-estimates-as-subsidy-boost-tapers/129133418",
+      "title": "China E - commerce Giant JD . com Reports Revenue Miss Amid Tapering Subsidies , ETRetail",
+      "source": "retail.economictimes.indiatimes.com",
+      "language": "English",
+      "seendate": "20260306T084500Z"
+    },
+    {
+      "url": "https://hotair.com/tree-hugging-sister/2026/03/09/hows-that-green-net-zero-grift-working-out-for-you-england-n3812696",
+      "title": "How That Green Net Zero Grift Working Out for You , England ? ",
+      "source": "hotair.com",
+      "language": "English",
+      "seendate": "20260310T001500Z"
+    },
+    {
+      "url": "https://www.theoaklandpress.com/2026/03/08/oakland-county-community-calendar-march-8-and-beyond/",
+      "title": "Oakland County community calendar March 8 and beyond",
+      "source": "theoaklandpress.com",
+      "language": "English",
+      "seendate": "20260308T123000Z"
+    },
+    {
+      "url": "https://tribune.com.pk/story/2596425/opposition-blasts-inflation-bomb",
+      "title": "Opposition blasts  inflation bomb  ",
+      "source": "tribune.com.pk",
+      "language": "English",
+      "seendate": "20260308T044500Z"
+    },
+    {
+      "url": "https://tribune.com.pk/story/2596399/fuel-price-hike-deepens-household-anxiety",
+      "title": "Fuel price hike deepens household anxiety",
+      "source": "tribune.com.pk",
+      "language": "English",
+      "seendate": "20260308T021500Z"
+    },
+    {
+      "url": "https://www.dailymaverick.co.za/article/2026-03-05-srd-grant-set-for-a-redesign-falls-r60-short-of-our-list-of-basic-food-items/",
+      "title": "SRD grant falls R60 short of our basic food basket",
+      "source": "dailymaverick.co.za",
+      "language": "English",
+      "seendate": "20260305T140000Z"
+    },
+    {
+      "url": "https://www.ibtimes.co.in/bengaluru-hotels-shut-ops-tomorrow-lpg-supply-stops-amid-middle-east-conflict-899112",
+      "title": "Bengaluru hotels to shut ops from tomorrow as LPG supply stops amid Middle East conflict",
+      "source": "ibtimes.co.in",
+      "language": "English",
+      "seendate": "20260309T193000Z"
+    },
+    {
+      "url": "https://markets.financialcontent.com/stocks/article/marketminute-2026-3-6-bittersweet-markets-coffee-and-sugar-prices-skyrocket-as-climate-volatility-meets-resurgent-global-demand",
+      "title": "FinancialContent - Bittersweet Markets : Coffee and Sugar Prices Skyrocket as Climate Volatility Meets Resurgent Global Demand",
+      "source": "markets.financialcontent.com",
+      "language": "English",
+      "seendate": "20260306T153000Z"
+    },
+    {
+      "url": "https://www.news18.com/world/imf-managing-director-kristalina-georgieva-warns-of-global-inflation-middle-east-west-asia-conflict-ws-l-9950282.html",
+      "title": "  Think Of The Unthinkable : IMF Chief Warns Middle East Conflict Could Raise Global Inflation",
+      "source": "news18.com",
+      "language": "English",
+      "seendate": "20260309T093000Z"
+    },
+    {
+      "url": "https://www.opinionnigeria.com/as-the-third-world-war-crisis-unfolds-it-is-a-mixed-blessing-for-nigerias-economy-without-looting-by-daniel-nduka-okonkwo/",
+      "title": "As the Third World War Crisis Unfolds , it is a Mixed Blessing for Nigeria Economy , Without Looting - By Daniel Nduka Okonkwo",
+      "source": "opinionnigeria.com",
+      "language": "English",
+      "seendate": "20260304T201500Z"
+    },
+    {
+      "url": "https://tribune.com.pk/story/2596651/punjab-cm-announces-closure-of-educational-institutions-till-mar-31-imposes-fuel-curbs-on-officials",
+      "title": "Punjab tightens fuel monitoring as global oil prices surge amid ME tensions",
+      "source": "tribune.com.pk",
+      "language": "English",
+      "seendate": "20260309T163000Z"
+    },
+    {
+      "url": "https://www.housingwire.com/articles/mortgage-rates-housing-demand-2026-2/",
+      "title": "Housing demand is up and inventory is down , even with Iran conflict",
+      "source": "housingwire.com",
+      "language": "English",
+      "seendate": "20260308T004500Z"
+    },
+    {
+      "url": "https://www.sun-sentinel.com/2026/03/10/iran-war-global-economy/",
+      "title": "War with Iran delivers another shock to the global economy",
+      "source": "sun-sentinel.com",
+      "language": "English",
+      "seendate": "20260310T163000Z"
+    },
+    {
+      "url": "https://alanbatnews.net/article/473496",
+      "title": "Fear for fuel price hike grips T\u00fcrkiye amid mounting tensions in Strait of Hormuz",
+      "source": "alanbatnews.net",
+      "language": "English",
+      "seendate": "20260305T130000Z"
+    },
+    {
+      "url": "https://economictimes.indiatimes.com/news/international/us/us-oil-prices-finally-explode-now-up-10-as-trump-demands-irans-surrender-could-100-crude-ignite-a-new-inflation-shock-across-the-u-s-economy/articleshow/129163682.cms",
+      "title": "US Oil Prices : Could oil prices reach $100 : US oil prices finally explode , now up 10 % as Trump demands Iran surrender could $100 crude ignite a new inflation shock across the U . S . economy ? ",
+      "source": "economictimes.indiatimes.com",
+      "language": "English",
+      "seendate": "20260306T161500Z"
+    },
+    {
+      "url": "https://www.durangoherald.com/articles/war-with-iran-delivers-another-shock-to-the-global-economy/",
+      "title": "War with Iran delivers another shock to the global economy",
+      "source": "durangoherald.com",
+      "language": "English",
+      "seendate": "20260310T070000Z"
+    },
+    {
+      "url": "https://economictimes.indiatimes.com/news/politics-and-nation/mamata-banerjee-labels-new-bengal-governor-rn-ravi-as-bjps-parrot-raises-concerns-over-lpg-price-hikes-and-governors-resignation/articleshow/129210163.cms",
+      "title": "Mamata Banerjee calls incoming Bengal Governor  BJP Parrot  ",
+      "source": "economictimes.indiatimes.com",
+      "language": "English",
+      "seendate": "20260307T113000Z"
+    },
+    {
+      "url": "https://www.al-monitor.com/originals/2026/03/oil-crisis-stokes-inflation-risks-mideast-iran-war-exposes-importers",
+      "title": "Oil crisis stokes inflation risks for Mideast as Iran war exposes importers",
+      "source": "al-monitor.com",
+      "language": "English",
+      "seendate": "20260309T213000Z"
+    },
+    {
+      "url": "https://www.dailylocal.com/2026/03/10/iran-war-global-economy/",
+      "title": "War with Iran delivers another shock to the global economy",
+      "source": "dailylocal.com",
+      "language": "English",
+      "seendate": "20260310T140000Z"
+    },
+    {
+      "url": "https://moneylife.in/article/lpg-crisis-forces-restaurant-shutdowns-govt-invokes-essential-commodities-act-tightens-booking-rules/79889.html",
+      "title": "LPG Crisis Forces Restaurant Shutdowns ; Govt Invokes Essential Commodities Act , Tightens Booking Rules",
+      "source": "moneylife.in",
+      "language": "English",
+      "seendate": "20260310T114500Z"
+    },
+    {
+      "url": "https://www.businesstoday.in/world/story/spillover-already-a-reality-ursula-von-der-leyen-says-europe-caught-in-crossfire-of-west-asia-conflict-519762-2026-03-09",
+      "title": "  Spillover already a reality : Ursula von der Leyen says Europe caught in crossfire of West Asia conflict",
+      "source": "businesstoday.in",
+      "language": "English",
+      "seendate": "20260309T143000Z"
+    },
+    {
+      "url": "https://www.firstpost.com/explainers/iran-war-could-dubai-run-out-of-fresh-food-in-10-days-13986983.html",
+      "title": "Could Iran war cause Dubai to run out of fresh food soon ? \u2013 Firstpost",
+      "source": "firstpost.com",
+      "language": "English",
+      "seendate": "20260306T174500Z"
+    },
+    {
+      "url": "https://www.manchestereveningnews.co.uk/news/cost-of-living/five-ways-uk-bills-set-33559146",
+      "title": "Five ways united kingdom bills set to spike due to Middle East war as Rachel Reeves issues warning",
+      "source": "manchestereveningnews.co.uk",
+      "language": "English",
+      "seendate": "20260310T084500Z"
+    },
+    {
+      "url": "https://www.smh.com.au/politics/federal/no-need-for-panic-bowen-calls-urgent-summit-as-fuel-fears-grip-regions-20260310-p5o8yx.html",
+      "title": "Australian fuel crisis : Coalition and farmers demand action amid panic buying and Iran war fears",
+      "source": "smh.com.au",
+      "language": "English",
+      "seendate": "20260310T020000Z"
+    },
+    {
+      "url": "https://www.watoday.com.au/politics/federal/no-need-for-panic-bowen-calls-urgent-summit-as-fuel-fears-grip-regions-20260310-p5o8yx.html",
+      "title": "Australian fuel crisis : Coalition and farmers demand action amid panic buying and Iran war fears",
+      "source": "watoday.com.au",
+      "language": "English",
+      "seendate": "20260310T014500Z"
+    },
+    {
+      "url": "https://www.forbes.com/sites/christinero/2026/03/05/after-almost-3-years-a-tiny-window-to-vaccinate-zero-dose-kids-in-sudan/",
+      "title": "After Almost 3 Years , A Tiny Window To Vaccinate Zero - Dose Kids In Sudan",
+      "source": "forbes.com",
+      "language": "English",
+      "seendate": "20260305T140000Z"
+    },
+    {
+      "url": "https://www.brisbanetimes.com.au/politics/federal/no-need-for-panic-bowen-calls-urgent-summit-as-fuel-fears-grip-regions-20260310-p5o8yx.html",
+      "title": "Australian fuel crisis : Coalition and farmers demand action amid panic buying and Iran war fears",
+      "source": "brisbanetimes.com.au",
+      "language": "English",
+      "seendate": "20260310T013000Z"
+    },
+    {
+      "url": "https://metro.co.uk/2026/03/10/supermarket-mistakes-making-weekly-shop-even-expensive-27245727/",
+      "title": "The supermarket mistakes that are making your weekly shop even more expensive",
+      "source": "metro.co.uk",
+      "language": "English",
+      "seendate": "20260310T084500Z"
+    }
+  ],
+  "fetched_at": "2026-03-11T00:50:06.744902+00:00"
+}

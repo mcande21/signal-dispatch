@@ -1,0 +1,182 @@
+[
+  {
+    "ticker": "KXWTI-26MAR02-T72.99",
+    "title": "Will the WTI front-month settle oil price  be >72.99 on Mar 2, 2026?",
+    "status": "active",
+    "yes_price": 0.01,
+    "volume": 63700.0,
+    "close_time": "2026-03-02T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26MAR06-T73.99",
+    "title": "Will the WTI front-month settle oil price  be >73.99 on Mar 6, 2026?",
+    "status": "active",
+    "yes_price": 0.8049999999999999,
+    "volume": 32854.0,
+    "close_time": "2026-03-06T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTI-26MAR02-B72.5",
+    "title": "Will the WTI front-month settle oil price  be Between 72.00 and 72.99 on Mar 2, 2026?",
+    "status": "active",
+    "yes_price": 0.025,
+    "volume": 19142.0,
+    "close_time": "2026-03-02T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTI-26MAR02-B71.5",
+    "title": "Will the WTI front-month settle oil price  be Between 71.00 and 71.99 on Mar 2, 2026?",
+    "status": "active",
+    "yes_price": 0.74,
+    "volume": 15283.0,
+    "close_time": "2026-03-02T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26MAR06-B73.5",
+    "title": "Will the WTI front-month settle oil price  be Between 73.00 and 73.99 on Mar 6, 2026?",
+    "status": "active",
+    "yes_price": 0.16999999999999998,
+    "volume": 13628.0,
+    "close_time": "2026-03-06T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26FEB27-B66.5",
+    "title": "Will the WTI front-month settle oil price  be Between 66.00 and 66.99 on Feb 27, 2026?",
+    "status": "active",
+    "yes_price": 0.56,
+    "volume": 11219.0,
+    "close_time": "2026-02-27T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTI-26MAR02-B70.5",
+    "title": "Will the WTI front-month settle oil price  be Between 70.00 and 70.99 on Mar 2, 2026?",
+    "status": "active",
+    "yes_price": 0.34,
+    "volume": 9306.0,
+    "close_time": "2026-03-02T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26FEB27-B65.5",
+    "title": "Will the WTI front-month settle oil price  be Between 65.00 and 65.99 on Feb 27, 2026?",
+    "status": "active",
+    "yes_price": 0.12,
+    "volume": 6850.0,
+    "close_time": "2026-02-27T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTI-26MAR02-B69.5",
+    "title": "Will the WTI front-month settle oil price  be Between 69.00 and 69.99 on Mar 2, 2026?",
+    "status": "active",
+    "yes_price": 0.015,
+    "volume": 6793.0,
+    "close_time": "2026-03-02T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26FEB27-B67.5",
+    "title": "Will the WTI front-month settle oil price  be Between 67.00 and 67.99 on Feb 27, 2026?",
+    "status": "active",
+    "yes_price": 0.25,
+    "volume": 5649.0,
+    "close_time": "2026-02-27T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTI-26MAR02-B66.5",
+    "title": "Will the WTI front-month settle oil price  be Between 66.00 and 66.99 on Mar 2, 2026?",
+    "status": "active",
+    "yes_price": 0.01,
+    "volume": 5003.0,
+    "close_time": "2026-03-02T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26MAR06-B72.5",
+    "title": "Will the WTI front-month settle oil price  be Between 72.00 and 72.99 on Mar 6, 2026?",
+    "status": "active",
+    "yes_price": 0.045,
+    "volume": 4412.0,
+    "close_time": "2026-03-06T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTI-26MAR02-B67.5",
+    "title": "Will the WTI front-month settle oil price  be Between 67.00 and 67.99 on Mar 2, 2026?",
+    "status": "active",
+    "yes_price": 0.04,
+    "volume": 4181.0,
+    "close_time": "2026-03-02T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26MAR06-B71.5",
+    "title": "Will the WTI front-month settle oil price  be Between 71.00 and 71.99 on Mar 6, 2026?",
+    "status": "active",
+    "yes_price": 0.025,
+    "volume": 3932.0,
+    "close_time": "2026-03-06T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26FEB27-B64.5",
+    "title": "Will the WTI front-month settle oil price  be Between 64.00 and 64.99 on Feb 27, 2026?",
+    "status": "active",
+    "yes_price": 0.03,
+    "volume": 3604.0,
+    "close_time": "2026-02-27T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTI-26MAR02-B68.5",
+    "title": "Will the WTI front-month settle oil price  be Between 68.00 and 68.99 on Mar 2, 2026?",
+    "status": "active",
+    "yes_price": 0.06,
+    "volume": 2947.0,
+    "close_time": "2026-03-02T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26MAR06-B70.5",
+    "title": "Will the WTI front-month settle oil price  be Between 70.00 and 70.99 on Mar 6, 2026?",
+    "status": "active",
+    "yes_price": 0.025,
+    "volume": 2510.0,
+    "close_time": "2026-03-06T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26FEB27-B63.5",
+    "title": "Will the WTI front-month settle oil price  be Between 63.00 and 63.99 on Feb 27, 2026?",
+    "status": "active",
+    "yes_price": 0.015,
+    "volume": 2350.0,
+    "close_time": "2026-02-27T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26FEB27-B68.5",
+    "title": "Will the WTI front-month settle oil price  be Between 68.00 and 68.99 on Feb 27, 2026?",
+    "status": "active",
+    "yes_price": 0.065,
+    "volume": 2322.0,
+    "close_time": "2026-02-27T19:30:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXWTIW-26MAR06-B69.5",
+    "title": "Will the WTI front-month settle oil price  be Between 69.00 and 69.99 on Mar 6, 2026?",
+    "status": "active",
+    "yes_price": 0.04,
+    "volume": 2080.0,
+    "close_time": "2026-03-06T19:30:00Z",
+    "category": ""
+  }
+]

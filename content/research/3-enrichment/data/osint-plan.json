@@ -1,0 +1,144 @@
+{
+  "issue": "3",
+  "topic": "Energy-Food-Europe Nexus",
+  "queries": [
+    {
+      "source": "federal_register",
+      "queries": [
+        {
+          "type": "document_search",
+          "params": {
+            "term": "emergency petroleum reserve release",
+            "date_gte": "2026-02-01",
+            "agencies": ["energy-department"],
+            "type": ["NOTICE", "RULE", "PRESDOCU"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "params": {
+            "term": "strategic petroleum reserve drawdown sale",
+            "date_gte": "2026-02-01",
+            "agencies": ["energy-department"],
+            "type": ["NOTICE", "RULE"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "params": {
+            "term": "emergency natural gas LNG export authorization",
+            "date_gte": "2026-02-01",
+            "agencies": ["energy-department", "federal-energy-regulatory-commission"],
+            "type": ["NOTICE", "RULE"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "params": {
+            "term": "fertilizer emergency supply agriculture",
+            "date_gte": "2026-02-01",
+            "agencies": ["agriculture-department"],
+            "type": ["NOTICE", "RULE", "PRESDOCU"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "params": {
+            "term": "fertilizer import waiver tariff emergency",
+            "date_gte": "2026-02-01",
+            "agencies": ["commerce-department", "international-trade-administration"],
+            "type": ["NOTICE", "RULE"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "params": {
+            "term": "Iran sanctions energy exemption waiver",
+            "date_gte": "2026-02-01",
+            "agencies": ["treasury-department"],
+            "type": ["NOTICE", "RULE", "PRESDOCU"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "params": {
+            "term": "national emergency energy supply declaration",
+            "date_gte": "2026-02-01",
+            "type": ["PRESDOCU"],
+            "per_page": 20
+          }
+        },
+        {
+          "type": "document_search",
+          "params": {
+            "term": "EPA fertilizer production waiver environmental emergency",
+            "date_gte": "2026-02-01",
+            "agencies": ["environmental-protection-agency"],
+            "type": ["NOTICE", "RULE"],
+            "per_page": 20
+          }
+        }
+      ]
+    },
+    {
+      "source": "congress_gov",
+      "queries": [
+        {
+          "type": "list_bills",
+          "params": {
+            "congress": 119,
+            "from_date": "2026-02-01T00:00:00Z",
+            "limit": 50,
+            "sort": "updateDate+desc"
+          }
+        },
+        {
+          "type": "bill_search",
+          "params": {
+            "query": "strategic petroleum reserve emergency",
+            "congress": 119,
+            "limit": 20
+          }
+        },
+        {
+          "type": "bill_search",
+          "params": {
+            "query": "fertilizer agriculture emergency supply",
+            "congress": 119,
+            "limit": 20
+          }
+        },
+        {
+          "type": "bill_search",
+          "params": {
+            "query": "energy security natural gas LNG export",
+            "congress": 119,
+            "limit": 20
+          }
+        },
+        {
+          "type": "bill_search",
+          "params": {
+            "query": "Iran sanctions emergency Hormuz",
+            "congress": 119,
+            "limit": 20
+          }
+        },
+        {
+          "type": "bill_search",
+          "params": {
+            "query": "food security price emergency",
+            "congress": 119,
+            "limit": 20
+          }
+        }
+      ]
+    }
+  ]
+}

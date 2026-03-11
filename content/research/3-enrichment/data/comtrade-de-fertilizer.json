@@ -1,0 +1,11 @@
+{
+  "source": "comtrade",
+  "reporter": "DE",
+  "reporter_m49": 276,
+  "commodity": 3102,
+  "flow": "M",
+  "frequency": "A",
+  "record_count": 0,
+  "trades": [],
+  "fetched_at": "2026-03-11T00:50:09.097571+00:00"
+}

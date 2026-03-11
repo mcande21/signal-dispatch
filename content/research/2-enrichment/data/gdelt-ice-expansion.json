@@ -1,0 +1,184 @@
+{
+  "source": "gdelt",
+  "query": "ICE detention expansion billion beds",
+  "timespan": "30d",
+  "article_count": 25,
+  "articles": [
+    {
+      "url": "https://www.khaama.com/us-plans-38-billion-detention-expansion-to-hold-tens-of-thousands-of-migrants/",
+      "title": "US Plans $38 Billion Detention Expansion to Hold Tens of Thousands of Migrants",
+      "source": "khaama.com",
+      "language": "English",
+      "seendate": "20260214T103000Z"
+    },
+    {
+      "url": "https://www.wcvb.com/article/ice-383-billion-detention-center-beds/70353306",
+      "title": "Planned $38 . 3 billion to 92 , 600 beds for immigration detention",
+      "source": "wcvb.com",
+      "language": "English",
+      "seendate": "20260215T161500Z"
+    },
+    {
+      "url": "https://www.wyff4.com/article/ice-383-billion-detention-center-beds/70353306",
+      "title": "Planned $38 . 3 billion to 92 , 600 beds for immigration detention",
+      "source": "wyff4.com",
+      "language": "English",
+      "seendate": "20260215T144500Z"
+    },
+    {
+      "url": "https://www.wtae.com/article/ice-383-billion-detention-center-beds/70353306",
+      "title": "Planned $38 . 3 billion to 92 , 600 beds for immigration detention",
+      "source": "wtae.com",
+      "language": "English",
+      "seendate": "20260215T130000Z"
+    },
+    {
+      "url": "https://www.wbaltv.com/article/ice-383-billion-detention-center-beds/70353306",
+      "title": "Planned $38 . 3 billion to 92 , 600 beds for immigration detention",
+      "source": "wbaltv.com",
+      "language": "English",
+      "seendate": "20260215T123000Z"
+    },
+    {
+      "url": "https://www.kcci.com/article/ice-383-billion-detention-center-beds/70353306",
+      "title": "Planned $38 . 3 billion to 92 , 600 beds for immigration detention",
+      "source": "kcci.com",
+      "language": "English",
+      "seendate": "20260215T131500Z"
+    },
+    {
+      "url": "https://www.kcra.com/article/ice-383-billion-detention-center-beds/70353306",
+      "title": "Planned $38 . 3 billion to 92 , 600 beds for immigration detention",
+      "source": "kcra.com",
+      "language": "English",
+      "seendate": "20260215T151500Z"
+    },
+    {
+      "url": "https://www.kmbc.com/article/ice-383-billion-detention-center-beds/70353306",
+      "title": "Planned $38 . 3 billion to 92 , 600 beds for immigration detention",
+      "source": "kmbc.com",
+      "language": "English",
+      "seendate": "20260215T150000Z"
+    },
+    {
+      "url": "https://www.wmtw.com/article/ice-383-billion-detention-center-beds/70353306",
+      "title": "Planned $38 . 3 billion to 92 , 600 beds for immigration detention",
+      "source": "wmtw.com",
+      "language": "English",
+      "seendate": "20260215T160000Z"
+    },
+    {
+      "url": "https://www.yahoo.com/news/articles/immigration-officials-plan-spend-38-005101537.html",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "yahoo.com",
+      "language": "English",
+      "seendate": "20260214T013000Z"
+    },
+    {
+      "url": "https://www.wral.com/news/ap/c61c3-immigration-officials-plan-to-spend-38-3-billion-to-boost-detention-capacity-to-92-000-beds/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "wral.com",
+      "language": "English",
+      "seendate": "20260214T023000Z"
+    },
+    {
+      "url": "https://www.chicagotribune.com/2026/02/13/immigration-officials-detention-capacity-plan/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "chicagotribune.com",
+      "language": "English",
+      "seendate": "20260214T033000Z"
+    },
+    {
+      "url": "https://www.baltimoresun.com/2026/02/13/immigration-detention-expansion/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "baltimoresun.com",
+      "language": "English",
+      "seendate": "20260214T020000Z"
+    },
+    {
+      "url": "https://www.sun-sentinel.com/2026/02/13/immigration-detention-expansion/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "sun-sentinel.com",
+      "language": "English",
+      "seendate": "20260214T013000Z"
+    },
+    {
+      "url": "https://whdh.com/news/immigration-officials-plan-to-spend-38-3-billion-to-boost-detention-capacity-to-92000-beds/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds - Boston News , Weather , Sports",
+      "source": "whdh.com",
+      "language": "English",
+      "seendate": "20260214T040000Z"
+    },
+    {
+      "url": "https://www.orlandosentinel.com/2026/02/13/immigration-detention-expansion/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "orlandosentinel.com",
+      "language": "English",
+      "seendate": "20260214T024500Z"
+    },
+    {
+      "url": "https://www.sandiegouniontribune.com/2026/02/13/immigration-detention-expansion/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "sandiegouniontribune.com",
+      "language": "English",
+      "seendate": "20260214T030000Z"
+    },
+    {
+      "url": "https://www.click2houston.com/news/national/2026/02/14/immigration-officials-plan-to-spend-383-billion-to-boost-detention-capacity-to-92000-beds/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "click2houston.com",
+      "language": "English",
+      "seendate": "20260214T014500Z"
+    },
+    {
+      "url": "https://www.twincities.com/2026/02/13/immigration-detention-expansion/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "twincities.com",
+      "language": "English",
+      "seendate": "20260214T021500Z"
+    },
+    {
+      "url": "https://www.winnipegfreepress.com/world/2026/02/13/immigration-officials-plan-to-spend-38-3-billion-to-boost-detention-capacity-to-92000-beds",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds \u2013 Winnipeg Free Press",
+      "source": "winnipegfreepress.com",
+      "language": "English",
+      "seendate": "20260214T011500Z"
+    },
+    {
+      "url": "https://www.clickorlando.com/news/national/2026/02/14/immigration-officials-plan-to-spend-383-billion-to-boost-detention-capacity-to-92000-beds/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "clickorlando.com",
+      "language": "English",
+      "seendate": "20260214T024500Z"
+    },
+    {
+      "url": "https://www.citizensvoice.com/2026/02/13/immigration-detention-expansion/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "citizensvoice.com",
+      "language": "English",
+      "seendate": "20260214T031500Z"
+    },
+    {
+      "url": "https://www.krgv.com/news/immigration-officials-plan-to-spend-38-3-billion-turning-warehouses-into-detention-centers",
+      "title": "Immigration officials plan to spend $38 . 3 billion turning warehouses into detention centers",
+      "source": "krgv.com",
+      "language": "English",
+      "seendate": "20260214T041500Z"
+    },
+    {
+      "url": "https://www.dailynews.com/2026/02/13/immigration-detention-expansion/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "dailynews.com",
+      "language": "English",
+      "seendate": "20260214T053000Z"
+    },
+    {
+      "url": "https://www.bangordailynews.com/2026/02/13/nation/immigration-officials-plan-to-spend-38-3-billion-to-boost-detention-capacity-to-92000-beds/",
+      "title": "Immigration officials plan to spend $38 . 3 billion to boost detention capacity to 92 , 000 beds",
+      "source": "bangordailynews.com",
+      "language": "English",
+      "seendate": "20260214T033000Z"
+    }
+  ],
+  "fetched_at": "2026-03-07T14:45:18.977568+00:00"
+}

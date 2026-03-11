@@ -1,0 +1,210 @@
+{
+  "source": "entsog",
+  "country": "DE",
+  "indicator": "Physical Flow",
+  "period_type": "day",
+  "record_count": 20,
+  "flows": [
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-02-25T06:00:00+01:00",
+      "period_to": "2026-02-26T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-02-26T06:00:00+01:00",
+      "period_to": "2026-02-27T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-02-27T06:00:00+01:00",
+      "period_to": "2026-02-28T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-02-28T06:00:00+01:00",
+      "period_to": "2026-03-01T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-01T06:00:00+01:00",
+      "period_to": "2026-03-02T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-02T06:00:00+01:00",
+      "period_to": "2026-03-03T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-03T06:00:00+01:00",
+      "period_to": "2026-03-04T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-04T06:00:00+01:00",
+      "period_to": "2026-03-05T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-05T06:00:00+01:00",
+      "period_to": "2026-03-06T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-06T06:00:00+01:00",
+      "period_to": "2026-03-07T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-07T06:00:00+01:00",
+      "period_to": "2026-03-08T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-08T06:00:00+01:00",
+      "period_to": "2026-03-09T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-09T06:00:00+01:00",
+      "period_to": "2026-03-10T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-10T06:00:00+01:00",
+      "period_to": "2026-03-11T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "exit",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-11T06:00:00+01:00",
+      "period_to": "2026-03-12T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "entry",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-02-25T06:00:00+01:00",
+      "period_to": "2026-02-26T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "entry",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-02-26T06:00:00+01:00",
+      "period_to": "2026-02-27T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "entry",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-02-27T06:00:00+01:00",
+      "period_to": "2026-02-28T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "entry",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-02-28T06:00:00+01:00",
+      "period_to": "2026-03-01T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    },
+    {
+      "point_key": "ITP-00515",
+      "point_label": "Transfer Point NGTN <-> GTNTT",
+      "direction": "entry",
+      "value": "",
+      "unit": "kWh/d",
+      "period_from": "2026-03-01T06:00:00+01:00",
+      "period_to": "2026-03-02T06:00:00+01:00",
+      "operator_key": "BG-TSO-0001"
+    }
+  ],
+  "fetched_at": "2026-03-11T00:49:46.204650+00:00"
+}

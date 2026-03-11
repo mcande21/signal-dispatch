@@ -1,6 +1,6 @@
 {
   "$schema": "Signal Dispatch Probability State v1",
-  "last_updated": "2026-03-06T00:00:00Z",
+  "last_updated": "2026-03-10T00:00:00Z",
   "events": [
     {
       "id": "iran-regime-change-2026",
@@ -18,12 +18,13 @@
       "id": "hormuz-reopen-q2-2026",
       "event": "Strait of Hormuz reopens to normal commercial traffic by June 30, 2026",
       "issue_introduced": 0,
-      "current_probability": 0.25,
+      "current_probability": 0.55,
       "confidence": "medium",
       "resolution_date": "2026-06-30",
       "resolution_criteria": "YES if Lloyd's reinstates standard marine insurance for Persian Gulf transit at pre-conflict premium levels. NO if war-risk premiums remain above 5x pre-conflict baseline.",
       "history": [
-        { "date": "2026-03-06", "probability": 0.25, "issue": 0, "note": "Initial assessment" }
+        { "date": "2026-03-06", "probability": 0.25, "issue": 0, "note": "Initial assessment" },
+        { "date": "2026-03-10", "probability": 0.55, "issue": 3, "note": "Updated from 25% to 55% (+30pp). Issue #3 analysis assesses 65% chance disruption resolves before mid-April. Lloyd's insurance normalization lags shipping resumption by weeks, but 25% was inconsistent with the disruption-duration estimate. 55% reflects insurance lag discount on the 65% shipping-resolution probability plus additional April-June resolution window." }
       ]
     },
     {
@@ -116,6 +117,54 @@
       "history": [
         { "date": "2026-03-06", "probability": 0.20, "issue": 2, "note": "Initial assessment" }
       ]
+    },
+    {
+      "id": "eu-storage-fails-80-mandate",
+      "event": "EU gas storage fails 80% mandate by October 2026",
+      "issue_introduced": 3,
+      "current_probability": 0.45,
+      "confidence": "medium",
+      "resolution_date": "2026-10-31",
+      "resolution_criteria": "AGSI EU-wide aggregate storage below 80% on October 31, 2026.",
+      "history": [
+        { "date": "2026-03-10", "probability": 0.45, "issue": 3, "note": "Initial assessment. AGSI shows NL at 9%, DE at 21.5% entering refill season. Qatari LNG (12-14% of EU imports) offline. Germany recovering via Norwegian pipeline; Netherlands has no viable alternative." }
+      ]
+    },
+    {
+      "id": "hormuz-disruption-6-weeks",
+      "event": "Hormuz disruption persists more than 6 weeks",
+      "issue_introduced": 3,
+      "current_probability": 0.35,
+      "confidence": "low",
+      "resolution_date": "2026-04-13",
+      "resolution_criteria": "Commercial shipping through Strait of Hormuz remains disrupted (no LNG/oil tanker transit) as of April 13, 2026.",
+      "history": [
+        { "date": "2026-03-10", "probability": 0.35, "issue": 3, "note": "Initial assessment. Historical base rate of sustained full closure effectively zero. Current conflict unprecedented in scope (direct US-Iran engagement). Adjusted from near-zero to 35% for unprecedented scope while respecting base rate discipline." }
+      ]
+    },
+    {
+      "id": "fertilizer-yield-reduction-2pct",
+      "event": "Fertilizer scarcity reduces Northern Hemisphere yields more than 2% (conditional on closure through April)",
+      "issue_introduced": 3,
+      "current_probability": 0.60,
+      "confidence": "medium-low",
+      "resolution_date": "2026-10-31",
+      "resolution_criteria": "USDA or FAO reporting yield reduction exceeding 2% on staple crops (wheat, corn, soybeans) in Northern Hemisphere harvest 2026, attributed to fertilizer under-application.",
+      "history": [
+        { "date": "2026-03-10", "probability": 0.60, "issue": 3, "note": "Initial assessment. CONDITIONAL on Hormuz closed through April. Gulf handles 20-30% of global fertilizer trade. Spring planting window is March-April. No structured fertilizer pricing data -- rests on web research." }
+      ]
+    },
+    {
+      "id": "food-price-spike-10pct-h2",
+      "event": "Food prices spike more than 10% in H2 2026",
+      "issue_introduced": 3,
+      "current_probability": 0.25,
+      "confidence": "low",
+      "resolution_date": "2026-12-31",
+      "resolution_criteria": "FAO Food Price Index or relevant CPI food component increases more than 10% from June 2026 baseline by December 2026.",
+      "history": [
+        { "date": "2026-03-10", "probability": 0.25, "issue": 3, "note": "Initial assessment. Unconditional. Chain decomposition: P(closure) 0.35 x P(yield|closure) 0.60 x P(transmission|yield) 0.70 = 14.7%, rounded to 25% for model uncertainty and partial effects from shorter disruptions." }
+      ]
     }
   ],
   "resolved": [],
@@ -126,10 +175,10 @@
       "0-10": { "predictions": 1, "outcomes": 0 },
       "10-20": { "predictions": 1, "outcomes": 0 },
       "20-30": { "predictions": 2, "outcomes": 0 },
-      "30-40": { "predictions": 2, "outcomes": 0 },
-      "40-50": { "predictions": 0, "outcomes": 0 },
-      "50-60": { "predictions": 1, "outcomes": 0 },
-      "60-70": { "predictions": 1, "outcomes": 0 },
+      "30-40": { "predictions": 3, "outcomes": 0 },
+      "40-50": { "predictions": 1, "outcomes": 0 },
+      "50-60": { "predictions": 2, "outcomes": 0 },
+      "60-70": { "predictions": 2, "outcomes": 0 },
       "70-80": { "predictions": 2, "outcomes": 0 },
       "80-90": { "predictions": 0, "outcomes": 0 },
       "90-100": { "predictions": 0, "outcomes": 0 }

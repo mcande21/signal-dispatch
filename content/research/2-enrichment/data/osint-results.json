@@ -1,0 +1,2480 @@
+{
+  "ticker": "",
+  "results": [
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "federal_register",
+      "query_type": "document_search",
+      "data": []
+    },
+    {
+      "source": "congress",
+      "query_type": "list_bills",
+      "data": [
+        {
+          "bill_id": "HR173",
+          "title": "High Rise Fire Sprinkler Incentive Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/173?format=json"
+        },
+        {
+          "bill_id": "HR22",
+          "title": "SAVE Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-04-10",
+            "text": "Received in the Senate."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/22?format=json"
+        },
+        {
+          "bill_id": "HJRES10",
+          "title": "Proposing a balanced budget amendment to the Constitution of the United States.",
+          "type": "HJRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hjres/10?format=json"
+        },
+        {
+          "bill_id": "HR138",
+          "title": "Lowering Costs for Caregivers Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/138?format=json"
+        },
+        {
+          "bill_id": "HR197",
+          "title": "Lake Winnibigoshish Land Exchange Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-10-27",
+            "text": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 218."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/197?format=json"
+        },
+        {
+          "bill_id": "HRES5",
+          "title": "Adopting the Rules of the House of Representatives for the One Hundred Nineteenth Congress, and for other purposes.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Motion to reconsider laid on the table Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/5?format=json"
+        },
+        {
+          "bill_id": "HR131",
+          "title": "Finish the Arkansas Valley Conduit Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-01-08",
+            "text": "The Chair directed the Clerk to notify the Senate of the action of the House."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/131?format=json"
+        },
+        {
+          "bill_id": "HJRES6",
+          "title": "Proposing an amendment to the Constitution of the United States to provide for balanced budgets for the Government.",
+          "type": "HJRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hjres/6?format=json"
+        },
+        {
+          "bill_id": "HR64",
+          "title": "Grant\u2019s Law",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/64?format=json"
+        },
+        {
+          "bill_id": "HR169",
+          "title": "Prevent Family Fire Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/169?format=json"
+        },
+        {
+          "bill_id": "HR165",
+          "title": "Wounded Knee Massacre Memorial and Sacred Site Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-12-19",
+            "text": "Became Public Law No: 119-61."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/165?format=json"
+        },
+        {
+          "bill_id": "HR45",
+          "title": "FIND Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Oversight and Government Reform."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/45?format=json"
+        },
+        {
+          "bill_id": "HR185",
+          "title": "Responsible Legislating Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-03-14",
+            "text": "Referred to the Subcommittee on Livestock, Dairy, and Poultry."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/185?format=json"
+        },
+        {
+          "bill_id": "HR207",
+          "title": "SHARKED Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-22",
+            "text": "Received in the Senate and Read twice and referred to the Committee on Commerce, Science, and Transportation."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/207?format=json"
+        },
+        {
+          "bill_id": "HJRES9",
+          "title": "Proposing an amendment to the Constitution of the United States prohibiting the United States Government from increasing its debt except for a specific purpose by law adopted by three-fourths of the membership of each House of Congress.",
+          "type": "HJRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hjres/9?format=json"
+        },
+        {
+          "bill_id": "HJRES2",
+          "title": "Proposing a balanced budget amendment to the Constitution of the United States.",
+          "type": "HJRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hjres/2?format=json"
+        },
+        {
+          "bill_id": "HR41",
+          "title": "Unrecognized Southeast Alaska Native Communities Recognition and Compensation Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-03-05",
+            "text": "Ordered to be Reported in the Nature of a Substitute (Amended) by Unanimous Consent."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/41?format=json"
+        },
+        {
+          "bill_id": "HR161",
+          "title": "New Source Review Permitting Improvement Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-01-21",
+            "text": "Ordered to be Reported (Amended) by the Yeas and Nays: 28 - 23."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/161?format=json"
+        },
+        {
+          "bill_id": "HR168",
+          "title": "TORCH Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-04-04",
+            "text": "Referred to the Subcommittee on Forestry and Horticulture."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/168?format=json"
+        },
+        {
+          "bill_id": "HR204",
+          "title": "ACRES Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-03-04",
+            "text": "Committee on Energy and Natural Resources. Ordered to be reported without amendment favorably."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/204?format=json"
+        },
+        {
+          "bill_id": "HR116",
+          "title": "Stopping Border Surges Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Committee on the Judiciary, and in addition to the Committee on Foreign Affairs, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/116?format=json"
+        },
+        {
+          "bill_id": "HR151",
+          "title": "Equal Representation Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-12-02",
+            "text": "Ordered to be Reported (Amended) by the Yeas and Nays: 20 - 19."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/151?format=json"
+        },
+        {
+          "bill_id": "HR183",
+          "title": "Law Enforcement Officer and Firefighter Recreation Pass Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-07-22",
+            "text": "Received in the Senate and Read twice and referred to the Committee on Energy and Natural Resources."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/183?format=json"
+        },
+        {
+          "bill_id": "HR34",
+          "title": "LASSO Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-02-10",
+            "text": "Subcommittee Hearings Held"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/34?format=json"
+        },
+        {
+          "bill_id": "HR38",
+          "title": "Constitutional Concealed Carry Reciprocity Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-10-03",
+            "text": "Placed on the Union Calendar, Calendar No. 289."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/38?format=json"
+        },
+        {
+          "bill_id": "HR54",
+          "title": "WHO Withdrawal Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Foreign Affairs."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/54?format=json"
+        },
+        {
+          "bill_id": "HR79",
+          "title": "Freedom from Mandates Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Education and Workforce, Energy and Commerce, and Ways and Means, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/79?format=json"
+        },
+        {
+          "bill_id": "HR128",
+          "title": "Fentanyl is a WMD Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Subcommittee on Emergency Management and Technology."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/128?format=json"
+        },
+        {
+          "bill_id": "HR210",
+          "title": "Dental Care for Veterans Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-06",
+            "text": "Referred to the Subcommittee on Health."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/210?format=json"
+        },
+        {
+          "bill_id": "HJRES12",
+          "title": "Proposing an amendment to the Constitution of the United States to limit the number of terms that a Member of Congress may serve.",
+          "type": "HJRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-06",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hjres/12?format=json"
+        },
+        {
+          "bill_id": "HR227",
+          "title": "Clergy Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-01-07",
+            "text": "Placed on the Union Calendar, Calendar No. 370."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/227?format=json"
+        },
+        {
+          "bill_id": "HR225",
+          "title": "HUD Transparency Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-12-02",
+            "text": "Received in the Senate and Read twice and referred to the Committee on Banking, Housing, and Urban Affairs."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/225?format=json"
+        },
+        {
+          "bill_id": "HR309",
+          "title": "National Law Enforcement Officers Remembrance, Support and Community Outreach Act.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-09-18",
+            "text": "Subcommittee Hearings Held"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/309?format=json"
+        },
+        {
+          "bill_id": "HRES30",
+          "title": "Honoring the life, achievements, legacy, and public service of former President James Earl \"Jimmy\" Carter, Jr.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Oversight and Government Reform."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/30?format=json"
+        },
+        {
+          "bill_id": "HR295",
+          "title": "Fair Milk Pricing for Farmers Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-14",
+            "text": "Referred to the Subcommittee on General Farm Commodities, Risk Management, and Credit."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/295?format=json"
+        },
+        {
+          "bill_id": "HR306",
+          "title": "ESCRA Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Financial Services."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/306?format=json"
+        },
+        {
+          "bill_id": "HR263",
+          "title": "Transnational Criminal Organization Illicit Spotter Prevention and Elimination Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/263?format=json"
+        },
+        {
+          "bill_id": "HR261",
+          "title": "Undersea Cable Protection Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-02-12",
+            "text": "Received in the Senate and Read twice and referred to the Committee on Commerce, Science, and Transportation."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/261?format=json"
+        },
+        {
+          "bill_id": "HR251",
+          "title": "Legal Workforce Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the Committee on the Judiciary, and in addition to the Committees on Ways and Means, and Education and Workforce, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/251?format=json"
+        },
+        {
+          "bill_id": "HR290",
+          "title": "Rural Telehealth and Education Enhancement Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-14",
+            "text": "Referred to the Subcommittee on Commodity Markets, Digital Assets, and Rural Development."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/290?format=json"
+        },
+        {
+          "bill_id": "HR301",
+          "title": "GEO Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-03-05",
+            "text": "Ordered to be Reported by Unanimous Consent."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/301?format=json"
+        },
+        {
+          "bill_id": "HR262",
+          "title": "Disaster Reforestation Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/262?format=json"
+        },
+        {
+          "bill_id": "HR286",
+          "title": "Preserving Safe Communities by Ending Swatting Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/286?format=json"
+        },
+        {
+          "bill_id": "HR277",
+          "title": "Matthew Lawrence Perna Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the Committee on the Judiciary, and in addition to the Committee on Intelligence (Permanent Select), for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/277?format=json"
+        },
+        {
+          "bill_id": "HR281",
+          "title": "Grizzly Bear State Management Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-10-03",
+            "text": "Placed on the Union Calendar, Calendar No. 281."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/281?format=json"
+        },
+        {
+          "bill_id": "HR247",
+          "title": "Health Care Affordability Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/247?format=json"
+        },
+        {
+          "bill_id": "HR244",
+          "title": "Veterans\u2019 True Choice Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-11",
+            "text": "Referred to the Subcommittee on Health."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/244?format=json"
+        },
+        {
+          "bill_id": "HR271",
+          "title": "Defund Planned Parenthood Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/271?format=json"
+        },
+        {
+          "bill_id": "HR291",
+          "title": "CAREERS Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-14",
+            "text": "Referred to the Subcommittee on Commodity Markets, Digital Assets, and Rural Development."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/291?format=json"
+        },
+        {
+          "bill_id": "HR318",
+          "title": "Border Safety and Security Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the Subcommittee on Border Security and Enforcement."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/318?format=json"
+        },
+        {
+          "bill_id": "HR272",
+          "title": "Protecting Life and Taxpayers Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/272?format=json"
+        },
+        {
+          "bill_id": "HJRES15",
+          "title": "Providing for congressional disapproval under chapter 8 of title 5, United States Code, of the rule submitted by the Department of Energy relating to \"Energy Conservation Program: Energy Conservation Standards for Commercial Water Heating Equipment\".",
+          "type": "HJRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hjres/15?format=json"
+        },
+        {
+          "bill_id": "HR260",
+          "title": "No Tax Dollars for Terrorists Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-02-10",
+            "text": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 330."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/260?format=json"
+        },
+        {
+          "bill_id": "S68",
+          "title": "Complete COVID Collections Act",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-10",
+            "text": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 8."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/68?format=json"
+        },
+        {
+          "bill_id": "S46",
+          "title": "Health Care Affordability Act of 2025",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Read twice and referred to the Committee on Finance."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/46?format=json"
+        },
+        {
+          "bill_id": "HR2",
+          "title": "Reserved for the Speaker.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": null,
+          "url": "https://api.congress.gov/v3/bill/119/hr/2?format=json"
+        },
+        {
+          "bill_id": "HR349",
+          "title": "Goldie\u2019s Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-14",
+            "text": "Referred to the Subcommittee on Livestock, Dairy, and Poultry."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/349?format=json"
+        },
+        {
+          "bill_id": "HR336",
+          "title": "HEADWAY Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-13",
+            "text": "Referred to the House Committee on Education and Workforce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/336?format=json"
+        },
+        {
+          "bill_id": "HR339",
+          "title": "Broadband Resiliency and Flexible Investment Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-13",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/339?format=json"
+        },
+        {
+          "bill_id": "HR347",
+          "title": "Sea Turtle Rescue Assistance and Rehabilitation Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-13",
+            "text": "Referred to the House Committee on Natural Resources."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/347?format=json"
+        },
+        {
+          "bill_id": "HR364",
+          "title": "Territorial Tax Equity and Economic Growth Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-13",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/364?format=json"
+        },
+        {
+          "bill_id": "HR1",
+          "title": "An act to provide for reconciliation pursuant to title II of H. Con. Res. 14.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-07-04",
+            "text": "Became Public Law No: 119-21."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/1?format=json"
+        },
+        {
+          "bill_id": "HR8",
+          "title": "Reserved for the Speaker.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": null,
+          "url": "https://api.congress.gov/v3/bill/119/hr/8?format=json"
+        },
+        {
+          "bill_id": "HR353",
+          "title": "Family First Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-13",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/353?format=json"
+        },
+        {
+          "bill_id": "HR10",
+          "title": "Reserved for the Speaker.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": null,
+          "url": "https://api.congress.gov/v3/bill/119/hr/10?format=json"
+        },
+        {
+          "bill_id": "HJRES17",
+          "title": "Proposing a balanced budget amendment to the Constitution of the United States.",
+          "type": "HJRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-13",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hjres/17?format=json"
+        },
+        {
+          "bill_id": "S71",
+          "title": "Baby Changing on Board Act",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-02-12",
+            "text": "Committee on Commerce, Science, and Transportation. Ordered to be reported with an amendment in the nature of a substitute favorably."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/71?format=json"
+        },
+        {
+          "bill_id": "S70",
+          "title": "A bill to require the imposition of sanctions with respect to Ansarallah and its officials, agents, or affiliates for acts of international terrorism.",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-13",
+            "text": "Read twice and referred to the Committee on Foreign Relations."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/70?format=json"
+        },
+        {
+          "bill_id": "HR388",
+          "title": "Cattle Fever Tick Eradication Program Enhancement Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-14",
+            "text": "Referred to the Subcommittee on Livestock, Dairy, and Poultry."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/388?format=json"
+        },
+        {
+          "bill_id": "HR389",
+          "title": "Southern Border Farmers and Ranchers Protection Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-14",
+            "text": "Referred to the Subcommittee on Conservation, Research, and Biotechnology."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/389?format=json"
+        },
+        {
+          "bill_id": "HR392",
+          "title": "PRECEPT Nurses Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-14",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/392?format=json"
+        },
+        {
+          "bill_id": "HR379",
+          "title": "Healthcare Freedom and Choice Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-14",
+            "text": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on Education and Workforce, and Ways and Means, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/379?format=json"
+        },
+        {
+          "bill_id": "HR387",
+          "title": "Texas Agricultural Producers Assistance Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-14",
+            "text": "Referred to the Subcommittee on General Farm Commodities, Risk Management, and Credit."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/387?format=json"
+        },
+        {
+          "bill_id": "HR390",
+          "title": "ACERO Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-02-24",
+            "text": "Received in the Senate and Read twice and referred to the Committee on Commerce, Science, and Transportation."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/390?format=json"
+        },
+        {
+          "bill_id": "HR398",
+          "title": "Geothermal Cost-Recovery Authority Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-03-05",
+            "text": "Ordered to be Reported by Unanimous Consent."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/398?format=json"
+        },
+        {
+          "bill_id": "S83",
+          "title": "Thin Blue Line Act",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-14",
+            "text": "Read twice and referred to the Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/83?format=json"
+        },
+        {
+          "bill_id": "S91",
+          "title": "Western Wildfire Support Act of 2025",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-02-04",
+            "text": "Committee on Energy and Natural Resources. Ordered to be reported with an amendment in the nature of a substitute favorably."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/91?format=json"
+        },
+        {
+          "bill_id": "S90",
+          "title": "Historic Roadways Protection Act",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-02-04",
+            "text": "Committee on Energy and Natural Resources. Ordered to be reported with an amendment in the nature of a substitute favorably."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/90?format=json"
+        },
+        {
+          "bill_id": "HJRES19",
+          "title": "To acknowledge the courage and sacrifice of veterans of the Vietnam war and formally apologize for the treatment they received upon returning home.",
+          "type": "HJRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-15",
+            "text": "Referred to the Committee on Veterans' Affairs, and in addition to the Committee on Education and Workforce, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hjres/19?format=json"
+        },
+        {
+          "bill_id": "HR440",
+          "title": "READY Accounts Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-15",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/440?format=json"
+        },
+        {
+          "bill_id": "HR425",
+          "title": "Repealing Big Brother Overreach Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-15",
+            "text": "Referred to the House Committee on Financial Services."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/425?format=json"
+        },
+        {
+          "bill_id": "HR404",
+          "title": "Hearing Protection Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-15",
+            "text": "Referred to the Committee on Ways and Means, and in addition to the Committee on the Judiciary, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/404?format=json"
+        },
+        {
+          "bill_id": "HR433",
+          "title": "Department of Education Protection Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-15",
+            "text": "Referred to the House Committee on Education and Workforce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/433?format=json"
+        },
+        {
+          "bill_id": "HR443",
+          "title": "Parris Island Protection Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-15",
+            "text": "Referred to the House Committee on Armed Services."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/443?format=json"
+        },
+        {
+          "bill_id": "HR410",
+          "title": "Alaska Native Vietnam Era Veterans Land Allotment Extension Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-12-26",
+            "text": "Became Public Law No: 119-63."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/410?format=json"
+        },
+        {
+          "bill_id": "S105",
+          "title": "Wounded Knee Massacre Memorial and Sacred Site Act",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-10-02",
+            "text": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 176."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/105?format=json"
+        },
+        {
+          "bill_id": "HR501",
+          "title": "Promoting Resilient Buildings Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-10-03",
+            "text": "Placed on the Union Calendar, Calendar No. 273."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/501?format=json"
+        },
+        {
+          "bill_id": "HR537",
+          "title": "INCREASE Housing Affordability Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-03-05",
+            "text": "ASSUMING FIRST SPONSORHSIP - Mr. Magaziner asked unanimous consent that he may be hereafter be considered as the first sponsor of H.R. 537, a bill originally introduced by Representative Sherrill, for the purpose of adding cosponsors and requesting reprintings pursuant to clause 7 of rule XII. Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/537?format=json"
+        },
+        {
+          "bill_id": "HR507",
+          "title": "Veterans Member Business Loan Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-16",
+            "text": "Referred to the House Committee on Financial Services."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/507?format=json"
+        },
+        {
+          "bill_id": "HR471",
+          "title": "Fix Our Forests Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-03-06",
+            "text": "Committee on Agriculture, Nutrition, and Forestry Subcommittee on Conservation, Forestry, Natural Resources, and Biotechnology. Hearings held. With printed Hearing: S.Hrg. 119-27."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/471?format=json"
+        },
+        {
+          "bill_id": "HR474",
+          "title": "Lumbee Fairness Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-16",
+            "text": "Referred to the House Committee on Natural Resources."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/474?format=json"
+        },
+        {
+          "bill_id": "HR500",
+          "title": "Medicare Hearing Aid Coverage Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-16",
+            "text": "Referred to the Committee on Energy and Commerce, and in addition to the Committee on Ways and Means, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/500?format=json"
+        },
+        {
+          "bill_id": "HR511",
+          "title": "AMERICANS Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-16",
+            "text": "Referred to the House Committee on Armed Services."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/511?format=json"
+        },
+        {
+          "bill_id": "HR493",
+          "title": "FAIR Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-09-16",
+            "text": "ASSUMING FIRST SPONSORSHIP - Mr. Walkinshaw asked unanimous consent that he may hereafter be considered as the first sponsor of H.R. 493, a bill originally introduced by Representative Connolly, for the purpose of adding cosponsors and requesting reprintings pursuant to clause 7 of rule XII. Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/493?format=json"
+        },
+        {
+          "bill_id": "HR504",
+          "title": "Miccosukee Reserved Area Amendments Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2026-01-08",
+            "text": "The Chair directed the Clerk to notify the Senate of the action of the House."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/504?format=json"
+        },
+        {
+          "bill_id": "HR485",
+          "title": "Muhammad Ali Congressional Gold Medal Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-16",
+            "text": "Referred to the House Committee on Financial Services."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/485?format=json"
+        },
+        {
+          "bill_id": "HR492",
+          "title": "Saving the Civil Service Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-09-16",
+            "text": "ASSUMING FIRST SPONSORSHIP - Mr. Walkinshaw asked unanimous consent that he may hereafter be considered as the first sponsor of H.R. 492, a bill originally introduced by Representative Connolly, for the purpose of adding cosponsors and requesting reprintings pursuant to clause 7 of rule XII. Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/492?format=json"
+        },
+        {
+          "bill_id": "HR491",
+          "title": "Equal COLA Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-09-16",
+            "text": "ASSUMING FIRST SPONSORSHIP - Mr. Walkinshaw asked unanimous consent that he may hereafter be considered as the first sponsor of H.R. 491, a bill originally introduced by Representative Connolly, for the purpose of adding cosponsors and requesting reprintings pursuant to clause 7 of rule XII. Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/491?format=json"
+        },
+        {
+          "bill_id": "HR516",
+          "title": "To amend the Internal Revenue Code of 1986 to modify the railroad track maintenance credit.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-16",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/516?format=json"
+        },
+        {
+          "bill_id": "HR539",
+          "title": "Chiropractic Medicare Coverage Modernization Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-16",
+            "text": "Referred to the Committee on Energy and Commerce, and in addition to the Committee on Ways and Means, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/539?format=json"
+        }
+      ]
+    },
+    {
+      "source": "congress",
+      "query_type": "list_bills",
+      "data": [
+        {
+          "bill_id": "HR144",
+          "title": "Tennessee Valley Authority Salary Transparency Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-16",
+            "text": "Received in the Senate and Read twice and referred to the Committee on Environment and Public Works."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/144?format=json"
+        },
+        {
+          "bill_id": "HR68",
+          "title": "Housing Fairness Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Financial Services."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/68?format=json"
+        },
+        {
+          "bill_id": "HR166",
+          "title": "Fair Lending for All Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Financial Services."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/166?format=json"
+        },
+        {
+          "bill_id": "HR105",
+          "title": "Increasing Public Access to Recreation Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Natural Resources."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/105?format=json"
+        },
+        {
+          "bill_id": "HR171",
+          "title": "Make Transportation Authorities Accountable and Transparent Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-04",
+            "text": "Referred to the Subcommittee on Highways and Transit."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/171?format=json"
+        },
+        {
+          "bill_id": "HR37",
+          "title": "Proposing a Federal debt limit amendment to the Constitution of the United States.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/37?format=json"
+        },
+        {
+          "bill_id": "HR108",
+          "title": "Space Research Innovation Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Science, Space, and Technology."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/108?format=json"
+        },
+        {
+          "bill_id": "HR189",
+          "title": "Securities and Exchange Commission Real Estate Leasing Authority Revocation Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-14",
+            "text": "Received in the Senate and Read twice and referred to the Committee on Banking, Housing, and Urban Affairs."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/189?format=json"
+        },
+        {
+          "bill_id": "HR65",
+          "title": "Armed Forces Endangered Species Exemption Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Natural Resources."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/65?format=json"
+        },
+        {
+          "bill_id": "HR95",
+          "title": "One Bill, One Subject Transparency Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/95?format=json"
+        },
+        {
+          "bill_id": "HR126",
+          "title": "Original Students Voicing Opinions in Today\u2019s Elections (VOTE) Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on House Administration."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/126?format=json"
+        },
+        {
+          "bill_id": "HR55",
+          "title": "To repeal the National Voter Registration Act of 1993.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on House Administration."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/55?format=json"
+        },
+        {
+          "bill_id": "HR23",
+          "title": "Illegitimate Court Counteraction Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-28",
+            "text": "Cloture on the motion to proceed to the measure not invoked in Senate by Yea-Nay Vote. 54 - 45. Record Vote Number: 22. (CR S410)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/23?format=json"
+        },
+        {
+          "bill_id": "HR110",
+          "title": "Small Business Prosperity Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/110?format=json"
+        },
+        {
+          "bill_id": "HR156",
+          "title": "Securing our Elections Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on House Administration."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/156?format=json"
+        },
+        {
+          "bill_id": "HR195",
+          "title": "CBP Relocation Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Subcommittee on Oversight, Investigations, and Accountability."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/195?format=json"
+        },
+        {
+          "bill_id": "HR123",
+          "title": "Improving Science in Chemical Assessments Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Committee on Science, Space, and Technology, and in addition to the Committee on Energy and Commerce, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/123?format=json"
+        },
+        {
+          "bill_id": "HR111",
+          "title": "To amend the Internal Revenue Code of 1986 to allow an above-the-line deduction for health insurance premiums.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/111?format=json"
+        },
+        {
+          "bill_id": "HR127",
+          "title": "Protection from Obamacare Mandates and Congressional Equity Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Committee on Ways and Means, and in addition to the Committees on Energy and Commerce, House Administration, and Oversight and Government Reform, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/127?format=json"
+        },
+        {
+          "bill_id": "HR92",
+          "title": "Strategic Production Response and Implementation Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/92?format=json"
+        },
+        {
+          "bill_id": "SCONRES3",
+          "title": "A concurrent resolution authorizing the use of the rotunda of the Capitol for the lying in state of the remains of the late James Earl Carter, Jr., 39th President of the United States.",
+          "type": "SCONRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Motion to reconsider laid on the table Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sconres/3?format=json"
+        },
+        {
+          "bill_id": "HR163",
+          "title": "Finish the Wall Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Subcommittee on Border Security and Enforcement."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/163?format=json"
+        },
+        {
+          "bill_id": "HRES10",
+          "title": "HEALTH Act",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Rules."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/10?format=json"
+        },
+        {
+          "bill_id": "HR63",
+          "title": "ALVIN Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/63?format=json"
+        },
+        {
+          "bill_id": "HR71",
+          "title": "Veterans Health Care Freedom Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-06",
+            "text": "Referred to the Subcommittee on Health."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/71?format=json"
+        },
+        {
+          "bill_id": "HR81",
+          "title": "Travel Mask Mandate Repeal Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-04",
+            "text": "Referred to the Subcommittee on Highways and Transit."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/81?format=json"
+        },
+        {
+          "bill_id": "HRES11",
+          "title": "Fair Representation Amendment",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Rules."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/11?format=json"
+        },
+        {
+          "bill_id": "HR182",
+          "title": "Default Prevention Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/182?format=json"
+        },
+        {
+          "bill_id": "HCONRES2",
+          "title": "Reclaiming Congress\u2019s Constitutional Mandate in Trade Resolution",
+          "type": "HCONRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Committee on Rules, and in addition to the Committee on Ways and Means, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hconres/2?format=json"
+        },
+        {
+          "bill_id": "HR159",
+          "title": "CLEAN Public Service Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Committee on House Administration, and in addition to the Committee on Oversight and Government Reform, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/159?format=json"
+        },
+        {
+          "bill_id": "HR91",
+          "title": "Freedom for Farmers Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/91?format=json"
+        },
+        {
+          "bill_id": "HR132",
+          "title": "Western Water Accelerated Revenue Repayment Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Natural Resources."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/132?format=json"
+        },
+        {
+          "bill_id": "HR72",
+          "title": "TBI and PTSD Treatment Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-02-06",
+            "text": "Referred to the Subcommittee on Health."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/72?format=json"
+        },
+        {
+          "bill_id": "HR94",
+          "title": "To terminate the designation of the Islamic Republic of Pakistan as a major non-NATO ally, and for other purposes.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Foreign Affairs."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/94?format=json"
+        },
+        {
+          "bill_id": "HR106",
+          "title": "LIST Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Natural Resources."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/106?format=json"
+        },
+        {
+          "bill_id": "HR190",
+          "title": "SEND THEM BACK Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/190?format=json"
+        },
+        {
+          "bill_id": "HR174",
+          "title": "Consequences for Social Security Fraud Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/174?format=json"
+        },
+        {
+          "bill_id": "HRES7",
+          "title": "Recognizing the importance of access to comprehensive, high-quality, life-affirming medical care for women of all ages.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/7?format=json"
+        },
+        {
+          "bill_id": "HR191",
+          "title": "Inflation Reduction Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Committee on Ways and Means, and in addition to the Committees on Energy and Commerce, Agriculture, Natural Resources, Financial Services, Science, Space, and Technology, Transportation and Infrastructure, and Oversight and Government Reform, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/191?format=json"
+        },
+        {
+          "bill_id": "HCONRES1",
+          "title": "Regarding consent to assemble outside the seat of government.",
+          "type": "HCONRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-06",
+            "text": "Received in the Senate."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hconres/1?format=json"
+        },
+        {
+          "bill_id": "HR99",
+          "title": "Protecting Businesses From Frivolous COVID Lawsuits Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/99?format=json"
+        },
+        {
+          "bill_id": "HR78",
+          "title": "Pregnant Women Health and Safety Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Committee on the Judiciary, and in addition to the Committee on Energy and Commerce, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/78?format=json"
+        },
+        {
+          "bill_id": "HR62",
+          "title": "WILLIS Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/62?format=json"
+        },
+        {
+          "bill_id": "HR181",
+          "title": "To amend the Endangered Species Act of 1973 to provide that artificially propagated animals shall be treated the same under that Act as naturally propagated animals, and for other purposes.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Natural Resources."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/181?format=json"
+        },
+        {
+          "bill_id": "HR89",
+          "title": "Prescription Freedom Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/89?format=json"
+        },
+        {
+          "bill_id": "HR69",
+          "title": "Freedom to Petition the Government Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Oversight and Government Reform."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/69?format=json"
+        },
+        {
+          "bill_id": "SCONRES2",
+          "title": "A concurrent resolution to provide for the counting on January 6, 2025, of the electoral votes for President and Vice President of the United States.",
+          "type": "SCONRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Motion to reconsider laid on the table Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sconres/2?format=json"
+        },
+        {
+          "bill_id": "HR157",
+          "title": "CLEAN Congress Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/157?format=json"
+        },
+        {
+          "bill_id": "HR93",
+          "title": "Stop Imposing Woke Ideology Abroad Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Foreign Affairs."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/93?format=json"
+        },
+        {
+          "bill_id": "HR118",
+          "title": "No Federal Funds for Political Prosecutions Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Committee on the Judiciary, and in addition to the Committee on Energy and Commerce, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/118?format=json"
+        },
+        {
+          "bill_id": "HR121",
+          "title": "No Vaccine Passports Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committee on House Administration, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/121?format=json"
+        },
+        {
+          "bill_id": "HRES1",
+          "title": "Electing officers of the House of Representatives.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Motion to reconsider laid on the table Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/1?format=json"
+        },
+        {
+          "bill_id": "SRES15",
+          "title": "A resolution electing Gary B. Myrick, of Virginia, as Secretary for the Minority of the Senate.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment by Unanimous Consent. (consideration: CR S8; text: CR S8)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/15?format=json"
+        },
+        {
+          "bill_id": "SRES13",
+          "title": "A resolution notifying the House of Representatives of the election of a Sergeant at Arms and Doorkeeper of the Senate.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-06",
+            "text": "Message on Senate action sent to the House."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/13?format=json"
+        },
+        {
+          "bill_id": "SRES12",
+          "title": "A resolution notifying the President of the United States of the election of a Sergeant at Arms and Doorkeeper of the Senate.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment by Unanimous Consent. (consideration: CR S8; text: CR S8)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/12?format=json"
+        },
+        {
+          "bill_id": "SRES11",
+          "title": "A resolution electing Jennifer A. Hemingway as Sergeant at Arms and Doorkeeper of the Senate.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment by Unanimous Consent. (consideration: CR S8; text: CR S8)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/11?format=json"
+        },
+        {
+          "bill_id": "SRES10",
+          "title": "A resolution notifying the House of Representatives of the election of a Secretary of the Senate.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-06",
+            "text": "Message on Senate action sent to the House."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/10?format=json"
+        },
+        {
+          "bill_id": "SRES9",
+          "title": "A resolution notifying the President of the United States of the election of a Secretary of the Senate.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment by Unanimous Consent. (consideration: CR S7-8; text: CR S8)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/9?format=json"
+        },
+        {
+          "bill_id": "SRES8",
+          "title": "A resolution electing Jackie Barber as Secretary of the Senate.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment by Unanimous Consent. (consideration: CR S7; text: CR S7)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/8?format=json"
+        },
+        {
+          "bill_id": "SRES7",
+          "title": "A resolution fixing the hour of daily meeting of the Senate.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment by Unanimous Consent. (consideration: CR S7; text: CR S7)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/7?format=json"
+        },
+        {
+          "bill_id": "SRES6",
+          "title": "A resolution expressing the thanks of the Senate to the Honorable Patty Murray for her service as President Pro Tempore of the United States Senate and to designate Senator Murray as President Pro Tempore Emerita of the United States Senate.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment by Unanimous Consent. (consideration: CR S6-7; text: CR S6-7)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/6?format=json"
+        },
+        {
+          "bill_id": "SRES4",
+          "title": "A resolution notifying the President of the United States of the election of a President pro tempore.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment by Unanimous Consent. (consideration: CR S6; text: CR S6)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/4?format=json"
+        },
+        {
+          "bill_id": "SRES3",
+          "title": "A resolution to elect Charles E. Grassley, a Senator from the State of Iowa, to be President pro tempore of the Senate of the United States.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment by Unanimous Consent. (consideration: CR S6; text: CR S6)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/3?format=json"
+        },
+        {
+          "bill_id": "SRES2",
+          "title": "A resolution informing the House of Representatives that a quorum of the Senate is assembled.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-06",
+            "text": "Message on Senate action sent to the House."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/2?format=json"
+        },
+        {
+          "bill_id": "HRES14",
+          "title": "Electing Members to certain standing committees of the House of Representatives.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-06",
+            "text": "Motion to reconsider laid on the table Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/14?format=json"
+        },
+        {
+          "bill_id": "HR213",
+          "title": "To prohibit the use of Federal financial assistance for a certain high-speed rail development project in the State of California, and for other purposes.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-07",
+            "text": "Referred to the Subcommittee on Railroads, Pipelines, and Hazardous Materials."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/213?format=json"
+        },
+        {
+          "bill_id": "HRES15",
+          "title": "Rescinding the subpoenas issued by the January 6th Select Committee on September 23, 2021, October 6, 2021, and February 9, 2022, and withdrawing the recommendations finding Stephen K. Bannon, Mark Randall Meadows, Daniel Scavino, Jr., and Peter K. Navarro in contempt of Congress.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-06",
+            "text": "Referred to the Committee on Rules, and in addition to the Committee on the Judiciary, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/15?format=json"
+        },
+        {
+          "bill_id": "HR214",
+          "title": "District of Columbia Legislative Home Rule Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-06",
+            "text": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committee on Rules, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/214?format=json"
+        },
+        {
+          "bill_id": "HRES16",
+          "title": "Recognizing Russian actions in Ukraine as a genocide.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-06",
+            "text": "Referred to the House Committee on Foreign Affairs."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/16?format=json"
+        },
+        {
+          "bill_id": "HRES13",
+          "title": "Electing Members to certain standing committees of the House of Representatives.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-06",
+            "text": "Motion to reconsider laid on the table Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/13?format=json"
+        },
+        {
+          "bill_id": "HR237",
+          "title": "Paws Off Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-07",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/237?format=json"
+        },
+        {
+          "bill_id": "HRES18",
+          "title": "Expressing the sense of the House of Representatives that the Parthenon Marbles should be returned to Greece.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-07",
+            "text": "Referred to the House Committee on Foreign Affairs."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/18?format=json"
+        },
+        {
+          "bill_id": "HRES19",
+          "title": "Providing the sense of the House of Representatives that the House should not adjourn until the annual appropriation bills within the jurisdiction of all the subcommittees of the Committee on Appropriations for the current fiscal year are enacted into law.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-07",
+            "text": "Referred to the House Committee on Appropriations."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/19?format=json"
+        },
+        {
+          "bill_id": "HR238",
+          "title": "Healthy Technology Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-07",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/238?format=json"
+        },
+        {
+          "bill_id": "HR223",
+          "title": "Preventing Unjust Red Flag Laws Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-07",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/223?format=json"
+        },
+        {
+          "bill_id": "SRES16",
+          "title": "A resolution to constitute the majority party's membership on certain committees for the One Hundred Nineteenth Congress, or until their successors are chosen.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-07",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment by Unanimous Consent. (consideration: CR S40; text: CR S42-43)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/16?format=json"
+        },
+        {
+          "bill_id": "S24",
+          "title": "A bill to designate the facility of the United States Postal Service located at 154 First Avenue East in Jerome, Idaho, as the \"Representative Maxine Bell Post Office\".",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-07",
+            "text": "Read twice and referred to the Committee on Homeland Security and Governmental Affairs."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/24?format=json"
+        },
+        {
+          "bill_id": "HR321",
+          "title": "FLY Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-10",
+            "text": "Referred to the Subcommittee on Aviation."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/321?format=json"
+        },
+        {
+          "bill_id": "HR254",
+          "title": "American Science First Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Science, Space, and Technology."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/254?format=json"
+        },
+        {
+          "bill_id": "HR270",
+          "title": "To authorize the waiver of costs of activities relating to evacuation of United States citizens when their lives are endangered by war or acts of terrorism.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Foreign Affairs."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/270?format=json"
+        },
+        {
+          "bill_id": "HR257",
+          "title": "SEC Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Financial Services."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/257?format=json"
+        },
+        {
+          "bill_id": "HR322",
+          "title": "Import Security and Fairness Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/322?format=json"
+        },
+        {
+          "bill_id": "HR259",
+          "title": "No Funding for Illegal Migrant Billboards Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the Subcommittee on Border Security and Enforcement."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/259?format=json"
+        },
+        {
+          "bill_id": "HR258",
+          "title": "To cancel certain proposed changes to loan level price adjustments by the Federal National Mortgage Association and credit fees charged by the Federal Home Loan Mortgage Corporation.",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Financial Services."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/258?format=json"
+        },
+        {
+          "bill_id": "HR324",
+          "title": "PPP Shell Company Discovery Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the Committee on Ways and Means, and in addition to the Committee on Small Business, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/324?format=json"
+        },
+        {
+          "bill_id": "HRES28",
+          "title": "BRIDGE to Congress Resolution",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Rules."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/28?format=json"
+        },
+        {
+          "bill_id": "HJRES16",
+          "title": "Proposing an amendment to the Constitution of the United States extending the right to vote to citizens sixteen years of age or older.",
+          "type": "HJRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hjres/16?format=json"
+        },
+        {
+          "bill_id": "HRES22",
+          "title": "Electing Members to certain standing committees of the House of Representatives.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Motion to reconsider laid on the table Agreed to without objection."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/22?format=json"
+        },
+        {
+          "bill_id": "HR311",
+          "title": "Restoring Fuel Market Freedom Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/311?format=json"
+        },
+        {
+          "bill_id": "HR283",
+          "title": "Panama Canal Repurchase Act of 2025",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Foreign Affairs."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/283?format=json"
+        },
+        {
+          "bill_id": "HRES29",
+          "title": "Recognizing the 125th anniversary of organized Okinawan immigration to the United States.",
+          "type": "HRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Oversight and Government Reform."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hres/29?format=json"
+        },
+        {
+          "bill_id": "HR326",
+          "title": "Border Wall Waste Accountability Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the Subcommittee on Oversight, Investigations, and Accountability."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/326?format=json"
+        },
+        {
+          "bill_id": "HR314",
+          "title": "Empowering Nonprofits Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Oversight and Government Reform."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/314?format=json"
+        },
+        {
+          "bill_id": "HR278",
+          "title": "BROADBAND Leadership Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Energy and Commerce."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/278?format=json"
+        },
+        {
+          "bill_id": "HR310",
+          "title": "Restoring Energy Market Freedom Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on Ways and Means."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/310?format=json"
+        },
+        {
+          "bill_id": "HR299",
+          "title": "Transparency of Migration Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/hr/299?format=json"
+        },
+        {
+          "bill_id": "S69",
+          "title": "COLLUDE Act",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Read twice and referred to the Committee on Commerce, Science, and Transportation."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/69?format=json"
+        },
+        {
+          "bill_id": "SRES19",
+          "title": "A resolution honoring the life and legacy of President Jimmy Carter and commending President Jimmy Carter for his life-long career of public service, humanitarian leadership, diplomacy, and courageous advocacy.",
+          "type": "SRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Submitted in the Senate, considered, and agreed to without amendment and with a preamble by Unanimous Consent. (consideration: CR S76; text: CR S81)"
+          },
+          "url": "https://api.congress.gov/v3/bill/119/sres/19?format=json"
+        },
+        {
+          "bill_id": "S57",
+          "title": "MAPLE Act",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/57?format=json"
+        },
+        {
+          "bill_id": "S55",
+          "title": "Read the Bills Act",
+          "type": "S",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-09",
+            "text": "Read twice and referred to the Committee on Rules and Administration."
+          },
+          "url": "https://api.congress.gov/v3/bill/119/s/55?format=json"
+        }
+      ]
+    },
+    {
+      "source": "congress",
+      "query_type": "bill_search",
+      "data": []
+    },
+    {
+      "source": "congress",
+      "query_type": "bill_search",
+      "data": [
+        {
+          "bill_id": "HJRES1",
+          "title": "Proposing an amendment to the Constitution of the United States to require that the Supreme Court of the United States be composed of nine justices.",
+          "type": "HJRES",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on the Judiciary."
+          },
+          "sponsors": [],
+          "url": "https://api.congress.gov/v3/bill/119/hjres/1?format=json"
+        },
+        {
+          "bill_id": "HR83",
+          "title": "Ending Common Core and Expanding School Choice Act",
+          "type": "HR",
+          "congress": 119,
+          "introduced_date": "",
+          "latest_action": {
+            "date": "2025-01-03",
+            "text": "Referred to the House Committee on Education and Workforce."
+          },
+          "sponsors": [],
+          "url": "https://api.congress.gov/v3/bill/119/hr/83?format=json"
+        }
+      ]
+    },
+    {
+      "source": "congress",
+      "query_type": "bill_search",
+      "data": []
+    }
+  ]
+}

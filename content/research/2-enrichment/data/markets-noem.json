@@ -1,0 +1,182 @@
+[
+  {
+    "ticker": "KXNOEMOUT-26MAR01",
+    "title": "Will Kristi Noem leaves the Trump administration in after Issuance and before March 1?",
+    "status": "active",
+    "yes_price": 0.01,
+    "volume": 511674.0,
+    "close_time": "2026-03-01T04:59:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXATTENDSOTU-KNOE",
+    "title": "Will Kristi Noem attend the 2026 State of the Union Address?",
+    "status": "active",
+    "yes_price": 0.94,
+    "volume": 29445.0,
+    "close_time": "2026-02-25T15:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-ELEC",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.995,
+    "volume": 14742.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-FRAU",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.995,
+    "volume": 14074.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-RENE",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.01,
+    "volume": 12801.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-SANC",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.995,
+    "volume": 11677.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-SHUT",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.01,
+    "volume": 7998.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-SOMA",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.01,
+    "volume": 7668.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-MASK",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.01,
+    "volume": 5267.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-BIDE",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.995,
+    "volume": 4817.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-NATI",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.995,
+    "volume": 4746.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-SAVE",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.01,
+    "volume": 4713.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-WALZ",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.01,
+    "volume": 4665.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-HOMA",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.01,
+    "volume": 4477.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-WARR",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.995,
+    "volume": 4355.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXVISITMN-26MAR01-KNOE",
+    "title": "Will Kristi Noem visit Minnesota before Mar 1, 2026?",
+    "status": "active",
+    "yes_price": 0.05,
+    "volume": 4007.0,
+    "close_time": "2026-03-01T15:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-BODY",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.995,
+    "volume": 3455.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-DEMO",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.995,
+    "volume": 2660.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26APR03-FENT",
+    "title": "What will Kristi Noem say during The House Judiciary Committee: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.995,
+    "volume": 2562.0,
+    "close_time": "2026-04-03T14:00:00Z",
+    "category": ""
+  },
+  {
+    "ticker": "KXCONGRESSMENTION-26MAR31-RENE",
+    "title": "What will Kristi Noem say during US Senate Committee on the Judiciary: Oversight of the Department of Homeland Security?",
+    "status": "active",
+    "yes_price": 0.495,
+    "volume": 1787.0,
+    "close_time": "2026-03-31T14:00:00Z",
+    "category": ""
+  }
+]

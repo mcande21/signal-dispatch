@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Signal Dispatch -- Deep Dive</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Signal Dispatch -- Deep Dive</h1>
+</header>
+<h1 id="signal-dispatch-deep-dive">Signal Dispatch – Deep Dive</h1>
+<h2
+id="the-dhs-machine-trade-coercion-industrial-detention-and-the-procurement-network-that-brought-down-kristi-noem">The
+DHS Machine: Trade Coercion, Industrial Detention, and the Procurement
+Network That Brought Down Kristi Noem</h2>
+<h3 id="march-2026">March 2026</h3>
+<p><strong>Classification:</strong> Open Source Intelligence
+<strong>Topic:</strong> DHS under Noem: Trade coercion infrastructure,
+detention expansion, procurement corruption <strong>Analyst
+confidence:</strong> Medium (data quality high; integration thesis
+contested)</p>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p>In February 2026, the Department of Homeland Security fired its own
+Secretary. The official reason was procurement irregularities – $220
+million in advertising contracts routed through firms with no federal
+contracting history, at least one incorporated eight days before
+receiving a $143 million award. But the procurement scandal was the
+surface. Underneath it, three partially integrated tracks of DHS
+activity had been running simultaneously, and the data tells a larger
+story than any single track suggests.</p>
+<p>The first track is trade coercion infrastructure. Comtrade data shows
+the United States systematically leveraged extreme export dependencies –
+Guatemala sends 91.8% of its apparel exports to the US market, Colombia
+routes 38% of its petroleum through American buyers – to compel
+receiving-country agreements for deportation flights. A 2-month
+action-reward cycle is visible in the timeline: tariff threats in
+January 2025, capitulation by February, punitive tariffs in April,
+negotiated agreements by June, operational deportation flights by
+October, tariff removal in November. This is not ad-hoc diplomacy. It is
+an operationalized policy cadence.</p>
+<p>The second track is industrial-scale detention infrastructure. Beyond
+the $3.78 billion in FY2025 operational spending documented through
+USAspending, a $38.3 billion multi-year authorization for detention
+expansion was embedded in the “One Big Beautiful Bill Act” – funding
+eight mega-centers with 10,000 beds each, sixteen regional processing
+sites, and ten turnkey centers for a total of 92,600 beds. The combined
+figure – $42.1 billion in enforcement and infrastructure – reframes the
+scale from aggressive operations to industrial detention architecture
+with multi-year commitment.</p>
+<p>The third track is procurement corruption. Corey Lewandowski,
+operating as a “special government employee” with contract approval
+authority, served as the hub connecting political operatives to
+sole-source contracts awarded under emergency authority. The $99,999
+contract structuring – one dollar below the threshold requiring
+additional oversight – and the personal relationship between Noem and
+Lewandowski created a bypass channel for spending approvals that
+circumvented standard procedural safeguards.</p>
+<p>I assess these tracks as partially integrated rather than a single
+coordinated operation. Trade coercion was Executive and State Department
+machinery, not DHS-specific. The procurement corruption was enabled by
+personal access networks that died with Noem’s firing. The detention
+infrastructure has bureaucratic inertia that will outlast any individual
+secretary. The connections between tracks are real – trade coercion
+enables enforcement scale, enforcement justifies infrastructure,
+infrastructure creates corruption opportunities – but they are looser
+than a unified conspiracy narrative would suggest. The machine was built
+by multiple hands for overlapping purposes, not designed from a single
+blueprint.</p>
+<p>What matters now: the machine survives its operator. Mullin inherits
+the trade coercion toolkit, the detention infrastructure authorization,
+and the enforcement apparatus. What he does not inherit is the personal
+bypass channel for procurement corruption. I assess 55% probability that
+enforcement operations continue within 20% of Noem-era levels through Q3
+2026, driven by infrastructure inertia offset by investigation-driven
+political constraints.</p>
+<hr />
+<h2 id="structured-data">Structured Data</h2>
+<p>Five open-source intelligence feeds inform this assessment. Each is
+described with its measurement methodology, current reading, baseline
+context, and analytical significance.</p>
+<h3 id="comtrade-trade-dependency-as-coercion-leverage">Comtrade: Trade
+Dependency as Coercion Leverage</h3>
+<p>UN Comtrade trade statistics quantify the economic pressure available
+to the United States against deportation receiving countries. The
+numbers are stark.</p>
+<p>Guatemala’s apparel sector is the clearest case. HS 6109 (T-shirts
+and singlets) alone shows $421.8 million in total Guatemalan exports, of
+which the United States purchases 91.8% – $387.2 million, 57.2 million
+units (Comtrade, 2024 annual data, queried 2026-03-06). This is not
+trade partnership. This is existential dependency. A tariff threat
+against Guatemala’s garment sector is not a negotiating position; it is
+an economic annihilation threat. Historical trade diversification data
+shows single-market dependency above 70% for manufactured goods is rare.
+Guatemala’s 91.8% is extreme concentration, almost certainly reflecting
+deliberate supply chain architecture under CAFTA-DR – the 91.8%
+concentration is anomalous absent structural explanation.<a href="#fn1"
+class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Coffee exports tell a similar story at lower intensity. Guatemala
+ships $917.3 million in coffee globally, with the US taking 41.6%
+($381.7 million). Honduras: $1.28 billion total, US share 31.2% ($399.7
+million). El Salvador: $137.1 million total, US share 43.1% ($59.1
+million). These dependencies are material – 31-43% of export revenue –
+but not existential – alternative buyers exist. The apparel dependency
+is the binding constraint.</p>
+<p>Colombia’s petroleum trade validated the coercion mechanism in real
+time. At $12.1 billion in total petroleum exports with the US purchasing
+38% ($4.6 billion), Colombia had enough dependency to feel tariff
+pressure but enough diversification to negotiate. When Colombia turned
+away two US military deportation flights in January 2025, Trump’s
+immediate tariff threat produced a reversal within hours – Colombia’s
+foreign minister sent a military plane to San Diego to collect the
+deportees. This episode is better understood as coercion-enabled
+diplomatic resolution than pure economic annihilation. Colombia had
+options; it chose capitulation because the cost-benefit calculation
+favored compliance, not because alternatives didn’t exist.<a href="#fn2"
+class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Remittance flows add a second pressure vector. Guatemala received
+$21.5 billion in remittances in the most recent reporting period,
+representing 19% of GDP. Deportations threaten this flow – deportees
+cannot send money home. Combined with export dependency, this creates
+dual leverage: tariffs on goods plus deportation-driven remittance
+reduction. I assess this mechanism as theoretically sound but
+empirically unvalidated. Deportation volumes affect less than 1% of the
+population, deportees may re-migrate through circular migration
+patterns, and no data confirms that aggregate remittance flows actually
+dropped. The leverage is theoretical until World Bank quarterly
+remittance data for Q1 2026 becomes available in April or May.<a
+href="#fn3" class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a></p>
+<h3 id="usaspending-the-scale-story">USAspending: The Scale Story</h3>
+<p>Federal procurement data documents three layers of DHS spending under
+Noem’s tenure.</p>
+<p><strong>Layer 1: Advertising contracts ($220 million).</strong> The
+procurement corruption that ended Noem’s tenure. Three firms with no
+federal contracting history received sole-source awards under emergency
+authority: Safe America Media, People Who Think LLC (incorporated eight
+days before receiving $143 million), and Strategy Group. Contract
+structuring at $99,999 is documented across multiple awards. This is the
+smallest layer by dollar value and the one that generated the
+scandal.</p>
+<p><strong>Layer 2: Operational enforcement ($3.78 billion
+FY2025).</strong> Deportation flights, detention facility contracts, ICE
+operational spending. This is documented, largely uncontested, and
+represents the running cost of the enforcement apparatus. It includes
+the flights, the facilities, the personnel, and the logistics of
+processing 600,000 claimed removals in 2025.</p>
+<p><strong>Layer 3: Infrastructure authorization ($38.3 billion
+multi-year).</strong> Authorized through the “One Big Beautiful Bill
+Act” for detention infrastructure expansion: eight mega-centers with
+10,000 beds each, sixteen regional processing sites, ten turnkey
+centers, 92,600 total beds. This is the number that changes the
+narrative from aggressive operations to industrial-scale detention
+architecture.</p>
+<p>A critical distinction: multi-year authorization is not current-year
+appropriation. If FY2026 appropriation is $4-5 billion against FY2025’s
+$3.78 billion, the actual year-over-year spending increase is 15-30%,
+not the 10x figure that the $38.3 billion headline implies. The
+authorization ceiling matters for long-term trajectory planning – it
+signals political commitment to sustained detention capacity – but it
+does not mean $38.3 billion is being spent this year. The combined $42.1
+billion figure ($3.78B + $38.3B) represents total enforcement plus
+infrastructure commitment across the authorization window, not annual
+spending.<a href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a></p>
+<p><strong>Data gap:</strong> USAspending API returned 400 errors on Q2
+2026 queries. This data is not yet available and is expected in July
+2026. Contract term structure – quarterly versus annual – remains
+unknown, and this gap significantly affects the advertising spending
+continuation forecast.</p>
+<h3 id="gdelt-media-coverage-patterns">GDELT: Media Coverage
+Patterns</h3>
+<p>Global news monitoring through GDELT reveals coverage burst patterns
+that illuminate information dynamics.</p>
+<p><strong>ICE expansion coverage (February 13-15, 2026, GDELT queried
+2026-03-06):</strong> 25 articles in a 48-hour burst, an unusually
+concentrated coverage pattern for a single DHS policy story, all
+covering the same ICE memo detailing the $38.3 billion infrastructure
+plan. Coverage was AP wire pickup across regional outlets – identical
+source, distributed distribution. The analytical question is
+attribution: who sourced this story? If ICE disclosed the memo directly,
+this is strategic narrative-building – constructing public support for
+infrastructure spending. If the memo was leaked, this is opposition
+signaling – someone inside the apparatus wanted the scale visible.
+Intent analysis matters for forecasting Mullin’s approach to the same
+infrastructure.</p>
+<p><strong>DHS advertising contracts (March 3-7, 2026):</strong> 10
+articles with international pickup. <em>ibtimes.co.uk</em> led with the
+“$143 million to 8-Day-Old Firm” framing. <em>Fox News</em> defended
+McLaughlin and cited 2.2 million self-deportations as justification.
+<em>Seattle Times</em> published “Bulletproof vests and Rolex watches:
+Rise and fall of Noem.” The international coverage pattern – UK and
+Australian outlets running the story – suggests the procurement scandal
+crossed from domestic political story to international governance
+concern.</p>
+<p><strong>Lewandowski connection (February 16 - March 7,
+2026):</strong> 10 articles over three weeks. <em>ProPublica</em>
+documented contradictions between Noem’s congressional testimony and
+Lewandowski’s actual operational role. <em>Raw Story</em> reported White
+House investigation into whether Noem knew Lewandowski was “grifting off
+DHS contracts.” <em>Daily Beast</em> ran the post-firing victory lap
+from Trump allies. The coverage arc tracks a narrative shift: from
+policy criticism to personal scandal to criminal referral in three
+weeks.</p>
+<h3 id="dolarvzla-venezuelan-economic-context">dolarVzla: Venezuelan
+Economic Context</h3>
+<p>Venezuela’s parallel exchange rate provides context for one
+deportation destination but does not drive the coercion analysis.</p>
+<p>Official rate: 433.17 VES/USD. Parallel rate: 613.95 VES/USD. Premium
+spread: 42%. (dolarVzla, 2026-03-06) A parallel premium above 30%
+signals severe capital flight pressure and low confidence in the
+official exchange rate.</p>
+<p>Currency controls continue generating 42% arbitrage spreads. Economic
+pressure driving emigration has not eased despite the existing sanctions
+regime. Venezuela received over 13,000 deportees in 2025. However,
+Venezuela does not fit the trade coercion model – it is already heavily
+sanctioned, and US leverage appears diplomatic and sanctions-based
+rather than trade-dependent. I include this for completeness, not
+because it changes the assessment.</p>
+<h3 id="prediction-markets-the-signal-in-the-silence">Prediction
+Markets: The Signal in the Silence</h3>
+<p>No major prediction market platform – Polymarket, Kalshi, Metaculus –
+carries active contracts on federal charges against Noem, Mullin’s
+confirmation timeline, or advertising contract continuation. These are
+high-value questions with clear resolution criteria. The absence is
+informative.</p>
+<p>Two interpretations: market makers assess the questions as too
+uncertain for informed trading (no edge available), or too legally
+sensitive for contract listing. Either way, the organic probability
+estimates in this assessment are unanchored by market discipline. I am
+operating without the calibration check that prediction market pricing
+normally provides.</p>
+<p>The one data point available is retrospective: Polymarket’s Noem
+departure contract traded at $0.01 approximately four days before the
+firing (Polymarket: Noem DHS Departure @ $0.01, late February 2026),
+then resolved YES. The simultaneous announcement of Mullin as
+replacement suggests compartmentalization – the decision was made and
+held tightly enough that even informed traders had no signal. If
+investigation outcomes are similarly compartmentalized, prediction
+markets will provide no early warning on federal charges either.</p>
+<hr />
+<h2 id="qualitative-intelligence">Qualitative Intelligence</h2>
+<h3 id="the-trade-coercion-timeline">The Trade Coercion Timeline</h3>
+<p>The chronological sequence reveals an operationalized policy cadence,
+not ad-hoc diplomatic responses. I am walking through this in detail
+because the pattern is the finding.</p>
+<p><strong>January 2025:</strong> Trump announces tariff threats, visa
+restrictions, and sanctions against countries refusing deportation
+flights. This is the opening position – maximum pressure, broad
+scope.</p>
+<p><strong>Late January 2025:</strong> Colombia turns away two US
+military deportation flights. Trump threatens tariffs immediately.
+Within hours, Colombian Foreign Minister Murillo reverses the decision
+and sends a military plane to San Diego to collect the deportees. The
+speed of reversal – hours, not days – indicates pre-negotiated fallback
+positions rather than pure coercion. Colombia had diplomatic channels;
+it chose compliance over confrontation. The 38% petroleum dependency
+made the tariff threat credible, but Colombia’s export diversification
+meant this was pressure, not annihilation.</p>
+<p><strong>February 2025:</strong> Guatemala capitulates. Agrees to a
+40% increase in deportation flight acceptance and begins receiving
+third-country nationals – non-Guatemalans deported through Guatemala.
+Secretary Rubio negotiates parallel deals with El Salvador and
+Guatemala. At 91.8% apparel export dependency, Guatemala’s negotiating
+position is qualitatively different from Colombia’s. There is no
+fallback market for $387 million in T-shirt exports.</p>
+<p><strong>March 2025:</strong> Honduras signs an Asylum Cooperative
+Agreement. Venezuelan deportation flights resume after a suspension
+period.</p>
+<p><strong>April 2025:</strong> Punitive tariffs imposed – 10% on
+Central American goods broadly, 18% on Nicaragua specifically. This is
+the punishment phase: agreements have been signed, but tariffs are
+applied to reinforce the power dynamic.</p>
+<p><strong>June 2025:</strong> Noem personally negotiates safe third
+country agreements in Central America. The Honduras agreement is amended
+retroactively to apply to non-Honduran migrants – an expansion to
+multilateral scope from the March baseline. Honduras’s immigration
+director initially denied signing the amended agreement, suggesting
+coercion rather than voluntary partnership. This denial was later walked
+back.</p>
+<p><strong>October 2025:</strong> First third-country removal flight
+arrives in Guatemala carrying 56 Guatemalans and 3 Hondurans. The system
+is now operational end-to-end.</p>
+<p><strong>November 2025:</strong> US removes tariffs on some products
+from Guatemala and El Salvador. The reward phase: compliance is
+compensated. The 10-month arc from threat to reward is complete.</p>
+<p><strong>December 2025:</strong> ICE reports 600,000 deportations
+through December, later revised to 675,000 for the full calendar year.
+The Northern Triangle received over 50% of May 2025 deportations.</p>
+<p>The pattern – threat, capitulation, punishment, agreement,
+implementation, reward – repeats on approximately a 2-month
+action-reward cycle. This is not improvisation. It is operationalized
+policy with a visible cadence. I assess that this toolkit is Executive
+and State Department machinery, not DHS-specific. Mullin inherits the
+enforcement end but does not control the trade coercion lever. That
+distinction matters for forecasting enforcement continuity.</p>
+<h3 id="the-procurement-corruption-network">The Procurement Corruption
+Network</h3>
+<p>The procurement corruption that ended Noem’s tenure operates through
+a documented chain: emergency authority declarations enable sole-source
+contracting, bypassing competitive bidding and routing awards to
+political operatives with no federal contracting history.</p>
+<p>Three firms received the bulk of advertising contracts:</p>
+<p><strong>Safe America Media</strong> received contracts for DHS
+advertising campaigns. The firm’s principals include individuals
+connected to Republican political operations with no prior federal
+contracting record.</p>
+<p><strong>People Who Think LLC</strong> was incorporated eight days
+before receiving a $143 million contract. The timeline alone –
+incorporation to nine-figure federal award in eight days – indicates the
+entity was created specifically to receive the contract. Standard
+federal contracting requires registration, capability demonstration, and
+competitive evaluation. Emergency authority bypassed all of these
+requirements.</p>
+<p><strong>Strategy Group</strong> received additional advertising
+contracts. Senate investigators Welch and Blumenthal sent letters to all
+three firms demanding documentation.</p>
+<p>Corey Lewandowski operated as the hub. Officially a “special
+government employee,” he held contract approval authority that
+contradicted Noem’s sworn congressional testimony. ProPublica documented
+this contradiction: Noem testified that Lewandowski did not approve
+contracts; operational documents show he did. This discrepancy is the
+basis for the perjury referral Senator Blumenthal demanded on March 6,
+2026.</p>
+<p>The $99,999 structuring pattern – awards set one dollar below
+enhanced oversight thresholds – appears across multiple contracts.
+Federal procurement analysts recognize this as deliberate threshold
+avoidance.</p>
+<h3 id="investigation-and-fall">Investigation and Fall</h3>
+<p>The investigative exposure followed a compression pattern: years of
+operation, weeks of exposure, days to termination.</p>
+<p><em>ProPublica</em> published the foundational reporting documenting
+contradictions between Noem’s testimony and Lewandowski’s operational
+role. <em>The Wall Street Journal</em> reported on the personal
+relationship between Noem and Lewandowski in February 2026, describing
+that “they do little to hide their relationship inside the department.”
+Both deny the characterization. Noem called it a “disgusting lie” during
+congressional testimony. Representative Kamlager-Dove confronted Noem
+directly in a House Judiciary Committee hearing.</p>
+<p>The personal relationship is relevant as scandal context, not as a
+legal element. The corruption case rests on emergency authority abuse,
+sole-source contracting to unqualified firms, and threshold structuring.
+These are documentable, prosecutable facts. Whether Noem and Lewandowski
+were personally involved changes public perception but not the legal
+exposure. Perjury, if provable, would require demonstrating willful
+falsehood rather than definitional dispute – a high bar given that both
+parties deny the characterization.<a href="#fn5" class="footnote-ref"
+id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>The Senate Permanent Subcommittee on Investigations is actively
+investigating. Blumenthal’s perjury referral was sent March 6, 2026. No
+DOJ or Inspector General reports have been published as of this writing.
+No grand jury empanelment has been reported.</p>
+<p>DHS fired Noem in February 2026 and simultaneously announced Mullin
+as replacement. The simultaneity suggests leadership planned the
+transition, not reacted to events – they arranged succession before
+executing termination.</p>
+<hr />
+<h2 id="threatopportunity-assessment">Threat/Opportunity Assessment</h2>
+<p>The question is not what Noem did. That story is largely documented.
+The question is what survives her departure.</p>
+<p><strong>What survives:</strong></p>
+<p><em>Detention infrastructure.</em> The $38.3 billion authorization
+has bureaucratic inertia. Contracts have been signed, construction has
+been planned, bed capacity expansion is underway. New DHS leadership
+does not typically cancel predecessor infrastructure programs – the
+political cost of appearing “soft on enforcement” outweighs the
+governance benefit of reassessing procurement. I assess 70-80%
+probability that infrastructure expansion continues at or near planned
+levels, based on bureaucratic inertia and political incentives against
+cancellation.</p>
+<p><em>Trade coercion toolkit.</em> Tariff threats, visa restrictions,
+and safe third country agreements are Executive and State Department
+machinery. They operated through Trump, Rubio, and interagency
+coordination, not through DHS alone. Noem’s personal role in June 2025
+Central American negotiations was execution, not design. The toolkit is
+inherited infrastructure.</p>
+<p><em>Enforcement operations.</em> ICE operational tempo has
+institutional momentum. Field offices, regional priorities, and
+deportation flight logistics do not change with a secretary’s departure.
+However, removal volume is politically contested in a way that
+infrastructure is not. Congressional pressure, litigation, and public
+attention create friction that infrastructure spending does not
+face.</p>
+<p><strong>What dies with Noem:</strong></p>
+<p><em>The personal bypass channel.</em> Lewandowski’s contract approval
+authority, the personal relationship enabling informal approvals, the
+specific network of political operatives receiving sole-source awards –
+this is the mechanism that required Noem specifically. Mullin has no
+documented connection to McLaughlin, Yoho, or the Safe America Media
+network. The procurement corruption was enabled by personal capture of
+emergency contracting authority. Without that specific capture, the
+bypass channel closes.</p>
+<p><em>Political cover for aggressive spending.</em> The investigation
+creates a chilling effect on future emergency authority use. Even if
+Mullin wanted to route contracts through political networks (no evidence
+suggests this), the precedent of Noem’s firing makes such behavior
+higher-risk for any successor.</p>
+<p><strong>The net assessment:</strong> Mullin inherits the machine but
+not the scandal. Enforcement operations continue with moderate
+probability. Infrastructure expansion continues with high probability.
+Procurement corruption through the specific Noem-Lewandowski channel
+stops. The policy apparatus is larger than any individual secretary –
+which is precisely what makes the $38.3 billion authorization
+significant. It is designed to outlast political cycles.</p>
+<hr />
+<h2 id="probability-assessment">Probability Assessment</h2>
+<p>Five forward-looking assessments, each updated from Issue #2’s
+original estimates with enrichment data and calibration challenges
+integrated.</p>
+<hr />
+<p><strong>Updated assessment:</strong> Enforcement policy continuity
+under Mullin (removals within 20% of Noem-era levels through Q3 2026) -
+Prior: 60% (2026-03-06) - New data: Trade coercion is interagency, not
+DHS-specific; detention infrastructure has bureaucratic inertia; active
+investigation constrains aggressive continuation - Updated:
+<strong>55%</strong> - Note: Near coin-flip territory at the low end of
+the 50-69% range - Change: -5 percentage points - Resolution: ICE public
+reports or TRAC data showing Q3 2026 removals within 20% of Q3 2025
+baseline</p>
+<p>This estimate conflates three questions with different base rates.
+Detention capacity expansion: 70-80% (bureaucratic inertia). Removal
+volume sustained at current levels: 40-50% (politically contested,
+litigation exposure). Trade coercion continues: 60-70% (not
+DHS-dependent). The blended 55% is defensible but masks the divergence
+between infrastructure continuation (likely) and operational tempo
+continuation (uncertain). I am keeping the blended estimate for tracking
+simplicity while noting the decomposition.<a href="#fn6"
+class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<hr />
+<p><strong>Updated assessment:</strong> Mullin confirmed as DHS
+Secretary by April 15, 2026 - Prior: 75% (2026-03-06) - New data: April
+15 = 39 days from nomination; historical contested confirmations take
+60-120 days; scandal context complicates hearings even though Mullin is
+replacement, not subject - Updated: <strong>60%</strong> - Change: -15
+percentage points - Resolution: Senate confirmation vote completed by
+April 15, 2026</p>
+<p>The reference class is post-2010 Cabinet confirmations. Over 90% are
+eventually confirmed. Typical timeline is 30-60 days; contested
+confirmations run 60-120 days. 60% reflects the speed challenge, not the
+probability challenge. If the question were “Mullin confirmed
+eventually,” I would assess 85-90%. But the April 15 deadline is
+aggressive given the scandal context requiring Senate navigation.
+Confirmation hearings will inevitably relitigate Noem’s procurement
+decisions, even though Mullin is not personally implicated.</p>
+<hr />
+<p><strong>Updated assessment:</strong> Federal charges related to DHS
+advertising contracts by December 31, 2026 - Prior: 30% (2026-03-06) -
+New data: Blumenthal perjury referral (March 6, 2026); ProPublica
+evidence contradicting sworn testimony; Senate Permanent Subcommittee
+active investigation; base rate for congressional perjury referrals
+leading to prosecution below 10% - Updated: <strong>25%</strong> - Note:
+Low probability – more likely NOT to happen - Change: -5 percentage
+points - Resolution: Federal charges filed by any agency (DOJ, IG)
+against Noem, Lewandowski, McLaughlin, McElwain, Connaughton, or Yoho
+related to DHS advertising contracts by December 31, 2026</p>
+<p>At 25%, I am still 2.5 times above the historical base rate for
+perjury referral prosecution. The justification: ProPublica’s
+operational documents directly contradict Noem’s testimony (stronger
+evidence than typical referrals), the Senate investigation is active
+with bipartisan interest, and the contract structuring pattern ($99,999
+threshold avoidance) provides a prosecution theory beyond perjury alone.
+But the base rate is the base rate. Holder, Sessions, and Barr all faced
+referrals. None were charged. The personal relationship denial is
+particularly difficult to prosecute as willful perjury – it requires
+proving Noem knowingly lied about a characterization that admits
+definitional dispute. I was at 30% before Legion’s calibration
+challenge. 25% is where statistical discipline meets evidence
+assessment.</p>
+<hr />
+<p><strong>Updated assessment:</strong> DHS advertising spending drops
+more than 50% in Q2 2026 compared to Q1 2026 - Prior: 70% (2026-03-06) -
+New data: Contract term structure unknown (quarterly vs. annual); if
+annual contracts expire September 30, spending continues pro-rata
+through Q2 regardless of political dynamics - Updated:
+<strong>65%</strong> - Change: -5 percentage points - Resolution:
+USAspending data shows DHS advertising contract obligations to Safe
+America Media, People Who Think, and Strategy Group drop more than 50%
+in Q2 2026 vs. Q1 2026</p>
+<p>This is my lowest-confidence estimate. The uncertainty is not
+analytical – it is a data gap. If the advertising contracts are
+structured quarterly and expired March 31, non-renewal is
+straightforward and 70% would be defensible. If the contracts are annual
+with a September 30 expiration (standard federal fiscal year), spending
+continues pro-rata through Q2 regardless of Noem’s departure. Government
+contracts are legal obligations; cancellation requires breach findings
+or convenience termination, both of which are costly and time-consuming.
+I cannot distinguish between these scenarios without contract term data,
+which USAspending Q2 reporting will provide in July 2026. 65% is an
+uncomfortable split-the-difference estimate. I am flagging this
+discomfort rather than pretending precision I do not have.<a href="#fn7"
+class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<hr />
+<p><strong>Updated assessment:</strong> ICE removals exceed 700,000 in
+calendar year 2026 - Prior: 20% (2026-03-06) - New data: $38.3B
+infrastructure authorization validated (92,600 planned beds); trade
+coercion toolkit operational with 2-month action-reward cycle; 675,000
+claimed for 2025 (unverified, 50% above historical peak) - Updated:
+<strong>25%</strong> - Note: Low probability – more likely NOT to happen
+- Change: +5 percentage points - Resolution: ICE public reporting or
+independent verification (TRAC Immigration, ACLU, ProPublica FOIA)
+showing total removals exceed 700,000 in calendar year 2026</p>
+<p>This estimate is anchored to a credibility gap. DHS claimed 675,000
+removals in 2025 – 50% above the prior historical peak. If accurate,
+700,000 requires only a 4% increase, which the infrastructure expansion
+and trade coercion toolkit could easily support. If the 675,000 figure
+is overstated by 30% (approximately 470,000 actual), reaching 700,000
+requires a 50% increase from actual levels – ambitious even with
+expanded capacity.</p>
+<p>I do not have independent verification. TRAC Immigration, ACLU
+litigation discovery, and ProPublica FOIA requests are the three paths
+to ground truth. Until one of them produces verified numbers, I am
+defensively calibrated. If DHS numbers prove accurate, this estimate
+should be 40-50%. If DHS numbers prove inflated, 15-20%. The 25%
+reflects my current uncertainty about the denominator, not about the
+enforcement apparatus’s capacity.</p>
+<hr />
+<h2 id="escalationresolution-indicators">Escalation/Resolution
+Indicators</h2>
+<p>What I am watching, with specific thresholds and calendar dates.</p>
+<p><strong>April 15, 2026: Mullin confirmation deadline.</strong> If
+confirmed by this date, enforcement continuity assessment rises 5-10
+percentage points (transition completed, institutional momentum
+maintained). If delayed beyond April 15, acting leadership creates
+policy uncertainty – assessment holds or drops.</p>
+<p><strong>Late March 2026: Federal Register re-query.</strong> Six
+queries returned zero results during initial research. This could
+reflect publication lag (2-3 week standard processing) or genuine
+procedural bypass under emergency authority. Re-querying in late March
+tests the lag hypothesis. Continued absence would strengthen the
+procedural bypass interpretation.</p>
+<p><strong>April-May 2026: World Bank Q1 remittance data.</strong>
+Guatemala, Honduras, and El Salvador quarterly remittance flows. If
+aggregate remittances to Guatemala dropped more than 5% year-over-year
+in Q1 2026, the remittance leverage mechanism moves from theoretical to
+validated. If flows are stable or rising, the mechanism stays
+theoretical.</p>
+<p><strong>July 2026: USAspending Q2 data.</strong> The single most
+important data release for this assessment. Resolves the advertising
+contract continuation question (P4) and provides updated enforcement
+spending trajectory. Contract term structure will be visible.</p>
+<p><strong>September 30, 2026: Federal fiscal year end.</strong> Annual
+contracts expire. If advertising contracts are annual, this is the
+natural termination point without requiring active cancellation.</p>
+<p><strong>Ongoing: Senate investigation activity.</strong> Subpoena
+issuance, witness testimony, and subcommittee reports would signal
+investigation momentum. Absence of visible activity by Q3 2026 suggests
+political attention has moved on – downward pressure on federal charges
+estimate.</p>
+<p><strong>Ongoing: DOJ/IG activity.</strong> Grand jury empanelment,
+search warrants, or formal investigation announcements would be strong
+upward signals for federal charges. Current status: no known DOJ or IG
+investigation beyond the congressional referral.</p>
+<p><strong>December 31, 2026: Annual resolution window.</strong> Federal
+charges deadline (P3) and annual removals total (P5) both resolve. This
+is when the calibration exercise produces scores.</p>
+<hr />
+<h2 id="sources">Sources</h2>
+<p><strong>Structured Data Feeds:</strong> - UN Comtrade: Guatemala
+apparel (HS 6109), coffee exports; Honduras, El Salvador, Colombia trade
+data (comtradeplus.un.org) - dolarVzla: Venezuelan parallel exchange
+rate monitoring (dolarvzla.com) - GDELT: Global news coverage analysis,
+February-March 2026 - USAspending: Federal procurement data, DHS
+contract obligations (usaspending.gov)</p>
+<p><strong>Investigative Reporting:</strong> - <em>ProPublica</em>:
+“Kristi Noem Misled Congress About Corey Lewandowski Role” (March 2026)
+- <em>The Wall Street Journal</em>: Noem-Lewandowski relationship
+reporting, February 2026 - <em>Seattle Times</em>: “Bulletproof vests
+and Rolex watches: Rise and fall of Noem” (March 2026) -
+<em>International Business Times (UK)</em>: “$143 million to 8-Day-Old
+Firm” (March 2026)</p>
+<p><strong>News Coverage:</strong> - <em>Raw Story</em>: White House
+investigation into DHS contract grifting (February-March 2026) - <em>The
+Independent</em>: Noem impeachment and criminal investigation reporting
+(February-March 2026) - <em>Daily Beast</em>: Post-firing political
+dynamics (February-March 2026) - <em>Fox News</em>: ICE expansion
+coverage, McLaughlin defense, self-deportation claims (February-March
+2026) - <em>AP Wire Services</em>: ICE infrastructure expansion
+coverage, February 13-15, 2026 - <em>CBS News</em>: Deportation
+operations coverage (February-March 2026)</p>
+<p><strong>Prediction Markets:</strong> - Polymarket: Noem departure
+contract @ $0.01 pre-firing (retrospective analysis, February 2026) -
+Kalshi: DHS oversight hearing markets (no active contracts found,
+queried 2026-03-06)</p>
+<p><strong>Government Sources:</strong> - Federal Register: OSINT
+queries (negative results documented) - Congress.gov: Legislative
+tracking - Senate Permanent Subcommittee on Investigations:
+Welch/Blumenthal correspondence</p>
+<hr />
+<hr />
+<p><em>I combine structured OSINT data feeds with analytical synthesis
+and trade prediction markets on my own analysis. Track record and
+methodology published. Brier scoring pending first resolution
+window.</em></p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>HS 6109 is one apparel category. If other harmonized
+system codes cover additional Guatemalan apparel exports to the US,
+total dependency could be higher than 91.8%. The concentration is
+anomalous enough to warrant verification against the full HS 61-62 range
+(articles of apparel and clothing accessories).<a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The Colombia episode is the most frequently cited case
+of trade coercion in this context, but it may be the least
+representative. Colombia’s export diversification gives it options that
+Guatemala and Honduras lack. Generalizing from Colombia overstates the
+“diplomatic resolution” frame; generalizing from Guatemala overstates
+the “annihilation” frame. Both happened. The toolkit is calibrated to
+the target.<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Remittance leverage sounds compelling until you run the
+math. The math has to work: deportation volume times average remittance
+per deportee times duration of disruption. If 10,000 Guatemalans are
+deported and each sent $500/month, that’s $60 million annually – 0.3% of
+the $21.5 billion flow. The aggregate number is scary. The marginal
+impact of deportation-driven disruption may not be.<a href="#fnref3"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Authorization versus appropriation is the most commonly
+confused distinction in federal spending analysis. Congress authorizes a
+ceiling. Appropriations committees decide actual spending within that
+ceiling, subject to annual budget negotiations, sequestration, and
+political reality. The $38.3 billion authorization is a permission slip,
+not a check.<a href="#fnref4" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Historical reference class for congressional perjury
+referrals to prosecution: Eric Holder (2012) – no charges. Jeff Sessions
+(2017) – no charges. William Barr (2019) – no charges. The base rate is
+below 10%. Noem’s case has stronger documentary evidence than typical
+referrals (ProPublica’s operational documents directly contradict
+testimony), but “stronger than typical” does not mean “likely to
+prosecute.” I am at 25% – 2.5 times the base rate, which I consider
+justified by the evidence quality but not higher.<a href="#fnref5"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>If I were trading this as three separate contracts, I
+would price infrastructure continuation at $0.75, removal volume at
+$0.45, and trade coercion at $0.65. The blended $0.55 is a compromise
+that a market would not offer.<a href="#fnref6" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>If I could see the contract terms, this estimate would
+move sharply – to 75%+ for quarterly contracts or below 30% for annual.
+Pricing uncertainty at 65% when the true answer is bimodal is the kind
+of fake precision I usually criticize in others. Consider this estimate
+provisional pending July data.<a href="#fnref7" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Signal Dispatch -- Geopolitical Intelligence Newsletter
 
-## Status: Foundation -- Workflow System Built
+## Status: Foundation + Delta Engine Phase 1
 
 Geopolitical intelligence newsletter combining structured OSINT data feeds with analytical synthesis and prediction market context.
 
@@ -15,15 +15,25 @@ Four skills, executed in sequence for each issue via `/new-issue` mission:
 
 **This is a collaborative workflow, not an automated pipeline.** Skills provide structure. Cooper gates every phase transition.
 
-## Data Dependency
+## Data Pipeline
 
-This project does NOT contain its own data adapters. It wraps the prediction-markets pipeline:
-- Ghost Market adapters (OONI, OFAC, Bonbast, EIA, Cloudflare Radar, TEDPIX, USAspending, GDELT, ENTSOG, AGSI, ECB, Comtrade, EIA Grid, VIIRS/FIRMS, dolarVzla, Oryx)
-- OSINT adapters (Federal Register, Congress, FEC)
-- FRED + NOAA data sources
-- Prediction market CLI (`pm signals`, `pm search`, `pm scan`)
+Self-contained. All adapters live in `src/adapters/` with own venv and dependencies.
 
-**Prediction markets project:** `/path/to/home/work/personal/code/research/prediction-markets/`
+**Adapters (`src/adapters/`):**
+- Ghost Market (16): OONI, OFAC, Bonbast, EIA, Cloudflare Radar, TEDPIX, USAspending, GDELT, ENTSOG, AGSI, ECB, Comtrade, EIA Grid, VIIRS/FIRMS, dolarVzla, Oryx
+- OSINT (3): Federal Register, Congress, FEC
+- Standalone: FRED, NOAA, Kalshi (prediction markets)
+
+**Delta Engine (`src/delta/`):**
+- `daemon.py` -- Cron-driven poller (hot every 6h, warm daily, cold on-demand)
+- `engine.py` -- Delta computation (numeric, event_set, binary, categorical)
+- `sources.py` -- 22 poll functions wrapping local adapters
+- `clusters.py` -- Correlated delta detection (Iran, Hormuz, Europe energy, conflict, US macro)
+- State at `content/state/deltas/` (runtime data, gitignored)
+
+**Active mission:** `.claude/missions/delta-engine.md` -- Phases 2-5 remaining
+
+**Origin:** Adapters consolidated from prediction-markets project (`/path/to/home/projects/prediction-markets/`). SD is now independent.
 
 ## Content Types
 
@@ -38,6 +48,7 @@ This project does NOT contain its own data adapters. It wraps the prediction-mar
 | Path | Purpose |
 |------|---------|
 | `.claude/missions/new-issue.md` | Parent mission -- chains all four skills for producing an issue |
+| `.claude/missions/delta-engine.md` | Delta engine build mission -- Phases 2-5 remaining |
 | `.claude/skills/intel/SKILL.md` | Research phase -- adapted from prediction-markets /recon + Legion |
 | `.claude/skills/draft/SKILL.md` | Collaborative drafting with persona voice |
 | `.claude/skills/review/SKILL.md` | 5-pass editorial review |
@@ -54,6 +65,10 @@ This project does NOT contain its own data adapters. It wraps the prediction-mar
 | `content/drafts/` | Work in progress articles |
 | `content/published/` | Archive of published issues |
 | `content/research/` | Research data snapshots per issue |
+| `src/adapters/` | All data source adapters (Ghost Market, OSINT, FRED, NOAA, Kalshi) |
+| `src/delta/` | Delta engine -- daemon, computation, clustering, source polling |
+| `content/state/deltas/thresholds.json` | Per-source threshold config (Cooper-calibrated) |
+| `config/com.signaldispatch.delta.plist` | Launchd template for cron scheduling |
 
 ## Quick Start
 

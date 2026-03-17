@@ -110,7 +110,7 @@ After persona is scaffolded, continue with the research pipeline:
 ## Data Dependencies
 
 Signal Dispatch wraps the prediction-markets project for data:
-- **Project root:** `/path/to/home/work/personal/code/research/prediction-markets/`
+- **Project root:** `/path/to/home/projects/prediction-markets/`
 - **CLI:** `cd prediction-markets && source .venv/bin/activate && python -m src.cli signals --source X --json`
 - **Adapters:** OONI, OFAC, Bonbast, EIA, Cloudflare Radar, TEDPIX, USAspending
 - **OSINT:** Federal Register, Congress, FEC

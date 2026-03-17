@@ -1,0 +1,36 @@
+{
+  "bonbast": {
+    "notification": {"percent_change_48h": 5.0},
+    "watch": {"percent_change_48h": 2.0}
+  },
+  "ooni": {
+    "notification": {"new_blocked_endpoints": 2, "same_country_72h": true},
+    "watch": {"new_blocked_endpoints": 1}
+  },
+  "fred": {
+    "notification": {"yield_curve_inversion_change": 0.05, "vix_percent_change": 15.0},
+    "watch": {"vix_percent_change": 8.0}
+  },
+  "eia": {
+    "notification": {"inventory_change_vs_seasonal": 2.0},
+    "watch": {"inventory_change_vs_seasonal": 1.5}
+  },
+  "agsi": {
+    "notification": {"draw_rate_vs_seasonal": 1.5},
+    "watch": {"draw_rate_vs_seasonal": 1.2}
+  },
+  "gdelt": {
+    "notification": {"sigma_above_30d_mean": 2.5},
+    "watch": {"sigma_above_30d_mean": 1.5}
+  },
+  "prediction_markets": {
+    "notification": {"price_change_48h": 0.05},
+    "watch": {"price_change_48h": 0.03}
+  },
+  "cluster": {
+    "notification": {"min_sources": 3, "all_same_direction": true},
+    "watch": {"min_sources": 2}
+  },
+  "decay_suppression_hours": 48,
+  "decay_escalation_factor": 1.5
+}

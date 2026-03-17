@@ -1,0 +1,105 @@
+{
+  "description": "Signal Dispatch topic backlog. Ideas worth exploring for future issues.",
+  "topics": [
+    {
+      "id": 1,
+      "title": "The Linguistics of Crisis",
+      "subtitle": "How the Fed's vocabulary gap creates measurable information asymmetry",
+      "type": "deep_dive",
+      "source": "recon on KXFEDMENTION-26MAR-RECE",
+      "date_added": "2026-03-17",
+      "status": "backlog",
+      "signal_strength": "strong",
+      "hook": "Goldman puts recession at 25%. Kalshi puts Powell SAYING recession at 28%. The market is pricing the distance between reality and institutional speech.",
+      "key_data": [
+        "Powell: 0 uses of 'recession' in ~15 FOMC pressers since June 2022",
+        "March 2020: cut rates to zero, didn't say the word for 6 weeks",
+        "5 documented evasion patterns that operate below the verbatim threshold",
+        "Denial mechanism: 'we are not in a recession' triggers resolution"
+      ],
+      "notes": "Broader pattern beyond the Fed -- every institution has vocabulary thresholds. Tracking the gap between language and data is SD's core methodology."
+    },
+    {
+      "id": 2,
+      "title": "What's Dying While Everyone Watches Iran",
+      "subtitle": "Five institutional failures compounding under wartime distraction",
+      "type": "deep_dive",
+      "source": "session environmental scan",
+      "date_added": "2026-03-17",
+      "status": "published",
+      "issue_number": 4,
+      "notes": "Published as SD Issue #4 on signaldsp.substack.com"
+    },
+    {
+      "id": 3,
+      "title": "2026 Recession Probability",
+      "subtitle": "Compound shock model -- four simultaneous stressors",
+      "type": "deep_dive",
+      "source": "recon swarm research",
+      "date_added": "2026-03-17",
+      "status": "researched",
+      "signal_strength": "strong",
+      "hook": "Wall Street prices recession at 15-34%. Our compound shock model says 40-50%. The difference: they treat the shocks as independent. They're correlated.",
+      "key_data": [
+        "Hormuz + tariffs + CRE maturity wall + DOGE cuts arriving simultaneously",
+        "Private credit shadow default rate doubled to 6.4-9.2%",
+        "February NFP: -92K. 2025 benchmark revision slashed job creation from 584K to 181K",
+        "Fed trapped: GDP 0.7%, core PCE 3.1%, can't cut, can't hike"
+      ],
+      "research_brief": "content/research/5/recession-synthesis.md",
+      "notes": "Research mostly complete. Needs synthesis completion + draft."
+    },
+    {
+      "id": 4,
+      "title": "The Dollar's Quiet Retreat",
+      "subtitle": "BRICS payment rails, gold hoarding, SWF repositioning",
+      "type": "deep_dive",
+      "source": "session shadow intelligence sweep",
+      "date_added": "2026-03-17",
+      "status": "backlog",
+      "signal_strength": "strong",
+      "hook": "Dollar-denominated risk is being quietly reduced by every sophisticated actor who can afford to reduce it, while the US government accumulates new dollar obligations to keep the oil flowing.",
+      "key_data": [
+        "Central banks: 1,000+ tonnes gold/year for 3 consecutive years",
+        "BRICS Pay in operational trials at 20,000 TPS",
+        "Dollar reserve share: 65.3% (2016) to 57.4% (Q3 2024)",
+        "US now insurer of last resort for Gulf tanker traffic ($20B DFC program)"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "The 2027 Harvest",
+      "subtitle": "The food crisis nobody sees coming",
+      "type": "deep_dive",
+      "source": "session shadow intelligence sweep",
+      "date_added": "2026-03-17",
+      "status": "backlog",
+      "signal_strength": "medium-high",
+      "hook": "Hormuz cut 20-30% of global fertilizer trade. The crop price impact arrives late 2026-mid 2027. By the time it's visible, it's too late.",
+      "key_data": [
+        "318M people facing crisis-level hunger (double 2019)",
+        "WFP lost $2.6B from USAID closure, cut 6,000 jobs",
+        "UN declared 'global water bankruptcy' January 2026",
+        "Fertilizer-to-food-price lag: 6-12 months"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "The Compound Shock",
+      "subtitle": "Stagflation thesis and prediction market mispricings",
+      "type": "weekly_brief",
+      "source": "tradeable thesis analysis",
+      "date_added": "2026-03-17",
+      "status": "backlog",
+      "signal_strength": "strong",
+      "hook": "The market is running a demand-shock recession playbook. The reality is a supply-shock stagflation. Every instrument where that distinction matters is mispriced.",
+      "key_data": [
+        "Kalshi recession at 34% vs our 50%",
+        "Fed rate cut count overpriced (market: 3-4 cuts, thesis: 0-1)",
+        "KRE puts: CRE maturity wall, shadow defaults doubled",
+        "TTF winter strip: EU gas storage at 29%, refill math failing"
+      ]
+    }
+  ],
+  "next_id": 7
+}

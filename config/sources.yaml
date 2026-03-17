@@ -1,5 +1,5 @@
 # Data sources -- all sourced from prediction-markets project
-prediction_markets_root: "/Users/cooperanderson/work/personal/code/research/prediction-markets"
+prediction_markets_root: "/Users/cooperanderson/projects/prediction-markets"
 
 structured_feeds:
   ooni:

@@ -9,8 +9,8 @@ import sys
 from pathlib import Path
 
 # File paths
-MD_PATH = Path("/Users/cooperanderson/work/personal/code/research/signal-dispatch/content/drafts/3-deep_dive.md")
-PDF_PATH = Path("/Users/cooperanderson/work/personal/code/research/signal-dispatch/content/drafts/3-deep_dive.pdf")
+MD_PATH = Path("/Users/cooperanderson/projects/signal-dispatch/content/drafts/4-deep_dive.md")
+PDF_PATH = Path("/Users/cooperanderson/projects/signal-dispatch/content/drafts/4-deep_dive.pdf")
 INTERMEDIATE_HTML_PATH = Path("/tmp/signal_dispatch_styled.html")
 
 # HTML template with clean blog post styling

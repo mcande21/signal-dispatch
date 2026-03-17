@@ -30,8 +30,8 @@ This is the core Signal Dispatch workflow. It turns open-source data feeds into 
 
 ## Project Paths
 
-- **Signal Dispatch root:** `/Users/cooperanderson/work/personal/code/research/signal-dispatch`
-- **Prediction markets root:** `/Users/cooperanderson/work/personal/code/research/prediction-markets`
+- **Signal Dispatch root:** `/Users/cooperanderson/projects/signal-dispatch`
+- **Prediction markets root:** `/Users/cooperanderson/projects/prediction-markets`
 - **Research output:** `{sd_root}/content/research/{issue-number}/`
 - **PM CLI pattern:** `cd {pm_root} && source .venv/bin/activate && python -m src.cli {command}`
 
@@ -46,8 +46,8 @@ Five phases. War-room threshold: 3+ tracks → parallel dispatch. 1-2 tracks →
 Different behavior per content type:
 
 **weekly_brief:**
-- Review ALL structured feeds from `/Users/cooperanderson/work/personal/code/research/signal-dispatch/config/sources.yaml`
-- Read `/Users/cooperanderson/work/personal/code/research/signal-dispatch/content/state/probabilities.json` for active tracking events
+- Review ALL structured feeds from `/Users/cooperanderson/projects/signal-dispatch/config/sources.yaml`
+- Read `/Users/cooperanderson/projects/signal-dispatch/content/state/probabilities.json` for active tracking events
 - Question: "What moved this cycle across all feeds?"
 
 **breaking_alert:**
@@ -82,7 +82,7 @@ Topic-to-source routing table:
 **Step 0B.1: Read Adapter Documentation**
 
 For each Ghost Market source selected above, read its capability doc:
-- Path: `/Users/cooperanderson/work/personal/code/research/signal-dispatch/docs/sources/{adapter}.md`
+- Path: `/Users/cooperanderson/projects/signal-dispatch/docs/sources/{adapter}.md`
 - These docs list available query parameters, intelligence use cases, valid values, and example queries
 - Use this to construct TARGETED queries in Phase 1A instead of bare `--source` calls
 
@@ -143,7 +143,7 @@ Construct exact commands for each active source. Map source names to CLI argumen
 
 Full command template:
 ```bash
-cd /Users/cooperanderson/work/personal/code/research/prediction-markets && \
+cd /Users/cooperanderson/projects/prediction-markets && \
 source .venv/bin/activate && \
 python -m src.cli signals --source {source} [--param key=value ...] --json --output data/pipeline/sd-{issue}-{source}.json
 ```
@@ -166,16 +166,16 @@ Examples:
 Based on topic, select which capability briefs Liara reads:
 
 **Iran/geopolitics topics:**
-- `/Users/cooperanderson/work/personal/code/research/prediction-markets/docs/osint/federal_register.md`
-- `/Users/cooperanderson/work/personal/code/research/prediction-markets/docs/osint/alternative_signals.md`
+- `/Users/cooperanderson/projects/prediction-markets/docs/osint/federal_register.md`
+- `/Users/cooperanderson/projects/prediction-markets/docs/osint/alternative_signals.md`
 
 **Legislation/policy topics:**
-- `/Users/cooperanderson/work/personal/code/research/prediction-markets/docs/osint/federal_register.md`
-- `/Users/cooperanderson/work/personal/code/research/prediction-markets/docs/osint/congress_gov.md`
+- `/Users/cooperanderson/projects/prediction-markets/docs/osint/federal_register.md`
+- `/Users/cooperanderson/projects/prediction-markets/docs/osint/congress_gov.md`
 
 **Election/campaign topics:**
-- `/Users/cooperanderson/work/personal/code/research/prediction-markets/docs/osint/fec.md`
-- `/Users/cooperanderson/work/personal/code/research/prediction-markets/docs/osint/congress_gov.md`
+- `/Users/cooperanderson/projects/prediction-markets/docs/osint/fec.md`
+- `/Users/cooperanderson/projects/prediction-markets/docs/osint/congress_gov.md`
 
 **Multi-topic (weekly brief):**
 - All three: `federal_register.md`, `congress_gov.md`, `fec.md`
@@ -212,7 +212,7 @@ Construct search queries for relevant markets. This provides market-implied prob
 
 Format:
 ```bash
-cd /Users/cooperanderson/work/personal/code/research/prediction-markets && \
+cd /Users/cooperanderson/projects/prediction-markets && \
 source .venv/bin/activate && \
 python -m src.cli search "{topic keywords}" --json --output data/pipeline/sd-{issue}-markets.json
 ```
@@ -241,7 +241,7 @@ Dispatch one Geth instance per source. Parallel execution for speed.
 ```
 Task(
   subagent_type: "geth",
-  prompt: "Run: cd /Users/cooperanderson/work/personal/code/research/prediction-markets && source .venv/bin/activate && python -m src.cli signals --source {source} {params} --json --output data/pipeline/sd-{issue}-{source}.json
+  prompt: "Run: cd /Users/cooperanderson/projects/prediction-markets && source .venv/bin/activate && python -m src.cli signals --source {source} {params} --json --output data/pipeline/sd-{issue}-{source}.json
 
 Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
   description: "Fetch {source} signals for SD #{issue}",
@@ -291,10 +291,10 @@ Task(
   prompt: "Intelligence research for Signal Dispatch {content_type} on {topic}.
 
 Read these files yourself:
-- Source config: /Users/cooperanderson/work/personal/code/research/signal-dispatch/config/sources.yaml
-- Persona reference: /Users/cooperanderson/work/personal/code/research/signal-dispatch/docs/PERSONA.md
+- Source config: /Users/cooperanderson/projects/signal-dispatch/config/sources.yaml
+- Persona reference: /Users/cooperanderson/projects/signal-dispatch/docs/PERSONA.md
 {For each selected OSINT API doc:}
-- OSINT API docs: /Users/cooperanderson/work/personal/code/research/prediction-markets/docs/osint/{doc_name}.md
+- OSINT API docs: /Users/cooperanderson/projects/prediction-markets/docs/osint/{doc_name}.md
 
 == CONTEXT ==
 Content type: {weekly_brief | breaking_alert | deep_dive}
@@ -400,7 +400,7 @@ Search for relevant prediction markets to extract market-implied probabilities.
 ```
 Task(
   subagent_type: "geth",
-  prompt: "Run: cd /Users/cooperanderson/work/personal/code/research/prediction-markets && source .venv/bin/activate && python -m src.cli search \"{search_query}\" --json --output data/pipeline/sd-{issue}-markets.json
+  prompt: "Run: cd /Users/cooperanderson/projects/prediction-markets && source .venv/bin/activate && python -m src.cli search \"{search_query}\" --json --output data/pipeline/sd-{issue}-markets.json
 
 Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
   description: "Search markets for {topic}",
@@ -422,7 +422,7 @@ After Liara returns, extract the JSON query plan from her response and write it 
 
 ```
 Write(
-  file_path="/Users/cooperanderson/work/personal/code/research/prediction-markets/data/pipeline/osint-plan-sd-{issue}.json",
+  file_path="/Users/cooperanderson/projects/prediction-markets/data/pipeline/osint-plan-sd-{issue}.json",
   content="{Liara's query plan JSON}"
 )
 ```
@@ -432,7 +432,7 @@ Then dispatch Geth to execute:
 ```
 Task(
   subagent_type: "geth",
-  prompt: "Run: cd /Users/cooperanderson/work/personal/code/research/prediction-markets && source .venv/bin/activate && set -a && source .env && set +a && python -m src.cli osint --plan-file data/pipeline/osint-plan-sd-{issue}.json --json --output data/pipeline/sd-{issue}-osint.json
+  prompt: "Run: cd /Users/cooperanderson/projects/prediction-markets && source .venv/bin/activate && set -a && source .env && set +a && python -m src.cli osint --plan-file data/pipeline/osint-plan-sd-{issue}.json --json --output data/pipeline/sd-{issue}-osint.json
 
 Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
   description: "Execute OSINT plan SD #{issue}",
@@ -481,12 +481,12 @@ Task(
 
 Read these files:
 {If Ghost Market track fired, for each source:}
-- Ghost Market signals ({source}): /Users/cooperanderson/work/personal/code/research/prediction-markets/data/pipeline/sd-{issue}-{source}.json
-- Source config: /Users/cooperanderson/work/personal/code/research/signal-dispatch/config/sources.yaml
+- Ghost Market signals ({source}): /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-{source}.json
+- Source config: /Users/cooperanderson/projects/signal-dispatch/config/sources.yaml
 {If OSINT executed:}
-- OSINT results: /Users/cooperanderson/work/personal/code/research/prediction-markets/data/pipeline/sd-{issue}-osint.json
+- OSINT results: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-osint.json
 {If prediction market search ran:}
-- Prediction markets: /Users/cooperanderson/work/personal/code/research/prediction-markets/data/pipeline/sd-{issue}-markets.json
+- Prediction markets: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-markets.json
 
 == CONTEXT ==
 Your prior research findings are available in your conversation history (Track B web research + signal interpretation framework).
@@ -562,7 +562,7 @@ Return a structured synthesis with these sections:
 
 ```
 Write(
-  file_path="/Users/cooperanderson/work/personal/code/research/signal-dispatch/content/research/{issue-number}/synthesis.md",
+  file_path="/Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/synthesis.md",
   content="{Liara's synthesis output}"
 )
 ```
@@ -593,13 +593,13 @@ Task(
 You are NOT reviewing Liara's synthesis for approval. You are providing an independent, orthogonal perspective to catch what she missed or overweighted.
 
 Read these files:
-- Liara's synthesis: /Users/cooperanderson/work/personal/code/research/signal-dispatch/content/research/{issue-number}/synthesis.md
+- Liara's synthesis: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/synthesis.md
 {For each data file produced in Phase 2:}
-- {source} signals: /Users/cooperanderson/work/personal/code/research/prediction-markets/data/pipeline/sd-{issue}-{source}.json
+- {source} signals: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-{source}.json
 {If OSINT executed:}
-- OSINT results: /Users/cooperanderson/work/personal/code/research/prediction-markets/data/pipeline/sd-{issue}-osint.json
+- OSINT results: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-osint.json
 {If market search ran:}
-- Markets: /Users/cooperanderson/work/personal/code/research/prediction-markets/data/pipeline/sd-{issue}-markets.json
+- Markets: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-markets.json
 
 == CONTEXT ==
 Content type: {weekly_brief | breaking_alert | deep_dive}
@@ -683,7 +683,7 @@ Three sections as described above. Be AGGRESSIVE. Your job is to find problems, 
 
 ```
 Write(
-  file_path="/Users/cooperanderson/work/personal/code/research/signal-dispatch/content/research/{issue-number}/orthogonal.md",
+  file_path="/Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/orthogonal.md",
   content="{Legion's orthogonal analysis}"
 )
 ```
@@ -905,8 +905,8 @@ Task(
   subagent_type: "geth",
   prompt: "Copy Signal Dispatch #{issue} pipeline data to archive.
 
-Source directory: /Users/cooperanderson/work/personal/code/research/prediction-markets/data/pipeline/
-Destination: /Users/cooperanderson/work/personal/code/research/signal-dispatch/content/research/{issue-number}/data/
+Source directory: /Users/cooperanderson/projects/prediction-markets/data/pipeline/
+Destination: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/
 
 Files to copy (if they exist):
 {For each Ghost Market source:}
@@ -960,7 +960,7 @@ Tell Cooper:
 ```
 Intelligence collection complete for SD #{issue}.
 
-Research brief: /Users/cooperanderson/work/personal/code/research/signal-dispatch/content/research/{issue-number}/brief.md
+Research brief: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/brief.md
 
 Data collected:
 - Ghost Market: {N} sources
@@ -1021,8 +1021,8 @@ Ready to proceed to drafting? (Run `/draft {issue-number}` when ready)
 
 ## Notes
 
-- Signal Dispatch project root: `/Users/cooperanderson/work/personal/code/research/signal-dispatch`
-- Prediction markets project root: `/Users/cooperanderson/work/personal/code/research/prediction-markets`
+- Signal Dispatch project root: `/Users/cooperanderson/projects/signal-dispatch`
+- Prediction markets project root: `/Users/cooperanderson/projects/prediction-markets`
 - Ghost Market adapters require `ghost_market.db` and proper connection cleanup (CLI handles)
 - OSINT execution requires `.env` file with API keys
 - Persona reference defines voice, not methodology (methodology is in this skill)

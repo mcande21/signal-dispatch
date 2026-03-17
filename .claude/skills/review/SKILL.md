@@ -123,8 +123,8 @@ Task(
   prompt: "Editorial style review for Signal Dispatch issue #{issue-number}.
 
 Read these files:
-- Draft: /Users/cooperanderson/work/personal/code/research/signal-dispatch/content/drafts/{issue-number}-{type}.md
-- Style guide: /Users/cooperanderson/work/personal/code/research/signal-dispatch/docs/STYLE-GUIDE.md
+- Draft: /Users/cooperanderson/projects/signal-dispatch/content/drafts/{issue-number}-{type}.md
+- Style guide: /Users/cooperanderson/projects/signal-dispatch/docs/STYLE-GUIDE.md
 
 Review the draft against EVERY rule in the style guide. Check:
 - Word choice (assess not think, probability not chance, etc.)
@@ -406,9 +406,9 @@ Task(
   prompt: "Persona consistency review for Signal Dispatch issue #{issue-number}.
 
 Read these files:
-- Draft: /Users/cooperanderson/work/personal/code/research/signal-dispatch/content/drafts/{issue-number}-{type}.md
-- Persona guide: /Users/cooperanderson/work/personal/code/research/signal-dispatch/docs/PERSONA.md
-- Persona config: /Users/cooperanderson/work/personal/code/research/signal-dispatch/config/persona.yaml
+- Draft: /Users/cooperanderson/projects/signal-dispatch/content/drafts/{issue-number}-{type}.md
+- Persona guide: /Users/cooperanderson/projects/signal-dispatch/docs/PERSONA.md
+- Persona config: /Users/cooperanderson/projects/signal-dispatch/config/persona.yaml
 
 Review the draft for voice consistency with the Data-Driven Practitioner archetype.
 

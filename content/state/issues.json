@@ -1,6 +1,6 @@
 {
   "$schema": "Signal Dispatch Issue Tracker v1",
-  "next_issue_number": 3,
+  "next_issue_number": 9,
   "issues": [
     {
       "issue_number": 0,
@@ -24,6 +24,52 @@
       "date_started": "2026-03-06",
       "status": "published",
       "published_date": "2026-03-06"
+    },
+    {
+      "issue_number": 4,
+      "type": "deep_dive",
+      "topic": "What's Dying While Everyone Watches Iran -- institutional decay under wartime distraction",
+      "date_started": "2026-03-16",
+      "status": "published",
+      "published_date": "2026-03-16",
+      "platform_url": "https://signaldsp.substack.com",
+      "draft_path": "content/drafts/4-deep_dive.md"
+    },
+    {
+      "issue_number": 5,
+      "type": "deep_dive",
+      "topic": "2026 Recession Probability -- compound shock model",
+      "date_started": "2026-03-17",
+      "status": "researched",
+      "research_path": "content/research/5/recession-synthesis.md",
+      "notes": "Research swarm complete. Synthesis needs completion. Draft pending."
+    },
+    {
+      "issue_number": 6,
+      "type": "research_only",
+      "topic": "KXFEDMENTION-26MAR-RECE -- Fed recession mention at March 18 presser",
+      "date_started": "2026-03-17",
+      "status": "passed",
+      "research_path": "content/research/6/brief.md",
+      "notes": "Full recon complete. Market at 28c approximately fair (our estimate 28-30%). No trade. No article."
+    },
+    {
+      "issue_number": 7,
+      "type": "research_only",
+      "topic": "KXTARIFFREFUND -- tariff refund probability after SCOTUS IEEPA ruling",
+      "date_started": "2026-03-17",
+      "status": "passed",
+      "research_path": "content/research/7/brief.md",
+      "notes": "Full recon complete. Edge real (-24pts) but time horizon >30 days. PASS per trading criteria."
+    },
+    {
+      "issue_number": 8,
+      "type": "research_only",
+      "topic": "Linerixibat FDA PDUFA March 24 -- approval probability",
+      "date_started": "2026-03-17",
+      "status": "passed",
+      "research_path": "content/research/8/brief.md",
+      "notes": "Full recon complete. Our estimate 68% vs market 62c. Edge 6pts at medium confidence -- below 15pt gate threshold. PASS."
     }
   ]
 }

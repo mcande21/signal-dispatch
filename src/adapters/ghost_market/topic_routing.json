@@ -1,0 +1,79 @@
+{
+  "version": "1.0",
+  "description": "Domain-to-adapter routing table. Used as FALLBACK when a market ticker is not in market_config.json. Agents identify the relevant domain(s), then query the listed adapters with the provided default_queries.",
+  "usage": "1) Check market_config.json for ticker. 2) If not found, identify domain(s) from this file. 3) Query adapters listed under that domain using default_queries as starting points. 4) Adjust queries based on specific market resolution criteria.",
+  "domains": {
+    "iran_middle_east": {
+      "description": "Markets involving Iranian domestic stability, regime actions, nuclear negotiations, or regional conflict in the Middle East. Use when the market resolves on events inside Iran, Iran-adjacent military activity, or US-Iran diplomatic developments.",
+      "adapters": ["ooni", "bonbast", "tedpix", "cloudflare_radar", "ofac", "eia", "gdelt", "viirs"],
+      "default_queries": {
+        "ooni": {"probe_cc": "IR", "days": 7},
+        "bonbast": {},
+        "tedpix": {},
+        "cloudflare_radar": {"location": "IR", "endpoint": "anomalies"},
+        "ofac": {"filter": "IRAN"},
+        "eia": {"series_id": "WCESTUS1", "weeks": 5},
+        "gdelt": {"query": "Iran Middle East", "maxrecords": 25, "timespan": "1d"},
+        "viirs": {"country": "IR", "days": 2}
+      }
+    },
+    "energy_oil": {
+      "description": "Markets resolving on oil prices, petroleum supply, natural gas flows, European energy security, or US grid demand. Use for WTI/Brent price thresholds, OPEC decisions, pipeline disruptions, or electricity market events.",
+      "adapters": ["eia", "entsog", "agsi", "eia_grid", "viirs"],
+      "default_queries": {
+        "eia": {"series_id": "WCESTUS1", "weeks": 5},
+        "entsog": {"country": "DE", "indicator": "Physical Flow", "days": 7, "limit": 20},
+        "agsi": {"country": "DE", "size": 30},
+        "eia_grid": {"respondent": "US48", "type": "D", "length": 14},
+        "viirs": {"country": "IR", "days": 2}
+      }
+    },
+    "venezuela": {
+      "description": "Markets involving Venezuelan political stability, Maduro regime survival, oil production, elections, or US sanctions policy toward Venezuela. Use when the market resolves on events inside Venezuela or US-Venezuela relations.",
+      "adapters": ["dolarvzla", "gdelt", "ofac", "comtrade"],
+      "default_queries": {
+        "dolarvzla": {},
+        "gdelt": {"query": "Venezuela Maduro", "maxrecords": 25, "timespan": "1d"},
+        "ofac": {"filter": "VENEZ"},
+        "comtrade": {"reporter": "CN", "commodity": "2709", "flow": "M"}
+      }
+    },
+    "us_domestic_policy": {
+      "description": "Markets resolving on US federal government actions, legislation, executive orders, disaster declarations, defense procurement, or domestic political events. Use when the market is about what the US government does or spends.",
+      "adapters": ["usaspending", "gdelt"],
+      "default_queries": {
+        "usaspending": {"keywords": ["FEMA", "defense", "homeland security", "emergency"], "days": 90},
+        "gdelt": {"query": "United States government policy", "maxrecords": 25, "timespan": "1d"}
+      }
+    },
+    "eu_europe": {
+      "description": "Markets involving European Union policy, eurozone economic conditions, EU member state politics, European energy security, or ECB monetary policy. Use when the market resolves on European-wide or major EU-member events.",
+      "adapters": ["ecb", "entsog", "agsi", "gdelt"],
+      "default_queries": {
+        "ecb": {"flow_ref": "EXR", "key": "D.USD.EUR.SP00.A"},
+        "entsog": {"country": "DE", "indicator": "Physical Flow", "days": 7, "limit": 20},
+        "agsi": {"country": "DE", "size": 30},
+        "gdelt": {"query": "European Union Europe", "maxrecords": 25, "timespan": "1d"}
+      }
+    },
+    "military_conflict": {
+      "description": "Markets resolving on active military conflicts, territorial control, ceasefire agreements, or equipment/force attrition. Primarily calibrated for Russia-Ukraine but applicable to any documented conventional conflict with visual evidence.",
+      "adapters": ["oryx", "gdelt", "viirs"],
+      "default_queries": {
+        "oryx": {"dataset": "totals", "country": "Russia"},
+        "gdelt": {"query": "military conflict war", "maxrecords": 25, "timespan": "1d"},
+        "viirs": {"country": "UA", "days": 2}
+      }
+    },
+    "trade_economics": {
+      "description": "Markets resolving on bilateral trade volumes, trade agreements, tariff policy, economic sanctions enforcement, or global commodity flows. Use when the market is about what countries import/export or broader macroeconomic outcomes.",
+      "adapters": ["comtrade", "ecb", "eia", "gdelt"],
+      "default_queries": {
+        "comtrade": {"reporter": "CN", "commodity": "2709", "flow": "M"},
+        "ecb": {"flow_ref": "EXR", "key": "D.USD.EUR.SP00.A"},
+        "eia": {"series_id": "WCESTUS1", "weeks": 5},
+        "gdelt": {"query": "trade tariff sanctions economics", "maxrecords": 25, "timespan": "1d"}
+      }
+    }
+  }
+}

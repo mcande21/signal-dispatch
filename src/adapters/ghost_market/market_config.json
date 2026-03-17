@@ -1,0 +1,434 @@
+{
+  "version": "1.0",
+  "description": "Market-to-signal source mappings. Agents read this to know which data sources are relevant to each market. Weights are initial estimates from research -- agents may adjust based on context.",
+  "markets": {
+    "KXCLOSEHORMUZ": {
+      "name": "Strait of Hormuz Closure",
+      "description": "Will Iran close the Strait of Hormuz to oil tanker traffic?",
+      "sources": {
+        "ooni": {
+          "weight": 0.27,
+          "rationale": "Internet censorship signals domestic crisis response. Shutdowns correlate with major regime actions including potential Strait closure operations.",
+          "default_query": {"probe_cc": "IR", "days": 7}
+        },
+        "cloudflare_radar": {
+          "weight": 0.27,
+          "rationale": "Network traffic anomalies complement OONI data. Internet disruption cluster indicates heightened security state that may precede Strait action.",
+          "default_query": {"location": "IR", "endpoint": "anomalies"}
+        },
+        "eia": {
+          "weight": 0.18,
+          "rationale": "Oil supply disruption indicator. Weekly inventory draws and disruption signals can reflect market pricing in Hormuz risk or actual disruption.",
+          "default_query": {"series_id": "WCESTUS1", "weeks": 5}
+        },
+        "usaspending": {
+          "weight": 0.18,
+          "rationale": "Military posture signal. CENTCOM/Arabian Gulf procurement surges indicate elevated US military readiness for potential Strait operations.",
+          "default_query": {"keywords": ["CENTCOM", "Arabian Gulf", "Strait of Hormuz"], "days": 90}
+        },
+        "gdelt": {
+          "weight": 0.10,
+          "rationale": "Real-time global news volume and tone indicator. Article surge on Strait of Hormuz signals escalating media attention that precedes market-moving events.",
+          "default_query": {"query": "Strait Hormuz Iran", "maxrecords": 25, "timespan": "1d"}
+        }
+      }
+    },
+    "KXUSAIRANAGREEMENT": {
+      "name": "US-Iran Nuclear Agreement",
+      "description": "Will the US and Iran reach a new nuclear agreement?",
+      "sources": {
+        "usaspending": {
+          "weight": 0.25,
+          "rationale": "Diplomatic procurement patterns. Shifts in diplomatic spending and CENTCOM posture indicate negotiation trajectory or enforcement stance.",
+          "default_query": {"keywords": ["Iran", "CENTCOM", "State Department", "sanctions"], "days": 90}
+        },
+        "ofac": {
+          "weight": 0.25,
+          "rationale": "Sanctions movement is the most direct signal. Net additions = escalation (deal less likely), removals = de-escalation (deal momentum).",
+          "default_query": {"filter": "IRAN"}
+        },
+        "ooni": {
+          "weight": 0.15,
+          "rationale": "Internet censorship as instability proxy. High censorship correlates with regime under pressure, which affects deal calculus on both sides.",
+          "default_query": {"probe_cc": "IR", "days": 7}
+        },
+        "cloudflare_radar": {
+          "weight": 0.15,
+          "rationale": "Network anomalies complement OONI. Internet disruption signals domestic instability that may derail or accelerate deal negotiations.",
+          "default_query": {"location": "IR", "endpoint": "anomalies"}
+        },
+        "bonbast": {
+          "weight": 0.10,
+          "rationale": "Rial exchange rate as pressure gauge. Rial collapse increases regime incentive to deal; rial stability suggests reduced urgency.",
+          "default_query": {}
+        },
+        "tedpix": {
+          "weight": 0.10,
+          "rationale": "Tehran stock market confidence. Market surges suggest deal optimism; crashes suggest pessimism or capital flight from instability.",
+          "default_query": {}
+        }
+      }
+    },
+    "KXNEXTIRANLEADER": {
+      "name": "Next Iran Supreme Leader",
+      "description": "Who will be Iran's next Supreme Leader?",
+      "sources": {
+        "bonbast": {
+          "weight": 0.25,
+          "rationale": "Rial collapse signals regime instability. Leadership transitions become more likely when economic pressure reaches crisis levels.",
+          "default_query": {}
+        },
+        "tedpix": {
+          "weight": 0.20,
+          "rationale": "Capital flight indicator. Sharp drops or sustained crashes signal loss of elite confidence, which can precipitate leadership change.",
+          "default_query": {}
+        },
+        "ooni": {
+          "weight": 0.25,
+          "rationale": "Internet shutdowns signal regime action under pressure. High censorship rates indicate internal crisis that may force leadership transition.",
+          "default_query": {"probe_cc": "IR", "days": 7}
+        },
+        "cloudflare_radar": {
+          "weight": 0.20,
+          "rationale": "Network disruptions complement OONI. Outages and anomalies indicate state of emergency conditions that correlate with succession events.",
+          "default_query": {"location": "IR", "endpoint": "anomalies"}
+        },
+        "ofac": {
+          "weight": 0.10,
+          "rationale": "Sanctions pressure on the regime. Escalation increases internal pressure that can destabilize leadership; removals reduce pressure.",
+          "default_query": {"filter": "IRAN"}
+        }
+      }
+    },
+    "KXWTIW": {
+      "name": "WTI Crude Oil Price",
+      "description": "Will WTI crude oil exceed specified price threshold?",
+      "sources": {
+        "eia": {
+          "weight": 0.35,
+          "rationale": "Direct oil data. Weekly inventory, imports, exports, and SPR stocks directly drive WTI pricing. Largest weight for fundamental supply data.",
+          "default_query": {"series_id": "WCESTUS1", "weeks": 5}
+        },
+        "ooni": {
+          "weight": 0.13,
+          "rationale": "Hormuz disruption proxy. Iran internet shutdowns can signal escalation toward actions affecting oil supply (e.g., Strait closure threats).",
+          "default_query": {"probe_cc": "IR", "days": 7}
+        },
+        "cloudflare_radar": {
+          "weight": 0.09,
+          "rationale": "Network anomalies as Iran crisis indicator. Outages signal instability that may affect oil markets via supply risk premium.",
+          "default_query": {"location": "IR", "endpoint": "anomalies"}
+        },
+        "ofac": {
+          "weight": 0.18,
+          "rationale": "Sanctions enforcement on oil exports. Net additions = tighter enforcement on Iran/others (supply constraint, bullish). Removals = looser (bearish).",
+          "default_query": {"filter": "IRAN"}
+        },
+        "usaspending": {
+          "weight": 0.13,
+          "rationale": "Conflict duration indicator. Elevated military procurement for CENTCOM signals sustained Middle East operations that support higher oil prices.",
+          "default_query": {"keywords": ["CENTCOM", "Arabian Gulf", "Middle East"], "days": 90}
+        },
+        "gdelt": {
+          "weight": 0.12,
+          "rationale": "Real-time global news volume and tone indicator. Article surge on oil, OPEC, or crude signals escalating media attention that precedes market-moving events.",
+          "default_query": {"query": "oil OPEC crude", "maxrecords": 25, "timespan": "1d"}
+        }
+      }
+    },
+    "KXRECOGPERSONIRAN": {
+      "name": "US Recognition of Iranian Opposition Figure",
+      "description": "Will the US recognize a specific Iranian opposition figure or movement?",
+      "sources": {
+        "bonbast": {
+          "weight": 0.25,
+          "rationale": "Regime instability proxy. Rial collapse increases likelihood of US backing opposition as regime vulnerability creates policy opportunity.",
+          "default_query": {}
+        },
+        "tedpix": {
+          "weight": 0.25,
+          "rationale": "Elite confidence indicator. Market crashes signal capital flight and loss of regime backing, making US recognition more viable.",
+          "default_query": {}
+        },
+        "usaspending": {
+          "weight": 0.25,
+          "rationale": "Policy direction signal. Procurement patterns for diplomatic or democracy promotion spending indicate US strategic posture toward Iran.",
+          "default_query": {"keywords": ["Iran", "democracy", "State Department"], "days": 90}
+        },
+        "ofac": {
+          "weight": 0.25,
+          "rationale": "Sanctions as policy indicator. Escalation suggests hardline approach (more likely to recognize opposition). De-escalation suggests engagement (less likely).",
+          "default_query": {"filter": "IRAN"}
+        }
+      }
+    },
+    "KXPAHLAVIVISITA": {
+      "name": "Pahlavi Visit to US",
+      "description": "Will Reza Pahlavi visit the United States in an official capacity?",
+      "sources": {
+        "bonbast": {
+          "weight": 0.25,
+          "rationale": "Regime instability proxy. Rial collapse increases likelihood of US engagement with Pahlavi as regime vulnerability creates policy window.",
+          "default_query": {}
+        },
+        "tedpix": {
+          "weight": 0.25,
+          "rationale": "Elite confidence indicator. Market crashes signal loss of regime backing, making US outreach to Pahlavi more politically viable.",
+          "default_query": {}
+        },
+        "usaspending": {
+          "weight": 0.25,
+          "rationale": "Policy direction signal. Diplomatic and democracy promotion procurement patterns indicate US strategic posture toward Iranian opposition.",
+          "default_query": {"keywords": ["Iran", "democracy", "State Department"], "days": 90}
+        },
+        "ofac": {
+          "weight": 0.25,
+          "rationale": "Sanctions as policy indicator. Escalation suggests hardline approach (more likely to engage Pahlavi). De-escalation suggests engagement with regime.",
+          "default_query": {"filter": "IRAN"}
+        }
+      }
+    },
+    "KXPAHLAVIHEAD": {
+      "name": "Pahlavi as Head of State",
+      "description": "Will Reza Pahlavi become recognized as head of state of Iran?",
+      "sources": {
+        "bonbast": {
+          "weight": 0.25,
+          "rationale": "Regime instability proxy. Rial collapse to crisis levels is precondition for regime change scenario where Pahlavi recognition becomes plausible.",
+          "default_query": {}
+        },
+        "tedpix": {
+          "weight": 0.25,
+          "rationale": "Elite confidence indicator. Sustained market collapse signals capital flight and loss of regime backing, necessary for Pahlavi scenario.",
+          "default_query": {}
+        },
+        "usaspending": {
+          "weight": 0.25,
+          "rationale": "Policy direction signal. Procurement patterns for democracy promotion, diplomatic, or military operations indicate US readiness for regime change scenario.",
+          "default_query": {"keywords": ["Iran", "democracy", "CENTCOM"], "days": 90}
+        },
+        "ofac": {
+          "weight": 0.25,
+          "rationale": "Sanctions as policy indicator. Maximum pressure campaign (net additions) is precondition for regime collapse scenario enabling Pahlavi.",
+          "default_query": {"filter": "IRAN"}
+        }
+      }
+    },
+    "GHOST-RU": {
+      "name": "Russia Signal Group",
+      "description": "Intelligence signals for Russian Federation events",
+      "sources": {
+        "ooni": {
+          "weight": 0.14,
+          "rationale": "Internet censorship signals authoritarian control response. Russia has history of censorship escalation during military operations, protests, and elections.",
+          "default_query": {"probe_cc": "RU", "days": 7}
+        },
+        "cloudflare_radar": {
+          "weight": 0.14,
+          "rationale": "Network traffic anomalies complement OONI data. Disruptions indicate heightened state control or infrastructure stress during military/political events.",
+          "default_query": {"location": "RU", "endpoint": "anomalies"}
+        },
+        "ofac": {
+          "weight": 0.09,
+          "rationale": "US sanctions policy indicator. Net additions signal escalation (Ukraine, military operations). Removals unlikely but would indicate major policy shift.",
+          "default_query": {"filter": "RUSSIA"}
+        },
+        "eia": {
+          "weight": 0.09,
+          "rationale": "Energy export disruption proxy. Russia is major oil/gas producer. Global inventory changes reflect sanctions enforcement and export disruptions.",
+          "default_query": {"series_id": "WCESTUS1", "weeks": 5}
+        },
+        "gdelt": {
+          "weight": 0.08,
+          "rationale": "Real-time global news volume and tone indicator. Article surge on Russia Ukraine war signals escalating media attention that precedes market-moving events.",
+          "default_query": {"query": "Russia Ukraine war", "maxrecords": 25, "timespan": "1d"}
+        },
+        "entsog": {
+          "weight": 0.12,
+          "rationale": "Russia-to-EU gas flow indicator. Reduced eastward flows at key interconnection points (Mallnow/Yamal, Waidhaus/Nord Stream) signal Russian supply weaponization or sanctions impact.",
+          "default_query": {"country": "DE", "indicator": "Physical Flow", "days": 7, "limit": 20}
+        },
+        "ecb": {
+          "weight": 0.08,
+          "rationale": "EUR/RUB as sanctions pressure gauge. Ruble collapse signals sanctions impact or economic isolation.",
+          "default_query": {"flow_ref": "EXR", "key": "D.RUB.EUR.SP00.A"}
+        },
+        "comtrade": {
+          "weight": 0.08,
+          "rationale": "Russia trade flow data. Declining export volumes signal sanctions enforcement effectiveness. Monitor crude oil (2709) and natural gas (2711) commodity codes.",
+          "default_query": {"reporter": "RU", "commodity": "2709", "flow": "X"}
+        },
+        "viirs": {
+          "weight": 0.08,
+          "rationale": "Satellite thermal anomaly detection. Elevated hotspot clusters near conflict zones indicate active military operations, industrial fires, or infrastructure strikes.",
+          "default_query": {"country": "UA", "days": 2}
+        },
+        "oryx": {
+          "weight": 0.12,
+          "rationale": "Visually confirmed military equipment losses. Loss rate trajectory indicates war intensity and resource depletion. Compare Russia vs Ukraine loss ratios for conflict balance.",
+          "default_query": {"dataset": "totals", "country": "Russia"}
+        }
+      }
+    },
+    "GHOST-CN": {
+      "name": "China Signal Group",
+      "description": "Intelligence signals for People's Republic of China events",
+      "sources": {
+        "ooni": {
+          "weight": 0.28,
+          "rationale": "Great Firewall operations indicator. Censorship escalation signals domestic crisis response, political events (Two Sessions, Party Congress), or external tensions (Taiwan).",
+          "default_query": {"probe_cc": "CN", "days": 7}
+        },
+        "cloudflare_radar": {
+          "weight": 0.21,
+          "rationale": "Network anomalies as infrastructure stress or state control signal. China has sophisticated censorship apparatus; traffic patterns reveal regime actions.",
+          "default_query": {"location": "CN", "endpoint": "anomalies"}
+        },
+        "ofac": {
+          "weight": 0.21,
+          "rationale": "US-China relations indicator. Sanctions additions signal tech/military escalation. Pattern shifts indicate Taiwan posture, Xinjiang policy, or tech war evolution.",
+          "default_query": {"filter": "CHIN"}
+        },
+        "gdelt": {
+          "weight": 0.12,
+          "rationale": "Real-time global news volume and tone indicator. Article surge on China Taiwan signals escalating media attention that precedes market-moving events.",
+          "default_query": {"query": "China Taiwan", "maxrecords": 25, "timespan": "1d"}
+        },
+        "ecb": {
+          "weight": 0.09,
+          "rationale": "EUR/CNY as trade tension indicator. Yuan weakness signals capital outflows or economic pressure.",
+          "default_query": {"flow_ref": "EXR", "key": "D.CNY.EUR.SP00.A"}
+        },
+        "comtrade": {
+          "weight": 0.09,
+          "rationale": "China trade flow data. Import/export volumes reveal economic health and trade war impact. Monitor crude oil imports and total trade balance.",
+          "default_query": {"reporter": "CN", "commodity": "2709", "flow": "M"}
+        }
+      }
+    },
+    "GHOST-VE": {
+      "name": "Venezuela Signal Group",
+      "description": "Intelligence signals for Bolivarian Republic of Venezuela events",
+      "sources": {
+        "ooni": {
+          "weight": 0.16,
+          "rationale": "Internet censorship during political crises. Venezuela blocks social media and news sites during elections, protests, and regime pressure events.",
+          "default_query": {"probe_cc": "VE", "days": 7}
+        },
+        "cloudflare_radar": {
+          "weight": 0.16,
+          "rationale": "Network disruptions as regime instability indicator. Outages correlate with political crises, protests, and infrastructure decay from economic collapse.",
+          "default_query": {"location": "VE", "endpoint": "anomalies"}
+        },
+        "ofac": {
+          "weight": 0.10,
+          "rationale": "US sanctions policy on Maduro regime. Additions = escalation (regime pressure), removals = de-escalation (negotiation signals, oil-for-relief deals).",
+          "default_query": {"filter": "VENEZ"}
+        },
+        "eia": {
+          "weight": 0.10,
+          "rationale": "Oil production and export indicator. Venezuela has largest proven reserves; production collapse from sanctions/mismanagement affects global supply.",
+          "default_query": {"series_id": "WCESTUS1", "weeks": 5}
+        },
+        "gdelt": {
+          "weight": 0.09,
+          "rationale": "Real-time global news volume and tone indicator. Article surge on Venezuela Maduro signals escalating media attention that precedes market-moving events.",
+          "default_query": {"query": "Venezuela Maduro", "maxrecords": 25, "timespan": "1d"}
+        },
+        "comtrade": {
+          "weight": 0.09,
+          "rationale": "Venezuela trade flow data. Oil export volumes reflect sanctions impact and production collapse. Note: VE may not report; use partner-side data (CN imports from VE).",
+          "default_query": {"reporter": "CN", "commodity": "2709", "flow": "M"}
+        },
+        "viirs": {
+          "weight": 0.09,
+          "rationale": "Satellite thermal monitoring. Gas flaring patterns indicate oil production activity. Declining flares signal production collapse.",
+          "default_query": {"country": "VE", "days": 2}
+        },
+        "dolarvzla": {
+          "weight": 0.22,
+          "rationale": "Parallel USD/VES exchange rate as regime pressure gauge. Divergence between oficial (BCV) and paralelo rates signals black market premium and economic crisis severity.",
+          "default_query": {}
+        }
+      }
+    },
+    "GHOST-EU": {
+      "name": "Europe Signal Group (Germany anchor)",
+      "description": "Intelligence signals for European events, anchored on Germany as EU's largest economy",
+      "sources": {
+        "ooni": {
+          "weight": 0.14,
+          "rationale": "Democratic baseline for internet freedom. Germany censorship is low; deviations signal major events (terrorism, elections). Useful for Europe-wide comparison.",
+          "default_query": {"probe_cc": "DE", "days": 7}
+        },
+        "cloudflare_radar": {
+          "weight": 0.19,
+          "rationale": "Network health and cyber operations indicator. Germany is major internet hub; anomalies indicate cyber attacks, infrastructure issues, or cross-border events.",
+          "default_query": {"location": "DE", "endpoint": "anomalies"}
+        },
+        "entsog": {
+          "weight": 0.29,
+          "rationale": "Physical gas flow data at EU interconnection points. Flow reductions signal supply disruptions, geopolitical pressure, or infrastructure issues affecting European energy security.",
+          "default_query": {"country": "DE", "indicator": "Physical Flow", "days": 7, "limit": 20}
+        },
+        "agsi": {
+          "weight": 0.24,
+          "rationale": "European gas storage levels. Fill percentage below 30% signals energy insecurity; above 80% signals resilience. Storage trajectory drives EU policy response and Russian leverage calculus.",
+          "default_query": {"country": "DE", "size": 30}
+        },
+        "ecb": {
+          "weight": 0.14,
+          "rationale": "EUR/USD exchange rate as EU economic health baseline. Euro weakness signals economic stress or policy divergence.",
+          "default_query": {"flow_ref": "EXR", "key": "D.USD.EUR.SP00.A"}
+        }
+      }
+    },
+    "GHOST-US": {
+      "name": "United States Signal Group",
+      "description": "Intelligence signals for US domestic and foreign policy events",
+      "sources": {
+        "usaspending": {
+          "weight": 0.48,
+          "rationale": "Federal procurement as policy direction indicator. Contract patterns reveal priorities (defense, FEMA, homeland security, infrastructure) before public announcements.",
+          "default_query": {"keywords": ["FEMA", "defense", "homeland security", "disaster", "emergency", "CENTCOM", "hurricane", "wildfire"], "days": 90}
+        },
+        "eia": {
+          "weight": 0.32,
+          "rationale": "Domestic oil/gas data baseline. Inventory, SPR releases, exports reflect US energy policy, refinery operations, and supply security posture.",
+          "default_query": {"series_id": "WCESTUS1", "weeks": 5}
+        },
+        "eia_grid": {
+          "weight": 0.20,
+          "rationale": "US electricity demand as economic activity indicator. Demand drops signal industrial slowdown or extreme weather events. Compare to seasonal norms for context.",
+          "default_query": {"respondent": "US48", "type": "D", "length": 14}
+        }
+      }
+    },
+    "GHOST-TR": {
+      "name": "Turkey Signal Group",
+      "description": "Intelligence signals for Republic of Turkey events",
+      "sources": {
+        "ooni": {
+          "weight": 0.36,
+          "rationale": "High information control regime. Turkey blocks Twitter/social media during crises, elections, protests. Censorship escalation signals regime pressure or major events.",
+          "default_query": {"probe_cc": "TR", "days": 7}
+        },
+        "cloudflare_radar": {
+          "weight": 0.36,
+          "rationale": "Network disruptions as crisis indicator. Turkey has history of shutting down internet during coup attempts, Kurdish operations, and political transitions.",
+          "default_query": {"location": "TR", "endpoint": "anomalies"}
+        },
+        "gdelt": {
+          "weight": 0.13,
+          "rationale": "Real-time global news volume and tone indicator. Article surge on Turkey Erdogan signals escalating media attention that precedes market-moving events.",
+          "default_query": {"query": "Turkey Erdogan", "maxrecords": 25, "timespan": "1d"}
+        },
+        "ecb": {
+          "weight": 0.15,
+          "rationale": "EUR/TRY as Turkish economic instability indicator. Lira collapse signals economic crisis, inflation spiral, or policy failures.",
+          "default_query": {"flow_ref": "EXR", "key": "D.TRY.EUR.SP00.A"}
+        }
+      }
+    }
+  }
+}

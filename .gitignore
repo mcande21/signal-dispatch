@@ -8,3 +8,14 @@ content/drafts/*.md
 !content/drafts/.gitkeep
 .env
 *.db
+*.pem
+
+# Delta engine runtime state
+content/state/deltas/current/
+content/state/deltas/prior_state/
+content/state/deltas/history/
+content/state/deltas/clusters/
+content/state/deltas/alerts/
+
+# SQLite cache
+data/

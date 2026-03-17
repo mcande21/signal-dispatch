@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<!--
+  Signal Dispatch Delta Engine -- launchd plist (HOT cadence, every 6 hours)
+
+  DO NOT INSTALL THIS DIRECTLY.
+  Cooper installs manually after reviewing.
+
+  To install:
+    cp config/com.signaldispatch.delta.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.signaldispatch.delta.plist
+
+  To check status:
+    launchctl list | grep signaldispatch
+
+  To run immediately (test):
+    launchctl start com.signaldispatch.delta
+
+  To uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.signaldispatch.delta.plist
+    rm ~/Library/LaunchAgents/com.signaldispatch.delta.plist
+
+  Separate plists for warm/cold cadences:
+    - Hot (this file): every 6h -- bonbast, ooni, gdelt, prediction_markets
+    - Warm: daily at 06:00 -- eia, agsi (copy this, change Label + ProgramArguments + StartCalendarInterval)
+    - Cold: manual or weekly -- fred
+
+  Environment variables needed (set in EnvironmentVariables block below):
+    FRED_API_KEY
+    EIA_API_KEY
+    AGSI_API_KEY
+    KALSHI_API_KEY
+    KALSHI_API_KEY_ID
+-->
+
+<plist version="1.0">
+<dict>
+
+  <key>Label</key>
+  <string>com.signaldispatch.delta.hot</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <!-- Use the Python from the venv if you have one, otherwise system python3 -->
+    <string>/usr/bin/env</string>
+    <string>python3</string>
+    <string>-m</string>
+    <string>src.delta.daemon</string>
+    <string>--cadence</string>
+    <string>hot</string>
+  </array>
+
+  <!-- Working directory must be the signal-dispatch project root -->
+  <key>WorkingDirectory</key>
+  <string>/path/to/home/projects/signal-dispatch</string>
+
+  <!-- Run every 6 hours: 00:00, 06:00, 12:00, 18:00 UTC -->
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict>
+      <key>Hour</key>  <integer>0</integer>
+      <key>Minute</key><integer>0</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>  <integer>6</integer>
+      <key>Minute</key><integer>0</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>  <integer>12</integer>
+      <key>Minute</key><integer>0</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>  <integer>18</integer>
+      <key>Minute</key><integer>0</integer>
+    </dict>
+  </array>
+
+  <!-- Environment variables for API keys -->
+  <!-- Replace placeholder values with real keys before installing -->
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>FRED_API_KEY</key>
+    <string>REPLACE_WITH_REAL_KEY</string>
+    <key>EIA_API_KEY</key>
+    <string>REPLACE_WITH_REAL_KEY</string>
+    <key>AGSI_API_KEY</key>
+    <string>REPLACE_WITH_REAL_KEY</string>
+    <key>KALSHI_API_KEY</key>
+    <string>REPLACE_WITH_REAL_KEY</string>
+    <key>KALSHI_API_KEY_ID</key>
+    <string>REPLACE_WITH_REAL_KEY</string>
+    <!-- PATH must include python3 and the venv if used -->
+    <key>PATH</key>
+    <string>/usr/local/bin:/usr/bin:/bin:/path/to/home/.local/bin</string>
+  </dict>
+
+  <!-- Stdout/stderr logs -->
+  <key>StandardOutPath</key>
+  <string>/path/to/home/projects/signal-dispatch/content/state/deltas/daemon-hot.log</string>
+  <key>StandardErrorPath</key>
+  <string>/path/to/home/projects/signal-dispatch/content/state/deltas/daemon-hot-err.log</string>
+
+  <!-- Don't restart if it fails -- let the next scheduled run try -->
+  <key>KeepAlive</key>
+  <false/>
+
+  <!-- Run even if we missed a scheduled interval (e.g. machine was asleep) -->
+  <key>RunAtLoad</key>
+  <false/>
+
+</dict>
+</plist>

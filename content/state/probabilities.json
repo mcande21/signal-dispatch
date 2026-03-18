@@ -1,6 +1,6 @@
 {
   "$schema": "Signal Dispatch Probability State v1",
-  "last_updated": "2026-03-10T00:00:00Z",
+  "last_updated": "2026-03-18T00:00:00Z",
   "events": [
     {
       "id": "iran-regime-change-2026",
@@ -18,49 +18,40 @@
       "id": "hormuz-reopen-q2-2026",
       "event": "Strait of Hormuz reopens to normal commercial traffic by June 30, 2026",
       "issue_introduced": 0,
-      "current_probability": 0.55,
+      "current_probability": 0.40,
       "confidence": "medium",
       "resolution_date": "2026-06-30",
       "resolution_criteria": "YES if Lloyd's reinstates standard marine insurance for Persian Gulf transit at pre-conflict premium levels. NO if war-risk premiums remain above 5x pre-conflict baseline.",
       "history": [
         { "date": "2026-03-06", "probability": 0.25, "issue": 0, "note": "Initial assessment" },
-        { "date": "2026-03-10", "probability": 0.55, "issue": 3, "note": "Updated from 25% to 55% (+30pp). Issue #3 analysis assesses 65% chance disruption resolves before mid-April. Lloyd's insurance normalization lags shipping resumption by weeks, but 25% was inconsistent with the disruption-duration estimate. 55% reflects insurance lag discount on the 65% shipping-resolution probability plus additional April-June resolution window." }
+        { "date": "2026-03-10", "probability": 0.55, "issue": 3, "note": "Updated from 25% to 55% (+30pp). Issue #3 analysis assesses 65% chance disruption resolves before mid-April. Lloyd's insurance normalization lags shipping resumption by weeks, but 25% was inconsistent with the disruption-duration estimate. 55% reflects insurance lag discount on the 65% shipping-resolution probability plus additional April-June resolution window." },
+        { "date": "2026-03-18", "probability": 0.40, "issue": 5, "note": "Updated from 55% to 40% (-15pp). Duration model: 25-30% still disrupted at 120 days. But resolution criteria is Lloyd's insurance normalization, which lags physical reopening by weeks. June 30 timeline tight.", "delta_cluster": ["hormuz"] }
       ]
     },
     {
       "id": "iran-ceasefire-apr-2026",
       "event": "Ceasefire between US/Israel and Iran by April 30, 2026",
       "issue_introduced": 0,
-      "current_probability": 0.15,
+      "current_probability": 0.08,
       "confidence": "medium-high",
       "resolution_date": "2026-04-30",
       "resolution_criteria": "YES if hostilities cease for 72+ consecutive hours under a stated agreement. NO if active strikes continue past April 30.",
       "history": [
-        { "date": "2026-03-06", "probability": 0.15, "issue": 0, "note": "Initial assessment" }
-      ]
-    },
-    {
-      "id": "brent-100-q1q2-2026",
-      "event": "Brent crude exceeds $100/barrel during Q1-Q2 2026",
-      "issue_introduced": 0,
-      "current_probability": 0.55,
-      "confidence": "medium",
-      "resolution_date": "2026-06-30",
-      "resolution_criteria": "ICE Brent crude futures closing above $100/barrel on any trading day through June 30, 2026.",
-      "history": [
-        { "date": "2026-03-06", "probability": 0.55, "issue": 0, "note": "Initial assessment" }
+        { "date": "2026-03-06", "probability": 0.15, "issue": 0, "note": "Initial assessment" },
+        { "date": "2026-03-18", "probability": 0.08, "issue": 5, "note": "Updated from 15% to 8% (-7pp). Larijani killed (potential negotiating counterpart removed), ceasefire rejected twice by Iran's supreme leader, new leadership vows continuation.", "delta_cluster": ["iran", "telegram-osint"] }
       ]
     },
     {
       "id": "iran-nuclear-test-2026",
       "event": "Iran tests or deploys a nuclear weapon by December 31, 2026",
       "issue_introduced": 0,
-      "current_probability": 0.08,
+      "current_probability": 0.12,
       "confidence": "low",
       "resolution_date": "2026-12-31",
       "resolution_criteria": "IAEA confirmation of nuclear test, seismic detection by CTBTO consistent with nuclear detonation, or credible first-use in conflict.",
       "history": [
-        { "date": "2026-03-06", "probability": 0.08, "issue": 0, "note": "Initial assessment" }
+        { "date": "2026-03-06", "probability": 0.08, "issue": 0, "note": "Initial assessment" },
+        { "date": "2026-03-18", "probability": 0.12, "issue": 5, "note": "Updated from 8% to 12% (+4pp). Bushehr nuclear facility shelled (Telegram OSINT). Under existential military pressure, breakout rationale strengthens.", "delta_cluster": ["iran"] }
       ]
     },
     {
@@ -122,24 +113,26 @@
       "id": "eu-storage-fails-80-mandate",
       "event": "EU gas storage fails 80% mandate by October 2026",
       "issue_introduced": 3,
-      "current_probability": 0.45,
+      "current_probability": 0.55,
       "confidence": "medium",
       "resolution_date": "2026-10-31",
       "resolution_criteria": "AGSI EU-wide aggregate storage below 80% on October 31, 2026.",
       "history": [
-        { "date": "2026-03-10", "probability": 0.45, "issue": 3, "note": "Initial assessment. AGSI shows NL at 9%, DE at 21.5% entering refill season. Qatari LNG (12-14% of EU imports) offline. Germany recovering via Norwegian pipeline; Netherlands has no viable alternative." }
+        { "date": "2026-03-10", "probability": 0.45, "issue": 3, "note": "Initial assessment. AGSI shows NL at 9%, DE at 21.5% entering refill season. Qatari LNG (12-14% of EU imports) offline. Germany recovering via Norwegian pipeline; Netherlands has no viable alternative." },
+        { "date": "2026-03-18", "probability": 0.55, "issue": 5, "note": "Updated from 45% to 55% (+10pp). AGSI at 22% entering refill season. Hormuz disrupting Qatari LNG flows. If closure persists through summer, EU refill severely impacted.", "delta_cluster": ["europe-energy", "hormuz"] }
       ]
     },
     {
       "id": "hormuz-disruption-6-weeks",
       "event": "Hormuz disruption persists more than 6 weeks",
       "issue_introduced": 3,
-      "current_probability": 0.35,
+      "current_probability": 0.80,
       "confidence": "low",
       "resolution_date": "2026-04-13",
       "resolution_criteria": "Commercial shipping through Strait of Hormuz remains disrupted (no LNG/oil tanker transit) as of April 13, 2026.",
       "history": [
-        { "date": "2026-03-10", "probability": 0.35, "issue": 3, "note": "Initial assessment. Historical base rate of sustained full closure effectively zero. Current conflict unprecedented in scope (direct US-Iran engagement). Adjusted from near-zero to 35% for unprecedented scope while respecting base rate discipline." }
+        { "date": "2026-03-10", "probability": 0.35, "issue": 3, "note": "Initial assessment. Historical base rate of sustained full closure effectively zero. Current conflict unprecedented in scope (direct US-Iran engagement). Adjusted from near-zero to 35% for unprecedented scope while respecting base rate discipline." },
+        { "date": "2026-03-18", "probability": 0.80, "issue": 5, "note": "Updated from 35% to 80% (+45pp). Liara duration model: 90% at 30 days. Day 15+ of active closure, no de-escalation pathway maturing. IRGC hardening, Larijani killed, ceasefire rejected twice.", "delta_cluster": ["hormuz", "telegram-osint"] }
       ]
     },
     {
@@ -158,31 +151,80 @@
       "id": "food-price-spike-10pct-h2",
       "event": "Food prices spike more than 10% in H2 2026",
       "issue_introduced": 3,
-      "current_probability": 0.25,
+      "current_probability": 0.35,
       "confidence": "low",
       "resolution_date": "2026-12-31",
       "resolution_criteria": "FAO Food Price Index or relevant CPI food component increases more than 10% from June 2026 baseline by December 2026.",
       "history": [
-        { "date": "2026-03-10", "probability": 0.25, "issue": 3, "note": "Initial assessment. Unconditional. Chain decomposition: P(closure) 0.35 x P(yield|closure) 0.60 x P(transmission|yield) 0.70 = 14.7%, rounded to 25% for model uncertainty and partial effects from shorter disruptions." }
+        { "date": "2026-03-10", "probability": 0.25, "issue": 3, "note": "Initial assessment. Unconditional. Chain decomposition: P(closure) 0.35 x P(yield|closure) 0.60 x P(transmission|yield) 0.70 = 14.7%, rounded to 25% for model uncertainty and partial effects from shorter disruptions." },
+        { "date": "2026-03-18", "probability": 0.35, "issue": 5, "note": "Updated from 25% to 35% (+10pp). Updated chain: P(closure through April) now 80% x P(yield|closure) 60% x P(transmission) 70% = 33.6%, rounded for model uncertainty.", "delta_cluster": ["hormuz"] }
+      ]
+    },
+    {
+      "id": "us-technical-recession-2026",
+      "event": "US enters technical recession (2 consecutive negative real GDP quarters) in 2026",
+      "issue_introduced": 5,
+      "current_probability": 0.44,
+      "confidence": "medium-high",
+      "resolution_date": "2027-03-31",
+      "resolution_criteria": "BEA reports two consecutive quarters of negative real GDP growth with onset in 2026. Resolution delayed to Q1 2027 to allow for Q4 2026 advance estimate.",
+      "history": [
+        {
+          "date": "2026-03-18",
+          "probability": 0.44,
+          "issue": 5,
+          "note": "Initial assessment. Compound shock model: oil shock (Hormuz, +41%) + trade disruption (17% tariff) + constrained Fed (3.64%, 3.1% core PCE). Historical 100% recession rate when all 3 vectors present (n=2: 1973-75, 1979-82). Tempered by lower inflation (3% vs 12-15%), stronger consumer balance sheets (11.3% debt service), ISM still expanding (52.4). Key swing: Hormuz duration.",
+          "cooper_initial": 0.44,
+          "delta_cluster": ["fred-macro", "hormuz", "compound-shock"]
+        }
+      ]
+    },
+    {
+      "id": "us-growth-recession-2026",
+      "event": "US experiences growth recession (real GDP below 1.0% annualized for 2+ consecutive quarters) in 2026",
+      "issue_introduced": 5,
+      "current_probability": 0.62,
+      "confidence": "medium-high",
+      "resolution_date": "2027-03-31",
+      "resolution_criteria": "BEA reports two or more consecutive quarters of real GDP growth below 1.0% annualized with onset in 2026.",
+      "history": [
+        {
+          "date": "2026-03-18",
+          "probability": 0.62,
+          "issue": 5,
+          "note": "Initial assessment. More likely than technical recession because consumer balance sheets (11.3% debt service) provide floor against full contraction. Compound shock drags below trend but structural resilience prevents two negative quarters. GDP 0-1% is the modal outcome.",
+          "cooper_initial": 0.62,
+          "delta_cluster": ["fred-macro", "hormuz", "compound-shock"]
+        }
       ]
     }
   ],
-  "resolved": [],
+  "resolved": [
+    {
+      "id": "brent-100-q1q2-2026",
+      "event": "Brent crude exceeds $100/barrel during Q1-Q2 2026",
+      "resolved": "YES",
+      "resolution_date": "2026-03-14",
+      "resolution_note": "Brent crossed $106 on approximately March 14 following Hormuz closure. Resolved YES.",
+      "final_probability": 0.55,
+      "brier_score": 0.2025
+    }
+  ],
   "calibration_summary": {
-    "total_resolved": 0,
-    "mean_brier_score": null,
+    "total_resolved": 1,
+    "mean_brier_score": 0.2025,
     "calibration_buckets": {
       "0-10": { "predictions": 1, "outcomes": 0 },
       "10-20": { "predictions": 1, "outcomes": 0 },
       "20-30": { "predictions": 2, "outcomes": 0 },
       "30-40": { "predictions": 3, "outcomes": 0 },
       "40-50": { "predictions": 1, "outcomes": 0 },
-      "50-60": { "predictions": 2, "outcomes": 0 },
+      "50-60": { "predictions": 2, "outcomes": 1 },
       "60-70": { "predictions": 2, "outcomes": 0 },
       "70-80": { "predictions": 2, "outcomes": 0 },
       "80-90": { "predictions": 0, "outcomes": 0 },
       "90-100": { "predictions": 0, "outcomes": 0 }
     },
-    "directional_accuracy": null
+    "directional_accuracy": 1.0
   }
 }

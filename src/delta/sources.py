@@ -935,6 +935,136 @@ async def poll_eia_grid(respondent: str = "US48", data_type: str = "D") -> dict:
 # NOAA -- weather data (numeric + event_set, cold)
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# ACLED -- armed conflict event data (event_set, hot)
+# ---------------------------------------------------------------------------
+
+async def poll_acled() -> dict:
+    """Fetch ACLED conflict events for the past 7 days.
+
+    Returns:
+        {
+            "total_events": int,
+            "total_fatalities": int,
+            "by_region": dict,
+            "by_country": dict,
+            "top_events": list[dict],
+        }
+    """
+    try:
+        from src.adapters.acled import AcledAdapter  # noqa: PLC0415
+        adapter = AcledAdapter(_DB_PATH)
+        result = await adapter.fetch({})
+        await adapter.close()
+
+        return _ok("acled", {
+            "total_events": result.get("total_events", 0),
+            "total_fatalities": result.get("total_fatalities", 0),
+            "by_region": result.get("by_region", {}),
+            "by_country": result.get("by_country", {}),
+            "top_events": result.get("top_events", []),
+        })
+    except Exception as e:
+        return _err("acled", str(e))
+
+
+# ---------------------------------------------------------------------------
+# ADS-B -- military flight tracking (event_set + numeric, hot)
+# ---------------------------------------------------------------------------
+
+async def poll_adsb() -> dict:
+    """Fetch current military aircraft snapshot from ADS-B Exchange.
+
+    Returns:
+        {
+            "total_military": int,
+            "by_category": dict[str, int],
+            "notable": list[dict],
+        }
+    """
+    try:
+        from src.adapters.adsb import AdsbAdapter  # noqa: PLC0415
+        adapter = AdsbAdapter(_DB_PATH)
+        result = await adapter.fetch({})
+        await adapter.close()
+
+        return _ok("adsb", {
+            "total_military": result.get("total_military", 0),
+            "by_category": result.get("by_category", {}),
+            "notable": result.get("notable", []),
+        })
+    except Exception as e:
+        return _err("adsb", str(e))
+
+
+# ---------------------------------------------------------------------------
+# OpenSanctions -- multi-jurisdiction sanctions (categorical, warm)
+# ---------------------------------------------------------------------------
+
+async def poll_opensanctions(search_terms: list[str] | None = None) -> dict:
+    """Fetch OpenSanctions multi-jurisdiction entity data.
+
+    Args:
+        search_terms: Override default search terms (Iran, Russia, Wagner, Houthis).
+
+    Returns:
+        {
+            "dataset": {"entity_count": int, "last_updated": str},
+            "searches": dict[str, {"total_results": int, "entities": list}],
+            "cross_jurisdiction": list[dict],
+        }
+    """
+    try:
+        from src.adapters.opensanctions import OpenSanctionsAdapter  # noqa: PLC0415
+        adapter = OpenSanctionsAdapter(_DB_PATH, search_terms=search_terms)
+        query = {}
+        if search_terms:
+            query["search_terms"] = search_terms
+        result = await adapter.fetch(query)
+        await adapter.close()
+
+        return _ok("opensanctions", {
+            "dataset": result.get("dataset", {}),
+            "searches": result.get("searches", {}),
+            "cross_jurisdiction": result.get("cross_jurisdiction", []),
+        })
+    except Exception as e:
+        return _err("opensanctions", str(e))
+
+
+# ---------------------------------------------------------------------------
+# Telegram OSINT -- conflict channel scraping (event_set, hot)
+# ---------------------------------------------------------------------------
+
+async def poll_telegram_osint() -> dict:
+    """Scrape public Telegram OSINT channels for conflict signals.
+
+    Note: TelegramOsintAdapter.fetch() takes no query dict -- it scrapes
+    all configured channels and returns aggregated signal data.
+
+    Returns:
+        {
+            "total_messages": int,
+            "urgent_messages": int,
+            "channels": dict,
+            "urgency_summary": dict,
+        }
+    """
+    try:
+        from src.adapters.telegram_osint import TelegramOsintAdapter  # noqa: PLC0415
+        adapter = TelegramOsintAdapter()
+        result = await adapter.fetch()
+
+        return _ok("telegram_osint", {
+            "total_messages": result.get("total_messages", 0),
+            "urgent_messages": result.get("urgent_messages", 0),
+            "channels": result.get("channels", {}),
+            "urgency_summary": result.get("urgency_summary", {}),
+        })
+    except Exception as e:
+        return _err("telegram_osint", str(e))
+
+
 async def poll_noaa(query_type: str = "forecast", city: str = "nyc", state: str = "NY") -> dict:
     """Fetch NOAA weather forecast or active alerts.
 

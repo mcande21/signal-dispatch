@@ -25,7 +25,7 @@ CLUSTER_GROUPS: dict[str, dict] = {
     "iran": {
         "label": "Iran Stress Cluster",
         "description": "Correlated signals suggesting elevated Iranian regime stress or military posture",
-        "sources": ["bonbast", "ooni", "tedpix", "gdelt", "prediction_markets"],
+        "sources": ["bonbast", "ooni", "tedpix", "gdelt", "prediction_markets", "opensanctions"],
         "theme": "geopolitical",
     },
     "hormuz": {
@@ -43,7 +43,7 @@ CLUSTER_GROUPS: dict[str, dict] = {
     "conflict": {
         "label": "Active Conflict Cluster",
         "description": "Correlated signals from active conflict zones",
-        "sources": ["gdelt", "viirs", "oryx", "prediction_markets"],
+        "sources": ["gdelt", "viirs", "oryx", "prediction_markets", "acled", "adsb", "telegram_osint"],
         "theme": "conflict",
     },
     "us_macro": {

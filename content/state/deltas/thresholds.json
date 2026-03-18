@@ -31,6 +31,22 @@
     "notification": {"min_sources": 3, "all_same_direction": true},
     "watch": {"min_sources": 2}
   },
+  "acled": {
+    "notification": {"sigma_above_30d_mean": 2.0},
+    "watch": {"sigma_above_30d_mean": 1.5}
+  },
+  "adsb": {
+    "notification": {"percent_change": 50.0},
+    "watch": {"percent_change": 25.0}
+  },
+  "opensanctions": {
+    "notification": {"new_entries": 5},
+    "watch": {"new_entries": 2}
+  },
+  "telegram_osint": {
+    "notification": {"urgent_messages": 5},
+    "watch": {"urgent_messages": 2}
+  },
   "decay_suppression_hours": 48,
   "decay_escalation_factor": 1.5
 }

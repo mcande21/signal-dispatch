@@ -131,18 +131,18 @@ Issues that are incomplete, broken, or need attention. Organized by priority.
 | Two-stream Brier score tracking (system-suggested vs Cooper-actual) | P2 | 2h |
 | Historical context depth -- percentile requires 30+ data points per source | P2 | ongoing |
 
-### Phase 5: New Source Onboarding (blocked)
+### Phase 5: New Source Onboarding
 
-**Goal:** Add high-value Crucix-identified sources. Blocked on licensing/access research.
+**Goal:** Add high-value Crucix-identified sources.
 
-| Source | Blocker | Action Needed |
-|--------|---------|---------------|
-| ACLED (conflict events) | Commercial license for newsletter use | Contact ACLED for pricing, confirm redistribution terms for transformative analysis |
-| ADS-B Exchange (military flights) | Commercial use requires written authorization | Contact ADS-B Exchange via RapidAPI |
-| OpenSanctions (global sanctions) | Journalist exemption may apply | Confirm exemption covers newsletter use case |
-| Telegram OSINT (17 channels) | Web scraping technically violates Telegram ToS | Decision: accept risk for public channel scraping, or use Bot API |
+**Licensing:** Cooper greenlit all four sources for personal use (2026-03-17). Not deploying commercially.
 
-**Do not start onboarding until licensing is resolved.** Build adapters only after terms are clear.
+| Source | Delta Type | Cadence | API Auth |
+|--------|-----------|---------|----------|
+| ACLED (conflict events) | event_set | Hot | Free account (email/password) |
+| ADS-B Exchange (military flights) | event_set + binary | Hot | RapidAPI free tier (500 req/month) |
+| OpenSanctions (global sanctions) | categorical | Warm | None for basic queries |
+| Telegram OSINT (17 channels) | event_set | Hot | None (web scraping fallback) |
 
 ## Workflow
 

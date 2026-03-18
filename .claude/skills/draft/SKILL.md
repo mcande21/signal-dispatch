@@ -37,7 +37,8 @@ Collaborative writing phase. Cooper and Shepard draft together using research ar
 3. `config/persona.yaml` -- Voice configuration
 4. `docs/PERSONA.md` -- Complete persona guide
 5. `docs/STYLE-GUIDE.md` -- Writing rules and conventions
-6. `content/research/{issue-number}/probabilities.json` -- Prior probability estimates (if exists)
+6. `content/state/probabilities.json` -- Tracked probability state (for Step 0 commitment protocol)
+7. `content/research/{issue-number}/delta_summary.md` -- Delta summary from intel phase (for Step 0, if exists)
 
 ## Template Selection
 
@@ -48,6 +49,59 @@ Collaborative writing phase. Cooper and Shepard draft together using research ar
 | `deep_dive` | `src/paper/templates/deep_dive.md` | Comprehensive single-topic analysis. Executive summary first. Structured data is the differentiator. Probability assessment with full basis chain. |
 
 ## Drafting Protocol
+
+### Step 0: Probability Commitment
+
+**Runs before any drafting begins. Skip if no tracked probabilities exist OR if no `delta_summary.md` exists for this issue.**
+
+1. Read `content/state/probabilities.json` for all currently tracked outcomes and their current values
+2. Read `content/research/{issue}/delta_summary.md` for what moved since the last issue
+3. For each tracked outcome, present to Cooper:
+   - The event description
+   - Current probability and when it was last revised
+   - Relevant deltas from the summary that touch this outcome (by cluster or source)
+4. Wait for Cooper to commit his revised number for each outcome -- he goes first, based on what he saw in the delta summary
+5. After Cooper commits, Shepard may share calibration context:
+   - How similar delta patterns have correlated with past revisions (if history supports it)
+   - Whether Cooper's revision is within or outside the range of historical adjustments for similar signal magnitudes
+   - Frame this as a learning observation, not a correction or recommendation
+6. Cooper may adjust his committed number after seeing calibration context, or hold it -- his call
+7. Record final values in `content/state/probabilities.json` using the extended history schema (see below)
+
+**The tone here is collaborative, not procedural.** Shepard is thinking through the evidence with Cooper, not running him through a checklist.
+
+#### Anti-anchoring rules
+
+- Do NOT suggest probability revision numbers before Cooper commits his
+- Do NOT present "the system suggests..." or "based on the data, X% seems appropriate" language
+- Present raw deltas and let Cooper form his own judgment
+- Calibration context is shown AFTER commitment as a learning tool, not a prior
+- Cooper can always override -- this is editorial judgment, not model output
+
+#### Extended history schema
+
+When recording a revision under this protocol, history entries take additional optional fields:
+
+```json
+{
+  "date": "2026-03-17",
+  "probability": 0.45,
+  "issue": 4,
+  "note": "...",
+  "cooper_initial": 0.45,
+  "calibration_shown": "Similar OONI drop in Jan 2026 correlated with +8-12pp upward revision. Cooper's +10pp is within that range.",
+  "delta_cluster": ["iran-internet", "ooni-measurement-count"]
+}
+```
+
+Fields:
+- `cooper_initial` -- The number Cooper committed before seeing calibration context. Omit if Cooper did not revise (probability unchanged).
+- `calibration_shown` -- Free-text summary of what historical context was shared. Omit if no calibration context was available.
+- `delta_cluster` -- Array of delta cluster IDs or source names that informed this revision. Omit if unclear.
+
+**Existing history entries without these fields are valid.** They predate the protocol. New entries generated under this protocol should include all three where applicable.
+
+---
 
 ### Step 1: Propose Outline
 
@@ -251,7 +305,14 @@ This is not a "generate everything and present at end" workflow. Section-by-sect
     ↓
 Read prerequisites (research brief, template, persona, style guide)
     ↓
-Propose section outline to Cooper
+[If probabilities.json + delta_summary.md both exist]
+Step 0: Probability Commitment
+    - Present each tracked outcome + relevant deltas to Cooper
+    - Cooper commits revised numbers
+    - Shepard shares calibration context (after commitment)
+    - Record final values with extended history schema
+    ↓
+Step 1: Propose section outline to Cooper
     ↓
 Cooper approves or redirects
     ↓

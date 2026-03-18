@@ -455,26 +455,71 @@ Voice consistency is the brand. Drift compounds over issues. Be thorough.",
 )
 ```
 
+### Pass 6: Delta Verification
+
+**Purpose:** Cross-check every data claim in the draft against computed deltas. Mechanical fact-checking -- not editorial judgment.
+
+**What Shepard verifies:**
+
+1. Read `content/research/{issue}/delta_summary.md`
+2. For each numeric claim in the draft (percentages, counts, values):
+   - Find the corresponding delta in the summary
+   - Verify the number matches (within rounding tolerance)
+   - Flag any claim that doesn't have a supporting delta
+3. For each source attribution ("OONI data shows...", "according to FRED..."):
+   - Verify the source was actually polled in this cycle
+   - Verify the claim matches what the source returned
+
+**Rules:**
+- This is mechanical verification, not editorial judgment
+- Unverified claims are not necessarily wrong -- they may come from web research or manual analysis
+- Only flag discrepancies (claim contradicts computed delta) as errors
+- Claims sourced from prediction markets, web research, or expert analysis are exempt from delta verification
+
+**Report format:**
+
+```markdown
+## Delta Verification: SD Issue #{issue-number}
+
+### Verified Claims: {count}
+- [claim → delta source, with value match confirmed]
+
+### Unverified Claims: {count} (no matching delta -- informational only)
+- [claim, location in draft, likely source type]
+
+### Discrepancies: {count} (claim contradicts computed delta -- must fix)
+- [claim, location, what draft says, what delta says]
+
+Result: PASS / NEEDS WORK
+```
+
+PASS = no discrepancies (unverified claims are informational, not blocking)
+NEEDS WORK = one or more discrepancies found
+
+**Note:** If `delta_summary.md` doesn't exist for this issue (delta engine hasn't run, or issue predates delta engine), skip Pass 6 and note in review summary.
+
 ## Parallel Dispatch Strategy
 
 **Passes 1 and 5 can run in parallel** (Tali style review + Kelly persona review). They're independent checks.
 
-**Passes 2-4 run sequentially** (all Shepard). They build on each other:
+**Passes 2-4 and 6 run sequentially** (all Shepard). They build on each other:
 - Pass 2 verifies data accuracy (foundation)
 - Pass 3 validates probability format (structure)
 - Pass 4 cross-checks calibration (consistency)
+- Pass 6 verifies numeric claims against computed deltas (mechanical)
 
 **Workflow:**
 
 1. Dispatch Tali (Pass 1) and Kelly (Pass 5) in parallel
 2. Wait for both to return
 3. Run Shepard Passes 2-4 sequentially
-4. Synthesize all five pass results
-5. Present review summary to Cooper
+4. Run Shepard Pass 6 (delta verification) -- skip if delta_summary.md absent
+5. Synthesize all pass results
+6. Present review summary to Cooper
 
 ## Review Summary Format
 
-After all five passes complete, present this summary to Cooper:
+After all passes complete, present this summary to Cooper:
 
 ```markdown
 ## Editorial Review: SD Issue #{issue-number}
@@ -487,6 +532,7 @@ After all five passes complete, present this summary to Cooper:
 | Probability Format | Shepard | PASS/NEEDS WORK | {count} incomplete |
 | Calibration | Shepard | PASS/NEEDS WORK/WARN | {count} concerns |
 | Persona | Kelly | PASS/NEEDS WORK | {count} drift points |
+| Delta Verification | Shepard | PASS/NEEDS WORK/SKIPPED | {count} discrepancies |
 
 ### Overall: PASS / NEEDS WORK
 

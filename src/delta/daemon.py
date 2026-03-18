@@ -66,10 +66,12 @@ for _d in (
 HOT_SOURCES = [
     "bonbast", "ooni", "cloudflare_radar", "tedpix",
     "dolarvzla", "gdelt", "viirs", "prediction_markets",
+    "acled", "adsb", "telegram_osint",
 ]
 WARM_SOURCES = [
     "eia", "agsi", "entsog", "ofac", "oryx",
     "usaspending", "federal_register", "congress",
+    "opensanctions",
 ]
 COLD_SOURCES = [
     "fred", "ecb", "comtrade", "eia_grid", "fec", "noaa",
@@ -951,6 +953,151 @@ async def run_noaa(thresholds: dict) -> dict | None:
     return delta
 
 
+async def run_acled(thresholds: dict) -> dict | None:
+    """Poll ACLED conflict events, compute event-set delta on total events."""
+    from .sources import poll_acled  # noqa: PLC0415
+    from .engine import compute_event_set  # noqa: PLC0415
+
+    current_raw = await poll_acled()
+    if not current_raw.get("ok"):
+        log.error("acled poll failed: %s", current_raw.get("error"))
+        return None
+
+    current_events = current_raw.get("total_events", 0)
+    current_fatalities = current_raw.get("total_fatalities", 0)
+
+    prior = _load_prior("acled")
+    prior_events = prior.get("total_events", 0) if prior else 0
+    prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+
+    _save_prior("acled", current_raw)
+
+    if prior is None:
+        log.info("acled: no prior state, recording baseline")
+        return None
+
+    delta = compute_event_set(
+        source="acled",
+        prior_count=prior_events,
+        current_count=current_events,
+        prior_as_of=prior_as_of,
+        current_as_of=current_raw["as_of"],
+        prior_categories=None,
+        current_categories={"total_fatalities": current_fatalities},
+        thresholds=thresholds.get("acled", {}),
+    )
+    return delta
+
+
+async def run_adsb(thresholds: dict) -> dict | None:
+    """Poll ADS-B Exchange military flights, compute event-set delta on total military count."""
+    from .sources import poll_adsb  # noqa: PLC0415
+    from .engine import compute_event_set  # noqa: PLC0415
+
+    current_raw = await poll_adsb()
+    if not current_raw.get("ok"):
+        log.error("adsb poll failed: %s", current_raw.get("error"))
+        return None
+
+    current_total = current_raw.get("total_military", 0)
+    current_by_category = current_raw.get("by_category", {})
+
+    prior = _load_prior("adsb")
+    prior_total = prior.get("total_military", 0) if prior else 0
+    prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+
+    _save_prior("adsb", current_raw)
+
+    if prior is None:
+        log.info("adsb: no prior state, recording baseline")
+        return None
+
+    delta = compute_event_set(
+        source="adsb",
+        prior_count=prior_total,
+        current_count=current_total,
+        prior_as_of=prior_as_of,
+        current_as_of=current_raw["as_of"],
+        prior_categories=prior.get("by_category") if prior else None,
+        current_categories=current_by_category,
+        thresholds=thresholds.get("adsb", {}),
+    )
+    return delta
+
+
+async def run_opensanctions(thresholds: dict) -> dict | None:
+    """Poll OpenSanctions, compute categorical delta on search result counts."""
+    from .sources import poll_opensanctions  # noqa: PLC0415
+    from .engine import compute_categorical  # noqa: PLC0415
+
+    current_raw = await poll_opensanctions()
+    if not current_raw.get("ok"):
+        log.error("opensanctions poll failed: %s", current_raw.get("error"))
+        return None
+
+    # Build a flat snapshot: total results per search term + cross_jurisdiction count
+    searches = current_raw.get("searches", {})
+    current_snapshot = {term: data.get("total_results", 0) for term, data in searches.items()}
+    current_snapshot["cross_jurisdiction"] = len(current_raw.get("cross_jurisdiction", []))
+
+    prior = _load_prior("opensanctions")
+    prior_snapshot = prior.get("snapshot", {}) if prior else {}
+    prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+
+    # Persist the snapshot alongside the raw data for next comparison
+    current_raw["snapshot"] = current_snapshot
+    _save_prior("opensanctions", current_raw)
+
+    if prior is None or not prior_snapshot:
+        log.info("opensanctions: no prior state, recording baseline")
+        return None
+
+    delta = compute_categorical(
+        source="opensanctions",
+        prior_snapshot=prior_snapshot,
+        current_snapshot=current_snapshot,
+        prior_as_of=prior_as_of,
+        current_as_of=current_raw["as_of"],
+        thresholds=thresholds.get("opensanctions", {}),
+    )
+    return delta
+
+
+async def run_telegram_osint(thresholds: dict) -> dict | None:
+    """Poll Telegram OSINT channels, compute event-set delta on urgent message count."""
+    from .sources import poll_telegram_osint  # noqa: PLC0415
+    from .engine import compute_event_set  # noqa: PLC0415
+
+    current_raw = await poll_telegram_osint()
+    if not current_raw.get("ok"):
+        log.error("telegram_osint poll failed: %s", current_raw.get("error"))
+        return None
+
+    current_urgent = current_raw.get("urgent_messages", 0)
+
+    prior = _load_prior("telegram_osint")
+    prior_urgent = prior.get("urgent_messages", 0) if prior else 0
+    prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+
+    _save_prior("telegram_osint", current_raw)
+
+    if prior is None:
+        log.info("telegram_osint: no prior state, recording baseline")
+        return None
+
+    delta = compute_event_set(
+        source="telegram_osint",
+        prior_count=prior_urgent,
+        current_count=current_urgent,
+        prior_as_of=prior_as_of,
+        current_as_of=current_raw["as_of"],
+        prior_categories=None,
+        current_categories=None,
+        thresholds=thresholds.get("telegram_osint", {}),
+    )
+    return delta
+
+
 def _load_history_for_gdelt(cache_key: str, days: int = 30) -> list[float]:
     """Load historical GDELT article counts from prior_state snapshots.
 
@@ -1018,6 +1165,9 @@ async def run_cadence(cadence: str, thresholds: dict) -> list[dict]:
             _run_source(run_gdelt, thresholds, "Ukraine Russia conflict"),
             _run_source(run_viirs, thresholds, "IR"),
             _run_source(run_prediction_markets, thresholds),
+            _run_source(run_acled, thresholds),
+            _run_source(run_adsb, thresholds),
+            _run_source(run_telegram_osint, thresholds),
         ]
 
     if cadence in ("warm", "all"):
@@ -1030,6 +1180,7 @@ async def run_cadence(cadence: str, thresholds: dict) -> list[dict]:
             _run_source(run_usaspending, thresholds),
             _run_source(run_federal_register, thresholds),
             _run_source(run_congress, thresholds),
+            _run_source(run_opensanctions, thresholds),
         ]
 
     if cadence in ("cold", "all"):

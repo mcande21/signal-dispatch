@@ -70,14 +70,73 @@ Add standard footer:
 **Disclosure:** I trade prediction markets on this analysis. Positions disclosed when relevant.
 ```
 
+**Critical: Header format must match established pattern.**
+
+The `publish_to_substack.py` script parses H1 as the Substack title and H2 as the subtitle. The formatted file must use this exact structure:
+
+```markdown
+# {Article Title}
+## Signal Dispatch {Type} | {Date}
+```
+
+**Do NOT include:**
+- Front matter metadata blocks (Title:, Subtitle:, Tags:) in the article body -- the script ignores them and they render as visible text
+- `# Signal Dispatch -- Deep Dive` as a separate H1 before the title -- that becomes the title instead
+- `### {Date}` as H3 -- the date belongs in the H2 line
+
+**Correct example (matching SD #4 layout):**
+```markdown
+# What's Dying While Everyone Watches Iran
+## Signal Dispatch Deep Dive | March 16, 2026
+
+**Classification:** Open Source Intelligence
+**Topic:** ...
+```
+
+**Wrong (what SD #5 initially had):**
+```markdown
+Title: The Compound Shock...
+Subtitle: Three shocks...
+Section: Deep Dive
+---
+# Signal Dispatch -- Deep Dive
+## The Compound Shock...
+### March 18, 2026
+```
+
 **Output:** `content/drafts/{issue-number}-{type}-formatted.md`
+
+### Step 1B: Generate OG Image / Thumbnail
+
+Generate a 1200x630 OG image matching the Signal Dispatch brand theme.
+
+**Brand Theme:**
+- Background: Deep navy gradient (#0A0F1A top → #0E1424 bottom)
+- Accent: Signal orange/amber (#D4853A) -- used for "SIGNAL DISPATCH" header text and accent lines
+- Title font: Bebas Neue (bold, uppercase) -- available at `content/brand/BebasNeue-Regular.ttf`
+- Primary text: Off-white (#F0EDE8)
+- Secondary text: Muted (#B4AFA5)
+- Background texture: Faint grid lines (#1E2A3C), diagonal scan lines lower-right
+- Large issue number watermark (semi-transparent) in bottom-right corner
+- "SIGNAL DISPATCH" with orange accent line at top-left
+- Content type + date at bottom-left (e.g., "DEEP DIVE | MARCH 18, 2026")
+
+**Generator reference:** `content/drafts/generate_og_image.py` (SD #4 generator -- study this for exact implementation)
+
+**Workflow:**
+1. Use `/marketing-studio` or dispatch EDI to generate a Python Pillow script matching the brand theme
+2. Title text should be the article title in Bebas Neue caps
+3. Subtitle in smaller muted text below
+4. Output to: `content/drafts/{issue-number}-og-image.png`
+5. Upload as cover image in Substack editor after draft creation
 
 ### Step 2: Cooper Review (GATE)
 
-Present formatted version. Last gate before publication.
+Present formatted version + OG image. Last gate before publication.
 
 **Cooper Reviews:**
 - Formatted output visually correct?
+- OG image matches brand?
 - Paywall position appropriate?
 - Footer links correct?
 - Ready to publish?
@@ -86,26 +145,39 @@ Present formatted version. Last gate before publication.
 
 If no, return to drafting or review. If yes, proceed to Step 3.
 
-### Step 3: Publish to Substack
+### Step 3: Publish Draft to Substack
 
-**Currently manual** (no API automation):
+**Use `publish_to_substack.py` to create a Substack draft.**
 
-Present formatted content for Cooper to paste into Substack interface.
+```bash
+SUBSTACK_COOKIES="substack.sid={cookie_value}" \
+  .venv/bin/python publish_to_substack.py --draft-only content/drafts/{issue}-{type}-formatted.md
+```
 
-**Include:**
-- **Title:** From front matter
-- **Subtitle:** One-line hook with key probability
-- **Section:** Newsletter section (e.g., "Weekly Brief", "Breaking Alert", "Deep Dive")
-- **Tags:** From front matter (e.g., "Iran", "Sanctions", "OSINT")
-- **Paywall position:** Line number where `<!--more-->` appears
-- **Scheduling recommendation:** Based on newsletter.yaml schedule
-  - weekly_brief: Sunday 8:00 AM ET
-  - breaking_alert: Immediate (within 2 hours)
-  - deep_dive: First Sunday of month, 8:00 AM ET
+**The script:**
+- Parses H1 as Substack title, H2 as subtitle
+- Converts markdown to ProseMirror JSON (Substack's internal format)
+- Handles footnotes (converted to inline superscript + Notes section in Step 1)
+- Creates a draft and returns the draft URL
 
-**Note:** `publish_to_substack.py` (project root) handles Substack API integration. Currently used for manual-assisted publishing; full automation pending Substack API stability.
+**Auth:** Requires `SUBSTACK_COOKIES` env var with the `substack.sid` session cookie. Get from browser: DevTools → Application → Cookies → signaldsp.substack.com → `substack.sid` value. URL-encode special characters (`+` → `%2B`, `/` → `%2F`).
 
-**Dry-run mode:** Skip this step. Show formatted output only.
+**After draft creation:**
+1. Open the returned draft URL in browser
+2. Upload OG image as cover image
+3. Set paywall position (the `<!--more-->` marker should already be converted)
+4. Verify formatting in Substack preview
+5. Set scheduling or publish immediately
+
+**Modes:**
+- `--draft-only` -- Creates draft, returns URL (default for this workflow)
+- `--publish` -- Creates and immediately publishes (use with caution)
+- `--dry-run` -- Prints ProseMirror JSON without hitting API
+
+**Scheduling recommendation:**
+- weekly_brief: Sunday 8:00 AM ET
+- breaking_alert: Immediate (within 2 hours)
+- deep_dive: First Sunday of month, 8:00 AM ET (or immediately if timely -- e.g., pre-FOMC)
 
 ### Step 4: Archive
 

@@ -38,11 +38,14 @@
     {
       "issue_number": 5,
       "type": "deep_dive",
-      "topic": "2026 Recession Probability -- compound shock model",
+      "topic": "The Compound Shock: Why Three Simultaneous Pressures Make This Recession Different",
       "date_started": "2026-03-17",
-      "status": "researched",
-      "research_path": "content/research/5/recession-synthesis.md",
-      "notes": "Research swarm complete. Synthesis needs completion. Draft pending."
+      "status": "published",
+      "published_date": "2026-03-18",
+      "platform_url": "https://signaldsp.substack.com",
+      "draft_path": "content/drafts/5-deep_dive.md",
+      "published_path": "content/published/5-deep_dive-2026-03-18.md",
+      "research_path": "content/research/5/"
     },
     {
       "issue_number": 6,

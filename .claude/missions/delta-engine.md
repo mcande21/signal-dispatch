@@ -56,6 +56,56 @@ Commit these as separate logical commits before starting new work. State files (
 | Install launchd plist for hot-cadence (every 6h) | P2 | 15min |
 | Add Cloudflare Radar token to .env (free signup) | P3 | 10min |
 
+## Known Stragglers
+
+Issues that are incomplete, broken, or need attention. Organized by priority.
+
+### API Keys in Logs (OPSEC)
+- httpx logs show full URLs including API keys (Congress API key, FEC API key visible in daemon output)
+- Fix: Suppress httpx logging or redact URLs before logging
+- Priority: P2 -- local machine only, not urgent, but fix before any log shipping
+
+### GDELT Rate Limiting
+- Daemon fires 4 GDELT queries simultaneously, hits rate limit
+- Fix: Add sequential execution with delay between GDELT queries, or consolidate into fewer queries
+- Priority: P2
+
+### Kalshi Auth Verification
+- Verify Kalshi auth works in SD's `.env` (keys were copied from PM project)
+- RSA-PSS auth requires `.kalshi-key.pem` at the right path
+- Priority: P2
+
+### Launchd Not Installed
+- Template at `config/com.signaldispatch.delta.plist`
+- Cooper needs to customize paths and install manually
+- Priority: P2 -- daemon won't auto-restart until this is done
+
+### Composite Delta Types (Stubbed)
+- USAspending, Comtrade, FEC all return stub "not yet implemented" from engine
+- These need cross-field relational delta logic (Phase 4)
+- Priority: P3
+
+### Cloudflare Radar Token Missing
+- Needs `CLOUDFLARE_RADAR_TOKEN` in `.env` (free at developers.cloudflare.com/radar)
+- Without it, Cloudflare source always fails silently
+- Priority: P3 -- Cooper manual action
+
+### TEDPIX Unreachable
+- tsetmc.com (Tehran Stock Exchange) is unreachable from outside Iran -- Iran internet controls
+- May need proxy approach long-term, or accept as known gap
+- Priority: P3 -- by design, not a bug
+
+### Threshold Calibration (Ongoing)
+- All thresholds are initial conservative guesses
+- Real calibration requires 4-6 issues of real delta data
+- Priority: ongoing after Phase 3
+
+### Historical Context Shallow (Self-Resolving)
+- Percentile calculations need 30+ data points per source
+- Most sources currently have 1-3 data points
+- Will improve naturally as daemon accumulates history
+- Priority: self-resolving
+
 ### Phase 3: Editorial Integration
 
 **Goal:** Wire the delta engine into SD's skill pipeline (/intel, /draft, /review).

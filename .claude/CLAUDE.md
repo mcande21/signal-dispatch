@@ -70,6 +70,31 @@ Self-contained. All adapters live in `src/adapters/` with own venv and dependenc
 | `content/state/deltas/thresholds.json` | Per-source threshold config (Cooper-calibrated) |
 | `config/com.signaldispatch.delta.plist` | Launchd template for cron scheduling |
 
+## Delta Engine Alerts
+
+On session start, check for pending delta alerts:
+
+```bash
+ls content/state/deltas/alerts/pending/
+```
+
+If alerts exist, report them before proceeding:
+- Read each alert JSON file
+- Present: source, severity, plain_english description, timestamp
+- Ask Cooper: acknowledge (move to `acknowledged/`) or escalate to Breaking Alert
+
+Alert schema:
+```json
+{
+  "source": "bonbast",
+  "severity": "high",
+  "timestamp": "...",
+  "plain_english": "...",
+  "delta": {},
+  "cluster": "iran"
+}
+```
+
 ## Quick Start
 
 To produce a new issue:

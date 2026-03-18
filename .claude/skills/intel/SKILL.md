@@ -31,9 +31,10 @@ This is the core Signal Dispatch workflow. It turns open-source data feeds into 
 ## Project Paths
 
 - **Signal Dispatch root:** `/Users/cooperanderson/projects/signal-dispatch`
-- **Prediction markets root:** `/Users/cooperanderson/projects/prediction-markets`
 - **Research output:** `{sd_root}/content/research/{issue-number}/`
-- **PM CLI pattern:** `cd {pm_root} && source .venv/bin/activate && python -m src.cli {command}`
+- **Delta state:** `{sd_root}/content/state/deltas/`
+- **Local venv:** `{sd_root}/.venv/bin/python`
+- **Local adapter pattern:** `/Users/cooperanderson/projects/signal-dispatch/.venv/bin/python -c "import asyncio; from src.delta.sources import poll_{source}; import json; print(json.dumps(asyncio.run(poll_{source}())))"`
 
 ## Execution
 
@@ -151,7 +152,9 @@ Topic-to-source routing table:
 For each Ghost Market source selected above, read its capability doc:
 - Path: `/Users/cooperanderson/projects/signal-dispatch/docs/sources/{adapter}.md`
 - These docs list available query parameters, intelligence use cases, valid values, and example queries
-- Use this to construct TARGETED queries in Phase 1A instead of bare `--source` calls
+- Use this to construct TARGETED queries in Phase 2 instead of bare default calls
+
+**Missing adapter docs:** Only 9 of 16 adapter docs exist (agsi, comtrade, dolarvzla, ecb, eia_grid, entsog, gdelt, oryx, viirs). If the doc for a selected adapter is missing, read the adapter source directly: `/Users/cooperanderson/projects/signal-dispatch/src/adapters/ghost_market/{adapter}.py` -- the docstrings describe capabilities, parameters, and return format.
 
 For weekly briefs touching many sources, read only the docs for sources relevant to this cycle's themes. Don't read all 16.
 
@@ -159,13 +162,13 @@ For weekly briefs touching many sources, read only the docs for sources relevant
 
 Determine which intelligence tracks to activate:
 
-| Track | Fires When | Agent | CLI Command |
+| Track | Fires When | Agent | Data Source |
 |-------|-----------|-------|-------------|
-| Ghost Market Signals | Topic matches sources | Geth | `pm signals --source {X} --json` |
+| Ghost Market Signals | Topic matches sources | Geth | Delta engine state + live local adapter calls |
 | OSINT Planning | Topic has govt data | Liara | (designs query plan) |
-| OSINT Execution | Liara produces plan | Geth | `pm osint --plan-file {path} --json` |
+| OSINT Execution | Liara produces plan | Geth | Local OSINT adapters (`src/adapters/osint/`) |
 | Web Research | Always (unless --skip-web) | Liara | (web search + synthesis) |
-| Prediction Market Context | Always | Geth | `pm search "{topic}" --json` |
+| Prediction Market Context | Always | Geth | Local Kalshi adapter via `poll_prediction_markets()` |
 
 **War-room threshold:** 3+ tracks = parallel dispatch. 1-2 = sequential.
 
@@ -185,68 +188,78 @@ Proceed with parallel dispatch?
 
 ### Phase 2: Source Mapping (Shepard)
 
-**Step 2A: Ghost Market CLI Commands**
+**Step 2A: Ghost Market Data Strategy**
 
-Construct exact commands for each active source. Map source names to CLI arguments:
+For each active Ghost Market source, choose the right data strategy:
 
-| Source | CLI Argument | Typical Frequency |
+**Strategy 1: Delta engine already has it (preferred)**
+
+The delta daemon polls all sources on schedule. If the daemon has run since the last issue, the data is already in `content/state/deltas/`. Phase 0 summarized the significant deltas in `delta_summary.md`. For analysis, the delta summary is usually sufficient -- it already contains threshold hits, cluster signals, and plain_english descriptions.
+
+For raw JSON from the most recent poll per source:
+- Path: `content/state/deltas/current/{source}.json`
+- These are overwritten each poll cycle (not historical)
+
+**Strategy 2: Live fetch via local adapter (when fresher data needed)**
+
+If the topic requires fresher data than the daemon's last poll, or if you need a parameterized query the daemon doesn't run, invoke the local adapter directly:
+
+| Source | Poll Function | Notable Parameters |
 |--------|-------------|-------------------|
-| OONI | `--source ooni` | 1h refresh |
-| Bonbast | `--source bonbast` | 1h refresh |
-| EIA | `--source eia` | 24h refresh |
-| OFAC | `--source ofac` | 24h refresh |
-| Cloudflare Radar | `--source cloudflare_radar` | 1h refresh |
-| TEDPIX | `--source tedpix` | 4h refresh |
-| USAspending | `--source usaspending` | 24h refresh |
-| GDELT | `--source gdelt` | 15m refresh |
-| ENTSOG | `--source entsog` | 1h refresh |
-| AGSI | `--source agsi` | 12h refresh |
-| ECB SDW | `--source ecb` | 6h refresh |
-| Comtrade | `--source comtrade` | 24h refresh |
-| EIA Grid | `--source eia_grid` | 1h refresh |
-| VIIRS/FIRMS | `--source viirs` | 24h refresh |
-| dolarVzla | `--source dolarvzla` | 1h refresh |
-| Oryx | `--source oryx` | 12h refresh |
+| OONI | `poll_ooni` | `probe_cc` (default: IR), `days` (default: 7) |
+| Bonbast | `poll_bonbast` | (no params -- auto) |
+| EIA | `poll_eia` | `series_id` (default: WCESTUS1) |
+| OFAC | `poll_ofac` | `filter_term` (default: IRAN) |
+| Cloudflare Radar | `poll_cloudflare_radar` | `location` (default: IR), `endpoint` |
+| TEDPIX | `poll_tedpix` | (no params -- auto) |
+| USAspending | `poll_usaspending` | `agency` (default: DoD) |
+| GDELT | `poll_gdelt` | `query` (default: "Iran military conflict"), `timespan` |
+| ENTSOG | `poll_entsog` | `country` (default: DE) |
+| AGSI | `poll_agsi` | `country` (default: DE) |
+| ECB SDW | `poll_ecb` | `flow_ref`, `key` (REQUIRED -- no defaults) |
+| Comtrade | `poll_comtrade` | `reporter` (default: IR), `partner` (default: CN) |
+| EIA Grid | `poll_eia_grid` | `respondent` (default: US48), `data_type` |
+| VIIRS/FIRMS | `poll_viirs` | `country` (default: IR), `days` (default: 1) |
+| dolarVzla | `poll_dolarvzla` | (no params -- auto) |
+| Oryx | `poll_oryx` | `country` (default: Russia) |
 
-Full command template:
+Live fetch command template:
 ```bash
-cd /Users/cooperanderson/projects/prediction-markets && \
-source .venv/bin/activate && \
-python -m src.cli signals --source {source} [--param key=value ...] --json --output data/pipeline/sd-{issue}-{source}.json
+cd /Users/cooperanderson/projects/signal-dispatch && \
+.venv/bin/python -c "
+import asyncio, json
+from src.delta.sources import poll_{source}
+result = asyncio.run(poll_{source}({kwargs}))
+print(json.dumps(result, indent=2, default=str))
+" > content/research/{issue-number}/data/{source}-signals.json
 ```
 
-**Parameterized queries:** Use `--param key=value` to pass query parameters to adapters. Multiple params supported. Check `docs/sources/{source}.md` for available parameters per adapter.
-
-Examples:
-- `--source gdelt --param query="Iran IAEA" --param timespan=7d` -- Keyword-targeted event search
-- `--source ecb --param flow_ref=EXR --param key=D.USD.EUR.SP00.A` -- Specific ECB data series (REQUIRED -- ECB has no defaults)
-- `--source comtrade --param reporter=TR --param commodity=2709 --param flow=M` -- Turkey crude petroleum imports
-- `--source viirs --param country=UA --param days=3` -- Ukraine satellite fire detection, 3 days
-
 **When to parameterize vs. use defaults:**
-- **Always parameterize:** ECB (required -- no defaults), Comtrade (reporter required), GDELT (keyword search is the whole point)
-- **Parameterize when focused:** VIIRS (specific country/bbox), ENTSOG/AGSI (specific country), EIA Grid (specific region)
-- **Defaults usually fine:** OONI, Bonbast, TEDPIX, Cloudflare Radar, dolarVzla, Oryx (simple endpoints, useful defaults)
+- **Always parameterize:** ECB (required -- no defaults), Comtrade (reporter required for non-Iran focus), GDELT (keyword search is the whole point)
+- **Parameterize when focused:** VIIRS (specific country/conflict zone), ENTSOG/AGSI (specific country), EIA Grid (specific region)
+- **Defaults usually fine:** OONI, Bonbast, TEDPIX, Cloudflare Radar, dolarVzla, Oryx
+
+**Decision rule:** Use the delta summary for broad context. Do a live fetch only when the daemon data is stale (>6h for hot sources, >24h for warm) or when you need a non-default parameterization.
 
 **Step 2B: OSINT API Doc Selection**
 
-Based on topic, select which capability briefs Liara reads:
+Based on topic, select which adapter source files Liara reads for OSINT query planning:
 
 **Iran/geopolitics topics:**
-- `/Users/cooperanderson/projects/prediction-markets/docs/osint/federal_register.md`
-- `/Users/cooperanderson/projects/prediction-markets/docs/osint/alternative_signals.md`
+- `/Users/cooperanderson/projects/signal-dispatch/src/adapters/osint/federal_register.py`
 
 **Legislation/policy topics:**
-- `/Users/cooperanderson/projects/prediction-markets/docs/osint/federal_register.md`
-- `/Users/cooperanderson/projects/prediction-markets/docs/osint/congress_gov.md`
+- `/Users/cooperanderson/projects/signal-dispatch/src/adapters/osint/federal_register.py`
+- `/Users/cooperanderson/projects/signal-dispatch/src/adapters/osint/congress.py`
 
 **Election/campaign topics:**
-- `/Users/cooperanderson/projects/prediction-markets/docs/osint/fec.md`
-- `/Users/cooperanderson/projects/prediction-markets/docs/osint/congress_gov.md`
+- `/Users/cooperanderson/projects/signal-dispatch/src/adapters/osint/fec.py`
+- `/Users/cooperanderson/projects/signal-dispatch/src/adapters/osint/congress.py`
 
 **Multi-topic (weekly brief):**
-- All three: `federal_register.md`, `congress_gov.md`, `fec.md`
-- Plus: `alternative_signals.md` if any Iran/geopolitics coverage
+- All three: `federal_register.py`, `congress.py`, `fec.py`
+
+Note: Read the adapter source file for constructor signature and method docstrings. These describe available query parameters, return format, and example usage.
 
 **Step 2C: Web Research Angles**
 
@@ -275,19 +288,29 @@ Define 3-5 research questions per content type:
 
 **Step 2D: Prediction Market Context**
 
-Construct search queries for relevant markets. This provides market-implied probabilities for comparison.
+Fetch current Kalshi market data via local adapter. This provides market-implied probabilities for comparison.
 
 Format:
 ```bash
-cd /Users/cooperanderson/projects/prediction-markets && \
-source .venv/bin/activate && \
-python -m src.cli search "{topic keywords}" --json --output data/pipeline/sd-{issue}-markets.json
+cd /Users/cooperanderson/projects/signal-dispatch && \
+.venv/bin/python -c "
+import asyncio, json
+from src.delta.sources import poll_prediction_markets
+result = asyncio.run(poll_prediction_markets())
+print(json.dumps(result, indent=2, default=str))
+" > content/research/{issue-number}/data/markets.json
 ```
 
+Note: `poll_prediction_markets()` uses a default ticker list from the adapter. If the issue topic requires different markets, pass an explicit tickers list:
+```python
+poll_prediction_markets(tickers=["KXIRAN-2026", "KXOIL-2026", ...])
+```
+Check `src/adapters/kalshi.py` for available ticker formats and `src/delta/sources.py` for the `poll_prediction_markets` signature.
+
 Example topics:
-- `weekly_brief` → "Iran", "sanctions", "oil", "conflict"
-- `breaking_alert` on OONI drop → "Iran internet", "Hormuz", "regime"
-- `deep_dive` on policy → "{specific policy topic}"
+- `weekly_brief` → use default tickers (covers broad geopolitical markets)
+- `breaking_alert` on OONI drop → pass Iran-specific tickers
+- `deep_dive` on policy → pass tickers matching the specific policy domain
 
 ### Phase 3: Parallel Intelligence Collection
 
@@ -299,30 +322,46 @@ Example topics:
 
 #### Track A: Ghost Market Signal Fetch (Geth)
 
-**Only fires if topic domain matches Ghost Market sources from Phase 1B.**
+**Only fires if topic domain matches Ghost Market sources from Phase 1B AND live data is needed beyond the delta summary.**
 
-Dispatch one Geth instance per source. Parallel execution for speed.
+For most issues, Phase 0's delta summary is sufficient. Track A fires when:
+- A source's daemon data is stale (check `content/state/deltas/current/{source}.json` mtime)
+- You need a non-default parameterization the daemon doesn't run
+- Cooper explicitly requests fresher data on a specific source
+
+Dispatch one Geth instance per source needing live fetch. Parallel execution for speed.
 
 **Dispatch template:**
 
 ```
 Task(
   subagent_type: "geth",
-  prompt: "Run: cd /Users/cooperanderson/projects/prediction-markets && source .venv/bin/activate && python -m src.cli signals --source {source} {params} --json --output data/pipeline/sd-{issue}-{source}.json
+  prompt: "Run this command from the signal-dispatch directory:
 
-Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
-  description: "Fetch {source} signals for SD #{issue}",
+cd /Users/cooperanderson/projects/signal-dispatch && \
+mkdir -p content/research/{issue-number}/data && \
+.venv/bin/python -c \"
+import asyncio, json
+from src.delta.sources import poll_{source}
+result = asyncio.run(poll_{source}({kwargs}))
+with open('content/research/{issue-number}/data/{source}-signals.json', 'w') as f:
+    json.dump(result, f, indent=2, default=str)
+print('done')
+\"
+
+Report ONLY: exit code and output file path. Do NOT read or summarize the JSON.",
+  description: "Live fetch {source} signals for SD #{issue}",
   model: "haiku"
 )
 ```
 
-**Replace {params} with** `--param` flags based on adapter docs (read in Step 1B.1). For adapters with useful defaults (OONI, Bonbast, etc.), omit {params}. For adapters requiring parameters (ECB, Comtrade), include them.
+**Replace {kwargs} with** keyword arguments based on adapter docs (Step 1B.1). For adapters with useful defaults (OONI, Bonbast, etc.), omit kwargs. For adapters requiring parameters (ECB: flow_ref+key, Comtrade: reporter), include them.
 
 **Replace {source} with:** ooni, bonbast, eia, ofac, cloudflare_radar, tedpix, usaspending, gdelt, entsog, agsi, ecb, comtrade, eia_grid, viirs, dolarvzla, or oryx
 
 **Multiple parallel Geth dispatches:**
 
-For a weekly brief covering Iran/geopolitics:
+For a weekly brief covering Iran/geopolitics needing live data:
 - Geth #1: OONI
 - Geth #2: Bonbast
 - Geth #3: TEDPIX
@@ -332,12 +371,12 @@ For a weekly brief covering Iran/geopolitics:
 
 All dispatch simultaneously. Shepard waits for all to return before synthesis.
 
-**Output:** `data/pipeline/sd-{issue}-{source}.json` per source
+**Output:** `content/research/{issue-number}/data/{source}-signals.json` per source
 
 **Error handling:**
-- Exit code != 0 → Note source failure, proceed without that data
-- Ghost Market adapters require `ghost_market.db` and must close connections properly (CLI handles cleanup)
-- Rate limits (Bonbast, TEDPIX) → retry once after 5s, then note failure
+- Exit code != 0 → Note source failure, proceed without that data. Lower confidence if critical to topic.
+- Rate limits (Bonbast, TEDPIX) → retry once, then note failure
+- If delta summary already covers this source adequately, skip the live fetch
 
 #### Track B: Web Research + OSINT Planning (Liara)
 
@@ -360,8 +399,8 @@ Task(
 Read these files yourself:
 - Source config: /Users/cooperanderson/projects/signal-dispatch/config/sources.yaml
 - Persona reference: /Users/cooperanderson/projects/signal-dispatch/docs/PERSONA.md
-{For each selected OSINT API doc:}
-- OSINT API docs: /Users/cooperanderson/projects/prediction-markets/docs/osint/{doc_name}.md
+{For each selected OSINT adapter:}
+- OSINT adapter source: /Users/cooperanderson/projects/signal-dispatch/src/adapters/osint/{adapter}.py
 
 == CONTEXT ==
 Content type: {weekly_brief | breaking_alert | deep_dive}
@@ -460,24 +499,35 @@ Example output:
 
 **Always fires unless topic has no relevant markets.**
 
-Search for relevant prediction markets to extract market-implied probabilities.
+Fetch current Kalshi market data via local adapter.
 
 **Dispatch template:**
 
 ```
 Task(
   subagent_type: "geth",
-  prompt: "Run: cd /Users/cooperanderson/projects/prediction-markets && source .venv/bin/activate && python -m src.cli search \"{search_query}\" --json --output data/pipeline/sd-{issue}-markets.json
+  prompt: "Run from signal-dispatch directory:
 
-Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
-  description: "Search markets for {topic}",
+cd /Users/cooperanderson/projects/signal-dispatch && \
+mkdir -p content/research/{issue-number}/data && \
+.venv/bin/python -c \"
+import asyncio, json
+from src.delta.sources import poll_prediction_markets
+result = asyncio.run(poll_prediction_markets({tickers_arg}))
+with open('content/research/{issue-number}/data/markets.json', 'w') as f:
+    json.dump(result, f, indent=2, default=str)
+print('done')
+\"
+
+Report ONLY: exit code and output file path. Do NOT read or summarize the JSON.",
+  description: "Fetch prediction market context for SD #{issue}",
   model: "haiku"
 )
 ```
 
-**Replace {search_query} with topic keywords from Phase 1D.**
+**Replace {tickers_arg} with** either nothing (uses defaults) or `tickers=[\"TICKER1\", \"TICKER2\"]` for issue-specific markets.
 
-**Output:** `data/pipeline/sd-{issue}-markets.json`
+**Output:** `content/research/{issue-number}/data/markets.json`
 
 ### Phase 3B: OSINT Execution (Geth)
 
@@ -489,29 +539,65 @@ After Liara returns, extract the JSON query plan from her response and write it 
 
 ```
 Write(
-  file_path="/Users/cooperanderson/projects/prediction-markets/data/pipeline/osint-plan-sd-{issue}.json",
+  file_path="/Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/osint-plan.json",
   content="{Liara's query plan JSON}"
 )
 ```
 
-Then dispatch Geth to execute:
+Then dispatch Geth to execute each query against the local OSINT adapters:
 
 ```
 Task(
   subagent_type: "geth",
-  prompt: "Run: cd /Users/cooperanderson/projects/prediction-markets && source .venv/bin/activate && set -a && source .env && set +a && python -m src.cli osint --plan-file data/pipeline/osint-plan-sd-{issue}.json --json --output data/pipeline/sd-{issue}-osint.json
+  prompt: "Execute the OSINT query plan for SD #{issue}.
 
-Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
+Read the plan: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/osint-plan.json
+
+For each query in the plan, run the appropriate local adapter:
+
+cd /Users/cooperanderson/projects/signal-dispatch
+
+Federal Register queries:
+.venv/bin/python -c \"
+import asyncio, json
+from src.adapters.osint.federal_register import FederalRegisterAdapter
+adapter = FederalRegisterAdapter()
+result = asyncio.run(adapter.search({params_from_plan}))
+print(json.dumps(result, default=str))
+\"
+
+Congress queries:
+.venv/bin/python -c \"
+import asyncio, json
+from src.adapters.osint.congress import CongressAdapter
+adapter = CongressAdapter()
+result = asyncio.run(adapter.search({params_from_plan}))
+print(json.dumps(result, default=str))
+\"
+
+FEC queries:
+.venv/bin/python -c \"
+import asyncio, json
+from src.adapters.osint.fec import FECAdapter
+adapter = FECAdapter()
+result = asyncio.run(adapter.search({params_from_plan}))
+print(json.dumps(result, default=str))
+\"
+
+Collect all results and write to:
+/Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/osint.json
+
+Report ONLY: exit code and output file path. Do NOT summarize the results.",
   description: "Execute OSINT plan SD #{issue}",
   model: "haiku"
 )
 ```
 
-**Output:** `data/pipeline/sd-{issue}-osint.json`
+**Output:** `content/research/{issue-number}/data/osint.json`
 
 **Error handling:**
-- OSINT execution fails → Note in brief but proceed to Phase 3. OSINT enriches, doesn't gate.
-- API rate limits → CLI handles retry logic
+- OSINT execution fails → Note in brief but proceed to Phase 4. OSINT enriches, doesn't gate.
+- API rate limits → Retry once, note failure, continue with available results
 - Empty results → Valid outcome. Not all queries have relevant documents.
 
 ### Phase 4: Synthesis (Liara + Legion)
@@ -549,13 +635,13 @@ Task(
 
 Read these files:
 - Delta summary (accumulated daemon signals since last issue): /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/delta_summary.md
-{If Ghost Market track fired, for each source:}
-- Ghost Market signals ({source}): /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-{source}.json
 - Source config: /Users/cooperanderson/projects/signal-dispatch/config/sources.yaml
+{If Ghost Market live fetch fired, for each source:}
+- Ghost Market signals ({source}): /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/{source}-signals.json
 {If OSINT executed:}
-- OSINT results: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-osint.json
-{If prediction market search ran:}
-- Prediction markets: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-markets.json
+- OSINT results: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/osint.json
+{If prediction market fetch ran:}
+- Prediction markets: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/markets.json
 
 == CONTEXT ==
 Your prior research findings are available in your conversation history (Track B web research + signal interpretation framework).
@@ -664,12 +750,12 @@ You are NOT reviewing Liara's synthesis for approval. You are providing an indep
 Read these files:
 - Delta summary (accumulated daemon signals since last issue): /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/delta_summary.md
 - Liara's synthesis: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/synthesis.md
-{For each data file produced in Phase 3:}
-- {source} signals: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-{source}.json
+{For each data file produced in Phase 3 -- all live fetch outputs land here:}
+- {source} signals: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/{source}-signals.json
 {If OSINT executed:}
-- OSINT results: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-osint.json
-{If market search ran:}
-- Markets: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-markets.json
+- OSINT results: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/osint.json
+{If market fetch ran:}
+- Markets: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/markets.json
 
 == CONTEXT ==
 Content type: {weekly_brief | breaking_alert | deep_dive}
@@ -972,33 +1058,21 @@ Full delta summary: `content/research/{issue-number}/delta_summary.md`
 - Publish with methodology transparency
 ```
 
-#### Step 5B: Raw Data Archival (Geth)
+#### Step 5B: Data Directory Verification (Geth)
 
-Copy all pipeline data to issue directory for archival.
+All data now lands directly in `content/research/{issue-number}/data/` during collection -- no cross-project copy needed. Verify the directory is complete.
 
 **Dispatch Geth:**
 
 ```
 Task(
   subagent_type: "geth",
-  prompt: "Copy Signal Dispatch #{issue} pipeline data to archive.
+  prompt: "Verify Signal Dispatch #{issue} data directory.
 
-Source directory: /Users/cooperanderson/projects/prediction-markets/data/pipeline/
-Destination: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/
+List all files in: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/data/
 
-Files to copy (if they exist):
-{For each Ghost Market source:}
-- sd-{issue}-{source}.json → data/{source}-signals.json
-{If OSINT executed:}
-- sd-{issue}-osint.json → data/osint.json
-- osint-plan-sd-{issue}.json → data/osint-plan.json
-{If market search ran:}
-- sd-{issue}-markets.json → data/markets.json
-
-Create destination directory if it doesn't exist.
-Skip files that don't exist (sources that didn't fire).
-Report: Which files copied, which were missing.",
-  description: "Archive SD #{issue} pipeline data",
+Report: Which files are present, their sizes. Note any expected files that are missing based on what sources were active this issue.",
+  description: "Verify SD #{issue} data directory",
   model: "haiku"
 )
 ```
@@ -1011,11 +1085,11 @@ content/research/{issue-number}/
 ├── brief.md               # Comprehensive research brief
 ├── synthesis.md           # Liara's cross-track synthesis
 ├── orthogonal.md          # Legion's orthogonal analysis
-└── data/                  # Raw data archive
-    ├── ooni-signals.json
-    ├── bonbast-signals.json
-    ├── eia-signals.json
-    ├── ofac-signals.json
+└── data/                  # Live fetch outputs (only sources that fired Track A)
+    ├── ooni-signals.json          # (if live-fetched)
+    ├── bonbast-signals.json       # (if live-fetched)
+    ├── eia-signals.json           # (if live-fetched)
+    ├── ofac-signals.json          # (if live-fetched)
     ├── cloudflare_radar-signals.json
     ├── tedpix-signals.json
     ├── usaspending-signals.json
@@ -1028,10 +1102,12 @@ content/research/{issue-number}/
     ├── viirs-signals.json
     ├── dolarvzla-signals.json
     ├── oryx-signals.json
-    ├── osint.json
-    ├── osint-plan.json
-    └── markets.json
+    ├── osint.json                 # (if OSINT executed)
+    ├── osint-plan.json            # (if OSINT executed)
+    └── markets.json               # (if prediction market fetch ran)
 ```
+
+Note: The delta summary (`delta_summary.md`) serves as the primary data source for most issues. The `data/` directory contains live-fetch outputs only when the daemon data was insufficient or stale.
 
 **After archival completes:**
 
@@ -1057,13 +1133,15 @@ Ready to proceed to drafting? (Run `/draft {issue-number}` when ready)
 
 | Error | Action |
 |-------|--------|
-| Ghost Market adapter fails | Note in brief ("OONI data unavailable this cycle"), proceed without. Lower confidence if critical to topic. |
+| Delta merge script fails | Check if `content/state/deltas/` exists. If daemon hasn't run, note delta context unavailable and proceed. |
+| Ghost Market live fetch fails | Note in brief ("OONI live fetch failed, using delta summary"). Lower confidence if critical to topic and daemon data is also stale. |
+| Delta summary is empty | Valid -- daemon running but nothing crossed thresholds. Proceed with baseline context. |
 | Liara returns thin results | Note in brief, ask Cooper if more research time needed before proceeding. |
 | OSINT execution fails | Note in brief. OSINT enriches, doesn't gate. Proceed to synthesis. |
-| All Ghost Market sources fail | Flag as critical error. Cannot produce data-driven brief without structured feeds. Diagnose with Mordin. |
+| All live fetches fail | Degrade gracefully to delta summary only. Note this in brief, flag confidence as reduced. |
 | Legion returns empty/generic | BAD SIGN. Legion must find something. If output is "looks good," Shepard rejects and re-dispatches with more aggressive prompt. |
-| pm search returns no markets | Valid outcome. Not all topics have active prediction markets. Note absence in brief. |
-| Prediction markets CLI fails | Note in brief, proceed without market context. |
+| Prediction markets fetch returns empty | Valid outcome. Not all topics have active prediction markets. Note absence in brief. |
+| Kalshi adapter fails | Note in brief, proceed without market context. |
 | Issue number collision | Check if issue already exists. Ask Cooper: overwrite or increment? |
 
 ## Anti-Patterns
@@ -1081,7 +1159,7 @@ Ready to proceed to drafting? (Run `/draft {issue-number}` when ready)
 
 ## Key Principles
 
-- **File-based data flow:** CLI → JSON files → agents read files → markdown output
+- **File-based data flow:** Delta daemon → delta summary → agents read files → markdown output. Live fetches when needed.
 - **Agents design analytical frameworks BEFORE seeing data** (Track B signal interpretation framework)
 - **War-room mode for 3+ tracks** (parallel dispatch), sequential for 1-2
 - **Cooper approves track manifest before dispatch** (no autonomous parallel execution without approval)
@@ -1095,17 +1173,22 @@ Ready to proceed to drafting? (Run `/draft {issue-number}` when ready)
 ## Related Commands
 
 - **`/draft {issue-number}`** -- Next step after `/intel`. Turns research brief into newsletter article.
-- **`/edit {issue-number}`** -- Style consistency, fact verification, probability format checks.
+- **`/review {issue-number}`** -- 5-pass editorial review: style, fact verification, probability format, calibration, persona consistency.
 - **`/publish {issue-number}`** -- Format and publish to newsletter platform.
+- **`/recon {topic}`** -- Swarm research pipeline. Alternative to `/intel` for deep background research without the structured data collection phases.
+- **`/scan`** -- Environmental signal sweep. Quick check of current delta state without full intel collection.
 
 ## Notes
 
 - Signal Dispatch project root: `/Users/cooperanderson/projects/signal-dispatch`
-- Prediction markets project root: `/Users/cooperanderson/projects/prediction-markets`
-- Ghost Market adapters require `ghost_market.db` and proper connection cleanup (CLI handles)
-- OSINT execution requires `.env` file with API keys
+- All adapters and the delta engine are self-contained in this project
+- Ghost Market adapters live in `src/adapters/ghost_market/`; poll functions in `src/delta/sources.py`
+- OSINT adapters live in `src/adapters/osint/`; also exposed as `poll_federal_register`, `poll_congress`, `poll_fec` in `src/delta/sources.py`
+- Local venv at `.venv/` -- always use `.venv/bin/python`, not system python
+- OSINT adapters may require API keys; check `.env` if calls fail with auth errors
 - Persona reference defines voice, not methodology (methodology is in this skill)
 - Legion's orthogonal analysis is the newsletter's competitive advantage
 - Issue numbers auto-increment if not specified
 - All probability estimates must be falsifiable with clear resolution criteria
 - Track record includes wins AND losses (no hiding failures)
+- Delta summary is the primary data source; live fetches supplement when needed

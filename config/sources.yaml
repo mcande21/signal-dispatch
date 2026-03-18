@@ -1,5 +1,5 @@
 # Data sources -- all sourced from prediction-markets project
-prediction_markets_root: "/Users/cooperanderson/projects/prediction-markets"
+prediction_markets_root: "/Users/cooperanderson/projects/prediction-markets"  # Legacy -- SD now uses local adapters in src/adapters/. This path retained for reference only.
 
 structured_feeds:
   ooni:
@@ -80,10 +80,10 @@ osint_feeds:
 
 quantitative:
   fred:
-    adapter: "data_sources.FredAdapter"
+    adapter: "data_sources.FredAdapter"  # Local: src/adapters/fred.py
     signal: "Economic indicators -- macro context"
   noaa:
-    adapter: "data_sources.NoaaAdapter"
+    adapter: "data_sources.NoaaAdapter"  # Local: src/adapters/noaa.py
     signal: "Weather data -- for weather-sensitive markets"
 
 prediction_markets:

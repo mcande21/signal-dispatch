@@ -39,7 +39,7 @@ Commit these as separate logical commits before starting new work. State files (
 
 ## Phases
 
-### Phase 2: Cleanup + Harden (next)
+### Phase 2: Cleanup + Harden -- DONE (2026-03-17)
 
 **Goal:** Fix known issues, commit everything clean, set up the cron schedule.
 
@@ -106,7 +106,7 @@ Issues that are incomplete, broken, or need attention. Organized by priority.
 - Will improve naturally as daemon accumulates history
 - Priority: self-resolving
 
-### Phase 3: Editorial Integration
+### Phase 3: Editorial Integration -- DONE (2026-03-17)
 
 **Goal:** Wire the delta engine into SD's skill pipeline (/intel, /draft, /review).
 

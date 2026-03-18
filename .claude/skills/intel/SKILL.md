@@ -37,11 +37,78 @@ This is the core Signal Dispatch workflow. It turns open-source data feeds into 
 
 ## Execution
 
-Five phases. War-room threshold: 3+ tracks → parallel dispatch. 1-2 tracks → sequential dispatch.
+Six phases. War-room threshold: 3+ tracks → parallel dispatch. 1-2 tracks → sequential dispatch.
 
-### Phase 0: Topic Validation and Source Routing (Shepard)
+### Phase 0: Delta Merge (Shepard)
 
-**Step 0A: Topic Scoping**
+**Run before all other phases. No exceptions.**
+
+Merge accumulated delta engine output since the last published issue into a structured summary that informs all subsequent phases.
+
+**Step 0A: Run the merge script**
+
+```bash
+cd /Users/cooperanderson/projects/signal-dispatch && \
+.venv/bin/python -m src.delta.merge --issue {issue_number} --output content/research/{issue_number}/delta_summary.md
+```
+
+This script:
+- Reads `content/state/issues.json` to find the last published issue date
+- Scans `content/state/deltas/history/*.jsonl` for all entries since that date
+- Reads `content/state/deltas/clusters/latest.json` for active clusters
+- Reads `content/state/deltas/alerts/pending/` and `alerts/acknowledged/` for threshold alerts
+- Produces `content/research/{issue_number}/delta_summary.md`
+
+**Step 0B: Read and internalize the delta summary**
+
+Read the file at `content/research/{issue_number}/delta_summary.md`.
+
+This document is the ground truth for what has moved since the last issue. It contains:
+- **Active Clusters** -- correlated signal groups with severity ratings
+- **Alerts** -- threshold breaches, both pending and acknowledged
+- **Hot-Cadence Deltas** -- bonbast, ooni, cloudflare_radar, tedpix, gdelt, viirs, prediction_markets
+- **Warm-Cadence Deltas** -- eia, agsi, entsog, ofac, oryx, usaspending, federal_register, congress
+- **Cold-Cadence Deltas** -- fred, ecb, comtrade, eia_grid, fec, noaa
+- **No Significant Deltas** -- sources that produced no threshold signals
+
+**The delta summary shows raw data changes. It does NOT suggest probabilities.** Analytical interpretation happens in Phases 3 and 4.
+
+**Step 0C: Handle empty-state case**
+
+If the script produces a summary with no significant deltas (all sources clear, no clusters, no alerts), this is valid -- it means the daemon has been running but nothing crossed thresholds. Note this in the track manifest and proceed normally. The delta summary still serves as the baseline reference.
+
+If the script fails or `content/state/deltas/` does not exist (delta engine not yet running), log a warning and proceed to Phase 1 without the delta summary. Note in the research brief that delta context is unavailable for this issue.
+
+**Step 0D: Surface key signals to Cooper**
+
+Before proceeding to Phase 1, present a brief summary:
+
+```
+Delta summary for SD #{issue_number} (since {last_published_date}):
+
+Clusters: {count} active
+  - {cluster_label}: [{severity}] {plain_english}
+
+Alerts: {count} pending
+  - {source}: [{severity}] {plain_english}
+
+Hot signals: {count} sources with threshold hits
+  - {source}: {plain_english}
+
+Warm/Cold signals: {count} threshold hits
+
+Full summary: content/research/{issue_number}/delta_summary.md
+
+Proceed to topic scoping?
+```
+
+Wait for Cooper to confirm before proceeding to Phase 1.
+
+---
+
+### Phase 1: Topic Validation and Source Routing (Shepard)
+
+**Step 1A: Topic Scoping**
 
 Different behavior per content type:
 
@@ -62,7 +129,7 @@ Different behavior per content type:
 - Which sources contribute to resolution?
 - Question: "What is the full causal chain from data to conclusion?"
 
-**Step 0B: Source Routing**
+**Step 1B: Source Routing**
 
 Topic-to-source routing table:
 
@@ -79,7 +146,7 @@ Topic-to-source routing table:
 | Legislation | None | Federal Register, Congress, FEC | Yes |
 | Multi-topic (weekly) | ALL active | ALL applicable | Yes |
 
-**Step 0B.1: Read Adapter Documentation**
+**Step 1B.1: Read Adapter Documentation**
 
 For each Ghost Market source selected above, read its capability doc:
 - Path: `/Users/cooperanderson/projects/signal-dispatch/docs/sources/{adapter}.md`
@@ -88,7 +155,7 @@ For each Ghost Market source selected above, read its capability doc:
 
 For weekly briefs touching many sources, read only the docs for sources relevant to this cycle's themes. Don't read all 16.
 
-**Step 0C: Build Track Manifest**
+**Step 1C: Build Track Manifest**
 
 Determine which intelligence tracks to activate:
 
@@ -116,9 +183,9 @@ War-room mode: YES (4 tracks)
 Proceed with parallel dispatch?
 ```
 
-### Phase 1: Source Mapping (Shepard)
+### Phase 2: Source Mapping (Shepard)
 
-**Step 1A: Ghost Market CLI Commands**
+**Step 2A: Ghost Market CLI Commands**
 
 Construct exact commands for each active source. Map source names to CLI arguments:
 
@@ -161,7 +228,7 @@ Examples:
 - **Parameterize when focused:** VIIRS (specific country/bbox), ENTSOG/AGSI (specific country), EIA Grid (specific region)
 - **Defaults usually fine:** OONI, Bonbast, TEDPIX, Cloudflare Radar, dolarVzla, Oryx (simple endpoints, useful defaults)
 
-**Step 1B: OSINT API Doc Selection**
+**Step 2B: OSINT API Doc Selection**
 
 Based on topic, select which capability briefs Liara reads:
 
@@ -181,7 +248,7 @@ Based on topic, select which capability briefs Liara reads:
 - All three: `federal_register.md`, `congress_gov.md`, `fec.md`
 - Plus: `alternative_signals.md` if any Iran/geopolitics coverage
 
-**Step 1C: Web Research Angles**
+**Step 2C: Web Research Angles**
 
 Define 3-5 research questions per content type:
 
@@ -206,7 +273,7 @@ Define 3-5 research questions per content type:
 4. Strongest counterarguments to the thesis?
 5. What resolution criteria make this assessable with ground truth?
 
-**Step 1D: Prediction Market Context**
+**Step 2D: Prediction Market Context**
 
 Construct search queries for relevant markets. This provides market-implied probabilities for comparison.
 
@@ -222,7 +289,7 @@ Example topics:
 - `breaking_alert` on OONI drop → "Iran internet", "Hormuz", "regime"
 - `deep_dive` on policy → "{specific policy topic}"
 
-### Phase 2: Parallel Intelligence Collection
+### Phase 3: Parallel Intelligence Collection
 
 **Mode selection based on track manifest:**
 
@@ -232,7 +299,7 @@ Example topics:
 
 #### Track A: Ghost Market Signal Fetch (Geth)
 
-**Only fires if topic domain matches Ghost Market sources from Phase 0B.**
+**Only fires if topic domain matches Ghost Market sources from Phase 1B.**
 
 Dispatch one Geth instance per source. Parallel execution for speed.
 
@@ -249,7 +316,7 @@ Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
 )
 ```
 
-**Replace {params} with** `--param` flags based on adapter docs (read in Step 0B.1). For adapters with useful defaults (OONI, Bonbast, etc.), omit {params}. For adapters requiring parameters (ECB, Comtrade), include them.
+**Replace {params} with** `--param` flags based on adapter docs (read in Step 1B.1). For adapters with useful defaults (OONI, Bonbast, etc.), omit {params}. For adapters requiring parameters (ECB, Comtrade), include them.
 
 **Replace {source} with:** ooni, bonbast, eia, ofac, cloudflare_radar, tedpix, usaspending, gdelt, entsog, agsi, ecb, comtrade, eia_grid, viirs, dolarvzla, or oryx
 
@@ -304,7 +371,7 @@ Content type: {weekly_brief | breaking_alert | deep_dive}
 
 {If Ghost Market track is active:}
 📊 GHOST MARKET ACTIVE: These structured data sources are being collected in parallel:
-{List of sources from Phase 0B routing: OONI, Bonbast, EIA, etc.}
+{List of sources from Phase 1B routing: OONI, Bonbast, EIA, etc.}
 
 You will NOT receive fetched signal data (Geth handles that in parallel). Your job is to design the analytical framework -- how should we interpret these signals in this topic's context?
 
@@ -365,7 +432,7 @@ If no OSINT sources are relevant to this topic, return an empty queries array. B
 
 {If Ghost Market track is active:}
 3. SIGNAL INTERPRETATION FRAMEWORK: For each Ghost Market source being collected:
-{List sources from Phase 0B}
+{List sources from Phase 1B}
 
 Explain (one paragraph per source):
 - What does this source measure in the real world?
@@ -412,7 +479,7 @@ Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
 
 **Output:** `data/pipeline/sd-{issue}-markets.json`
 
-### Phase 2B: OSINT Execution (Geth)
+### Phase 3B: OSINT Execution (Geth)
 
 **Depends on:** Liara returning an OSINT query plan from Track B.
 
@@ -447,7 +514,7 @@ Report ONLY: exit code and file path. Do NOT read or summarize the JSON.",
 - API rate limits → CLI handles retry logic
 - Empty results → Valid outcome. Not all queries have relevant documents.
 
-### Phase 3: Synthesis (Liara + Legion)
+### Phase 4: Synthesis (Liara + Legion)
 
 **THE SIGNAL DISPATCH DIFFERENTIATOR.**
 
@@ -459,14 +526,15 @@ Two-layer synthesis: Liara's cross-track integration + Legion's orthogonal analy
 
 **WAR-ROOM (3+ tracks):** Liara synthesizes first, then Legion provides orthogonal analysis.
 
-#### Step 3A: Liara Cross-Track Synthesis
+#### Step 4A: Liara Cross-Track Synthesis
 
-**Only runs when 3+ tracks fired in Phase 2.**
+**Only runs when 3+ tracks fired in Phase 3.**
 
 Liara receives:
+- Delta summary from Phase 0 (accumulated daemon output since last issue)
 - Her own web research findings (from Track B)
 - Raw Ghost Market signal data (from Track A) -- if Track A fired
-- OSINT execution results (from Phase 2B) -- if executed
+- OSINT execution results (from Phase 3B) -- if executed
 - Prediction market context (from Track C)
 - Signal interpretation framework she designed in Track B (if Ghost Market active)
 
@@ -480,6 +548,7 @@ Task(
   prompt: "Synthesize cross-track intelligence for Signal Dispatch #{issue} on {topic}.
 
 Read these files:
+- Delta summary (accumulated daemon signals since last issue): /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/delta_summary.md
 {If Ghost Market track fired, for each source:}
 - Ghost Market signals ({source}): /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-{source}.json
 - Source config: /Users/cooperanderson/projects/signal-dispatch/config/sources.yaml
@@ -567,12 +636,12 @@ Write(
 )
 ```
 
-#### Step 3B: Legion Orthogonal Synthesis
+#### Step 4B: Legion Orthogonal Synthesis
 
 **ALWAYS RUNS. This is the Signal Dispatch differentiator.**
 
 Legion receives:
-- Liara's synthesis (from Step 3A or Shepard's notes if simple mode)
+- Liara's synthesis (from Step 4A or Shepard's notes if simple mode)
 - ALL raw data files (Ghost Market signals, OSINT results, market context)
 - Topic/thesis framing from Phase 0A
 
@@ -593,8 +662,9 @@ Task(
 You are NOT reviewing Liara's synthesis for approval. You are providing an independent, orthogonal perspective to catch what she missed or overweighted.
 
 Read these files:
+- Delta summary (accumulated daemon signals since last issue): /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/delta_summary.md
 - Liara's synthesis: /Users/cooperanderson/projects/signal-dispatch/content/research/{issue-number}/synthesis.md
-{For each data file produced in Phase 2:}
+{For each data file produced in Phase 3:}
 - {source} signals: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-{source}.json
 {If OSINT executed:}
 - OSINT results: /Users/cooperanderson/projects/prediction-markets/data/pipeline/sd-{issue}-osint.json
@@ -688,7 +758,7 @@ Write(
 )
 ```
 
-#### Step 3C: Present Combined Synthesis to Cooper
+#### Step 4C: Present Combined Synthesis to Cooper
 
 **Shepard reads both files:**
 - `content/research/{issue-number}/synthesis.md` (Liara's cross-track synthesis)
@@ -728,11 +798,11 @@ Write(
 
 **Cooper gates the next phase.** Do not proceed to Phase 4 without approval.
 
-### Phase 4: Assessment Packaging (Shepard)
+### Phase 5: Assessment Packaging (Shepard)
 
 After Cooper approves synthesis, package the research brief.
 
-#### Step 4A: Research Brief
+#### Step 5A: Research Brief
 
 Write comprehensive research brief to `content/research/{issue-number}/brief.md`:
 
@@ -748,6 +818,14 @@ Write comprehensive research brief to `content/research/{issue-number}/brief.md`
 **Type:** {weekly_brief | breaking_alert | deep_dive}
 **Topic:** {topic}
 **Issue Date:** {date}
+
+## Delta Engine Summary
+
+_Accumulated signals since last issue (from Phase 0 delta merge)_
+
+{Paste key findings from content/research/{issue-number}/delta_summary.md -- clusters, alerts, and threshold hits only. Skip clear/no-signal sources.}
+
+Full delta summary: `content/research/{issue-number}/delta_summary.md`
 
 ## Data Signals
 
@@ -894,7 +972,7 @@ Write comprehensive research brief to `content/research/{issue-number}/brief.md`
 - Publish with methodology transparency
 ```
 
-#### Step 4B: Raw Data Archival (Geth)
+#### Step 5B: Raw Data Archival (Geth)
 
 Copy all pipeline data to issue directory for archival.
 
@@ -929,6 +1007,7 @@ Report: Which files copied, which were missing.",
 
 ```
 content/research/{issue-number}/
+├── delta_summary.md       # Phase 0: Accumulated delta engine output since last issue
 ├── brief.md               # Comprehensive research brief
 ├── synthesis.md           # Liara's cross-track synthesis
 ├── orthogonal.md          # Legion's orthogonal analysis

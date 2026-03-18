@@ -9,6 +9,7 @@ Upgrades SD's OFAC-only coverage to global multi-jurisdiction signals.
 """
 
 import asyncio
+import os
 from datetime import datetime, timezone
 
 import httpx
@@ -38,6 +39,14 @@ class OpenSanctionsAdapter(GhostMarketAdapter):
     def __init__(self, db_path: str, search_terms: list[str] | None = None):
         super().__init__(db_path)
         self.search_terms = search_terms if search_terms is not None else DEFAULT_SEARCH_TERMS
+
+    @staticmethod
+    def _auth_headers() -> dict:
+        """Return Authorization header if OPENSANCTIONS_API_KEY is set."""
+        key = os.environ.get("OPENSANCTIONS_API_KEY")
+        if key:
+            return {"Authorization": f"ApiKey {key}"}
+        return {}
 
     @property
     def ttl_seconds(self) -> int:
@@ -100,15 +109,11 @@ class OpenSanctionsAdapter(GhostMarketAdapter):
         if cached:
             return cached
 
-        # Fetch dataset metadata and search results
+        # Fetch dataset metadata (optional -- may 404 if endpoint moved)
         try:
             dataset_meta = await self._fetch_dataset_stats()
-        except GhostMarketApiError as e:
-            if e.retryable:
-                await asyncio.sleep(2)
-                dataset_meta = await self._fetch_dataset_stats()
-            else:
-                raise
+        except GhostMarketApiError:
+            dataset_meta = {"entity_count": None, "last_updated": None}
 
         searches: dict[str, dict] = {}
         for i, term in enumerate(search_terms):
@@ -148,7 +153,7 @@ class OpenSanctionsAdapter(GhostMarketAdapter):
         url = f"{OPENSANCTIONS_BASE_URL}/datasets/default"
         try:
             async with httpx.AsyncClient() as client:
-                response = await client.get(url, timeout=30.0)
+                response = await client.get(url, headers=self._auth_headers(), timeout=30.0)
                 response.raise_for_status()
                 data = response.json()
         except httpx.HTTPStatusError as e:
@@ -184,7 +189,7 @@ class OpenSanctionsAdapter(GhostMarketAdapter):
 
         try:
             async with httpx.AsyncClient() as client:
-                response = await client.get(url, params=params, timeout=30.0)
+                response = await client.get(url, params=params, headers=self._auth_headers(), timeout=30.0)
                 response.raise_for_status()
                 data = response.json()
         except httpx.HTTPStatusError as e:

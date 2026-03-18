@@ -10,7 +10,7 @@ Four skills, executed in sequence for each issue via `/new-issue` mission:
 
 1. **`/intel`** (`.claude/skills/intel/SKILL.md`) -- Full intelligence collection. 5-phase war-room capable research with Ghost Market signals, OSINT, web research, and Legion orthogonal synthesis.
 2. **`/draft`** (`.claude/skills/draft/SKILL.md`) -- Collaborative writing. Cooper and Shepard draft together using templates and persona voice.
-3. **`/review`** (`.claude/skills/review/SKILL.md`) -- 5-pass editorial review. Style guide (Tali), fact verification (Shepard), probability format, calibration cross-check, persona consistency (Kelly).
+3. **`/review`** (`.claude/skills/review/SKILL.md`) -- 6-pass editorial review. Style guide (Tali), fact verification (Shepard), probability format, calibration cross-check, persona consistency (Kelly), delta verification (Shepard).
 4. **`/publish`** (`.claude/skills/publish/SKILL.md`) -- Format for Substack, archive, update state, social thread outline.
 
 **This is a collaborative workflow, not an automated pipeline.** Skills provide structure. Cooper gates every phase transition.
@@ -51,7 +51,7 @@ Self-contained. All adapters live in `src/adapters/` with own venv and dependenc
 | `.claude/missions/delta-engine.md` | Delta engine build mission -- Phases 2-5 remaining |
 | `.claude/skills/intel/SKILL.md` | Research phase -- adapted from prediction-markets /recon + Legion |
 | `.claude/skills/draft/SKILL.md` | Collaborative drafting with persona voice |
-| `.claude/skills/review/SKILL.md` | 5-pass editorial review |
+| `.claude/skills/review/SKILL.md` | 6-pass editorial review |
 | `.claude/skills/publish/SKILL.md` | Publication, archival, state updates |
 | `config/persona.yaml` | Persona configuration (voice, traits, anti-patterns, platform strategy) |
 | `config/newsletter.yaml` | Newsletter configuration (schedule, tiers, platform) |

@@ -103,7 +103,7 @@ Present formatted content for Cooper to paste into Substack interface.
   - breaking_alert: Immediate (within 2 hours)
   - deep_dive: First Sunday of month, 8:00 AM ET
 
-**Note:** Future API integration via `src/publishing/publisher.py` when implemented. Substack API currently in beta.
+**Note:** `publish_to_substack.py` (project root) handles Substack API integration. Currently used for manual-assisted publishing; full automation pending Substack API stability.
 
 **Dry-run mode:** Skip this step. Show formatted output only.
 
@@ -273,7 +273,7 @@ docs: publish SD #1 -- weekly_brief on Iran nuclear escalation
 
 ## Notes
 
-- This skill does NOT handle the actual Substack API calls (not yet implemented).
-- Cooper manually pastes formatted content into Substack interface.
-- Future: `src/publishing/publisher.py` will automate Substack API when available.
+- Substack API calls go through `publish_to_substack.py` in the project root.
+- Cooper manually pastes formatted content into Substack interface for now.
+- Full automation pending Substack API stability.
 - Dry-run mode is useful for previewing formatting before gate review.

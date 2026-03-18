@@ -8,7 +8,7 @@ version: 1.0.0
 
 *"Edge requires honesty."*
 
-Quality assurance before publication. Five-pass editorial review ensuring style guide compliance, fact verification, probability calibration, and persona consistency.
+Quality assurance before publication. Six-pass editorial review ensuring style guide compliance, fact verification, probability calibration, and persona consistency.
 
 ## Purpose
 
@@ -38,7 +38,7 @@ This is the final gate before publication. Editorial integrity protects calibrat
 Before running `/review`, verify these files exist:
 
 1. **Draft:** `content/drafts/{issue-number}-{type}.md`
-   - {type} is one of: weekly, breaking, deep-dive
+   - {type} is one of: weekly_brief, breaking_alert, deep_dive
    - File must be complete (not stub or outline)
 
 2. **Research brief:** `content/research/{issue-number}/brief.md`
@@ -49,7 +49,7 @@ Before running `/review`, verify these files exist:
    - Tracks all active probability estimates
    - Contains priors for comparison
 
-If any prerequisite is missing, `/review` will error. Use `/build` to create the research brief first.
+If any prerequisite is missing, `/review` will error. Use `/intel` to create the research brief first.
 
 ## Review Protocol -- Five Passes
 
@@ -605,7 +605,7 @@ After review summary:
 Error: Draft not found
 Expected: content/drafts/{issue-number}-{type}.md
 
-Run /build first to create draft, or check issue number.
+Run /draft first to create the draft, or check issue number.
 ```
 
 **If research brief doesn't exist:**
@@ -613,7 +613,7 @@ Run /build first to create draft, or check issue number.
 Error: Research brief not found
 Expected: content/research/{issue-number}/brief.md
 
-Run /build --research to create research brief first.
+Run /intel to create research brief first.
 ```
 
 **If probabilities.json doesn't exist:**

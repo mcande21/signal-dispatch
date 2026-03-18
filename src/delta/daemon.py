@@ -87,6 +87,7 @@ logging.basicConfig(
     format="%(asctime)s  %(levelname)s  %(name)s  %(message)s",
     datefmt="%Y-%m-%dT%H:%M:%S",
 )
+logging.getLogger("httpx").setLevel(logging.WARNING)
 log = logging.getLogger("delta.daemon")
 
 
@@ -1159,10 +1160,6 @@ async def run_cadence(cadence: str, thresholds: dict) -> list[dict]:
             _run_source(run_cloudflare_radar, thresholds),
             _run_source(run_tedpix, thresholds),
             _run_source(run_dolarvzla, thresholds),
-            _run_source(run_gdelt, thresholds, "Iran military conflict"),
-            _run_source(run_gdelt, thresholds, "Strait Hormuz Iran"),
-            _run_source(run_gdelt, thresholds, "Europe energy crisis"),
-            _run_source(run_gdelt, thresholds, "Ukraine Russia conflict"),
             _run_source(run_viirs, thresholds, "IR"),
             _run_source(run_prediction_markets, thresholds),
             _run_source(run_acled, thresholds),
@@ -1196,9 +1193,24 @@ async def run_cadence(cadence: str, thresholds: dict) -> list[dict]:
             _run_source(run_noaa, thresholds),
         ]
 
-    # Run all with return_exceptions equivalent: gather won't abort on failure
-    # (_run_source already catches exceptions)
+    # Run all non-GDELT sources concurrently.
+    # (_run_source already catches exceptions, so gather won't abort on failure)
     await asyncio.gather(*tasks)
+
+    # GDELT queries are rate-limited (429 on concurrent requests).
+    # Run them sequentially with a 2-second delay between each.
+    if cadence in ("hot", "all"):
+        gdelt_queries = [
+            "Iran military conflict",
+            "Strait Hormuz Iran",
+            "Europe energy crisis",
+            "Ukraine Russia conflict",
+        ]
+        for i, query in enumerate(gdelt_queries):
+            if i > 0:
+                await asyncio.sleep(2)
+            await _run_source(run_gdelt, thresholds, query)
+
     return all_deltas
 
 

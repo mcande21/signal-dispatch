@@ -137,12 +137,12 @@ Issues that are incomplete, broken, or need attention. Organized by priority.
 
 **Licensing:** Cooper greenlit all four sources for personal use (2026-03-17). Not deploying commercially.
 
-| Source | Delta Type | Cadence | API Auth |
-|--------|-----------|---------|----------|
-| ACLED (conflict events) | event_set | Hot | Free account (email/password) |
-| ADS-B Exchange (military flights) | event_set + binary | Hot | RapidAPI free tier (500 req/month) |
-| OpenSanctions (global sanctions) | categorical | Warm | None for basic queries |
-| Telegram OSINT (17 channels) | event_set | Hot | None (web scraping fallback) |
+| Source | Status | Notes |
+|--------|--------|-------|
+| Telegram OSINT (15 channels) | **LIVE** | 119 msgs, 12 urgent on first run. Zero auth. |
+| OpenSanctions (global sanctions) | **LIVE** | 22K+ entities (Iran/Russia/Wagner/Houthis). API key added. |
+| ADS-B Exchange (military flights) | Deferred | $10/month via RapidAPI. Activate per-story when mil tracking needed. |
+| ACLED (conflict events) | Deferred | API endpoint unreachable (DNS). Revisit when they fix their infra. |
 
 ## Workflow
 

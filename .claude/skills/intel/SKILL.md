@@ -169,6 +169,7 @@ Determine which intelligence tracks to activate:
 | OSINT Execution | Liara produces plan | Geth | Local OSINT adapters (`src/adapters/osint/`) |
 | Web Research | Always (unless --skip-web) | Liara | (web search + synthesis) |
 | Prediction Market Context | Always | Geth | Local Kalshi adapter via `poll_prediction_markets()` |
+| Swarm Validation (MiroFish) | Optional, Cooper opt-in | omni-tool | MiroFish swarm simulation engine |
 
 **War-room threshold:** 3+ tracks = parallel dispatch. 1-2 = sequential.
 
@@ -181,9 +182,10 @@ Intelligence manifest for {content_type} on {topic}:
 - Track B: Web Research + OSINT Planning -- Liara
 - Track C: OSINT Execution -- Geth (depends on Track B)
 - Track D: Prediction Market Context -- Geth
+- Track E: Swarm Validation (MiroFish) -- optional, runs after synthesis
 
 War-room mode: YES (4 tracks)
-Proceed with parallel dispatch?
+Proceed with parallel dispatch? (Add Track E for swarm validation?)
 ```
 
 ### Phase 2: Source Mapping (Shepard)
@@ -599,6 +601,50 @@ Report ONLY: exit code and output file path. Do NOT summarize the results.",
 - OSINT execution fails → Note in brief but proceed to Phase 4. OSINT enriches, doesn't gate.
 - API rate limits → Retry once, note failure, continue with available results
 - Empty results → Valid outcome. Not all queries have relevant documents.
+
+### Phase 3C: Track E -- Swarm Validation (Optional, MiroFish)
+
+**Fires when:** Cooper opts in during manifest approval. Recommended for issues with strong directional probability claims.
+
+**Depends on:** Synthesis existing (`content/research/{issue-number}/synthesis-updated.md` or `synthesis.md`). Run AFTER Phase 4 synthesis is complete, or after Phase 3 if synthesis doc already exists from a prior run.
+
+**Seed document:** Research synthesis file -- NOT the finished article. The synthesis captures the raw intelligence in a form MiroFish can digest.
+
+**What it does:** Builds a knowledge graph from the intelligence, spawns LLM agents, runs social simulation across 100-238 simulated market participants debating the core thesis. Produces an independent probability estimate and surfaces counter-arguments the swarm converges on.
+
+**Blueprint (preferred):**
+```bash
+omni-tool blueprint run mirofish-predict \
+  --var name="sd-{issue-number}" \
+  --var file="content/research/{issue-number}/synthesis-updated.md" \
+  --var topic="{core prediction question from the issue}"
+```
+
+If `synthesis-updated.md` doesn't exist, use `synthesis.md` or `brief.md` — whatever is the most complete research document.
+
+**Individual steps (if blueprint unavailable):**
+```bash
+omni-tool mirofish graph build --project sd-{issue-number} --file <synthesis.md> --topic "{question}" --wait
+omni-tool mirofish sim run --project sd-{issue-number} --rounds 10
+omni-tool mirofish report get --project sd-{issue-number}
+```
+
+**Output:** MiroFish report with:
+- Implied probability estimate from swarm
+- Counter-arguments that emerged during simulation
+- Convergence/divergence analysis (did the swarm agree, or split?)
+
+**Write the report to:**
+```
+Write(
+  file_path="/path/to/home/projects/signal-dispatch/content/research/{issue-number}/mirofish-report.md",
+  content="{MiroFish report output}"
+)
+```
+
+**Calibration handoff:** The swarm probability is adversarial input for `/review` Pass 4b. Divergence >15% from editorial estimates triggers deeper thesis examination. Present swarm results to Cooper alongside synthesis before drafting if the divergence is large.
+
+**Article integration (optional):** If the swarm result adds interpretive value, include a "simulated market response" section in the article. E.g., "Our swarm simulation of 238 market participants converged on X% probability..."
 
 ### Phase 4: Synthesis (Liara + Legion)
 

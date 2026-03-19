@@ -344,6 +344,72 @@ PASS = all checks clear
 NEEDS WORK = incorrect priors or contradictory updates
 WARN = calibration red flags but not blocking (Cooper decides)
 
+### Pass 4b: Swarm Calibration (if MiroFish was run)
+
+**Purpose:** Compare article probability estimates against MiroFish swarm-implied probabilities. Adversarial validation from a different methodology -- graph-based swarm vs editorial review.
+
+**Prerequisite:** `content/research/{issue-number}/mirofish-report.md` exists. If it doesn't, skip this pass entirely and note "MiroFish not run" in the review summary.
+
+**What Shepard validates:**
+
+**Probability Comparison:**
+- Extract swarm-implied probability from `mirofish-report.md`
+- Compare against each corresponding probability estimate in the draft
+- Calculate divergence (absolute percentage point difference)
+
+**Divergence Thresholds:**
+- **<15pp divergence:** Note discrepancy, no action required
+- **≥15pp divergence:** Flag for deeper examination -- does the swarm's framing reveal assumptions the article makes implicitly?
+- **Convergence (both aligned):** Strengthens the editorial estimate; note as supporting evidence
+
+**Counter-Argument Check:**
+- Read the swarm's surfaced counter-arguments from the report
+- Identify any counter-argument the article does NOT address
+- Flag gaps as "Swarm surface, article silent" -- these are not necessarily errors, but warrant consideration
+
+**Article Integration (if Cooper decides to include):**
+- Swarm results can appear as a "simulated market response" section
+- Format: "Our swarm simulation of {N} market participants converged on X% probability..."
+- Only include if it adds interpretive value beyond the editorial assessment
+
+**Workflow:**
+
+1. Read `content/research/{issue-number}/mirofish-report.md`
+2. Read draft probability estimates
+3. Compare and calculate divergence for each estimate
+4. Review swarm counter-arguments against article coverage
+5. Flag gaps and large divergences
+
+**Report format:**
+
+```markdown
+## Swarm Calibration: SD Issue #{issue-number}
+
+### Probability Comparison
+| Event | Article | Swarm | Divergence | Flag? |
+|-------|---------|-------|------------|-------|
+| [event] | [X%] | [Y%] | [Zpp] | YES/no |
+
+### Large Divergences (≥15pp)
+- [event]: Article X%, Swarm Y% (+/-Z pp)
+  - Swarm framing: {brief summary of swarm's reasoning}
+  - Article assumption to examine: {what the swarm's divergence implies}
+
+### Counter-Arguments Surfaced by Swarm
+- Addressed in article: {count}
+- NOT addressed (gaps): {list}
+
+### Article Integration
+- Recommended: YES/NO
+- If YES, suggested placement: {section}
+
+Result: PASS (divergence <15pp on all) / WARN (divergence ≥15pp, review needed) / SKIPPED (no MiroFish report)
+```
+
+PASS = all divergences below threshold, no unaddressed counter-arguments that change the thesis
+WARN = divergence ≥15pp or significant gap in counter-argument coverage (Cooper decides)
+SKIPPED = `mirofish-report.md` not present
+
 ### Pass 5: Persona Consistency (Kelly)
 
 **Purpose:** Verify voice matches Data-Driven Practitioner archetype and institutional brand. Persona drift compounds over issues -- catch it early.
@@ -506,6 +572,7 @@ NEEDS WORK = one or more discrepancies found
 - Pass 2 verifies data accuracy (foundation)
 - Pass 3 validates probability format (structure)
 - Pass 4 cross-checks calibration (consistency)
+- Pass 4b swarm calibration (adversarial validation -- skip if no MiroFish report)
 - Pass 6 verifies numeric claims against computed deltas (mechanical)
 
 **Workflow:**
@@ -513,9 +580,10 @@ NEEDS WORK = one or more discrepancies found
 1. Dispatch Tali (Pass 1) and Kelly (Pass 5) in parallel
 2. Wait for both to return
 3. Run Shepard Passes 2-4 sequentially
-4. Run Shepard Pass 6 (delta verification) -- skip if delta_summary.md absent
-5. Synthesize all pass results
-6. Present review summary to Cooper
+4. Run Shepard Pass 4b (swarm calibration) -- skip if mirofish-report.md absent
+5. Run Shepard Pass 6 (delta verification) -- skip if delta_summary.md absent
+6. Synthesize all pass results
+7. Present review summary to Cooper
 
 ## Review Summary Format
 
@@ -531,6 +599,7 @@ After all passes complete, present this summary to Cooper:
 | Fact Verification | Shepard | PASS/NEEDS WORK | {count} discrepancies |
 | Probability Format | Shepard | PASS/NEEDS WORK | {count} incomplete |
 | Calibration | Shepard | PASS/NEEDS WORK/WARN | {count} concerns |
+| Swarm Calibration | Shepard | PASS/WARN/SKIPPED | {divergence summary} |
 | Persona | Kelly | PASS/NEEDS WORK | {count} drift points |
 | Delta Verification | Shepard | PASS/NEEDS WORK/SKIPPED | {count} discrepancies |
 
@@ -575,6 +644,12 @@ After review summary:
 **If WARN on calibration:**
 - Cooper decides: accept the calibration concerns or revise probabilities
 - WARN is not blocking, but requires explicit approval
+
+**If WARN on swarm calibration (Pass 4b):**
+- Review the swarm's divergence and counter-arguments
+- Cooper decides: investigate the divergence, revise the probability, or accept with justification
+- WARN is not blocking -- the swarm is adversarial input, not editorial authority
+- If divergence is large AND the swarm surfaces a counter-argument not in the article, consider whether the thesis needs strengthening
 
 ## Anti-Patterns
 

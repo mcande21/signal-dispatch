@@ -95,6 +95,35 @@ Alert schema:
 }
 ```
 
+## MiroFish: Swarm Validation
+
+MiroFish is a swarm intelligence prediction engine available via omni-tool. Feed it raw intelligence (research brief or synthesis doc), and it builds a knowledge graph, spawns LLM agents, runs social simulation across simulated Twitter/Reddit participants, and produces an implied probability estimate.
+
+**When to use:** Optional step between `/intel` and `/draft`, or as part of `/review`. Best used when the article makes a strong directional probability claim that benefits from adversarial validation from a different methodology.
+
+**Seed document:** Feed the research synthesis file, NOT the finished article. The files at `content/research/{issue}/synthesis-updated.md` or `brief.md` are the right inputs.
+
+**Blueprint (recommended):**
+```bash
+omni-tool blueprint run mirofish-predict \
+  --var name="sd-{issue}" \
+  --var file="content/research/{issue}/synthesis-updated.md" \
+  --var topic="<core prediction question>"
+```
+
+**Individual steps:**
+```bash
+omni-tool mirofish graph build --project sd-{issue} --file <synthesis.md> --topic "<question>" --wait
+omni-tool mirofish sim run --project sd-{issue} --rounds 10
+omni-tool mirofish report get --project sd-{issue}
+```
+
+**Output:** Implied probability estimate from 100-238 simulated market participants. Includes counter-arguments surfaced by the swarm and convergence/divergence analysis.
+
+**Article integration:** Swarm output can be included as a "simulated market response" section. Divergence >15% between swarm-implied and editorial probability triggers deeper thesis examination. See `/review` Pass 4b for the calibration protocol.
+
+**MCP server:** Available for direct Claude Code integration when running in-session.
+
 ## Quick Start
 
 To produce a new issue:

@@ -50,18 +50,42 @@ def _extract_countries(title: str) -> list[str]:
     """Best-effort country extraction from outbreak title.
 
     Looks for patterns like:
-    - "Mpox in Democratic Republic of Congo"
-    - "Yellow Fever – Brazil"
-    - "Cholera - Multiple Countries"
+    - "Avian influenza – situation in Egypt" → ["Egypt"]
+    - "Mpox in Democratic Republic of Congo" → ["Democratic Republic of Congo"]
+    - "Yellow Fever – Brazil" → ["Brazil"]
+    - "Cholera - Multiple Countries" → []
     """
-    # Match text after "in", "–", "—", "-" separator
-    match = re.search(r"(?:\s+in\s+|\s*[-–—]\s*)(.+)$", title, re.IGNORECASE)
-    if not match:
-        return []
-    location_str = match.group(1).strip()
-    # Split on "and", ",", "/"
-    parts = re.split(r"\s+and\s+|,\s*|/\s*", location_str, flags=re.IGNORECASE)
-    return [p.strip() for p in parts if p.strip() and p.strip().lower() != "multiple countries"]
+    # Pattern: "situation in COUNTRY" or "cases in COUNTRY"
+    situation_match = re.search(
+        r"(?:situation|cases|outbreak|update)\s+in\s+([A-Z][^,\-–—]+?)(?:\s*$|\s*,|\s*[-–—])",
+        title,
+        re.IGNORECASE,
+    )
+    if situation_match:
+        country = situation_match.group(1).strip()
+        if country.lower() not in ("multiple countries", "several countries"):
+            return [country]
+
+    # Pattern: title ends with "– COUNTRY" or "- COUNTRY" (no "situation in")
+    dash_match = re.search(
+        r"[-–—]\s*(?:situation\s+in\s+)?([A-Z][A-Za-z\s]+?)(?:\s*$|\s*,)",
+        title,
+    )
+    if dash_match:
+        country = dash_match.group(1).strip()
+        skip = ("multiple countries", "several countries", "update", "global situation update",
+                "global update", "global situation")
+        if country.lower() not in skip and not country.lower().startswith("global"):
+            return [country]
+
+    # Pattern: "in COUNTRY" anywhere
+    in_match = re.search(r"\bin\s+([A-Z][A-Za-z\s]{3,40}?)(?:\s*$|\s*,|\s+and\b)", title)
+    if in_match:
+        country = in_match.group(1).strip()
+        if country.lower() not in ("multiple countries", "several countries"):
+            return [country]
+
+    return []
 
 
 class WhoOutbreaksAdapter(GhostMarketAdapter):

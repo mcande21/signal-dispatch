@@ -66,6 +66,22 @@ structured_feeds:
     adapter: "ghost_market.viirs"
     refresh: "24h"
     signal: "NASA satellite fire/thermal anomaly detection -- conflict damage verification, infrastructure destruction confirmation, wildfire impact"
+  who_outbreaks:
+    adapter: "ghost_market.who_outbreaks"
+    refresh: "24h"
+    signal: "WHO Disease Outbreak News -- active disease outbreaks, macro disruption indicator (supply chains, labor markets, commodity demand)"
+  reliefweb:
+    adapter: "ghost_market.reliefweb"
+    refresh: "12h"
+    signal: "UN humanitarian crises and disasters -- geopolitical disruption indicator, ongoing emergencies presaging commodity/market impact"
+  opensky:
+    adapter: "ghost_market.opensky"
+    refresh: "30m"
+    signal: "Civilian flight density by strategic region (Taiwan Strait, Persian Gulf, Black Sea, Red Sea, South China Sea, Eastern Med) -- airspace closure = escalation indicator"
+  opensanctions:
+    adapter: "ghost_market.opensanctions"
+    refresh: "24h"
+    signal: "Global sanctions aggregator -- OFAC + EU + UN + 30 jurisdictions, cross-jurisdiction coordination signals"
 
 osint_feeds:
   federal_register:

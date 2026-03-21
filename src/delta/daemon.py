@@ -1280,7 +1280,7 @@ async def main_async(cadence: str) -> None:
     try:
         from .persist import persist_reading  # noqa: PLC0415
         persisted = 0
-        import time  # noqa: PLC0415
+        run_start_ts = datetime.now(timezone.utc).isoformat()
         for prior_file in _PRIOR_DIR.glob("*.json"):
             raw_stem = prior_file.stem
             # Normalize source name: strip query-specific suffixes
@@ -1294,9 +1294,8 @@ async def main_async(cadence: str) -> None:
             try:
                 with open(prior_file) as f:
                     payload = json.load(f)
-                # Only persist if this file was written in this run
-                # (mtime within last 5 minutes)
-                if time.time() - prior_file.stat().st_mtime < 300:
+                # Only persist successful fetches
+                if payload.get("ok", True):
                     await persist_reading(source=source, cadence=cadence, payload=payload)
                     persisted += 1
             except Exception as e:

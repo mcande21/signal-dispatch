@@ -1065,6 +1065,181 @@ async def poll_telegram_osint() -> dict:
         return _err("telegram_osint", str(e))
 
 
+# ---------------------------------------------------------------------------
+# Census -- ACS citizenship / nativity demographics (numeric, cold)
+# ---------------------------------------------------------------------------
+
+async def poll_census(geo_type: str = "state") -> dict:
+    """Fetch ACS 5-year citizenship data for all states (default).
+
+    Default query: citizenship_by_geography at state level.
+    This gives naturalized citizen counts per state -- the key metric
+    for tracking SAVE Act voter eligibility effects.
+
+    Args:
+        geo_type: Geography granularity. Default "state".
+                  Also supports: county, congressional district, tract.
+
+    Returns:
+        {
+            "geo_type": str,
+            "record_count": int,
+            "total_naturalized_nationally": int | None,
+            "total_non_citizen_nationally": int | None,
+            "data": list[dict],  -- per-geography citizenship breakdown
+        }
+    """
+    try:
+        from src.adapters.census import CensusAdapter  # noqa: PLC0415
+        adapter = CensusAdapter(_DB_PATH)
+        result = await adapter.fetch({
+            "method": "citizenship_by_geography",
+            "geo_type": geo_type,
+        })
+        await adapter.close()
+
+        data = result.get("data", [])
+
+        # Aggregate national totals for delta engine comparison
+        total_naturalized = None
+        total_non_citizen = None
+        nat_sum = 0
+        nc_sum = 0
+        has_data = False
+        for row in data:
+            n = row.get("naturalized_citizen_18plus")
+            nc = row.get("non_citizen_18plus")
+            if n is not None:
+                nat_sum += n
+                has_data = True
+            if nc is not None:
+                nc_sum += nc
+                has_data = True
+        if has_data:
+            total_naturalized = nat_sum
+            total_non_citizen = nc_sum
+
+        return _ok("census", {
+            "geo_type": geo_type,
+            "record_count": len(data),
+            "total_naturalized_nationally": total_naturalized,
+            "total_non_citizen_nationally": total_non_citizen,
+            "data": data,
+        })
+    except Exception as e:
+        return _err("census", str(e))
+
+
+# ---------------------------------------------------------------------------
+# CPS Voting -- Census voter turnout by demographics (numeric, cold)
+# ---------------------------------------------------------------------------
+
+async def poll_cps_voting(year: int = 2024) -> dict:
+    """Fetch CPS Voting Supplement citizenship turnout data for latest even year.
+
+    Returns national turnout rates by citizenship status (native vs naturalized),
+    which is the key delta signal for proof-of-citizenship requirement analysis.
+
+    Args:
+        year: Even-numbered survey year. Default: 2024 (latest available).
+
+    Returns:
+        {
+            "year": int,
+            "national_summary": dict,  # by citizenship status
+            "naturalized_turnout_rate": float | None,
+            "native_born_turnout_rate": float | None,
+            "turnout_gap": float | None,  # naturalized minus native (negative = lower)
+        }
+    """
+    try:
+        from src.adapters.cps_voting import CpsVotingAdapter  # noqa: PLC0415
+        adapter = CpsVotingAdapter(_DB_PATH)
+        result = await adapter.fetch({"method": "citizenship_turnout", "year": year})
+        await adapter.close()
+
+        national = result.get("national_summary", {})
+        naturalized = national.get("naturalized", {})
+        native_born = national.get("native_born", {})
+
+        naturalized_rate = naturalized.get("turnout_rate_unweighted")
+        native_rate = native_born.get("turnout_rate_unweighted")
+        gap = None
+        if naturalized_rate is not None and native_rate is not None:
+            gap = round(naturalized_rate - native_rate, 4)
+
+        return _ok("cps_voting", {
+            "year": year,
+            "national_summary": national,
+            "naturalized_turnout_rate": naturalized_rate,
+            "native_born_turnout_rate": native_rate,
+            "turnout_gap": gap,
+        })
+    except Exception as e:
+        return _err("cps_voting", str(e))
+
+
+# ---------------------------------------------------------------------------
+# Elections -- MEDSL historical election results (event_set, cold)
+# ---------------------------------------------------------------------------
+
+async def poll_elections() -> dict:
+    """Check for new MEDSL election dataset availability.
+
+    This is a cold/event-based poll -- checks whether new datasets have been
+    published to MEDSL GitHub repos since the last check. Delta is computed
+    on the set of available dataset URLs (event_set on dataset count).
+
+    Returns:
+        {
+            "available_datasets": list[str],   -- cache keys for available datasets
+            "dataset_count": int,
+            "newest_year": int | None,
+        }
+    """
+    # Known dataset endpoints we track for availability
+    _TRACKED = [
+        ("elections_house_1976_2018",
+         "https://raw.githubusercontent.com/MEDSL/constituency-returns/master/1976-2018-house.csv"),
+        ("elections_senate_1976_2018",
+         "https://raw.githubusercontent.com/MEDSL/constituency-returns/master/1976-2018-senate.csv"),
+        ("elections_county_pres_2000_2016",
+         "https://raw.githubusercontent.com/MEDSL/county-returns/master/countypres_2000-2016.csv"),
+        ("elections_pres_2024_state",
+         "https://raw.githubusercontent.com/MEDSL/2024-elections-official/main/2024-president-state.csv"),
+        ("elections_senate_2024_state",
+         "https://raw.githubusercontent.com/MEDSL/2024-elections-official/main/2024-senate-state.csv"),
+    ]
+
+    try:
+        import httpx  # noqa: PLC0415
+        available = []
+        newest_year = None
+
+        async with httpx.AsyncClient() as client:
+            for cache_key, url in _TRACKED:
+                try:
+                    resp = await client.head(url, timeout=15.0, follow_redirects=True)
+                    if resp.status_code == 200:
+                        available.append(cache_key)
+                        # Parse year from cache key
+                        for part in cache_key.split("_"):
+                            if len(part) == 4 and part.isdigit():
+                                yr = int(part)
+                                if newest_year is None or yr > newest_year:
+                                    newest_year = yr
+                except (httpx.HTTPError, Exception):
+                    continue
+
+        return _ok("elections", {
+            "available_datasets": available,
+            "dataset_count": len(available),
+            "newest_year": newest_year,
+        })
+    except Exception as e:
+        return _err("elections", str(e))
+
+
 async def poll_noaa(query_type: str = "forecast", city: str = "nyc", state: str = "NY") -> dict:
     """Fetch NOAA weather forecast or active alerts.
 

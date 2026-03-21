@@ -85,6 +85,62 @@ quantitative:
   noaa:
     adapter: "data_sources.NoaaAdapter"  # Local: src/adapters/noaa.py
     signal: "Weather data -- for weather-sensitive markets"
+  cps_voting:
+    adapter: "cps_voting.CpsVotingAdapter"  # Local: src/adapters/cps_voting.py
+    refresh: "biennial"  # November of even-numbered years only
+    cadence: "cold"
+    signal: "CPS Voting Supplement -- voter turnout by citizenship status, registration barriers, demographic breakdown"
+    key_metrics:
+      - "naturalized_turnout_rate: turnout rate for naturalized citizens (unweighted)"
+      - "native_born_turnout_rate: turnout rate for native-born citizens (unweighted)"
+      - "turnout_gap: naturalized minus native (negative = naturalized vote less)"
+    methods:
+      - "citizenship_turnout: aggregated rates by citizenship status per state"
+      - "turnout_by_demographics: full microdata with age/race/income breakdown"
+      - "registration_barriers: non-registrants + PES3 reason codes (ID/doc barriers)"
+      - "historical_comparison: multi-year trend across election cycles"
+    auth: "CENSUS_API_KEY (optional -- 500 req/day without key)"
+    note: "Biennial -- November even years. PWSSWGT required for population-weighted estimates. PES3=3 = registration requirement barrier (citizenship/ID docs)."
+  census:
+    adapter: "data_sources.CensusAdapter"  # Local: src/adapters/census.py
+    refresh: "annual"
+    cadence: "cold"
+    signal: "ACS citizenship and nativity demographics -- SAVE Act voter eligibility impact, naturalization rates by geography"
+    datasets:
+      primary: "2023/acs/acs5"    # 5-year, full geographic coverage
+      secondary: "2024/acs/acs1"  # 1-year, 65K+ population geographies only
+    methods:
+      - citizenship_by_geography  # B05003 -- native/naturalized/non-citizen 18+ by geography + race
+      - cvap_by_geography         # B29001 -- citizen voting-age population by age bracket
+      - nativity_by_education     # B06009 -- foreign-born by educational attainment
+      - nativity_by_poverty       # B06012 -- foreign-born by poverty status
+      - nativity_by_income        # B06010 -- foreign-born by income bracket
+    auth: "CENSUS_API_KEY env var (optional -- 500 req/day without key)"
+
+elections_historical:
+  medsl:
+    adapter: "elections.ElectionsAdapter"  # Local: src/adapters/elections.py
+    refresh: "cold"
+    cadence: "cold"
+    signal: "MEDSL historical election results -- county/district turnout for voter ID impact analysis (SAVE Act)"
+    methods:
+      - house_results: "District-level House returns 1976-2018 (params: year, state)"
+      - county_presidential: "County-level presidential returns 2000-2016 (params: year, state)"
+      - turnout_by_state: "State-level turnout proxy -- total votes cast by year (params: year)"
+      - state_comparison: "Before/after comparison across states+years (params: years, states, office)"
+    datasets:
+      - url: "https://raw.githubusercontent.com/MEDSL/constituency-returns/master/1976-2018-house.csv"
+        coverage: "US House 1976-2018, district-level"
+      - url: "https://raw.githubusercontent.com/MEDSL/constituency-returns/master/1976-2018-senate.csv"
+        coverage: "US Senate 1976-2018, state-level"
+      - url: "https://raw.githubusercontent.com/MEDSL/county-returns/master/countypres_2000-2016.csv"
+        coverage: "Presidential county returns 2000-2016"
+      - url: "https://raw.githubusercontent.com/MEDSL/2024-elections-official/main/2024-president-state.csv"
+        coverage: "Presidential state returns 2024"
+      - url: "https://raw.githubusercontent.com/MEDSL/2024-elections-official/main/2024-senate-state.csv"
+        coverage: "Senate state returns 2024"
+    auth: "None required -- public GitHub data"
+    note: "No house-by-district for 2024 yet (MEDSL publishes precinct ZIPs but no consolidated CSV). County presidential only covers 2000-2016 in this dataset."
 
 prediction_markets:
   kalshi:

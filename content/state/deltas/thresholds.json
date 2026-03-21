@@ -47,6 +47,18 @@
     "notification": {"urgent_messages": 5},
     "watch": {"urgent_messages": 2}
   },
+  "census": {
+    "notification": {"percent_change": 1.0},
+    "watch": {"percent_change": 0.5}
+  },
+  "cps_voting": {
+    "notification": {"percent_change_biennial": 5.0},
+    "watch": {"percent_change_biennial": 2.0}
+  },
+  "elections": {
+    "notification": {"new_datasets": 1},
+    "watch": {"new_datasets": 1}
+  },
   "decay_suppression_hours": 48,
   "decay_escalation_factor": 1.5
 }

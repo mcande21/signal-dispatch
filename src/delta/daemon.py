@@ -74,7 +74,8 @@ WARM_SOURCES = [
     "opensanctions",
 ]
 COLD_SOURCES = [
-    "fred", "ecb", "comtrade", "eia_grid", "fec", "noaa",
+    "fred", "ecb", "comtrade", "eia_grid", "fec", "noaa", "census", "cps_voting",
+    "elections",
 ]
 
 
@@ -954,6 +955,124 @@ async def run_noaa(thresholds: dict) -> dict | None:
     return delta
 
 
+async def run_census(thresholds: dict) -> dict | None:
+    """Poll Census ACS citizenship data, compute numeric delta on national naturalized count."""
+    from .sources import poll_census  # noqa: PLC0415
+    from .engine import compute_numeric  # noqa: PLC0415
+
+    current_raw = await poll_census(geo_type="state")
+    if not current_raw.get("ok"):
+        log.error("census poll failed: %s", current_raw.get("error"))
+        return None
+
+    current_val = current_raw.get("total_naturalized_nationally")
+    if current_val is None:
+        log.warning("census: no total_naturalized_nationally in response")
+        return None
+
+    prior = _load_prior("census")
+    prior_val = prior.get("total_naturalized_nationally") if prior else None
+    prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+
+    _save_prior("census", current_raw)
+
+    if prior_val is None:
+        log.info("census: no prior state, recording baseline")
+        return None
+
+    delta = compute_numeric(
+        source="census",
+        prior_value=float(prior_val),
+        current_value=float(current_val),
+        prior_as_of=prior_as_of,
+        current_as_of=current_raw["as_of"],
+        field_name="Naturalized citizens 18+ nationally",
+        thresholds=thresholds.get("census", {}),
+        history_values=None,
+    )
+    return delta
+
+
+async def run_cps_voting(thresholds: dict, year: int = 2024) -> dict | None:
+    """Poll CPS Voting Supplement, compute numeric delta on naturalized citizen turnout rate."""
+    from .sources import poll_cps_voting  # noqa: PLC0415
+    from .engine import compute_numeric  # noqa: PLC0415
+
+    current_raw = await poll_cps_voting(year=year)
+    if not current_raw.get("ok"):
+        log.error("cps_voting poll failed: %s", current_raw.get("error"))
+        return None
+
+    current_val = current_raw.get("naturalized_turnout_rate")
+    if current_val is None:
+        log.warning("cps_voting: no naturalized_turnout_rate in response")
+        return None
+
+    cache_key = f"cps_voting_{year}"
+    prior = _load_prior(cache_key)
+    prior_val = prior.get("naturalized_turnout_rate") if prior else None
+    prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+
+    _save_prior(cache_key, current_raw)
+
+    if prior_val is None:
+        log.info("cps_voting[%s]: no prior state, recording baseline", year)
+        return None
+
+    delta = compute_numeric(
+        source=f"cps_voting_{year}",
+        prior_value=float(prior_val),
+        current_value=float(current_val),
+        prior_as_of=prior_as_of,
+        current_as_of=current_raw["as_of"],
+        field_name=f"Naturalized citizen turnout rate ({year})",
+        thresholds=thresholds.get("cps_voting", {}),
+        history_values=None,
+    )
+    return delta
+
+
+async def run_elections(thresholds: dict) -> dict | None:
+    """Poll MEDSL election dataset availability, compute event-set delta on dataset count.
+
+    This is a cold/event-based source -- fires when MEDSL publishes new
+    election datasets (e.g., 2024 House results after certification).
+    """
+    from .sources import poll_elections  # noqa: PLC0415
+    from .engine import compute_event_set  # noqa: PLC0415
+
+    current_raw = await poll_elections()
+    if not current_raw.get("ok"):
+        log.error("elections poll failed: %s", current_raw.get("error"))
+        return None
+
+    current_count = current_raw.get("dataset_count", 0)
+    prior = _load_prior("elections")
+    prior_count = prior.get("dataset_count", 0) if prior else 0
+    prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+
+    _save_prior("elections", current_raw)
+
+    if prior is None:
+        log.info("elections: no prior state, recording baseline (%d datasets available)", current_count)
+        return None
+
+    delta = compute_event_set(
+        source="elections",
+        prior_count=prior_count,
+        current_count=current_count,
+        prior_as_of=prior_as_of,
+        current_as_of=current_raw["as_of"],
+        prior_categories=None,
+        current_categories={
+            "newest_year": current_raw.get("newest_year"),
+            "available_datasets": current_raw.get("available_datasets", []),
+        },
+        thresholds=thresholds.get("elections", {}),
+    )
+    return delta
+
+
 async def run_acled(thresholds: dict) -> dict | None:
     """Poll ACLED conflict events, compute event-set delta on total events."""
     from .sources import poll_acled  # noqa: PLC0415
@@ -1191,6 +1310,9 @@ async def run_cadence(cadence: str, thresholds: dict) -> list[dict]:
             _run_source(run_eia_grid, thresholds),
             _run_source(run_fec, thresholds),
             _run_source(run_noaa, thresholds),
+            _run_source(run_census, thresholds),
+            _run_source(run_cps_voting, thresholds, 2024),
+            _run_source(run_elections, thresholds),
         ]
 
     # Run all non-GDELT sources concurrently.

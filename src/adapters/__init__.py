@@ -29,8 +29,11 @@ from .ghost_market import (
 from .osint import FederalRegisterAdapter, CongressAdapter, FecAdapter
 from .acled import AcledAdapter
 from .adsb import AdsbAdapter
+from .census import CensusAdapter
 from .opensanctions import OpenSanctionsAdapter
 from .telegram_osint import TelegramOsintAdapter
+from .cps_voting import CpsVotingAdapter
+from .elections import ElectionsAdapter
 
 __all__ = [
     "GhostMarketAdapter",
@@ -59,6 +62,9 @@ __all__ = [
     "FecAdapter",
     "AcledAdapter",
     "AdsbAdapter",
+    "CensusAdapter",
     "OpenSanctionsAdapter",
     "TelegramOsintAdapter",
+    "CpsVotingAdapter",
+    "ElectionsAdapter",
 ]

@@ -1,6 +1,6 @@
 {
   "$schema": "Signal Dispatch Issue Tracker v1",
-  "next_issue_number": 9,
+  "next_issue_number": 11,
   "issues": [
     {
       "issue_number": 0,
@@ -73,6 +73,30 @@
       "status": "passed",
       "research_path": "content/research/8/brief.md",
       "notes": "Full recon complete. Our estimate 68% vs market 62c. Edge 6pts at medium confidence -- below 15pt gate threshold. PASS."
+    },
+    {
+      "issue_number": 9,
+      "type": "deep_dive",
+      "topic": "The Pipeline: How voter rolls became an enforcement tool",
+      "date_started": "2026-03-20",
+      "status": "published",
+      "published_date": "2026-03-21",
+      "platform_url": "https://signaldsp.substack.com/p/the-pipeline",
+      "draft_path": "content/drafts/9-deep_dive.md",
+      "published_path": "content/published/9-deep_dive-2026-03-21.md",
+      "research_path": "content/research/9/"
+    },
+    {
+      "issue_number": 10,
+      "type": "deep_dive",
+      "topic": "The Shotgun: SAVE Act partisan impact analysis -- who actually loses voters",
+      "date_started": "2026-03-20",
+      "status": "published",
+      "published_date": "2026-03-21",
+      "platform_url": "https://signaldsp.substack.com/p/the-shotgun",
+      "draft_path": "content/drafts/10-deep_dive.md",
+      "published_path": "content/published/10-deep_dive-2026-03-21.md",
+      "research_path": "content/research/9/"
     }
   ]
 }

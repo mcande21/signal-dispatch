@@ -197,6 +197,78 @@
           "delta_cluster": ["fred-macro", "hormuz", "compound-shock"]
         }
       ]
+    },
+    {
+      "id": "save-act-passage-2026",
+      "event": "Federal SAVE Act becomes law before November 2026",
+      "issue_introduced": 9,
+      "current_probability": 0.07,
+      "confidence": "medium-high",
+      "resolution_date": "2026-11-03",
+      "resolution_criteria": "H.R. 22 signed into law by November 3, 2026.",
+      "history": [
+        { "date": "2026-03-21", "probability": 0.07, "issue": 9, "note": "Initial assessment. 60-vote Senate threshold, nine votes short. Talking filibuster reform and must-pass vehicle attachment are viable routes. Thune says votes aren't there, Tillis/Collins/Murkowski named holdouts. Legislative filibuster has never been eliminated. Adversarial review revised from initial 3% to 7%.", "cooper_initial": 0.03, "calibration_shown": "Adversarial review (Geth) weighted scenario model: filibuster reform 6%, must-pass vehicle 5%, reconciliation 3%, full elimination 2%. Weighted output 6-7%. Original 3% underweighted active floor dynamics." }
+      ]
+    },
+    {
+      "id": "nh-hb1569-implemented-nov-2026",
+      "event": "NH HB 1569 in effect for November 2026 election",
+      "issue_introduced": 9,
+      "current_probability": 0.40,
+      "confidence": "medium",
+      "resolution_date": "2026-11-03",
+      "resolution_criteria": "NH HB 1569 not enjoined by November 2026 general election. Law remains in effect for voter registration.",
+      "history": [
+        { "date": "2026-03-21", "probability": 0.40, "issue": 9, "note": "Initial assessment. Trial concluded, Judge Elliott deliberating. Kansas/Arizona precedents favor plaintiffs but current judiciary more conservative. No injunction issued -- law currently in effect." }
+      ]
+    },
+    {
+      "id": "gop-retain-house-2026",
+      "event": "Republicans retain House majority after 2026 midterms",
+      "issue_introduced": 9,
+      "current_probability": 0.15,
+      "confidence": "medium",
+      "resolution_date": "2027-01-03",
+      "resolution_criteria": "218+ Republican seats certified by January 3, 2027.",
+      "history": [
+        { "date": "2026-03-21", "probability": 0.15, "issue": 9, "note": "Initial assessment. Trump at 39% approval, D+5.3 generic ballot. Every president below 40% at midterms has lost 30+ House seats. Rs hold 220-215." }
+      ]
+    },
+    {
+      "id": "dpoc-3plus-states-2026",
+      "event": "DPOC laws enacted in 3+ additional states by end of 2026",
+      "issue_introduced": 9,
+      "current_probability": 0.55,
+      "confidence": "medium",
+      "resolution_date": "2026-12-31",
+      "resolution_criteria": "Three or more states beyond current NH, WY, LA enact documentary proof-of-citizenship requirements by December 31, 2026.",
+      "history": [
+        { "date": "2026-03-21", "probability": 0.55, "issue": 9, "note": "Initial assessment. FL signed (2027 effective). SD and UT pending. MI ballot initiative. 15 states have active bills." }
+      ]
+    },
+    {
+      "id": "dpoc-net-r-benefit-2026",
+      "event": "Net partisan effect of DPOC requirements favors Republicans in competitive 2026 races",
+      "issue_introduced": 10,
+      "current_probability": 0.60,
+      "confidence": "medium",
+      "resolution_date": "2027-03-31",
+      "resolution_criteria": "Post-election analysis of turnout patterns in DPOC vs non-DPOC states, controlling for national environment. Assessable by March 2027.",
+      "history": [
+        { "date": "2026-03-21", "probability": 0.60, "issue": 10, "note": "Initial assessment. Range 55-70%. CDCE rate differential (D 10% vs R 7%) is directionally real but near edge of statistical significance (overlapping 95% CIs). Tempered by Republican documentation burden, 2024 naturalized realignment, native-born channel cross-cutting. Adversarial review and 7-pass editorial review confirmed range." }
+      ]
+    },
+    {
+      "id": "dpoc-100k-suppressed-2026",
+      "event": "SAVE Act-equivalent documentation barriers suppress more than 100,000 eligible voters nationally in 2026 cycle",
+      "issue_introduced": 10,
+      "current_probability": 0.45,
+      "confidence": "low",
+      "resolution_date": "2027-06-30",
+      "resolution_criteria": "CPS November 2026 supplement compared to 2024 baseline. Assessable by mid-2027.",
+      "history": [
+        { "date": "2026-03-21", "probability": 0.45, "issue": 10, "note": "Initial assessment. More likely not to happen. Per-CD model yields 3,000-5,000 net loss across ~30 competitive CDs (90K-150K range). But only NH has active DPOC for federal races -- 100K requires counting fear channel and DOJ voter roll effects operating without enacted legislation. Evidence is indirect." }
+      ]
     }
   ],
   "resolved": [

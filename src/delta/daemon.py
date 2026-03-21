@@ -1220,6 +1220,13 @@ async def main_async(cadence: str) -> None:
 
     thresholds = _load_thresholds()
 
+    # 0. Ensure persistence DB is initialized
+    try:
+        from .persist import init_db  # noqa: PLC0415
+        await init_db()
+    except Exception as e:
+        log.error("persist: init_db failed: %s", e)
+
     # 1. Poll sources and compute deltas
     deltas = await run_cadence(cadence, thresholds)
     log.info("Computed %d deltas", len(deltas))
@@ -1264,6 +1271,31 @@ async def main_async(cadence: str) -> None:
             log.info("No clusters detected")
     except Exception as e:
         log.error("Cluster detection failed: %s", e)
+
+    # 5. Persist raw readings from prior_state snapshots
+    # prior_state/ files are written by _save_prior() during each run —
+    # they are the raw adapter payloads. We read them here and persist to
+    # signals.db. This runs after all adapters have completed so we capture
+    # a consistent snapshot without touching any run_* internals.
+    try:
+        from .persist import persist_reading  # noqa: PLC0415
+        persisted = 0
+        for prior_file in _PRIOR_DIR.glob("*.json"):
+            source = prior_file.stem
+            try:
+                with open(prior_file) as f:
+                    payload = json.load(f)
+                # Only persist if this file was written in this run
+                # (mtime within last 5 minutes)
+                import time  # noqa: PLC0415
+                if time.time() - prior_file.stat().st_mtime < 300:
+                    await persist_reading(source=source, cadence=cadence, payload=payload)
+                    persisted += 1
+            except Exception as e:
+                log.error("persist: failed for %s: %s", source, e)
+        log.info("Persisted %d raw readings to signals.db", persisted)
+    except Exception as e:
+        log.error("persist: outer failure: %s", e)
 
     log.info("=== Run complete ===")
 

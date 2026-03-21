@@ -66,6 +66,22 @@ structured_feeds:
     adapter: "ghost_market.viirs"
     refresh: "24h"
     signal: "NASA satellite fire/thermal anomaly detection -- conflict damage verification, infrastructure destruction confirmation, wildfire impact"
+  opensanctions:
+    adapter: "adapters.opensanctions"  # src/adapters/opensanctions.py (root adapters level, already wired in sources.py)
+    refresh: "24h"
+    signal: "Global sanctions aggregator -- OFAC + EU + UN + 30 jurisdictions, cross-jurisdiction coordination signals"
+  who_outbreaks:
+    adapter: "ghost_market.who_outbreaks"
+    refresh: "24h"
+    signal: "WHO disease outbreak notices -- pandemic/epidemic disruption, supply chain stress, commodity demand shifts, trade route closure risk"
+  reliefweb:
+    adapter: "ghost_market.reliefweb"
+    refresh: "12h"
+    signal: "UN humanitarian crises -- active disasters, geopolitical disruption indicators, ongoing emergencies presaging commodity/market impact"
+  opensky:
+    adapter: "ghost_market.opensky"
+    refresh: "30m"
+    signal: "Civilian airspace monitoring -- 6 strategic regions (Taiwan Strait, Persian Gulf, Black Sea, Red Sea, South China Sea, Eastern Med); traffic drops = airspace closure = escalation indicator"
 
 osint_feeds:
   federal_register:

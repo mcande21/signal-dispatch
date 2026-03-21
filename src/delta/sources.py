@@ -1084,3 +1084,104 @@ async def poll_noaa(query_type: str = "forecast", city: str = "nyc", state: str 
         return _ok("noaa", result)
     except Exception as e:
         return _err("noaa", str(e))
+
+
+# ---------------------------------------------------------------------------
+# WHO Disease Outbreak News -- pandemic/epidemic signals (event_set, warm)
+# ---------------------------------------------------------------------------
+
+async def poll_who_outbreaks() -> dict:
+    """Fetch WHO Disease Outbreak News active notices.
+
+    Signal: Disease outbreaks → supply chain disruption, labor market impact,
+    commodity demand shifts, travel/trade route closure risk.
+
+    Returns:
+        {
+            "active_notices": list[dict],
+            "notice_count": int,
+            "fetched_at": str,
+        }
+    """
+    try:
+        from src.adapters.ghost_market.who_outbreaks import WhoOutbreaksAdapter  # noqa: PLC0415
+        adapter = WhoOutbreaksAdapter(_DB_PATH)
+        try:
+            result = await adapter.fetch({})
+        finally:
+            await adapter.close()
+
+        return _ok("who_outbreaks", {
+            "active_notices": result.get("active_notices", []),
+            "notice_count": result.get("notice_count", 0),
+            "fetched_at": result.get("fetched_at", ""),
+        })
+    except Exception as e:
+        return _err("who_outbreaks", str(e))
+
+
+# ---------------------------------------------------------------------------
+# ReliefWeb -- UN humanitarian crises (event_set, warm)
+# ---------------------------------------------------------------------------
+
+async def poll_reliefweb() -> dict:
+    """Fetch ReliefWeb ongoing humanitarian disasters and crises.
+
+    Signal: Active UN-declared disasters → geopolitical disruption indicators,
+    commodity/market impact precursors.
+
+    Returns:
+        {
+            "active_disasters": list[dict],
+            "disaster_count": int,
+            "fetched_at": str,
+        }
+    """
+    try:
+        from src.adapters.ghost_market.reliefweb import ReliefWebAdapter  # noqa: PLC0415
+        adapter = ReliefWebAdapter(_DB_PATH)
+        try:
+            result = await adapter.fetch({})
+        finally:
+            await adapter.close()
+
+        return _ok("reliefweb", {
+            "active_disasters": result.get("active_disasters", []),
+            "disaster_count": result.get("disaster_count", 0),
+            "fetched_at": result.get("fetched_at", ""),
+        })
+    except Exception as e:
+        return _err("reliefweb", str(e))
+
+
+# ---------------------------------------------------------------------------
+# OpenSky -- civilian airspace monitoring (snapshot, hot)
+# ---------------------------------------------------------------------------
+
+async def poll_opensky() -> dict:
+    """Fetch OpenSky civilian flight density across 6 strategic regions.
+
+    Signal: Civilian traffic drops = airspace closure = escalation indicator.
+    Regions: Taiwan Strait, Persian Gulf, Black Sea, Red Sea,
+             South China Sea, Eastern Mediterranean.
+
+    Returns:
+        {
+            "regions": dict[str, {"aircraft_count": int, "by_country": dict, "no_callsign": int}],
+            "snapshot_at": str,
+        }
+    """
+    try:
+        from src.adapters.ghost_market.opensky import OpenSkyAdapter  # noqa: PLC0415
+        adapter = OpenSkyAdapter(_DB_PATH)
+        try:
+            result = await adapter.fetch({})
+        finally:
+            await adapter.close()
+
+        return _ok("opensky", {
+            "regions": result.get("regions", {}),
+            "snapshot_at": result.get("snapshot_at", ""),
+        })
+    except Exception as e:
+        return _err("opensky", str(e))

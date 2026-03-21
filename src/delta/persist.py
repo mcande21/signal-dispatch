@@ -83,11 +83,11 @@ KEY_METRIC_MAP: dict[str, tuple[str, Callable[[dict], float | None]]] = {
     # -------------------------------------------------------------------------
     "bonbast": (
         "usd_irr_rate",
-        _safe(lambda p: p["rates"]["USD"]["rate"]),
+        _safe(lambda p: p.get("usd_irr") or p.get("rates", {}).get("USD", {}).get("rate")),
     ),
     "dolarvzla": (
-        "usd_vef_parallel_rate",
-        _safe(lambda p: p["rate"]),
+        "usd_ves_parallel_rate",
+        _safe(lambda p: p.get("usd_ves") or p.get("rate") or p.get("rates", {}).get("USD")),
     ),
     "tedpix": (
         "tedpix_index",
@@ -127,11 +127,11 @@ KEY_METRIC_MAP: dict[str, tuple[str, Callable[[dict], float | None]]] = {
     # -------------------------------------------------------------------------
     "gdelt": (
         "article_count",
-        _safe(lambda p: p.get("article_count")),
+        _safe(lambda p: p.get("article_count") or len(p.get("articles", []))),
     ),
     "acled": (
         "event_count",
-        _safe(lambda p: p.get("event_count") or len(p.get("events", []))),
+        _safe(lambda p: p.get("total_events") or p.get("event_count") or len(p.get("events", []))),
     ),
     "viirs": (
         "hotspot_count",
@@ -142,8 +142,8 @@ KEY_METRIC_MAP: dict[str, tuple[str, Callable[[dict], float | None]]] = {
         _safe(lambda p: p.get("total_losses") or p.get("loss_count")),
     ),
     "ooni": (
-        "blocked_endpoint_count",
-        _safe(lambda p: p.get("blocked_count") or len(p.get("blocked_endpoints", []))),
+        "anomaly_rate",
+        _safe(lambda p: p.get("anomaly_rate") or p.get("blocked_count") or len(p.get("blocked_endpoints", []))),
     ),
     "cloudflare_radar": (
         "traffic_anomaly_score",
@@ -155,7 +155,7 @@ KEY_METRIC_MAP: dict[str, tuple[str, Callable[[dict], float | None]]] = {
     ),
     "telegram_osint": (
         "urgent_message_count",
-        _safe(lambda p: p.get("urgent_count") or len(p.get("urgent_messages", []))),
+        _safe(lambda p: p.get("urgent_messages") or p.get("urgent_count") or len(p.get("messages", []))),
     ),
     "ofac": (
         "designation_count",

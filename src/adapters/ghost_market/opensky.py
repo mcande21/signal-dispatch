@@ -90,36 +90,43 @@ class OpenSkyAdapter(GhostMarketAdapter):
 
         data = await self._fetch_all_regions()
 
-        await self._cache_store(cache_key, data)
+        if not data.get("partial_failure"):
+            await self._cache_store(cache_key, data)
         return data
 
     async def _fetch_all_regions(self) -> dict:
         """Query all monitored regions sequentially with rate limiting."""
         regions = {}
+        had_error = False
 
-        for region_name, bbox in MONITORED_REGIONS.items():
-            try:
-                region_data = await self._fetch_region(region_name, bbox)
-                regions[region_name] = region_data
-            except GhostMarketApiError:
-                # On error, leave empty structure for the region
-                regions[region_name] = {
-                    "aircraft_count": 0,
-                    "by_country": {},
-                    "no_callsign": 0,
-                    "error": "failed to fetch",
-                }
+        async with httpx.AsyncClient() as client:
+            for region_name, bbox in MONITORED_REGIONS.items():
+                try:
+                    region_data = await self._fetch_region(region_name, bbox, client)
+                    regions[region_name] = region_data
+                except GhostMarketApiError:
+                    had_error = True
+                    # Use None for aircraft_count to distinguish error from real empty airspace
+                    regions[region_name] = {
+                        "aircraft_count": None,
+                        "by_country": {},
+                        "no_callsign": 0,
+                        "error": "failed to fetch",
+                    }
 
-            # Rate limit: 1 second between requests to avoid hammering the API
-            await asyncio.sleep(1)
+                # Rate limit: 1 second between requests to avoid hammering the API
+                await asyncio.sleep(1)
 
-        return {
+        result = {
             "source": "opensky",
             "snapshot_at": datetime.now(timezone.utc).isoformat(),
             "regions": regions,
         }
+        if had_error:
+            result["partial_failure"] = True
+        return result
 
-    async def _fetch_region(self, region_name: str, bbox: dict) -> dict:
+    async def _fetch_region(self, region_name: str, bbox: dict, client: httpx.AsyncClient) -> dict:
         """Fetch aircraft states for a single bounding box region."""
         params = {
             "lamin": bbox["lamin"],
@@ -133,12 +140,11 @@ class OpenSkyAdapter(GhostMarketAdapter):
         }
 
         try:
-            async with httpx.AsyncClient() as client:
-                response = await client.get(
-                    OPENSKY_API_URL, params=params, headers=headers, timeout=30.0
-                )
-                response.raise_for_status()
-                data = response.json()
+            response = await client.get(
+                OPENSKY_API_URL, params=params, headers=headers, timeout=30.0
+            )
+            response.raise_for_status()
+            data = response.json()
 
         except httpx.HTTPStatusError as e:
             status_code = e.response.status_code

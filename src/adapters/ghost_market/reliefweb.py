@@ -8,6 +8,7 @@ Signal: Active UN-declared disasters and crises → geopolitical disruption indi
 ongoing emergencies that presage commodity/market impact.
 """
 
+import os
 from datetime import datetime, timezone
 
 import httpx
@@ -16,7 +17,7 @@ from ..base import GhostMarketAdapter, GhostMarketApiError
 
 
 RELIEFWEB_API_URL = "https://api.reliefweb.int/v1/disasters"
-RELIEFWEB_APPNAME = "signaldispatch"
+RELIEFWEB_APPNAME = os.environ.get("RELIEFWEB_APPNAME", "signaldispatch")
 
 
 class ReliefWebAdapter(GhostMarketAdapter):

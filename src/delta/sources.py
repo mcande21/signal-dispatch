@@ -1106,8 +1106,10 @@ async def poll_who_outbreaks() -> dict:
     try:
         from src.adapters.ghost_market.who_outbreaks import WhoOutbreaksAdapter  # noqa: PLC0415
         adapter = WhoOutbreaksAdapter(_DB_PATH)
-        result = await adapter.fetch({})
-        await adapter.close()
+        try:
+            result = await adapter.fetch({})
+        finally:
+            await adapter.close()
 
         return _ok("who_outbreaks", {
             "active_notices": result.get("active_notices", []),
@@ -1138,8 +1140,10 @@ async def poll_reliefweb() -> dict:
     try:
         from src.adapters.ghost_market.reliefweb import ReliefWebAdapter  # noqa: PLC0415
         adapter = ReliefWebAdapter(_DB_PATH)
-        result = await adapter.fetch({})
-        await adapter.close()
+        try:
+            result = await adapter.fetch({})
+        finally:
+            await adapter.close()
 
         return _ok("reliefweb", {
             "active_disasters": result.get("active_disasters", []),
@@ -1170,8 +1174,10 @@ async def poll_opensky() -> dict:
     try:
         from src.adapters.ghost_market.opensky import OpenSkyAdapter  # noqa: PLC0415
         adapter = OpenSkyAdapter(_DB_PATH)
-        result = await adapter.fetch({})
-        await adapter.close()
+        try:
+            result = await adapter.fetch({})
+        finally:
+            await adapter.close()
 
         return _ok("opensky", {
             "regions": result.get("regions", {}),

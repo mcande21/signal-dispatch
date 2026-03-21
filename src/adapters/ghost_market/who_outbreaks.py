@@ -78,11 +78,19 @@ def _extract_countries(title: str) -> list[str]:
         if country.lower() not in skip and not country.lower().startswith("global"):
             return [country]
 
-    # Pattern: "in COUNTRY" anywhere
+    # Pattern: "in COUNTRY" anywhere; also split on " and " to capture multiple countries
     in_match = re.search(r"\bin\s+([A-Z][A-Za-z\s]{3,40}?)(?:\s*$|\s*,|\s+and\b)", title)
     if in_match:
         country = in_match.group(1).strip()
         if country.lower() not in ("multiple countries", "several countries"):
+            # Check for additional countries joined by " and "
+            and_match = re.search(
+                r"\bin\s+[A-Z][A-Za-z\s]{3,40}?\s+and\s+([A-Z][A-Za-z\s]{3,40}?)(?:\s*$|\s*,|\s+and\b)",
+                title,
+            )
+            if and_match:
+                extra = and_match.group(1).strip()
+                return [country, extra]
             return [country]
 
     return []

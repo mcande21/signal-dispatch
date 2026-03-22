@@ -115,6 +115,12 @@ If any prerequisite is missing, `/review` will error. Use `/intel` to create the
 - Footnotes for methodology detail and wit
 - No emojis, no all-caps except acronyms (OONI, EIA, IRGC)
 
+**Additional Checklist:**
+- [ ] Every acronym defined on first use in this article (assume every reader is new)
+- [ ] Every probability estimate includes a plain-language anchor (see Style Guide)
+- [ ] No load-bearing analysis in footnotes -- flag for promotion to body
+- [ ] Cross-references to prior issues use "Per SD #X" format, not re-presenting unchanged data as new
+
 **Dispatch template:**
 
 ```
@@ -300,6 +306,11 @@ If any estimate is incomplete, NEEDS WORK. Calibration tracking depends on compl
 - Update contradicts evidence direction
 - Frequent updates to same prediction (signal instability)
 
+**State File Reconciliation:**
+- [ ] Every probability percentage in the article text exactly matches probabilities.json. Any discrepancy = NEEDS WORK
+- [ ] All probability updates in the article are reflected in the state file with matching values
+- [ ] If any tracked event has passed its resolution date, flag: "Resolution required before publication -- [event name], resolution date [date]"
+
 **Workflow:**
 
 1. Read `content/state/probabilities.json`
@@ -445,6 +456,10 @@ SKIPPED = `mirofish-report.md` not present
 - AI-polished generic writing
 - Clickbait headlines
 
+**Additional Checklist:**
+- [ ] Trading disclosure names market, contract, and direction. Generic "I trade this" without specifics = NEEDS WORK
+- [ ] "So what" implication paragraph exists -- analysis connects to real-world stakes
+
 **Signature Phrases (check for natural usage):**
 
 Openings:
@@ -564,16 +579,185 @@ NEEDS WORK = one or more discrepancies found
 
 **Note:** If `delta_summary.md` doesn't exist for this issue (delta engine hasn't run, or issue predates delta engine), skip Pass 6 and note in review summary.
 
+### Pass 7: Reporter Review (al-Jilani)
+
+**Purpose:** Evaluate the piece from a working journalist's perspective. Would this pass editorial standards at a major outlet?
+
+**Agent:** `al-jilani`
+
+**What al-Jilani reviews:**
+
+**Sourcing:**
+- How many claims are properly sourced vs. asserted?
+- Are sources credible? Would an editor accept them?
+- Claims needing a second source that don't have one?
+- Weasel sourcing -- vague attributions, unnamed references, circular citations?
+- Missing obvious studies or sources?
+
+**Framing:**
+- Analysis or advocacy? Where does the line blur?
+- Would readers across the political spectrum feel fairly represented?
+- Buried lede -- what should be higher?
+- What's the real headline?
+
+**Editorial Standards:**
+- Would this pass fact-check at a major outlet?
+- What would an editor send back?
+- Conflict of interest adequately disclosed?
+- Predictions the author can't back up?
+
+**The Story:**
+- Is this news? What's the hook?
+- What does this piece add that others haven't?
+- Single most publishable finding?
+- If cut to 800 words, what survives?
+
+**Additional Checklist:**
+- [ ] No unsourced motive attributions. Cite source or reframe as "I assess the most likely motive is..."
+- [ ] Bottom-line summaries present after major analytical sections (3+ paragraphs of sustained argument)
+
+**Dispatch template:**
+
+```
+Task(
+  subagent_type: "al-jilani",
+  prompt: "Reporter review for Signal Dispatch issue #{issue-number}.
+Read the draft: {draft_path}
+Review as a working reporter. Evaluate sourcing, framing, editorial standards, and newsworthiness.
+Report: sourcing rate, framing assessment, editorial flags, your headline, 800-word wire cut.",
+  description: "Reporter review SD #{issue-number}"
+)
+```
+
+### Pass 8: Statistician Review (Garrus)
+
+**Purpose:** Evaluate methodology, model specification, sample validity, causal claims, and uncertainty quantification. The calibration pass.
+
+**Agent:** `garrus` (with statistician-focused prompt)
+
+**What Garrus reviews:**
+
+**Model Specification:**
+- Hidden assumptions in the model?
+- Sensitivity to key parameters (especially suppression rates)?
+- Are scenarios properly weighted or treated equally?
+
+**Sample Issues:**
+- State-level sample sizes -- are conclusions valid given n?
+- Survey confidence intervals -- do party-level breakdowns hold?
+- ACS margins of error at district level?
+
+**Causal Claims:**
+- What causal identification strategy supports each claim?
+- Are correlations being presented as causation?
+- Are key ratios (e.g., 800:1) fairly characterized?
+
+**Uncertainty Quantification:**
+- Are bounds derived formally or intuitively?
+- Are probability estimates appropriately uncertain given data quality?
+- Should ranges be wider?
+
+**What's Missing:**
+- Selection bias in precedent analysis?
+- Interaction effects between channels?
+- Missing cost-benefit components?
+
+**Priority fixes to flag:** Sample size disclosures (n<30 must be in body text), confidence intervals on survey-derived parameters, probability precision matching data quality.
+
+**Dispatch template:**
+
+```
+Task(
+  subagent_type: "garrus",
+  prompt: "Statistician review for Signal Dispatch issue #{issue-number}.
+Read draft: {draft_path}
+Read analysis data: content/research/{issue-number}/data/analysis-summary.md
+Review methodology, model specification, sample validity, causal claims, uncertainty quantification.
+For each finding: state the claim, the statistical concern, and the recommended fix.
+Overall verdict: would this survive peer review?",
+  description: "Statistician review SD #{issue-number}"
+)
+```
+
+### Pass 9: General Public Review (Vega)
+
+**Purpose:** Test whether the piece is comprehensible, engaging, and shareable for a reader with no prior context.
+
+**Agent:** `vega`
+
+**This is the hardest gate.** If Vega can't follow the argument, the piece isn't ready for publication. Technical accuracy means nothing if the reader closes the tab.
+
+**What Vega reviews:**
+
+**Comprehension:**
+- First 30 seconds: keep reading or close tab?
+- Where does the jargon wall hit?
+- Which acronyms/terms are undefined?
+- Can the argument be followed start to finish?
+
+**Engagement:**
+- How much was actually read (percentage)?
+- Which sections drag, which fly?
+- Is the piece too long?
+- Does the ending land?
+
+**Trust and Tone:**
+- Does the author seem credible?
+- Does the piece feel balanced or does it lean?
+- Does "I trade this" help or hurt?
+
+**The Share Test:**
+- Would they share it? Where? With whom?
+- One-sentence summary?
+- Would they pay for more?
+
+**Impact:**
+- Did it change their mind about anything?
+- What question wasn't answered?
+
+**Additional Checklist:**
+- [ ] Readable without prior SD issues
+- [ ] Methodology follows findings, not precedes
+- [ ] Executive summary is under 400 words
+- [ ] "So what" is explicit -- the reader knows what the analysis means for the real world
+- [ ] No undefined acronyms on first encounter
+
+**Dispatch template:**
+
+```
+Task(
+  subagent_type: "vega",
+  prompt: "General public review for Signal Dispatch issue #{issue-number}.
+You're a 34-year-old who saw this shared on social media. No prior context. No expertise.
+Read: {draft_path}
+Answer honestly: did you understand it? Did you finish it? Would you share it? Did it change your mind?
+Be blunt. No encouragement -- just honest feedback.",
+  description: "General public review SD #{issue-number}"
+)
+```
+
+---
+
 ## Parallel Dispatch Strategy
 
-**Passes 1 and 5 can run in parallel** (Tali style review + Kelly persona review). They're independent checks.
+**Wave 1 (parallel):** Tali (Pass 1) + Kelly (Pass 5). Independent mechanical checks.
 
-**Passes 2-4 and 6 run sequentially** (all Shepard). They build on each other:
-- Pass 2 verifies data accuracy (foundation)
-- Pass 3 validates probability format (structure)
-- Pass 4 cross-checks calibration (consistency)
-- Pass 4b swarm calibration (adversarial validation -- skip if no MiroFish report)
-- Pass 6 verifies numeric claims against computed deltas (mechanical)
+**Wave 2 (sequential):** Shepard Passes 2-4, 4b, 6. Build on each other.
+
+**Wave 3 (parallel):** al-Jilani (Pass 7) + Garrus (Pass 8) + Vega (Pass 9). Independent audience checks. Fire after Wave 1+2 fixes are applied.
+
+**Routing logic after Wave 3:**
+
+| Wave 3 Result | Action |
+|----------------|--------|
+| All three PASS | Proceed to `/publish` |
+| al-Jilani or Garrus flag critical issues | Apply targeted fixes, re-run affected pass only |
+| Vega fails comprehension (<50% read, can't summarize) | **Return to `/draft`** -- structural revision needed |
+| Vega flags jargon/length but follows argument | Apply targeted fixes, proceed to `/publish` |
+| Garrus flags statistical precision issues (CIs, sample sizes) | Add caveats/disclosures, proceed to `/publish` |
+| al-Jilani flags sourcing gaps | Source or remove claims, re-run Pass 7 |
+
+**Vega is the hardest gate.** A piece that fails general public comprehension needs structural revision, not cosmetic fixes. If the general public can't follow the argument, loop back to `/draft` with Vega's feedback as the brief.
 
 **Workflow:**
 
@@ -582,8 +766,11 @@ NEEDS WORK = one or more discrepancies found
 3. Run Shepard Passes 2-4 sequentially
 4. Run Shepard Pass 4b (swarm calibration) -- skip if mirofish-report.md absent
 5. Run Shepard Pass 6 (delta verification) -- skip if delta_summary.md absent
-6. Synthesize all pass results
-7. Present review summary to Cooper
+6. Apply Wave 1+2 fixes
+7. Dispatch al-Jilani (Pass 7), Garrus (Pass 8), and Vega (Pass 9) in parallel
+8. Synthesize all pass results
+9. Route per table above
+10. Present review summary to Cooper
 
 ## Review Summary Format
 
@@ -602,8 +789,11 @@ After all passes complete, present this summary to Cooper:
 | Swarm Calibration | Shepard | PASS/WARN/SKIPPED | {divergence summary} |
 | Persona | Kelly | PASS/NEEDS WORK | {count} drift points |
 | Delta Verification | Shepard | PASS/NEEDS WORK/SKIPPED | {count} discrepancies |
+| Reporter | al-Jilani | PASS/NEEDS WORK | sourcing rate, editorial flags |
+| Statistician | Garrus | PASS/NEEDS WORK | model concerns, sample issues |
+| General Public | Vega | PASS/FAIL | comprehension %, read-through %, share test |
 
-### Overall: PASS / NEEDS WORK
+### Overall: PASS / NEEDS WORK / RETURN TO DRAFT
 
 ---
 

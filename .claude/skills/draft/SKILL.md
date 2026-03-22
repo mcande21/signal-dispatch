@@ -191,7 +191,7 @@ Every section must satisfy these criteria:
 - [ ] Active voice in analysis sections
 - [ ] Specific numbers, not vague quantifiers ("72%" not "likely", "47/hr" not "significantly lower")
 - [ ] "I trade this" disclosure where relevant to content type
-- [ ] Footnotes for methodology depth and wit (rare, strategic)
+- [ ] Footnotes for citations and minor qualifications only -- if the footnote contains a definition, a methodological point that changes interpretation, or a caveat that adjusts the probability, it belongs in the body text, not a footnote
 - [ ] No emojis anywhere
 - [ ] No exclamation points in analysis sections
 - [ ] No hedge words ("somewhat," "arguably," "perhaps")
@@ -235,17 +235,17 @@ Bad: "An interesting development occurred today in Iranian internet infrastructu
 
 ### deep_dive
 
-**Executive summary first.** Busy readers get conclusion upfront. 3-4 paragraphs max:
-- What the question is
-- What the data shows
-- What I assess
-- What it means for markets
+**Executive summary first.** Findings-first ordering: conclusion and primary probability estimate, then basis chain, then methodology. 400-word soft cap.
+
+First 2-3 sentences must contain the core finding and primary probability. Do not bury the assessment inside qualifications.
 
 **Structured data section = the differentiator.** This is what sets Signal Dispatch apart. Walk through each OSINT feed:
 - What it measures
 - Current reading vs baseline
 - Historical context
 - Significance
+
+Structured data may follow findings when data density would interrupt narrative flow. Template supports reordering.
 
 **Qualitative intelligence = web research synthesis.** Connect structured data to broader context. News sources, think tank analysis, academic work. Always cited.
 
@@ -257,6 +257,14 @@ Bad: "An interesting development occurred today in Iranian internet infrastructu
 - Final assessment with confidence interval
 
 **Escalation/resolution indicators = what changes the assessment.** Specific triggers that would move probability up or down. Include thresholds where possible.
+
+**Implications section required.** Every deep dive must include a real-world implications section -- standalone or woven into conclusion. Answer: "What does this mean beyond the trading thesis?" Stakes, not advice.
+
+**Bottom-line summaries.** Major analytical sections (3+ paragraphs) end with: **Bottom line: {one sentence conclusion}.**
+
+**Cross-reference convention.** Reference prior analysis as "Per SD #X, [finding]." Do not re-present unchanged data as new.
+
+**Multi-topic split guidance.** If the article covers 3+ distinct topics, consider companion pieces (as with SD #9 and #10). Flag during Step 1 outline review so Cooper decides before drafting.
 
 ## Output
 

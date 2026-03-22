@@ -10,9 +10,13 @@
 
 ## Executive Summary
 
+<!-- Findings-first: conclusion + primary probability in first 2-3 sentences. Basis chain second, methodology last. 400-word soft cap. -->
+
 {executive_summary}
 
 ## Structured Data
+
+<!-- May move after Qualitative Intelligence if data density interrupts flow. Reorder during Step 1 outline review. -->
 
 {data_layer_analysis}
 
@@ -22,11 +26,20 @@
 
 ## Threat/Opportunity Assessment
 
+<!-- Major analytical sections (3+ paragraphs) should end with:
+     **Bottom line: {one sentence conclusion}.** -->
+
 {threat_vectors_or_opportunities}
 
 ## Probability Assessment
 
 {probability_estimates_with_reasoning}
+
+## What This Means
+
+<!-- Required. Answer: "What does this mean beyond the trading thesis?" Stakes, not advice. May be woven into conclusion instead of standalone. -->
+
+{implications_for_general_reader}
 
 ## Escalation/Resolution Indicators
 

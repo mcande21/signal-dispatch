@@ -209,6 +209,57 @@ paywall_position: 42
 ---
 ```
 
+### Step 4B: Resolution Sweep + State Reconciliation
+
+Mandatory pre-publication check. Runs after archive (Step 4), before probability state is finalized (Step 5). **Do not proceed to Step 5 if either sub-check fails.**
+
+#### Resolution Sweep
+
+Scan all entries in `probabilities.json` `events` array. For each event where `resolution_date` has passed:
+
+1. **Resolve it.** "We haven't checked" is not a valid reason to leave it open. Move the entry from `events` to `resolved` with:
+   - `resolved`: `"YES"` / `"NO"` / `"PARTIAL"`
+   - `resolution_date`: actual date resolution was determined
+   - `resolution_note`: 2-3 sentences -- what the assessment got right, what it missed
+   - `final_probability`: the last committed probability before resolution
+   - `brier_score`: `(final_probability - outcome)²` where outcome is `1` (happened) or `0` (didn't happen). For PARTIAL, treat as `0.5`.
+
+   Example:
+   ```json
+   {
+     "id": "hormuz-disruption-6-weeks",
+     "event": "Hormuz disruption persists more than 6 weeks",
+     "resolved": "YES",
+     "resolution_date": "2026-04-13",
+     "resolution_note": "Disruption persisted past the 6-week threshold. The 80% estimate at resolution captured the trajectory well -- IRGC hardening and absence of any de-escalation pathway were the key signals. Miss: underestimated how quickly hardline succession would consolidate after Larijani's death.",
+     "final_probability": 0.80,
+     "brier_score": 0.04
+   }
+   ```
+
+2. **Timeline extension.** If resolution is genuinely ambiguous, document:
+   - Add an `extension` field to the event entry: `{ "extended_to": "YYYY-MM-DD", "justification": "..." }`
+   - Justification must cite a specific, verifiable condition.
+
+3. **Update calibration summary.** After resolving, recalculate `calibration_summary`:
+   - Increment `total_resolved`
+   - Recalculate `mean_brier_score` across all resolved entries
+   - Update the appropriate `calibration_buckets` outcome count
+
+#### State File Reconciliation
+
+Every probability percentage stated in the article text must exactly match `current_probability` in `probabilities.json`.
+
+- Extract all probability claims from the article (e.g., "12% chance", "we assess 40%").
+- Cross-reference each against the corresponding event in `probabilities.json`.
+- If the article updates a probability (e.g., moves Iran ceasefire from 8% to 12%), the state file `current_probability` and `history` must already reflect the new value before publication.
+
+**Discrepancy = STOP.** Reconcile before proceeding. Either:
+- Correct the article text to match the state file, or
+- Update the state file with the new estimate (adding a history entry) and confirm with Cooper.
+
+Do not publish an article that disagrees with its own probability ledger.
+
 ### Step 5: Update Probability State
 
 Finalize `content/state/probabilities.json`:
@@ -235,6 +286,19 @@ For each estimate in the published issue:
   ```
 
 **This is when staged estimates become committed.** Probabilities in draft are staged. Probabilities in published content are locked in the track record.
+
+#### Ledger Status
+
+Every published issue should include or link to a current probability ledger. Options:
+
+1. **Standalone Substack page** (preferred): Maintain a living `/track-record` page on Substack updated after each publication. Link from the article footer (the footer template already references `signaldispatch.substack.com/track-record`).
+
+2. **Embedded ledger section**: If the article warrants it (e.g., a weekly brief with multiple probability updates), embed a condensed table:
+   - All active tracked events with current probability and last-updated date
+   - Any newly resolved events from Step 4B with Brier score and post-mortem summary
+   - Format: clean table, probabilities as percentages, dates as Month DD YYYY
+
+The ledger does not need to be exhaustive in every article -- but every reader should be able to find the full current state via one click from any issue.
 
 ### Step 6: Update Issue State
 

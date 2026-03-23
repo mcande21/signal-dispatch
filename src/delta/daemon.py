@@ -64,9 +64,12 @@ for _d in (
 # Each entry: (source_name, cadence, poll_fn, engine_fn_key)
 # engine_fn_key maps to how we build the delta in _run_source()
 HOT_SOURCES = [
-    "bonbast", "ooni", "cloudflare_radar", "tedpix",
+    "bonbast", "ooni", "tedpix",
     "dolarvzla", "gdelt", "viirs", "prediction_markets",
-    "acled", "adsb", "telegram_osint",
+    "acled", "telegram_osint",
+    "frankfurter", "cbr",
+    # cloudflare_radar: shelved 2026-03-22 (expired token)
+    # adsb: shelved 2026-03-22 (RapidAPI key issues)
 ]
 WARM_SOURCES = [
     "eia", "agsi", "entsog", "ofac", "oryx",
@@ -1027,16 +1030,17 @@ async def run_adsb(thresholds: dict) -> dict | None:
 
 
 async def run_opensanctions(thresholds: dict) -> dict | None:
-    """Poll OpenSanctions, compute categorical delta on search result counts."""
+    """Poll OpenSanctions, compute numeric delta per search term + cross_jurisdiction count."""
     from .sources import poll_opensanctions  # noqa: PLC0415
-    from .engine import compute_categorical  # noqa: PLC0415
+    from .engine import compute_numeric  # noqa: PLC0415
 
     current_raw = await poll_opensanctions()
     if not current_raw.get("ok"):
         log.error("opensanctions poll failed: %s", current_raw.get("error"))
         return None
 
-    # Build a flat snapshot: total results per search term + cross_jurisdiction count
+    # Build a flat snapshot: total results per search term + cross_jurisdiction count.
+    # cross_jurisdiction is a distinct signal (cross-source hits), kept as its own field.
     searches = current_raw.get("searches", {})
     current_snapshot = {term: data.get("total_results", 0) for term, data in searches.items()}
     current_snapshot["cross_jurisdiction"] = len(current_raw.get("cross_jurisdiction", []))
@@ -1044,6 +1048,11 @@ async def run_opensanctions(thresholds: dict) -> dict | None:
     prior = _load_prior("opensanctions")
     prior_snapshot = prior.get("snapshot", {}) if prior else {}
     prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+
+    # Validate before saving — don't clobber prior with an empty or bad snapshot
+    if not current_snapshot:
+        log.warning("opensanctions: empty snapshot, skipping save")
+        return None
 
     # Persist the snapshot alongside the raw data for next comparison
     current_raw["snapshot"] = current_snapshot
@@ -1053,15 +1062,44 @@ async def run_opensanctions(thresholds: dict) -> dict | None:
         log.info("opensanctions: no prior state, recording baseline")
         return None
 
-    delta = compute_categorical(
-        source="opensanctions",
-        prior_snapshot=prior_snapshot,
-        current_snapshot=current_snapshot,
-        prior_as_of=prior_as_of,
-        current_as_of=current_raw["as_of"],
-        thresholds=thresholds.get("opensanctions", {}),
-    )
-    return delta
+    # Compute per-term numeric deltas. Use 0 as baseline for new/missing terms.
+    # Skip terms where both prior and current are zero (no signal).
+    # Skip terms that are unchanged (prior == current, no delta to report).
+    source_thresholds = thresholds.get("opensanctions", {})
+    all_terms = set(prior_snapshot.keys()) | set(current_snapshot.keys())
+    per_term_deltas: dict[str, dict] = {}
+    for term in sorted(all_terms):
+        prior_val = prior_snapshot.get(term, 0)
+        current_val = current_snapshot.get(term, 0)
+        if prior_val == current_val:
+            continue  # unchanged (includes both-zero), no signal
+        key = f"opensanctions_{term}"
+        per_term_deltas[key] = compute_numeric(
+            source=key,
+            prior_value=float(prior_val),
+            current_value=float(current_val),
+            prior_as_of=prior_as_of,
+            current_as_of=current_raw["as_of"],
+            field_name=term,
+            thresholds=source_thresholds.get(term, source_thresholds),
+        )
+
+    if not per_term_deltas:
+        return None
+
+    # Return the most significant delta (highest abs % change) as the primary signal.
+    # inf percent (prior=0, current>0) sorts highest — intentional, new signal is significant.
+    # All per-term results are attached under "per_term" for downstream consumers.
+    def _sort_key(d: dict) -> float:
+        pct = d.get("delta", {}).get("percent", 0)
+        if pct != pct:  # NaN guard
+            return 0.0
+        return abs(pct) if pct != float("inf") and pct != float("-inf") else float("inf")
+
+    primary = max(per_term_deltas.values(), key=_sort_key)
+    primary = dict(primary)  # shallow copy — don't mutate the per_term entry
+    primary["per_term"] = per_term_deltas
+    return primary
 
 
 async def run_telegram_osint(thresholds: dict) -> dict | None:
@@ -1132,6 +1170,114 @@ def _load_history_for_gdelt(cache_key: str, days: int = 30) -> list[float]:
 
 
 # ---------------------------------------------------------------------------
+# New adapters: Frankfurter, CBR, Tenders Ukraine (2026-03-22)
+# ---------------------------------------------------------------------------
+
+async def run_frankfurter(thresholds: dict) -> dict | None:
+    """Poll Frankfurter forex rates (USD vs RUB/CNY/EUR). Free, no auth."""
+    from .sources import poll_frankfurter  # noqa: PLC0415
+    from .engine import compute_numeric  # noqa: PLC0415
+
+    current_raw = await poll_frankfurter()
+    if not current_raw.get("ok"):
+        log.error("frankfurter poll failed: %s", current_raw.get("error"))
+        return None
+
+    current_val = current_raw.get("rub")
+    if current_val is None:
+        log.warning("frankfurter: no RUB rate")
+        return None
+
+    prior = _load_prior("frankfurter")
+    prior_val = prior.get("rub") if prior else None
+    prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+    _save_prior("frankfurter", current_raw)
+
+    if prior_val is None:
+        log.info("frankfurter: no prior state, recording baseline")
+        return None
+
+    delta = compute_numeric(
+        source="frankfurter",
+        prior_value=float(prior_val),
+        current_value=float(current_val),
+        prior_as_of=prior_as_of,
+        current_as_of=current_raw["as_of"],
+        field_name="USD/RUB rate",
+        thresholds=thresholds.get("frankfurter", {}),
+    )
+    return delta
+
+
+async def run_cbr(thresholds: dict) -> dict | None:
+    """Poll Central Bank of Russia official RUB exchange rates. Free, no auth."""
+    from .sources import poll_cbr  # noqa: PLC0415
+    from .engine import compute_numeric  # noqa: PLC0415
+
+    current_raw = await poll_cbr()
+    if not current_raw.get("ok"):
+        log.error("cbr poll failed: %s", current_raw.get("error"))
+        return None
+
+    current_val = current_raw.get("usd_rub")
+    if current_val is None:
+        log.warning("cbr: no USD/RUB rate")
+        return None
+
+    prior = _load_prior("cbr")
+    prior_val = prior.get("usd_rub") if prior else None
+    prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+    _save_prior("cbr", current_raw)
+
+    if prior_val is None:
+        log.info("cbr: no prior state, recording baseline")
+        return None
+
+    delta = compute_numeric(
+        source="cbr",
+        prior_value=float(prior_val),
+        current_value=float(current_val),
+        prior_as_of=prior_as_of,
+        current_as_of=current_raw["as_of"],
+        field_name="USD/RUB (CBR official)",
+        thresholds=thresholds.get("cbr", {}),
+    )
+    return delta
+
+
+async def run_tenders_ukraine(thresholds: dict) -> dict | None:
+    """Poll Ukrainian government procurement tenders. War economy signal."""
+    from .sources import poll_tenders_ukraine  # noqa: PLC0415
+    from .engine import compute_numeric  # noqa: PLC0415
+
+    current_raw = await poll_tenders_ukraine()
+    if not current_raw.get("ok"):
+        log.error("tenders_ukraine poll failed: %s", current_raw.get("error"))
+        return None
+
+    current_count = current_raw.get("tender_count", 0)
+    prior = _load_prior("tenders_ukraine")
+    prior_count = prior.get("tender_count", 0) if prior else 0
+    prior_as_of = prior.get("as_of", current_raw["as_of"]) if prior else current_raw["as_of"]
+    _save_prior("tenders_ukraine", current_raw)
+
+    if prior is None:
+        log.info("tenders_ukraine: no prior state, recording baseline")
+        return None
+
+    delta = compute_numeric(
+        source="tenders_ukraine",
+        prior_value=float(prior_count),
+        current_value=float(current_count),
+        prior_as_of=prior_as_of,
+        current_as_of=current_raw["as_of"],
+        field_name="UA procurement tenders",
+        thresholds=thresholds.get("tenders_ukraine", {}),
+    )
+    return delta
+
+
+# ---------------------------------------------------------------------------
 # Main run orchestration
 # ---------------------------------------------------------------------------
 
@@ -1157,19 +1303,26 @@ async def run_cadence(cadence: str, thresholds: dict) -> list[dict]:
         tasks += [
             _run_source(run_bonbast, thresholds),
             _run_source(run_ooni, thresholds),
-            _run_source(run_cloudflare_radar, thresholds),
+            # cloudflare_radar: disabled — token expired, shelved (2026-03-22)
+            # _run_source(run_cloudflare_radar, thresholds),
             _run_source(run_tedpix, thresholds),
             _run_source(run_dolarvzla, thresholds),
+            _run_source(run_frankfurter, thresholds),
+            _run_source(run_cbr, thresholds),
             _run_source(run_viirs, thresholds, "IR"),
             _run_source(run_prediction_markets, thresholds),
-            _run_source(run_acled, thresholds),
-            _run_source(run_adsb, thresholds),
+            # acled: disabled — API unreachable, 3 consecutive failures 2026-03-23, shelved pending investigation
+            # _run_source(run_acled, thresholds),
+            # adsb: disabled — RapidAPI key didn't work out, shelved (2026-03-22)
+            # _run_source(run_adsb, thresholds),
             _run_source(run_telegram_osint, thresholds),
         ]
 
     if cadence in ("warm", "all"):
         tasks += [
             _run_source(run_eia, thresholds, "WCESTUS1"),
+            # tenders_ukraine: shelved — tenders.guru unreachable from Omega (2026-03-22)
+            # _run_source(run_tenders_ukraine, thresholds),
             _run_source(run_agsi, thresholds, "DE"),
             _run_source(run_entsog, thresholds),
             _run_source(run_ofac, thresholds),
@@ -1197,19 +1350,18 @@ async def run_cadence(cadence: str, thresholds: dict) -> list[dict]:
     # (_run_source already catches exceptions, so gather won't abort on failure)
     await asyncio.gather(*tasks)
 
-    # GDELT queries are rate-limited (429 on concurrent requests).
-    # Run them sequentially with a 2-second delay between each.
-    if cadence in ("hot", "all"):
-        gdelt_queries = [
-            "Iran military conflict",
-            "Strait Hormuz Iran",
-            "Europe energy crisis",
-            "Ukraine Russia conflict",
-        ]
-        for i, query in enumerate(gdelt_queries):
-            if i > 0:
-                await asyncio.sleep(2)
-            await _run_source(run_gdelt, thresholds, query)
+    # GDELT: disabled — persistent rate limiting 2026-03-23, shelved pending investigation
+    # if cadence in ("hot", "all"):
+    #     gdelt_queries = [
+    #         "Iran military conflict",
+    #         "Strait Hormuz Iran",
+    #         "Europe energy crisis",
+    #         "Ukraine Russia conflict",
+    #     ]
+    #     for i, query in enumerate(gdelt_queries):
+    #         if i > 0:
+    #             await asyncio.sleep(2)
+    #         await _run_source(run_gdelt, thresholds, query)
 
     return all_deltas
 

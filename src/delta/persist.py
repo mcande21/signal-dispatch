@@ -93,33 +93,63 @@ KEY_METRIC_MAP: dict[str, tuple[str, Callable[[dict], float | None]]] = {
         "tedpix_index",
         _safe(lambda p: p["index"]),
     ),
+    # EIA: keyed as "eia_wcestus1" (series id suffix), payload has latest_value
     "eia": (
         "crude_inventory_mbbl",
         _safe(lambda p: p.get("value") or p.get("inventory_mbbl")),
     ),
+    "eia_wcestus1": (
+        "crude_inventory_mbbl",
+        _safe(lambda p: p.get("latest_value")),
+    ),
     "eia_grid": (
         "us_grid_generation_mwh",
-        _safe(lambda p: p.get("total_generation_mwh") or p.get("value")),
+        _safe(lambda p: p.get("latest_value") or p.get("total_generation_mwh")),
     ),
+    # AGSI: keyed as "agsi_de" (country suffix), payload has latest_full_pct
     "agsi": (
         "eu_gas_storage_pct",
         _safe(lambda p: p.get("storage_percent") or p.get("percent_full")),
     ),
-    "entsog": (
-        "eu_gas_flow_gwh",
-        _safe(lambda p: p.get("total_flow_gwh") or p.get("value")),
+    "agsi_de": (
+        "eu_gas_storage_pct",
+        _safe(lambda p: p.get("latest_full_pct")),
     ),
+    # ENTSOG: payload has flow_count (no total_flow_gwh field)
+    "entsog": (
+        "eu_gas_flow_count",
+        _safe(lambda p: p.get("flow_count") or p.get("total_flow_gwh")),
+    ),
+    # ECB: payload has latest_value
     "ecb": (
         "eurusd_rate",
-        _safe(lambda p: p.get("value") or p.get("rate")),
+        _safe(lambda p: p.get("latest_value") or p.get("value") or p.get("rate")),
     ),
+    # FRED: keyed as "fred_vixcls", "fred_dff", etc — all have latest_value
     "fred": (
-        "vix",
-        _safe(lambda p: p.get("value")),
+        "latest_value",
+        _safe(lambda p: p.get("value") or p.get("latest_value")),
     ),
+    "fred_vixcls": (
+        "vix",
+        _safe(lambda p: p.get("latest_value")),
+    ),
+    "fred_dff": (
+        "fed_funds_rate",
+        _safe(lambda p: p.get("latest_value")),
+    ),
+    "fred_t10y2y": (
+        "yield_curve_spread",
+        _safe(lambda p: p.get("latest_value")),
+    ),
+    "fred_dcoilwtico": (
+        "wti_crude_price",
+        _safe(lambda p: p.get("latest_value")),
+    ),
+    # NOAA: payload has alert_count — use explicit None check (0 is valid)
     "noaa": (
-        "temperature_anomaly_c",
-        _safe(lambda p: p.get("value") or p.get("anomaly_c")),
+        "weather_alert_count",
+        _safe(lambda p: p["alert_count"] if p.get("alert_count") is not None else p.get("value") or p.get("anomaly_c")),
     ),
 
     # -------------------------------------------------------------------------
@@ -137,9 +167,14 @@ KEY_METRIC_MAP: dict[str, tuple[str, Callable[[dict], float | None]]] = {
         "hotspot_count",
         _safe(lambda p: p.get("hotspot_count") or len(p.get("hotspots", []))),
     ),
+    # Oryx: keyed as "oryx_russia" (country suffix)
     "oryx": (
         "total_losses",
         _safe(lambda p: p.get("total_losses") or p.get("loss_count")),
+    ),
+    "oryx_russia": (
+        "total_losses",
+        _safe(lambda p: p.get("total_losses")),
     ),
     "ooni": (
         "anomaly_rate",
@@ -157,17 +192,24 @@ KEY_METRIC_MAP: dict[str, tuple[str, Callable[[dict], float | None]]] = {
         "urgent_message_count",
         _safe(lambda p: p.get("urgent_messages") or p.get("urgent_count") or len(p.get("messages", []))),
     ),
+    # OFAC: payload has entity_count
     "ofac": (
         "designation_count",
-        _safe(lambda p: p.get("total_results") or p.get("designation_count")),
+        _safe(lambda p: p.get("entity_count") or p.get("total_results") or p.get("designation_count")),
     ),
+    # OpenSanctions: numeric data is nested in searches dict — use cross_jurisdiction count as scalar
     "opensanctions": (
-        "new_entry_count",
-        _safe(lambda p: p.get("new_entries") or p.get("count")),
+        "cross_jurisdiction_count",
+        _safe(lambda p: len(p.get("cross_jurisdiction", [])) if isinstance(p.get("cross_jurisdiction"), list) else p.get("new_entries") or p.get("count")),
     ),
+    # USASpending: sum obligations from nested data.awards list
     "usaspending": (
         "contract_total_usd",
-        _safe(lambda p: p.get("total_obligated_amount") or p.get("total_usd")),
+        _safe(lambda p: sum(
+            a.get("obligation", 0) or 0
+            for a in (p.get("data", {}).get("awards") or [])
+            if isinstance(a, dict)
+        ) or p.get("total_obligated_amount") or p.get("total_usd")),
     ),
     "comtrade": (
         "trade_value_usd",
@@ -181,9 +223,32 @@ KEY_METRIC_MAP: dict[str, tuple[str, Callable[[dict], float | None]]] = {
         "bill_count",
         _safe(lambda p: p.get("count") or len(p.get("bills", []))),
     ),
+    # FEC: payload has committee_count
     "fec": (
-        "total_contributions_usd",
-        _safe(lambda p: p.get("total_receipts") or p.get("total_usd")),
+        "committee_count",
+        _safe(lambda p: p.get("committee_count") or p.get("total_receipts") or p.get("total_usd")),
+    ),
+    # CBR: payload has usd_rub
+    "cbr": (
+        "usd_rub_rate",
+        _safe(lambda p: p.get("usd_rub")),
+    ),
+    # GDELT per-query keys
+    "gdelt_iran_military_conflict": (
+        "article_count",
+        _safe(lambda p: p.get("article_count") or len(p.get("articles", []))),
+    ),
+    "gdelt_strait_hormuz_iran": (
+        "article_count",
+        _safe(lambda p: p.get("article_count") or len(p.get("articles", []))),
+    ),
+    "gdelt_europe_energy_crisis": (
+        "article_count",
+        _safe(lambda p: p.get("article_count") or len(p.get("articles", []))),
+    ),
+    "gdelt_ukraine_russia_conflict": (
+        "article_count",
+        _safe(lambda p: p.get("article_count") or len(p.get("articles", []))),
     ),
 
     # -------------------------------------------------------------------------

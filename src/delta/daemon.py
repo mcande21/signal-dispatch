@@ -1162,8 +1162,10 @@ async def run_cadence(cadence: str, thresholds: dict) -> list[dict]:
             _run_source(run_dolarvzla, thresholds),
             _run_source(run_viirs, thresholds, "IR"),
             _run_source(run_prediction_markets, thresholds),
+            # acled: re-enabled 2026-03-24 with retry logic (2 attempts, 5s delay, 15s timeout)
             _run_source(run_acled, thresholds),
-            _run_source(run_adsb, thresholds),
+            # adsb: disabled — RapidAPI key didn't work out, shelved (2026-03-22)
+            # _run_source(run_adsb, thresholds),
             _run_source(run_telegram_osint, thresholds),
         ]
 
@@ -1197,19 +1199,34 @@ async def run_cadence(cadence: str, thresholds: dict) -> list[dict]:
     # (_run_source already catches exceptions, so gather won't abort on failure)
     await asyncio.gather(*tasks)
 
-    # GDELT queries are rate-limited (429 on concurrent requests).
-    # Run them sequentially with a 2-second delay between each.
+    # GDELT: re-enabled 2026-03-24 with 24h rate-limit gate
     if cadence in ("hot", "all"):
-        gdelt_queries = [
-            "Iran military conflict",
-            "Strait Hormuz Iran",
-            "Europe energy crisis",
-            "Ukraine Russia conflict",
-        ]
-        for i, query in enumerate(gdelt_queries):
-            if i > 0:
-                await asyncio.sleep(2)
-            await _run_source(run_gdelt, thresholds, query)
+        import time as _time  # noqa: PLC0415
+        import pathlib as _pathlib  # noqa: PLC0415
+        _gdelt_gate_path = _pathlib.Path(__file__).parent.parent.parent / "data" / "gdelt_last_poll.txt"
+        _gdelt_gate_path.parent.mkdir(parents=True, exist_ok=True)
+        _now = _time.time()
+        _last_poll = 0.0
+        if _gdelt_gate_path.exists():
+            try:
+                _last_poll = float(_gdelt_gate_path.read_text().strip())
+            except ValueError:
+                _last_poll = 0.0
+        if _now - _last_poll < 86400:
+            log.info("gdelt: skipping — last poll was %.1fh ago (24h gate active)", (_now - _last_poll) / 3600)
+        else:
+            gdelt_queries = [
+                "Iran military conflict",
+                "Strait Hormuz Iran",
+                "Europe energy crisis",
+                "Ukraine Russia conflict",
+            ]
+            for i, query in enumerate(gdelt_queries):
+                if i > 0:
+                    await asyncio.sleep(2)
+                await _run_source(run_gdelt, thresholds, query)
+            # Write gate file so GDELT is skipped for the next 24h
+            _gdelt_gate_path.write_text(str(_now))
 
     return all_deltas
 

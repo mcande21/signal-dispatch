@@ -942,6 +942,8 @@ async def poll_eia_grid(respondent: str = "US48", data_type: str = "D") -> dict:
 async def poll_acled() -> dict:
     """Fetch ACLED conflict events for the past 7 days.
 
+    Retries up to 2 attempts with a 5s delay and 15s timeout each.
+
     Returns:
         {
             "total_events": int,
@@ -951,21 +953,35 @@ async def poll_acled() -> dict:
             "top_events": list[dict],
         }
     """
-    try:
-        from src.adapters.acled import AcledAdapter  # noqa: PLC0415
-        adapter = AcledAdapter(_DB_PATH)
-        result = await adapter.fetch({})
-        await adapter.close()
+    import asyncio as _asyncio  # noqa: PLC0415
+    import logging as _logging  # noqa: PLC0415
+    _alog = _logging.getLogger(__name__)
 
-        return _ok("acled", {
-            "total_events": result.get("total_events", 0),
-            "total_fatalities": result.get("total_fatalities", 0),
-            "by_region": result.get("by_region", {}),
-            "by_country": result.get("by_country", {}),
-            "top_events": result.get("top_events", []),
-        })
-    except Exception as e:
-        return _err("acled", str(e))
+    max_attempts = 2
+    delay_s = 5
+    last_err: Exception | None = None
+
+    for attempt in range(1, max_attempts + 1):
+        try:
+            from src.adapters.acled import AcledAdapter  # noqa: PLC0415
+            adapter = AcledAdapter(_DB_PATH)
+            result = await _asyncio.wait_for(adapter.fetch({}), timeout=15)
+            await adapter.close()
+
+            return _ok("acled", {
+                "total_events": result.get("total_events", 0),
+                "total_fatalities": result.get("total_fatalities", 0),
+                "by_region": result.get("by_region", {}),
+                "by_country": result.get("by_country", {}),
+                "top_events": result.get("top_events", []),
+            })
+        except Exception as e:
+            last_err = e
+            _alog.warning("acled attempt %d/%d failed: %s", attempt, max_attempts, e)
+            if attempt < max_attempts:
+                await _asyncio.sleep(delay_s)
+
+    return _err("acled", str(last_err))
 
 
 # ---------------------------------------------------------------------------
@@ -1185,3 +1201,152 @@ async def poll_opensky() -> dict:
         })
     except Exception as e:
         return _err("opensky", str(e))
+# NEW ADAPTERS (2026-03-22)
+# ---------------------------------------------------------------------------
+
+async def poll_frankfurter(currencies: list[str] | None = None) -> dict:
+    """Fetch forex rates from Frankfurter (ECB-sourced, free, no auth).
+
+    Tracks USD vs RUB, CNY, IRR — sanctions pressure indicators.
+    Falls back to ExchangeRate-API v4 if Frankfurter is unreachable.
+
+    Returns:
+        {"base": "USD", "date": str, "rates": dict}
+    """
+    import logging as _logging  # noqa: PLC0415
+    _flog = _logging.getLogger(__name__)
+
+    if currencies is None:
+        currencies = ["RUB", "CNY", "IRR", "EUR", "GBP"]
+
+    try:
+        import aiohttp  # noqa: PLC0415
+        symbols = ",".join(currencies)
+        primary_url = f"https://api.frankfurter.app/latest?from=USD&to={symbols}"
+        fallback_url = "https://api.exchangerate-api.com/v4/latest/USD"
+
+        data = None
+        source_used = "frankfurter"
+
+        async with aiohttp.ClientSession() as session:
+            # Try Frankfurter first with a short timeout
+            try:
+                async with session.get(primary_url, timeout=aiohttp.ClientTimeout(total=8)) as resp:
+                    if resp.status == 200:
+                        data = await resp.json()
+                    else:
+                        raise ValueError(f"HTTP {resp.status}")
+            except Exception as primary_err:
+                _flog.warning("frankfurter primary unreachable (%s), trying ExchangeRate-API fallback", primary_err)
+                source_used = "exchangerate-api"
+                async with session.get(fallback_url, timeout=aiohttp.ClientTimeout(total=15)) as resp:
+                    if resp.status != 200:
+                        return _err("frankfurter", f"fallback HTTP {resp.status}")
+                    data = await resp.json()
+
+        rates = data.get("rates", {})
+        # Filter to requested currencies
+        filtered_rates = {c: rates[c] for c in currencies if c in rates}
+        return _ok("frankfurter", {
+            "base": "USD",
+            "date": data.get("date"),
+            "rates": filtered_rates,
+            "rub": filtered_rates.get("RUB"),
+            "cny": filtered_rates.get("CNY"),
+            "eur": filtered_rates.get("EUR"),
+            "source": source_used,
+        })
+    except Exception as e:
+        return _err("frankfurter", str(e))
+
+
+async def poll_cbr(base: str = "USD") -> dict:
+    """Fetch official RUB exchange rates from Central Bank of Russia.
+
+    Direct signal on ruble valuation from Moscow's official source.
+    Free, no auth, XML/JSON.
+
+    Returns:
+        {"date": str, "rates": dict}
+    """
+    try:
+        import aiohttp  # noqa: PLC0415
+        from xml.etree import ElementTree  # noqa: PLC0415
+        url = "https://www.cbr.ru/scripts/XML_daily.asp"
+
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, timeout=aiohttp.ClientTimeout(total=15)) as resp:
+                if resp.status != 200:
+                    return _err("cbr", f"HTTP {resp.status}")
+                text = await resp.text(encoding="windows-1251")
+
+        root = ElementTree.fromstring(text)
+        date_str = root.attrib.get("Date", "")
+        rates = {}
+        for valute in root.findall("Valute"):
+            char_code = valute.findtext("CharCode", "")
+            nominal = valute.findtext("Nominal", "1").replace(",", ".")
+            value = valute.findtext("Value", "0").replace(",", ".")
+            try:
+                rate_per_unit = float(value) / float(nominal)
+                rates[char_code] = round(rate_per_unit, 4)
+            except (ValueError, ZeroDivisionError):
+                pass
+
+        usd_rub = rates.get("USD")
+        eur_rub = rates.get("EUR")
+        cny_rub = rates.get("CNY")
+
+        return _ok("cbr", {
+            "date": date_str,
+            "base": "RUB",
+            "rates": rates,
+            "usd_rub": usd_rub,
+            "eur_rub": eur_rub,
+            "cny_rub": cny_rub,
+        })
+    except Exception as e:
+        return _err("cbr", str(e))
+
+
+async def poll_tenders_ukraine() -> dict:
+    """Fetch recent Ukrainian government procurement data from tenders.guru.
+
+    War economy signal — tracks defense/reconstruction spending patterns.
+    Free, no auth.
+
+    Returns:
+        {"tender_count": int, "recent_tenders": list[dict]}
+    """
+    try:
+        import aiohttp  # noqa: PLC0415
+        url = "https://tenders.guru/ua/api"
+        params = {"limit": 20, "sort": "date_desc"}
+
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=params, timeout=aiohttp.ClientTimeout(total=20)) as resp:
+                if resp.status != 200:
+                    return _err("tenders_ukraine", f"HTTP {resp.status}")
+                data = await resp.json()
+
+        tenders = data if isinstance(data, list) else data.get("data", data.get("tenders", []))
+        total = len(tenders)
+
+        # Extract key fields
+        recent = []
+        for t in tenders[:10]:
+            recent.append({
+                "id": t.get("id") or t.get("tender_id", ""),
+                "title": (t.get("title") or t.get("name", ""))[:120],
+                "value": t.get("value") or t.get("amount"),
+                "currency": t.get("currency", "UAH"),
+                "date": t.get("date") or t.get("published_at", ""),
+                "buyer": (t.get("buyer") or t.get("procuring_entity", ""))[:80],
+            })
+
+        return _ok("tenders_ukraine", {
+            "tender_count": total,
+            "recent_tenders": recent,
+        })
+    except Exception as e:
+        return _err("tenders_ukraine", str(e))

@@ -1259,3 +1259,158 @@ async def poll_noaa(query_type: str = "forecast", city: str = "nyc", state: str 
         return _ok("noaa", result)
     except Exception as e:
         return _err("noaa", str(e))
+
+
+# ---------------------------------------------------------------------------
+# SEC EDGAR -- corporate filings, insider trades, beneficial ownership (composite, warm)
+# ---------------------------------------------------------------------------
+
+async def poll_sec_edgar(method: str = "filing_search", **kwargs) -> dict:
+    """Fetch SEC EDGAR data by method.
+
+    Methods: company_search, company_filings, filing_search, insider_trades, beneficial_ownership.
+
+    Args:
+        method: EDGAR query method
+        **kwargs: Passed through to adapter query dict (company, cik, query, forms, days)
+
+    Returns:
+        Method-dependent dict from SecEdgarAdapter.
+    """
+    try:
+        from src.adapters.corporate import SecEdgarAdapter  # noqa: PLC0415
+        adapter = SecEdgarAdapter(_DB_PATH)
+        result = await adapter.fetch({"method": method, **kwargs})
+        await adapter.close()
+
+        return _ok("sec_edgar", {
+            "method": method,
+            "data": result,
+        })
+    except Exception as e:
+        return _err("sec_edgar", str(e))
+
+
+# ---------------------------------------------------------------------------
+# FEC Corporate -- PAC money, contributions, independent expenditures (composite, cold)
+# ---------------------------------------------------------------------------
+
+async def poll_fec_corporate(method: str = "committee_search", **kwargs) -> dict:
+    """Fetch FEC campaign finance data for corporate investigations.
+
+    Methods: committee_search, committee_detail, candidate_totals,
+             schedule_a (contributions), schedule_b (disbursements),
+             schedule_e (independent expenditures / Super PAC spend).
+
+    Requires FEC_API_KEY env var.
+    """
+    try:
+        from src.adapters.corporate import FecCorporateAdapter  # noqa: PLC0415
+        adapter = FecCorporateAdapter(_DB_PATH)
+        result = await adapter.fetch({"method": method, **kwargs})
+        await adapter.close()
+
+        if result.get("error"):
+            return _err("fec_corporate", result["error"])
+
+        return _ok("fec_corporate", {
+            "method": method,
+            "data": result,
+        })
+    except Exception as e:
+        return _err("fec_corporate", str(e))
+
+
+# ---------------------------------------------------------------------------
+# FERC -- energy regulatory filings, utility financials (composite, cold)
+# ---------------------------------------------------------------------------
+
+async def poll_ferc(method: str = "search_filings", **kwargs) -> dict:
+    """Fetch FERC regulatory documents via Federal Register API.
+
+    Methods: search_filings, search_docket, search_company.
+    """
+    try:
+        from src.adapters.corporate import FercAdapter  # noqa: PLC0415
+        adapter = FercAdapter(_DB_PATH)
+        result = await adapter.fetch({"method": method, **kwargs})
+        await adapter.close()
+
+        return _ok("ferc", {
+            "method": method,
+            "data": result,
+        })
+    except Exception as e:
+        return _err("ferc", str(e))
+
+
+# ---------------------------------------------------------------------------
+# ProPublica Nonprofits -- 990 filings, dark money groups (composite, cold)
+# ---------------------------------------------------------------------------
+
+async def poll_propublica_nonprofits(method: str = "search", **kwargs) -> dict:
+    """Fetch ProPublica Nonprofit Explorer data.
+
+    Methods: search, organization, filings.
+    """
+    try:
+        from src.adapters.corporate import ProPublicaNonprofitAdapter  # noqa: PLC0415
+        adapter = ProPublicaNonprofitAdapter(_DB_PATH)
+        result = await adapter.fetch({"method": method, **kwargs})
+        await adapter.close()
+
+        return _ok("propublica_nonprofits", {
+            "method": method,
+            "data": result,
+        })
+    except Exception as e:
+        return _err("propublica_nonprofits", str(e))
+
+
+# ---------------------------------------------------------------------------
+# CourtListener -- federal court dockets, opinions, RECAP (composite, cold)
+# ---------------------------------------------------------------------------
+
+async def poll_courtlistener(method: str = "search_dockets", **kwargs) -> dict:
+    """Fetch CourtListener federal court data.
+
+    Methods: search_opinions, search_dockets, search_recap, docket_detail.
+
+    Optional: COURTLISTENER_API_TOKEN env var for higher rate limits.
+    """
+    try:
+        from src.adapters.corporate import CourtListenerAdapter  # noqa: PLC0415
+        adapter = CourtListenerAdapter(_DB_PATH)
+        result = await adapter.fetch({"method": method, **kwargs})
+        await adapter.close()
+
+        return _ok("courtlistener", {
+            "method": method,
+            "data": result,
+        })
+    except Exception as e:
+        return _err("courtlistener", str(e))
+
+
+# ---------------------------------------------------------------------------
+# Senate Lobbying -- LDA filings, registrants, contributions (composite, cold)
+# ---------------------------------------------------------------------------
+
+async def poll_senate_lobbying(method: str = "search_filings", **kwargs) -> dict:
+    """Fetch Senate Lobbying Disclosure Act data.
+
+    Methods: search_filings, search_registrants, search_clients,
+             lobbyist_lookup, contributions.
+    """
+    try:
+        from src.adapters.corporate import SenateLobbyingAdapter  # noqa: PLC0415
+        adapter = SenateLobbyingAdapter(_DB_PATH)
+        result = await adapter.fetch({"method": method, **kwargs})
+        await adapter.close()
+
+        return _ok("senate_lobbying", {
+            "method": method,
+            "data": result,
+        })
+    except Exception as e:
+        return _err("senate_lobbying", str(e))

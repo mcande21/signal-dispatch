@@ -1,6 +1,6 @@
 {
   "$schema": "Signal Dispatch Issue Tracker v1",
-  "next_issue_number": 11,
+  "next_issue_number": 12,
   "issues": [
     {
       "issue_number": 0,
@@ -97,6 +97,27 @@
       "draft_path": "content/drafts/10-deep_dive.md",
       "published_path": "content/published/10-deep_dive-2026-03-21.md",
       "research_path": "content/research/9/"
+    },
+    {
+      "issue_number": 11,
+      "type": "deep_dive",
+      "topic": "Democratic Party faith in New York State - Frustrated Continuity",
+      "date_started": "2026-03-25",
+      "status": "published",
+      "published_date": "2026-03-25"
+    },
+    {
+      "issue_number": 12,
+      "type": "deep_dive",
+      "topic": "The Gap: How electricity regulation lets utilities choose data centers over communities",
+      "date_started": "2026-05-15",
+      "status": "published",
+      "published_date": "2026-05-16",
+      "platform_url": "https://signaldsp.substack.com",
+      "draft_path": "content/drafts/12-deep_dive.md",
+      "published_path": "content/published/12-deep_dive-2026-05-16.md",
+      "research_path": "content/research/12/"
     }
-  ]
+  ],
+  "next_issue_number": 13
 }

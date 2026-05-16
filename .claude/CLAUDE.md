@@ -22,12 +22,21 @@ Self-contained. All adapters live in `src/adapters/` with own venv and dependenc
 **Adapters (`src/adapters/`):**
 - Ghost Market (16): OONI, OFAC, Bonbast, EIA, Cloudflare Radar, TEDPIX, USAspending, GDELT, ENTSOG, AGSI, ECB, Comtrade, EIA Grid, VIIRS/FIRMS, dolarVzla, Oryx
 - OSINT (3): Federal Register, Congress, FEC
+- Corporate Investigative (6): SEC EDGAR, FEC Corporate, FERC, ProPublica Nonprofits, CourtListener, Senate Lobbying
 - Standalone: FRED, NOAA, Kalshi (prediction markets)
+
+**Corporate Investigative (`src/adapters/corporate/`):**
+- SEC EDGAR -- company filings (10-K/Q, 8-K), insider trades (Form 4), beneficial ownership (13D/G). No key needed.
+- FEC Corporate -- PAC money, itemized contributions (Schedule A), disbursements (Schedule B), Super PAC independent expenditures (Schedule E). Needs FEC_API_KEY (free).
+- FERC -- energy regulatory filings via Federal Register API (orders, notices, pipeline permits, rate cases). No key needed.
+- ProPublica Nonprofits -- 990 dark money / nonprofit filings, revenue, executive comp. No key needed.
+- CourtListener -- federal court dockets, opinions, RECAP/PACER. Optional COURTLISTENER_API_TOKEN for higher limits.
+- Senate Lobbying -- LDA filings via lda.gov (migrated from lda.senate.gov), lobbying firm-to-client mapping, revolving door. No key needed.
 
 **Delta Engine (`src/delta/`):**
 - `daemon.py` -- Cron-driven poller (hot every 6h, warm daily, cold on-demand)
 - `engine.py` -- Delta computation (numeric, event_set, binary, categorical)
-- `sources.py` -- 22 poll functions wrapping local adapters
+- `sources.py` -- 28 poll functions wrapping local adapters
 - `clusters.py` -- Correlated delta detection (Iran, Hormuz, Europe energy, conflict, US macro)
 - State at `content/state/deltas/` (runtime data, gitignored)
 

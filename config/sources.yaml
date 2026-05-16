@@ -142,6 +142,79 @@ elections_historical:
     auth: "None required -- public GitHub data"
     note: "No house-by-district for 2024 yet (MEDSL publishes precinct ZIPs but no consolidated CSV). County presidential only covers 2000-2016 in this dataset."
 
+corporate_investigative:
+  sec_edgar:
+    adapter: "corporate.sec_edgar"
+    refresh: "6h"
+    cadence: "warm"
+    signal: "SEC corporate filings -- 10-K/10-Q financials, 8-K events, Form 4 insider trades, 13D/G beneficial ownership (5%+ stakes)"
+    methods:
+      - company_search: "Find companies by name/ticker, return CIK numbers"
+      - company_filings: "Recent filings for a CIK (10-K, 10-Q, 8-K, DEF14A)"
+      - filing_search: "Full-text search across all SEC filings"
+      - insider_trades: "Form 4 insider trade filings"
+      - beneficial_ownership: "Schedule 13D/13G -- who owns 5%+ of a company"
+    auth: "None -- User-Agent header only"
+  fec_corporate:
+    adapter: "corporate.fec"
+    refresh: "12h"
+    cadence: "cold"
+    signal: "FEC campaign finance -- PAC money, itemized contributions, disbursements, Super PAC independent expenditures"
+    methods:
+      - committee_search: "Find PACs/committees by name or connected org"
+      - committee_detail: "Full committee record with financial totals by cycle"
+      - candidate_totals: "Candidate fundraising summary (receipts, PAC money, cash on hand)"
+      - schedule_a: "Itemized receipts -- who gave money to which committee (org-to-candidate tracing)"
+      - schedule_b: "Itemized disbursements -- how committees spent money"
+      - schedule_e: "Independent expenditures -- Super PAC spend for/against candidates"
+    auth: "FEC_API_KEY env var (free, apply at api.open.fec.gov)"
+    note: "Replaces discontinued OpenSecrets API. FEC is the authoritative source for all federal campaign finance data."
+  ferc:
+    adapter: "corporate.ferc"
+    refresh: "12h"
+    cadence: "cold"
+    signal: "FERC energy regulatory filings via Federal Register API -- orders, notices, rules, rate cases, pipeline permits"
+    methods:
+      - search_filings: "Search FERC documents by keyword with optional doc type filter"
+      - search_docket: "Trace a specific FERC docket number through Federal Register"
+      - search_company: "Find all FERC documents mentioning a company"
+    auth: "None"
+    note: "Uses Federal Register API (FERC eLibrary is SPA-only, no JSON API). Covers all FERC issuances published in the Federal Register."
+  propublica_nonprofits:
+    adapter: "corporate.propublica_nonprofits"
+    refresh: "24h"
+    cadence: "cold"
+    signal: "990 nonprofit filings -- revenue, expenses, executive compensation, grants. Dark money group tracing."
+    methods:
+      - search: "Search nonprofits by name, state, NTEE code"
+      - organization: "Full org record + all 990 filings for an EIN"
+      - filings: "Financial filing history for an EIN"
+    auth: "None"
+  courtlistener:
+    adapter: "corporate.courtlistener"
+    refresh: "6h"
+    cadence: "cold"
+    signal: "Federal court records -- dockets, opinions, RECAP/PACER filings. Enforcement actions, litigation, regulatory disputes."
+    methods:
+      - search_opinions: "Search court opinions by keyword"
+      - search_dockets: "Search federal court dockets"
+      - search_recap: "Search PACER documents in RECAP archive"
+      - docket_detail: "Full docket with all entries"
+    auth: "COURTLISTENER_API_TOKEN env var (optional, free registration for higher limits)"
+  senate_lobbying:
+    adapter: "corporate.senate_lobbying"
+    refresh: "12h"
+    cadence: "cold"
+    signal: "Lobbying disclosure -- registrations, activity reports, lobbyist-to-client mapping, revolving door, campaign contributions"
+    methods:
+      - search_filings: "Search lobbying filings by registrant, client, issue area"
+      - search_registrants: "Find lobbying firms by name"
+      - search_clients: "Find organizations that hired lobbyists"
+      - lobbyist_lookup: "Individual lobbyist search (revolving door tracer)"
+      - contributions: "LD-203 lobbyist campaign contribution filings"
+    auth: "None"
+    note: "Issue codes: ENE=Energy, FUE=Fuel/Gas/Oil, ENV=Environment, TAX=Taxation, DEF=Defense"
+
 prediction_markets:
   kalshi:
     cli: "pm search"

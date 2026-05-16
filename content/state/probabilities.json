@@ -1,6 +1,6 @@
 {
   "$schema": "Signal Dispatch Probability State v1",
-  "last_updated": "2026-03-18T00:00:00Z",
+  "last_updated": "2026-05-16T00:00:00Z",
   "events": [
     {
       "id": "iran-regime-change-2026",
@@ -269,6 +269,151 @@
       "history": [
         { "date": "2026-03-21", "probability": 0.45, "issue": 10, "note": "Initial assessment. More likely not to happen. Per-CD model yields 3,000-5,000 net loss across ~30 competitive CDs (90K-150K range). But only NH has active DPOC for federal races -- 100K requires counting fear channel and DOJ voter roll effects operating without enacted legislation. Evidence is indirect." }
       ]
+    },
+    {
+      "id": "ny-gov-hold-2026",
+      "event": "Democrats hold New York governorship in November 2026",
+      "issue_introduced": 11,
+      "current_probability": 0.92,
+      "confidence": "high",
+      "resolution_date": "2027-01-01",
+      "resolution_criteria": "Democratic candidate wins November 2026 NY gubernatorial election, certified by NY Board of Elections.",
+      "history": [
+        { "date": "2026-03-25", "probability": 0.92, "issue": 11, "note": "Initial assessment. Hochul leads Blakeman 17-20 points (Siena Feb 2026). 2:1 registration advantage. Subjective 8-point discount for black-swan scenarios." }
+      ]
+    },
+    {
+      "id": "dsa-new-seat-2026",
+      "event": "At least one DSA-endorsed candidate wins a new state legislative seat in 2026",
+      "issue_introduced": 11,
+      "current_probability": 0.78,
+      "confidence": "medium-high",
+      "resolution_date": "2027-01-01",
+      "resolution_criteria": "DSA-endorsed candidate not currently holding state legislative office wins in November 2026 general election.",
+      "history": [
+        { "date": "2026-03-25", "probability": 0.78, "issue": 11, "note": "Initial assessment. Largest-ever DSA state slate (7 Assembly, 1 Senate, 2 Congressional). Mamdani precedent. Discounted for AIPAC/corporate PAC opposition." }
+      ]
+    },
+    {
+      "id": "essential-plan-gap-200k",
+      "event": "Essential Plan coverage gap exceeds 200,000 by December 2026",
+      "issue_introduced": 11,
+      "current_probability": 0.72,
+      "confidence": "medium",
+      "resolution_date": "2027-03-31",
+      "resolution_criteria": "NYS DOH Essential Plan enrollment data shows 200,000+ fewer enrollees as of December 31, 2026 compared to June 30, 2026 baseline.",
+      "history": [
+        { "date": "2026-03-25", "probability": 0.72, "issue": 11, "note": "Initial assessment. 470K at risk from July 1 federal funding loss. Full backfill requires $2.4B (CSS). Governor has stated state cannot afford to backfill. Partial backfill likely." }
+      ]
+    },
+    {
+      "id": "aoc-schumer-announce-2028",
+      "event": "Alexandria Ocasio-Cortez formally announces challenge to Schumer for 2028 Senate primary",
+      "issue_introduced": 11,
+      "current_probability": 0.55,
+      "confidence": "low",
+      "resolution_date": "2027-12-31",
+      "resolution_criteria": "Formal FEC filing or public campaign announcement by December 31, 2027.",
+      "history": [
+        { "date": "2026-03-25", "probability": 0.55, "issue": 11, "note": "Initial assessment. Subjective estimate. Data for Progress March 2025 shows AOC +19 in hypothetical matchup. Schumer at 27% approval. Base rate for speculated candidacies becoming filings is historically low." }
+      ]
+    },
+    {
+      "id": "ny-tax-increase-5m-2026",
+      "event": "New York State enacts net tax increase on incomes above $5 million in 2026-2027 legislative session",
+      "issue_introduced": 11,
+      "current_probability": 0.35,
+      "confidence": "medium",
+      "resolution_date": "2026-12-31",
+      "resolution_criteria": "Enacted budget for SFY 2026-2027 contains net tax increase on income above $5M.",
+      "history": [
+        { "date": "2026-03-25", "probability": 0.35, "issue": 11, "note": "Initial assessment. Both chambers proposed increases. 62% public support. Hochul firmly opposed with effective veto. Budget deadline April 1." }
+      ]
+    },
+    {
+      "id": "ny-health-act-floor-vote-2026",
+      "event": "New York Health Act receives floor vote in at least one chamber by end of 2026 session",
+      "issue_introduced": 11,
+      "current_probability": 0.08,
+      "confidence": "medium-high",
+      "resolution_date": "2026-12-31",
+      "resolution_criteria": "A1466 or S3425 receives a recorded floor vote in the Assembly or Senate by December 31, 2026.",
+      "history": [
+        { "date": "2026-03-25", "probability": 0.08, "issue": 11, "note": "Initial assessment. Bill has never received a Senate floor vote in 35 years. Leadership shows no indication of scheduling one. 8% accounts for Essential Plan crisis creating pressure for symbolic vote." }
+      ]
+    }
+  ],
+    {
+      "id": "liberty-replacement-power-may-2027",
+      "event": "Liberty Utilities secures adequate replacement power by May 2027",
+      "issue_introduced": 12,
+      "current_probability": 0.50,
+      "confidence": "medium",
+      "resolution_date": "2027-05-31",
+      "resolution_criteria": "YES if Liberty Utilities has firm procurement contracts covering 75%+ of annual load by May 31, 2027. NO if Liberty faces supply shortfalls, emergency procurement, or rolling service interruptions.",
+      "history": [
+        {
+          "date": "2026-05-16",
+          "probability": 0.50,
+          "issue": 12,
+          "note": "Initial assessment. Greenlink West on-time rate 60-70%, but 4,000/5,000 MW already committed to data centers. Liberty has 12 months and 16 years of failed independence attempts. Decomposed: 70-75% lights-on via emergency purchases, 25-30% clean cost-neutral transition. 50% reflects the range between outcomes.",
+          "cooper_initial": 0.50
+        }
+      ]
+    },
+    {
+      "id": "ferc-intervenes-liberty-2027",
+      "event": "FERC intervenes to extend NV Energy wholesale service to Liberty Utilities",
+      "issue_introduced": 12,
+      "current_probability": 0.15,
+      "confidence": "medium",
+      "resolution_date": "2027-05-31",
+      "resolution_criteria": "YES if FERC issues any order under FPA Sections 202(b), 206, or 207 that results in continued or extended wholesale service from NV Energy to Liberty beyond May 2027. NO if no FERC action or if action does not result in service extension.",
+      "history": [
+        {
+          "date": "2026-05-16",
+          "probability": 0.15,
+          "issue": 12,
+          "note": "Initial assessment. Conditional on someone filing -- nobody has as of 2026-05-16. P(filing) ~30-40% x P(intervention|filing) ~35-40% = 11-16% unconditional. El Paso Electric (2000) provides precedent but Trump administration posture favors data center development.",
+          "cooper_initial": 0.15
+        }
+      ]
+    },
+    {
+      "id": "wholesale-termination-12mo",
+      "event": "Another community faces wholesale supply termination driven by data center demand within 12 months",
+      "issue_introduced": 12,
+      "current_probability": 0.40,
+      "confidence": "medium-low",
+      "resolution_date": "2027-05-16",
+      "resolution_criteria": "YES if a wholesale power supplier notifies a retail utility of supply termination or non-renewal citing capacity constraints attributable to data center demand, affecting 1,000+ residential customers, by May 16, 2027. NO if no such termination announced.",
+      "history": [
+        {
+          "date": "2026-05-16",
+          "probability": 0.40,
+          "issue": 12,
+          "note": "Initial assessment. Narrowed from 92% (conflicts broadly) to the specific wholesale termination mechanism. Conditions (interstate wholesale, isolated grid, capacity constraint, data center concentration) are unusual but not unique.",
+          "cooper_initial": 0.40
+        }
+      ]
+    },
+    {
+      "id": "fed-legislation-dc-grid-24mo",
+      "event": "Federal legislation addressing data center grid impact passes within 24 months",
+      "issue_introduced": 12,
+      "current_probability": 0.20,
+      "confidence": "medium",
+      "resolution_date": "2028-05-16",
+      "resolution_criteria": "YES if Congress passes and the President signs legislation explicitly addressing data center electricity demand, grid cost allocation, or residential ratepayer protection from data center load growth by May 16, 2028. FERC rulemaking alone does not qualify. NO if no such legislation enacted.",
+      "history": [
+        {
+          "date": "2026-05-16",
+          "probability": 0.20,
+          "issue": 12,
+          "note": "Initial assessment. GRID Act (Hawley/Blumenthal) has bipartisan sponsorship but faces national security framing (data centers as AI infrastructure vs. China) and base-rate congressional gridlock on energy legislation.",
+          "cooper_initial": 0.20
+        }
+      ]
     }
   ],
   "resolved": [
@@ -286,16 +431,16 @@
     "total_resolved": 1,
     "mean_brier_score": 0.2025,
     "calibration_buckets": {
-      "0-10": { "predictions": 1, "outcomes": 0 },
+      "0-10": { "predictions": 2, "outcomes": 0 },
       "10-20": { "predictions": 1, "outcomes": 0 },
       "20-30": { "predictions": 2, "outcomes": 0 },
-      "30-40": { "predictions": 3, "outcomes": 0 },
+      "30-40": { "predictions": 4, "outcomes": 0 },
       "40-50": { "predictions": 1, "outcomes": 0 },
-      "50-60": { "predictions": 2, "outcomes": 1 },
+      "50-60": { "predictions": 3, "outcomes": 1 },
       "60-70": { "predictions": 2, "outcomes": 0 },
-      "70-80": { "predictions": 2, "outcomes": 0 },
+      "70-80": { "predictions": 4, "outcomes": 0 },
       "80-90": { "predictions": 0, "outcomes": 0 },
-      "90-100": { "predictions": 0, "outcomes": 0 }
+      "90-100": { "predictions": 1, "outcomes": 0 }
     },
     "directional_accuracy": 1.0
   }

@@ -10,6 +10,7 @@ Auth: None required
 TTL: 3 hours (forecasts), 24 hours (historical obs)
 """
 
+import os
 from datetime import datetime, timezone
 
 import httpx
@@ -20,7 +21,7 @@ from .base import GhostMarketAdapter, GhostMarketApiError
 NOAA_API_BASE = "https://www.ncei.noaa.gov/access/services/data/v1"
 NWS_API_BASE = "https://api.weather.gov"
 
-NWS_USER_AGENT = "(signal-dispatch, contact@example.com)"
+NWS_USER_AGENT = f"(signal-dispatch, {os.environ.get('SD_CONTACT_EMAIL', 'contact@example.com')})"
 
 # GHCN-Daily station IDs for tracked cities
 NOAA_STATIONS = {

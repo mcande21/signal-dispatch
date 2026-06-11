@@ -1,5 +1,5 @@
 # Data sources -- all sourced from prediction-markets project
-prediction_markets_root: "/path/to/home/projects/prediction-markets"  # Legacy -- SD now uses local adapters in src/adapters/. This path retained for reference only.
+prediction_markets_root: "../prediction-markets"  # Legacy -- SD now uses local adapters in src/adapters/. This path retained for reference only.
 
 structured_feeds:
   ooni:

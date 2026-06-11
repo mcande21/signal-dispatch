@@ -77,7 +77,7 @@ Issues that are incomplete, broken, or need attention. Organized by priority.
 
 ### Launchd Not Installed
 - Template at `config/com.signaldispatch.delta.plist`
-- Cooper needs to customize paths and install manually
+- the editor needs to customize paths and install manually
 - Priority: P2 -- daemon won't auto-restart until this is done
 
 ### Composite Delta Types (Stubbed)
@@ -88,7 +88,7 @@ Issues that are incomplete, broken, or need attention. Organized by priority.
 ### Cloudflare Radar Token Missing
 - Needs `CLOUDFLARE_RADAR_TOKEN` in `.env` (free at developers.cloudflare.com/radar)
 - Without it, Cloudflare source always fails silently
-- Priority: P3 -- Cooper manual action
+- Priority: P3 -- the editor manual action
 
 ### TEDPIX Unreachable
 - tsetmc.com (Tehran Stock Exchange) is unreachable from outside Iran -- Iran internet controls
@@ -128,14 +128,14 @@ Issues that are incomplete, broken, or need attention. Organized by priority.
 | Composite delta type for Comtrade | P2 | 2h |
 | Composite delta type for FEC | P3 | 1h |
 | Threshold calibration after 4-6 issues with real delta data | P1 | ongoing |
-| Two-stream Brier score tracking (system-suggested vs Cooper-actual) | P2 | 2h |
+| Two-stream Brier score tracking (system-suggested vs editor-actual) | P2 | 2h |
 | Historical context depth -- percentile requires 30+ data points per source | P2 | ongoing |
 
 ### Phase 5: New Source Onboarding
 
 **Goal:** Add high-value Crucix-identified sources.
 
-**Licensing:** Cooper greenlit all four sources for personal use (2026-03-17). Not deploying commercially.
+**Licensing:** The editor greenlit all four sources for personal use (2026-03-17). Not deploying commercially.
 
 | Source | Status | Notes |
 |--------|--------|-------|
@@ -150,7 +150,7 @@ Issues that are incomplete, broken, or need attention. Organized by priority.
 Phase 2 (cleanup)
   ├── Fix bugs (EDI, focused dispatches)
   ├── Commit in logical chunks (Miranda)
-  └── Install cron (Cooper manual)
+  └── Install cron (the editor manual)
        │
 Phase 3 (editorial integration)
   ├── Garrus scopes /intel Stage 1 integration
@@ -166,14 +166,14 @@ Phase 5 (new sources)
   └── Only after licensing resolved
 ```
 
-## Key Decisions (Cooper)
+## Key Decisions (the editor)
 
 These require editorial judgment, not engineering:
 
 1. **Threshold calibration** -- What magnitude of rial movement is signal vs noise? Current default: 5% for notification, 2% for watch. Only real usage reveals the right numbers.
 2. **Daemon location** -- Currently local machine. If laptop sleeps, hot-cadence polling stops. VPS is always-on but adds infrastructure. Decision point: after Phase 3, based on how much the hot cadence actually matters.
-3. **Crucix as sandbox** -- Legion recommended running unmodified Crucix for 4 weeks to develop delta intuition. Optional. Cooper decides if that's useful or a distraction.
-4. **Anchoring mitigation** -- The probability commitment protocol (show deltas first, calibration ranges after Cooper commits) is a workflow choice. Cooper can override anytime.
+3. **Crucix as sandbox** -- Legion recommended running unmodified Crucix for 4 weeks to develop delta intuition. Optional. The editor decides if that's useful or a distraction.
+4. **Anchoring mitigation** -- The probability commitment protocol (show deltas first, calibration ranges after the editor commits) is a workflow choice. The editor can override anytime.
 
 ## Reference
 

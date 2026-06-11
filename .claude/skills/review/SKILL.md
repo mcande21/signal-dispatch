@@ -129,8 +129,8 @@ Task(
   prompt: "Editorial style review for Signal Dispatch issue #{issue-number}.
 
 Read these files:
-- Draft: /path/to/home/projects/signal-dispatch/content/drafts/{issue-number}-{type}.md
-- Style guide: /path/to/home/projects/signal-dispatch/docs/STYLE-GUIDE.md
+- Draft: content/drafts/{issue-number}-{type}.md
+- Style guide: docs/STYLE-GUIDE.md
 
 Review the draft against EVERY rule in the style guide. Check:
 - Word choice (assess not think, probability not chance, etc.)
@@ -353,7 +353,7 @@ Result: PASS / NEEDS WORK / WARN
 
 PASS = all checks clear
 NEEDS WORK = incorrect priors or contradictory updates
-WARN = calibration red flags but not blocking (Cooper decides)
+WARN = calibration red flags but not blocking (the editor decides)
 
 ### Pass 4b: Swarm Calibration (if MiroFish was run)
 
@@ -378,7 +378,7 @@ WARN = calibration red flags but not blocking (Cooper decides)
 - Identify any counter-argument the article does NOT address
 - Flag gaps as "Swarm surface, article silent" -- these are not necessarily errors, but warrant consideration
 
-**Article Integration (if Cooper decides to include):**
+**Article Integration (if the editor decides to include):**
 - Swarm results can appear as a "simulated market response" section
 - Format: "Our swarm simulation of {N} market participants converged on X% probability..."
 - Only include if it adds interpretive value beyond the editorial assessment
@@ -418,7 +418,7 @@ Result: PASS (divergence <15pp on all) / WARN (divergence ≥15pp, review needed
 ```
 
 PASS = all divergences below threshold, no unaddressed counter-arguments that change the thesis
-WARN = divergence ≥15pp or significant gap in counter-argument coverage (Cooper decides)
+WARN = divergence ≥15pp or significant gap in counter-argument coverage (the editor decides)
 SKIPPED = `mirofish-report.md` not present
 
 ### Pass 5: Persona Consistency (Kelly)
@@ -487,9 +487,9 @@ Task(
   prompt: "Persona consistency review for Signal Dispatch issue #{issue-number}.
 
 Read these files:
-- Draft: /path/to/home/projects/signal-dispatch/content/drafts/{issue-number}-{type}.md
-- Persona guide: /path/to/home/projects/signal-dispatch/docs/PERSONA.md
-- Persona config: /path/to/home/projects/signal-dispatch/config/persona.yaml
+- Draft: content/drafts/{issue-number}-{type}.md
+- Persona guide: docs/PERSONA.md
+- Persona config: config/persona.yaml
 
 Review the draft for voice consistency with the Data-Driven Practitioner archetype.
 
@@ -770,11 +770,11 @@ Be blunt. No encouragement -- just honest feedback.",
 7. Dispatch al-Jilani (Pass 7), Garrus (Pass 8), and Vega (Pass 9) in parallel
 8. Synthesize all pass results
 9. Route per table above
-10. Present review summary to Cooper
+10. Present review summary to the editor
 
 ## Review Summary Format
 
-After all passes complete, present this summary to Cooper:
+After all passes complete, present this summary to the editor:
 
 ```markdown
 ## Editorial Review: SD Issue #{issue-number}
@@ -815,10 +815,10 @@ After all passes complete, present this summary to Cooper:
 
 ---
 
-Cooper: Approve for publish, or request fixes?
+The editor: Approve for publish, or request fixes?
 ```
 
-## Cooper Decision Points
+## the editor Decision Points
 
 After review summary:
 
@@ -832,12 +832,12 @@ After review summary:
 - Iterate until PASS
 
 **If WARN on calibration:**
-- Cooper decides: accept the calibration concerns or revise probabilities
+- the editor decides: accept the calibration concerns or revise probabilities
 - WARN is not blocking, but requires explicit approval
 
 **If WARN on swarm calibration (Pass 4b):**
 - Review the swarm's divergence and counter-arguments
-- Cooper decides: investigate the divergence, revise the probability, or accept with justification
+- the editor decides: investigate the divergence, revise the probability, or accept with justification
 - WARN is not blocking -- the swarm is adversarial input, not editorial authority
 - If divergence is large AND the swarm surfaces a counter-argument not in the article, consider whether the thesis needs strengthening
 
@@ -891,7 +891,7 @@ echo '{"predictions": []}' > content/state/probabilities.json
 ```
 
 **If agent returns with errors:**
-Report to Cooper with context. Don't silently fail or skip passes.
+Report to the editor with context. Don't silently fail or skip passes.
 
 ## Notes
 

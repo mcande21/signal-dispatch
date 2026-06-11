@@ -7,7 +7,7 @@ set -e
 FOCUS="${1:-full}"
 if [ "$FOCUS" = "--focus" ]; then FOCUS="${2:-full}"; fi
 
-WORKING_DIR="/path/to/home/projects/signal-dispatch"
+WORKING_DIR="$(cd "$(dirname "$0")" && pwd)"
 WORKER_BUDGET="2.00"
 DATE=$(date '+%Y-%m-%d')
 SCAN_DIR="$WORKING_DIR/content/research/scans"
@@ -93,7 +93,7 @@ WORKER_COUNT=${#DOMAINS[@]}
 # PHASE 0: Ghost Market Adapter Dashboard
 # -----------------------------------------------------------------------
 echo "[Phase 0] Polling Ghost Market adapters..."
-PM_DIR="/path/to/home/projects/prediction-markets"
+PM_DIR="../prediction-markets"
 if [ -f "$PM_DIR/src/cli.py" ]; then
   mkdir -p /tmp/sd-scan/adapters
 

@@ -5,6 +5,7 @@ Auth: None required
 TTL: 12h (filings update on quarterly cycles)
 """
 
+import os
 from datetime import datetime, timezone
 
 import httpx
@@ -23,7 +24,7 @@ VALID_METHODS = {
 }
 
 HEADERS = {
-    "User-Agent": "SignalDispatch/1.0 (contact@example.com)",
+    "User-Agent": f"SignalDispatch/1.0 ({os.environ.get('SD_CONTACT_EMAIL', 'contact@example.com')})",
     "Accept": "application/json",
 }
 

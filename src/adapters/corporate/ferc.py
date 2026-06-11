@@ -7,6 +7,7 @@ Auth: None required
 TTL: 12h
 """
 
+import os
 import asyncio
 from datetime import datetime, timedelta, timezone
 
@@ -21,7 +22,7 @@ FERC_AGENCY_SLUG = "federal-energy-regulatory-commission"
 METHODS = {"search_filings", "search_docket", "search_company"}
 
 HEADERS = {
-    "User-Agent": "SignalDispatch/1.0 (contact@example.com)",
+    "User-Agent": f"SignalDispatch/1.0 ({os.environ.get('SD_CONTACT_EMAIL', 'contact@example.com')})",
     "Accept": "application/json",
 }
 

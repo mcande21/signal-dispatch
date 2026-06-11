@@ -183,10 +183,10 @@ The US commercial inventory data is measuring barrels that exist in Cushing, Okl
 
 ## Key Files Referenced
 
-- `/path/to/home/projects/signal-dispatch/content/research/5/data/eia-signals.json` -- EIA commercial inventory data showing the 24M barrel build
-- `/path/to/home/projects/signal-dispatch/content/research/5/orthogonal-updated.md` -- Legion's original identification of the inventory counter-signal (Section 1E)
-- `/path/to/home/projects/signal-dispatch/content/research/5/web-research-update.md` -- SPR release details, Hormuz escalation timeline, institutional probability updates
-- `/path/to/home/projects/signal-dispatch/content/research/5/synthesis.md` -- Base recession synthesis with energy shock modeling
+- `content/research/5/data/eia-signals.json` -- EIA commercial inventory data showing the 24M barrel build
+- `content/research/5/orthogonal-updated.md` -- Legion's original identification of the inventory counter-signal (Section 1E)
+- `content/research/5/web-research-update.md` -- SPR release details, Hormuz escalation timeline, institutional probability updates
+- `content/research/5/synthesis.md` -- Base recession synthesis with energy shock modeling
 
 ## Sources
 

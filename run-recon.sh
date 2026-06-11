@@ -10,7 +10,7 @@ ISSUE_NUMBER="${2:?Usage: ./run-recon.sh 'topic' issue_number}"
 WORKER_COUNT="${3:-8}"
 WORKER_BUDGET="${4:-2.00}"
 DEEP_PULL_BUDGET="${5:-3.00}"
-WORKING_DIR="/path/to/home/projects/signal-dispatch"
+WORKING_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "=========================================="
 echo "Signal Dispatch Recon Pipeline"

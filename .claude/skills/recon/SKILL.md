@@ -78,7 +78,7 @@ All worker outputs are aggregated into a single file. Legion (synthesis agent) r
 
 ### CHECKPOINT 1: Review Synthesis
 
-Cooper reviews the synthesis and decides:
+The editor reviews the synthesis and decides:
 - Which deep pull targets to pursue
 - Whether any angles are completely missing
 - Whether to add more workers or proceed
@@ -106,7 +106,7 @@ Legion integrates deep pull findings into the synthesis. Then Grunt + Jack run a
 
 ### CHECKPOINT 2: Review Adversarial
 
-Cooper reviews adversarial findings and decides:
+The editor reviews adversarial findings and decides:
 - Does the thesis survive?
 - Any probability adjustments needed?
 - Ready for final brief assembly?
@@ -141,7 +141,7 @@ omni-tool blueprint run sd-recon \
 
 **When invoked as a skill**, Shepard:
 1. Parses arguments
-2. Confirms the research plan with Cooper
+2. Confirms the research plan with the editor
 3. Runs `run-recon.sh` in background
 4. Monitors progress and presents checkpoints
 5. After completion, reads the brief and presents a summary

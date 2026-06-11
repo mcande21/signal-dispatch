@@ -34,7 +34,7 @@ VALID_METHODS = {
 }
 
 HEADERS = {
-    "User-Agent": "SignalDispatch/1.0 (contact@example.com)",
+    "User-Agent": f"SignalDispatch/1.0 ({os.environ.get('SD_CONTACT_EMAIL', 'contact@example.com')})",
     "Accept": "application/json",
 }
 

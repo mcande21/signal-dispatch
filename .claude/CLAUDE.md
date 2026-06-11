@@ -9,11 +9,11 @@ Geopolitical intelligence newsletter combining structured OSINT data feeds with 
 Four skills, executed in sequence for each issue via `/new-issue` mission:
 
 1. **`/intel`** (`.claude/skills/intel/SKILL.md`) -- Full intelligence collection. 5-phase war-room capable research with Ghost Market signals, OSINT, web research, and Legion orthogonal synthesis.
-2. **`/draft`** (`.claude/skills/draft/SKILL.md`) -- Collaborative writing. Cooper and Shepard draft together using templates and persona voice.
+2. **`/draft`** (`.claude/skills/draft/SKILL.md`) -- Collaborative writing. The editor and Shepard draft together using templates and persona voice.
 3. **`/review`** (`.claude/skills/review/SKILL.md`) -- 6-pass editorial review. Style guide (Tali), fact verification (Shepard), probability format, calibration cross-check, persona consistency (Kelly), delta verification (Shepard).
 4. **`/publish`** (`.claude/skills/publish/SKILL.md`) -- Format for Substack, archive, update state, social thread outline.
 
-**This is a collaborative workflow, not an automated pipeline.** Skills provide structure. Cooper gates every phase transition.
+**This is a collaborative workflow, not an automated pipeline.** Skills provide structure. The editor gates every phase transition.
 
 ## Data Pipeline
 
@@ -42,7 +42,7 @@ Self-contained. All adapters live in `src/adapters/` with own venv and dependenc
 
 **Active mission:** `.claude/missions/delta-engine.md` -- Phases 2-5 remaining
 
-**Origin:** Adapters consolidated from prediction-markets project (`/path/to/home/projects/prediction-markets/`). SD is now independent.
+**Origin:** Adapters consolidated from prediction-markets project (`../prediction-markets/`). SD is now independent.
 
 ## Content Types
 
@@ -76,7 +76,7 @@ Self-contained. All adapters live in `src/adapters/` with own venv and dependenc
 | `content/research/` | Research data snapshots per issue |
 | `src/adapters/` | All data source adapters (Ghost Market, OSINT, FRED, NOAA, Kalshi) |
 | `src/delta/` | Delta engine -- daemon, computation, clustering, source polling |
-| `content/state/deltas/thresholds.json` | Per-source threshold config (Cooper-calibrated) |
+| `content/state/deltas/thresholds.json` | Per-source threshold config (editor-calibrated) |
 | `config/com.signaldispatch.delta.plist` | Launchd template for cron scheduling |
 
 ## Delta Engine Alerts
@@ -90,7 +90,7 @@ ls content/state/deltas/alerts/pending/
 If alerts exist, report them before proceeding:
 - Read each alert JSON file
 - Present: source, severity, plain_english description, timestamp
-- Ask Cooper: acknowledge (move to `acknowledged/`) or escalate to Breaking Alert
+- Ask the editor: acknowledge (move to `acknowledged/`) or escalate to Breaking Alert
 
 Alert schema:
 ```json
@@ -138,7 +138,7 @@ omni-tool mirofish report get --project sd-{issue}
 To produce a new issue:
 1. Run `/mission new-issue` with content type and topic
 2. Follow the four-phase workflow: intel → draft → review → publish
-3. Cooper gates every phase transition
+3. The editor gates every phase transition
 
 Or invoke skills individually:
 - `/intel deep_dive Iran` -- Research only

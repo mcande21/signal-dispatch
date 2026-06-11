@@ -239,8 +239,8 @@ Based on the new intelligence, here is how the existing synthesis triggers have 
 
 ## Key Files Referenced
 
-- `/path/to/home/projects/signal-dispatch/content/research/5/recession-synthesis.md` -- 8-worker synthesis (326 lines)
-- `/path/to/home/projects/signal-dispatch/content/research/5/synthesis.md` -- Legion synthesis (174 lines)
+- `content/research/5/recession-synthesis.md` -- 8-worker synthesis (326 lines)
+- `content/research/5/synthesis.md` -- Legion synthesis (174 lines)
 
 ## Sources
 

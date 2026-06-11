@@ -22,7 +22,7 @@ from PIL import Image, ImageDraw, ImageFont
 # Config
 # ---------------------------------------------------------------------------
 
-OUTPUT_PATH = "/path/to/home/projects/signal-dispatch/content/drafts/10-og-image.png"
+OUTPUT_PATH = "content/drafts/10-og-image.png"
 FONT_DIR = "/tmp/sd-og-fonts"
 WIDTH, HEIGHT = 1200, 630
 

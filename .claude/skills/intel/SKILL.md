@@ -30,11 +30,11 @@ This is the core Signal Dispatch workflow. It turns open-source data feeds into 
 
 ## Project Paths
 
-- **Signal Dispatch root:** `/path/to/home/projects/signal-dispatch`
+- **Signal Dispatch root:** `.`
 - **Research output:** `{sd_root}/content/research/{issue-number}/`
 - **Delta state:** `{sd_root}/content/state/deltas/`
 - **Local venv:** `{sd_root}/.venv/bin/python`
-- **Local adapter pattern:** `/path/to/home/projects/signal-dispatch/.venv/bin/python -c "import asyncio; from src.delta.sources import poll_{source}; import json; print(json.dumps(asyncio.run(poll_{source}())))"`
+- **Local adapter pattern:** `.venv/bin/python -c "import asyncio; from src.delta.sources import poll_{source}; import json; print(json.dumps(asyncio.run(poll_{source}())))"`
 
 ## Execution
 
@@ -49,7 +49,7 @@ Merge accumulated delta engine output since the last published issue into a stru
 **Step 0A: Run the merge script**
 
 ```bash
-cd /path/to/home/projects/signal-dispatch && \
+cd . && \
 .venv/bin/python -m src.delta.merge --issue {issue_number} --output content/research/{issue_number}/delta_summary.md
 ```
 
@@ -80,7 +80,7 @@ If the script produces a summary with no significant deltas (all sources clear, 
 
 If the script fails or `content/state/deltas/` does not exist (delta engine not yet running), log a warning and proceed to Phase 1 without the delta summary. Note in the research brief that delta context is unavailable for this issue.
 
-**Step 0D: Surface key signals to Cooper**
+**Step 0D: Surface key signals to the editor**
 
 Before proceeding to Phase 1, present a brief summary:
 
@@ -103,7 +103,7 @@ Full summary: content/research/{issue_number}/delta_summary.md
 Proceed to topic scoping?
 ```
 
-Wait for Cooper to confirm before proceeding to Phase 1.
+Wait for the editor to confirm before proceeding to Phase 1.
 
 ---
 
@@ -114,14 +114,14 @@ Wait for Cooper to confirm before proceeding to Phase 1.
 Different behavior per content type:
 
 **weekly_brief:**
-- Review ALL structured feeds from `/path/to/home/projects/signal-dispatch/config/sources.yaml`
-- Read `/path/to/home/projects/signal-dispatch/content/state/probabilities.json` for active tracking events
+- Review ALL structured feeds from `config/sources.yaml`
+- Read `content/state/probabilities.json` for active tracking events
 - Question: "What moved this cycle across all feeds?"
 
 **breaking_alert:**
 - Validate the triggering anomaly
 - Which feed? What data point? What baseline?
-- Confirm with Cooper: Is this signal-level movement or noise?
+- Confirm with the editor: Is this signal-level movement or noise?
 - Question: "What is the triggering event and historical precedent?"
 
 **deep_dive:**
@@ -150,11 +150,11 @@ Topic-to-source routing table:
 **Step 1B.1: Read Adapter Documentation**
 
 For each Ghost Market source selected above, read its capability doc:
-- Path: `/path/to/home/projects/signal-dispatch/docs/sources/{adapter}.md`
+- Path: `docs/sources/{adapter}.md`
 - These docs list available query parameters, intelligence use cases, valid values, and example queries
 - Use this to construct TARGETED queries in Phase 2 instead of bare default calls
 
-**Missing adapter docs:** Only 9 of 16 adapter docs exist (agsi, comtrade, dolarvzla, ecb, eia_grid, entsog, gdelt, oryx, viirs). If the doc for a selected adapter is missing, read the adapter source directly: `/path/to/home/projects/signal-dispatch/src/adapters/ghost_market/{adapter}.py` -- the docstrings describe capabilities, parameters, and return format.
+**Missing adapter docs:** Only 9 of 16 adapter docs exist (agsi, comtrade, dolarvzla, ecb, eia_grid, entsog, gdelt, oryx, viirs). If the doc for a selected adapter is missing, read the adapter source directly: `src/adapters/ghost_market/{adapter}.py` -- the docstrings describe capabilities, parameters, and return format.
 
 For weekly briefs touching many sources, read only the docs for sources relevant to this cycle's themes. Don't read all 16.
 
@@ -169,11 +169,11 @@ Determine which intelligence tracks to activate:
 | OSINT Execution | Liara produces plan | Geth | Local OSINT adapters (`src/adapters/osint/`) |
 | Web Research | Always (unless --skip-web) | Liara | (web search + synthesis) |
 | Prediction Market Context | Always | Geth | Local Kalshi adapter via `poll_prediction_markets()` |
-| Swarm Validation (MiroFish) | Optional, Cooper opt-in | omni-tool | MiroFish swarm simulation engine |
+| Swarm Validation (MiroFish) | Optional, the editor opt-in | omni-tool | MiroFish swarm simulation engine |
 
 **War-room threshold:** 3+ tracks = parallel dispatch. 1-2 = sequential.
 
-**Present manifest to Cooper for approval before dispatching.**
+**Present manifest to the editor for approval before dispatching.**
 
 Format:
 ```
@@ -227,7 +227,7 @@ If the topic requires fresher data than the daemon's last poll, or if you need a
 
 Live fetch command template:
 ```bash
-cd /path/to/home/projects/signal-dispatch && \
+cd . && \
 .venv/bin/python -c "
 import asyncio, json
 from src.delta.sources import poll_{source}
@@ -248,15 +248,15 @@ print(json.dumps(result, indent=2, default=str))
 Based on topic, select which adapter source files Liara reads for OSINT query planning:
 
 **Iran/geopolitics topics:**
-- `/path/to/home/projects/signal-dispatch/src/adapters/osint/federal_register.py`
+- `src/adapters/osint/federal_register.py`
 
 **Legislation/policy topics:**
-- `/path/to/home/projects/signal-dispatch/src/adapters/osint/federal_register.py`
-- `/path/to/home/projects/signal-dispatch/src/adapters/osint/congress.py`
+- `src/adapters/osint/federal_register.py`
+- `src/adapters/osint/congress.py`
 
 **Election/campaign topics:**
-- `/path/to/home/projects/signal-dispatch/src/adapters/osint/fec.py`
-- `/path/to/home/projects/signal-dispatch/src/adapters/osint/congress.py`
+- `src/adapters/osint/fec.py`
+- `src/adapters/osint/congress.py`
 
 **Multi-topic (weekly brief):**
 - All three: `federal_register.py`, `congress.py`, `fec.py`
@@ -294,7 +294,7 @@ Fetch current Kalshi market data via local adapter. This provides market-implied
 
 Format:
 ```bash
-cd /path/to/home/projects/signal-dispatch && \
+cd . && \
 .venv/bin/python -c "
 import asyncio, json
 from src.delta.sources import poll_prediction_markets
@@ -329,7 +329,7 @@ Example topics:
 For most issues, Phase 0's delta summary is sufficient. Track A fires when:
 - A source's daemon data is stale (check `content/state/deltas/current/{source}.json` mtime)
 - You need a non-default parameterization the daemon doesn't run
-- Cooper explicitly requests fresher data on a specific source
+- the editor explicitly requests fresher data on a specific source
 
 Dispatch one Geth instance per source needing live fetch. Parallel execution for speed.
 
@@ -340,7 +340,7 @@ Task(
   subagent_type: "geth",
   prompt: "Run this command from the signal-dispatch directory:
 
-cd /path/to/home/projects/signal-dispatch && \
+cd . && \
 mkdir -p content/research/{issue-number}/data && \
 .venv/bin/python -c \"
 import asyncio, json
@@ -399,10 +399,10 @@ Task(
   prompt: "Intelligence research for Signal Dispatch {content_type} on {topic}.
 
 Read these files yourself:
-- Source config: /path/to/home/projects/signal-dispatch/config/sources.yaml
-- Persona reference: /path/to/home/projects/signal-dispatch/docs/PERSONA.md
+- Source config: config/sources.yaml
+- Persona reference: docs/PERSONA.md
 {For each selected OSINT adapter:}
-- OSINT adapter source: /path/to/home/projects/signal-dispatch/src/adapters/osint/{adapter}.py
+- OSINT adapter source: src/adapters/osint/{adapter}.py
 
 == CONTEXT ==
 Content type: {weekly_brief | breaking_alert | deep_dive}
@@ -510,7 +510,7 @@ Task(
   subagent_type: "geth",
   prompt: "Run from signal-dispatch directory:
 
-cd /path/to/home/projects/signal-dispatch && \
+cd . && \
 mkdir -p content/research/{issue-number}/data && \
 .venv/bin/python -c \"
 import asyncio, json
@@ -541,7 +541,7 @@ After Liara returns, extract the JSON query plan from her response and write it 
 
 ```
 Write(
-  file_path="/path/to/home/projects/signal-dispatch/content/research/{issue-number}/data/osint-plan.json",
+  file_path="content/research/{issue-number}/data/osint-plan.json",
   content="{Liara's query plan JSON}"
 )
 ```
@@ -553,11 +553,11 @@ Task(
   subagent_type: "geth",
   prompt: "Execute the OSINT query plan for SD #{issue}.
 
-Read the plan: /path/to/home/projects/signal-dispatch/content/research/{issue-number}/data/osint-plan.json
+Read the plan: content/research/{issue-number}/data/osint-plan.json
 
 For each query in the plan, run the appropriate local adapter:
 
-cd /path/to/home/projects/signal-dispatch
+cd .
 
 Federal Register queries:
 .venv/bin/python -c \"
@@ -587,7 +587,7 @@ print(json.dumps(result, default=str))
 \"
 
 Collect all results and write to:
-/path/to/home/projects/signal-dispatch/content/research/{issue-number}/data/osint.json
+content/research/{issue-number}/data/osint.json
 
 Report ONLY: exit code and output file path. Do NOT summarize the results.",
   description: "Execute OSINT plan SD #{issue}",
@@ -604,7 +604,7 @@ Report ONLY: exit code and output file path. Do NOT summarize the results.",
 
 ### Phase 3C: Track E -- Swarm Validation (Optional, MiroFish)
 
-**Fires when:** Cooper opts in during manifest approval. Recommended for issues with strong directional probability claims.
+**Fires when:** The editor opts in during manifest approval. Recommended for issues with strong directional probability claims.
 
 **Depends on:** Synthesis existing (`content/research/{issue-number}/synthesis-updated.md` or `synthesis.md`). Run AFTER Phase 4 synthesis is complete, or after Phase 3 if synthesis doc already exists from a prior run.
 
@@ -637,12 +637,12 @@ omni-tool mirofish report get --project sd-{issue-number}
 **Write the report to:**
 ```
 Write(
-  file_path="/path/to/home/projects/signal-dispatch/content/research/{issue-number}/mirofish-report.md",
+  file_path="content/research/{issue-number}/mirofish-report.md",
   content="{MiroFish report output}"
 )
 ```
 
-**Calibration handoff:** The swarm probability is adversarial input for `/review` Pass 4b. Divergence >15% from editorial estimates triggers deeper thesis examination. Present swarm results to Cooper alongside synthesis before drafting if the divergence is large.
+**Calibration handoff:** The swarm probability is adversarial input for `/review` Pass 4b. Divergence >15% from editorial estimates triggers deeper thesis examination. Present swarm results to the editor alongside synthesis before drafting if the divergence is large.
 
 **Article integration (optional):** If the swarm result adds interpretive value, include a "simulated market response" section in the article. E.g., "Our swarm simulation of 238 market participants converged on X% probability..."
 
@@ -680,14 +680,14 @@ Task(
   prompt: "Synthesize cross-track intelligence for Signal Dispatch #{issue} on {topic}.
 
 Read these files:
-- Delta summary (accumulated daemon signals since last issue): /path/to/home/projects/signal-dispatch/content/research/{issue-number}/delta_summary.md
-- Source config: /path/to/home/projects/signal-dispatch/config/sources.yaml
+- Delta summary (accumulated daemon signals since last issue): content/research/{issue-number}/delta_summary.md
+- Source config: config/sources.yaml
 {If Ghost Market live fetch fired, for each source:}
-- Ghost Market signals ({source}): /path/to/home/projects/signal-dispatch/content/research/{issue-number}/data/{source}-signals.json
+- Ghost Market signals ({source}): content/research/{issue-number}/data/{source}-signals.json
 {If OSINT executed:}
-- OSINT results: /path/to/home/projects/signal-dispatch/content/research/{issue-number}/data/osint.json
+- OSINT results: content/research/{issue-number}/data/osint.json
 {If prediction market fetch ran:}
-- Prediction markets: /path/to/home/projects/signal-dispatch/content/research/{issue-number}/data/markets.json
+- Prediction markets: content/research/{issue-number}/data/markets.json
 
 == CONTEXT ==
 Your prior research findings are available in your conversation history (Track B web research + signal interpretation framework).
@@ -763,7 +763,7 @@ Return a structured synthesis with these sections:
 
 ```
 Write(
-  file_path="/path/to/home/projects/signal-dispatch/content/research/{issue-number}/synthesis.md",
+  file_path="content/research/{issue-number}/synthesis.md",
   content="{Liara's synthesis output}"
 )
 ```
@@ -794,14 +794,14 @@ Task(
 You are NOT reviewing Liara's synthesis for approval. You are providing an independent, orthogonal perspective to catch what she missed or overweighted.
 
 Read these files:
-- Delta summary (accumulated daemon signals since last issue): /path/to/home/projects/signal-dispatch/content/research/{issue-number}/delta_summary.md
-- Liara's synthesis: /path/to/home/projects/signal-dispatch/content/research/{issue-number}/synthesis.md
+- Delta summary (accumulated daemon signals since last issue): content/research/{issue-number}/delta_summary.md
+- Liara's synthesis: content/research/{issue-number}/synthesis.md
 {For each data file produced in Phase 3 -- all live fetch outputs land here:}
-- {source} signals: /path/to/home/projects/signal-dispatch/content/research/{issue-number}/data/{source}-signals.json
+- {source} signals: content/research/{issue-number}/data/{source}-signals.json
 {If OSINT executed:}
-- OSINT results: /path/to/home/projects/signal-dispatch/content/research/{issue-number}/data/osint.json
+- OSINT results: content/research/{issue-number}/data/osint.json
 {If market fetch ran:}
-- Markets: /path/to/home/projects/signal-dispatch/content/research/{issue-number}/data/markets.json
+- Markets: content/research/{issue-number}/data/markets.json
 
 == CONTEXT ==
 Content type: {weekly_brief | breaking_alert | deep_dive}
@@ -885,12 +885,12 @@ Three sections as described above. Be AGGRESSIVE. Your job is to find problems, 
 
 ```
 Write(
-  file_path="/path/to/home/projects/signal-dispatch/content/research/{issue-number}/orthogonal.md",
+  file_path="content/research/{issue-number}/orthogonal.md",
   content="{Legion's orthogonal analysis}"
 )
 ```
 
-#### Step 4C: Present Combined Synthesis to Cooper
+#### Step 4C: Present Combined Synthesis to the editor
 
 **Shepard reads both files:**
 - `content/research/{issue-number}/synthesis.md` (Liara's cross-track synthesis)
@@ -924,15 +924,15 @@ Write(
 - Legion's calibration: {Y}%
 - Recommended: {Z}% (rationale: {why})
 
-**Cooper: Approve the final framing?**
-{Wait for Cooper's decision on probability estimates and any synthesis adjustments}
+**the editor: Approve the final framing?**
+{Wait for the editor's decision on probability estimates and any synthesis adjustments}
 ```
 
-**Cooper gates the next phase.** Do not proceed to Phase 4 without approval.
+**the editor gates the next phase.** Do not proceed to Phase 4 without approval.
 
 ### Phase 5: Assessment Packaging (Shepard)
 
-After Cooper approves synthesis, package the research brief.
+After the editor approves synthesis, package the research brief.
 
 #### Step 5A: Research Brief
 
@@ -1115,7 +1115,7 @@ Task(
   subagent_type: "geth",
   prompt: "Verify Signal Dispatch #{issue} data directory.
 
-List all files in: /path/to/home/projects/signal-dispatch/content/research/{issue-number}/data/
+List all files in: content/research/{issue-number}/data/
 
 Report: Which files are present, their sizes. Note any expected files that are missing based on what sources were active this issue.",
   description: "Verify SD #{issue} data directory",
@@ -1157,11 +1157,11 @@ Note: The delta summary (`delta_summary.md`) serves as the primary data source f
 
 **After archival completes:**
 
-Tell Cooper:
+Tell the editor:
 ```
 Intelligence collection complete for SD #{issue}.
 
-Research brief: /path/to/home/projects/signal-dispatch/content/research/{issue-number}/brief.md
+Research brief: content/research/{issue-number}/brief.md
 
 Data collected:
 - Ghost Market: {N} sources
@@ -1182,13 +1182,13 @@ Ready to proceed to drafting? (Run `/draft {issue-number}` when ready)
 | Delta merge script fails | Check if `content/state/deltas/` exists. If daemon hasn't run, note delta context unavailable and proceed. |
 | Ghost Market live fetch fails | Note in brief ("OONI live fetch failed, using delta summary"). Lower confidence if critical to topic and daemon data is also stale. |
 | Delta summary is empty | Valid -- daemon running but nothing crossed thresholds. Proceed with baseline context. |
-| Liara returns thin results | Note in brief, ask Cooper if more research time needed before proceeding. |
+| Liara returns thin results | Note in brief, ask the editor if more research time needed before proceeding. |
 | OSINT execution fails | Note in brief. OSINT enriches, doesn't gate. Proceed to synthesis. |
 | All live fetches fail | Degrade gracefully to delta summary only. Note this in brief, flag confidence as reduced. |
 | Legion returns empty/generic | BAD SIGN. Legion must find something. If output is "looks good," Shepard rejects and re-dispatches with more aggressive prompt. |
 | Prediction markets fetch returns empty | Valid outcome. Not all topics have active prediction markets. Note absence in brief. |
 | Kalshi adapter fails | Note in brief, proceed without market context. |
-| Issue number collision | Check if issue already exists. Ask Cooper: overwrite or increment? |
+| Issue number collision | Check if issue already exists. Ask the editor: overwrite or increment? |
 
 ## Anti-Patterns
 
@@ -1196,7 +1196,7 @@ Ready to proceed to drafting? (Run `/draft {issue-number}` when ready)
 - Paste JSON data into dispatch prompts → Give agents file paths
 - Let Geth summarize data → Exit codes and file paths only
 - Skip Legion → The orthogonal perspective is the differentiator
-- Auto-proceed to drafting → Cooper gates every phase
+- Auto-proceed to drafting → the editor gates every phase
 - Treat breaking_alert as lightweight → Same depth, different framing
 - Default to market price as assessment → Start from base rate and structured data
 - Accept "looks good" from Legion → He must find problems or he's not trying
@@ -1208,8 +1208,8 @@ Ready to proceed to drafting? (Run `/draft {issue-number}` when ready)
 - **File-based data flow:** Delta daemon → delta summary → agents read files → markdown output. Live fetches when needed.
 - **Agents design analytical frameworks BEFORE seeing data** (Track B signal interpretation framework)
 - **War-room mode for 3+ tracks** (parallel dispatch), sequential for 1-2
-- **Cooper approves track manifest before dispatch** (no autonomous parallel execution without approval)
-- **Cooper reviews synthesis before proceeding to draft** (gate at Phase 3C)
+- **the editor approves track manifest before dispatch** (no autonomous parallel execution without approval)
+- **the editor reviews synthesis before proceeding to draft** (gate at Phase 3C)
 - **Legion is adversarial, not validating** (finds problems, not approval)
 - **Nested skepticism:** Liara synthesizes, Legion stress-tests, Shepard adjudicates
 - **Methodology transparency:** Show all work, all data, all reasoning
@@ -1226,7 +1226,7 @@ Ready to proceed to drafting? (Run `/draft {issue-number}` when ready)
 
 ## Notes
 
-- Signal Dispatch project root: `/path/to/home/projects/signal-dispatch`
+- Signal Dispatch project root: `.`
 - All adapters and the delta engine are self-contained in this project
 - Ghost Market adapters live in `src/adapters/ghost_market/`; poll functions in `src/delta/sources.py`
 - OSINT adapters live in `src/adapters/osint/`; also exposed as `poll_federal_register`, `poll_congress`, `poll_fec` in `src/delta/sources.py`

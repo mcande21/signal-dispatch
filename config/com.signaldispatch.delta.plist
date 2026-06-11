@@ -54,7 +54,7 @@
 
   <!-- Working directory must be the signal-dispatch project root -->
   <key>WorkingDirectory</key>
-  <string>/path/to/home/projects/signal-dispatch</string>
+  <string>/path/to/signal-dispatch</string>
 
   <!-- Run every 6 hours: 00:00, 06:00, 12:00, 18:00 UTC -->
   <key>StartCalendarInterval</key>
@@ -93,14 +93,14 @@
     <string>REPLACE_WITH_REAL_KEY</string>
     <!-- PATH must include python3 and the venv if used -->
     <key>PATH</key>
-    <string>/usr/local/bin:/usr/bin:/bin:/path/to/home/.local/bin</string>
+    <string>/usr/local/bin:/usr/bin:/bin</string>
   </dict>
 
   <!-- Stdout/stderr logs -->
   <key>StandardOutPath</key>
-  <string>/path/to/home/projects/signal-dispatch/content/state/deltas/daemon-hot.log</string>
+  <string>/path/to/signal-dispatch/content/state/deltas/daemon-hot.log</string>
   <key>StandardErrorPath</key>
-  <string>/path/to/home/projects/signal-dispatch/content/state/deltas/daemon-hot-err.log</string>
+  <string>/path/to/signal-dispatch/content/state/deltas/daemon-hot-err.log</string>
 
   <!-- Don't restart if it fails -- let the next scheduled run try -->
   <key>KeepAlive</key>

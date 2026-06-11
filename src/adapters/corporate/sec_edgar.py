@@ -5,6 +5,7 @@ Auth: None required (User-Agent with contact email)
 TTL: 6h (filings update throughout the day)
 """
 
+import os
 import asyncio
 from datetime import datetime, timedelta, timezone
 
@@ -18,7 +19,7 @@ EDGAR_SUBMISSIONS_BASE = "https://data.sec.gov/submissions"
 EDGAR_TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 
 HEADERS = {
-    "User-Agent": "SignalDispatch/1.0 (contact@example.com)",
+    "User-Agent": f"SignalDispatch/1.0 ({os.environ.get('SD_CONTACT_EMAIL', 'contact@example.com')})",
     "Accept": "application/json",
 }
 

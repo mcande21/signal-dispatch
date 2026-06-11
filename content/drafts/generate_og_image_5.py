@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw, ImageFont
 # Config
 # ---------------------------------------------------------------------------
 
-OUTPUT_PATH = "/path/to/home/projects/signal-dispatch/content/drafts/5-og-image.png"
+OUTPUT_PATH = "content/drafts/5-og-image.png"
 FONT_DIR = "/tmp/sd-og-fonts"
 WIDTH, HEIGHT = 1200, 630
 
@@ -57,7 +57,7 @@ BEBAS_URL   = "https://github.com/google/fonts/raw/main/ofl/bebasneue/BebasNeue-
 JAKARTA_URL = "https://github.com/google/fonts/raw/main/ofl/plusjakartasans/PlusJakartaSans%5Bwght%5D.ttf"
 
 # Also check brand directory for local copy
-BRAND_BEBAS = "/path/to/home/projects/signal-dispatch/content/brand/BebasNeue-Regular.ttf"
+BRAND_BEBAS = "content/brand/BebasNeue-Regular.ttf"
 if os.path.exists(BRAND_BEBAS) and not os.path.exists(BEBAS_PATH):
     import shutil
     shutil.copy(BRAND_BEBAS, BEBAS_PATH)

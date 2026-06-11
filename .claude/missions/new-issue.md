@@ -29,7 +29,7 @@ Signal Dispatch wraps the prediction-markets project for structured data (Ghost 
 
 Persona voice: Data-Driven Practitioner. Methodologically rigorous, skin-in-the-game transparent, calm confidence. See `config/persona.yaml` and `docs/PERSONA.md`.
 
-This is collaborative work -- Cooper and Shepard work through each phase together. Skills provide structure, not automation. Each phase produces artifacts that feed the next. Nothing proceeds without Cooper's gate.
+This is collaborative work -- the editor and Shepard work through each phase together. Skills provide structure, not automation. Each phase produces artifacts that feed the next. Nothing proceeds without the editor's gate.
 
 ## Parameters
 
@@ -54,7 +54,7 @@ Before beginning Phase 1:
      "status": "research"
    }
    ```
-4. Confirm with Cooper: "Issue #{number}: {type} on {topic}. Ready to begin research?"
+4. Confirm with the editor: "Issue #{number}: {type} on {topic}. Ready to begin research?"
 
 ## Execution
 
@@ -64,7 +64,7 @@ Before beginning Phase 1:
 
 **Output:** `content/research/{issue-number}/` populated with research artifacts
 
-**Gate:** Cooper reviews research brief, decides whether to proceed to drafting
+**Gate:** The editor reviews research brief, decides whether to proceed to drafting
 
 **On approval:** Update issues.json status to `"drafting"`
 
@@ -78,7 +78,7 @@ Before beginning Phase 1:
 
 **Output:** `content/drafts/{issue-number}-{type}.md`
 
-**Gate:** Cooper reviews draft, decides whether to proceed to review
+**Gate:** The editor reviews draft, decides whether to proceed to review
 
 **On approval:** Update issues.json status to `"review"`
 
@@ -92,7 +92,7 @@ Before beginning Phase 1:
 
 **Output:** Review findings, updated `probabilities.json`
 
-**Gate:** Cooper approves final version
+**Gate:** The editor approves final version
 
 **On approval:** Update issues.json status to `"approved"`
 
@@ -114,7 +114,7 @@ Before beginning Phase 1:
 ## Constraints
 
 - Each phase must complete before the next begins.
-- Cooper gates every phase transition. No auto-progression.
+- the editor gates every phase transition. No auto-progression.
 - Breaking alerts follow the same depth but with urgency framing -- they do NOT skip phases.
 - All probability estimates must have: specific number, basis, resolution criteria.
 - File-based data flow: CLI → JSON → agents read files → markdown output.

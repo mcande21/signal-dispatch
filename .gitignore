@@ -19,3 +19,13 @@ content/state/deltas/alerts/
 
 # SQLite cache
 data/
+
+# macOS cruft
+.DS_Store
+
+# Substack publishing tooling (local-only, not part of the public repo)
+publish_to_substack.py
+probe_substack.py
+probe_notes.py
+probe_output.json
+research/

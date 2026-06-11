@@ -130,11 +130,11 @@ Generate a 1200x630 OG image matching the Signal Dispatch brand theme.
 4. Output to: `content/drafts/{issue-number}-og-image.png`
 5. Upload as cover image in Substack editor after draft creation
 
-### Step 2: Cooper Review (GATE)
+### Step 2: the editor Review (GATE)
 
 Present formatted version + OG image. Last gate before publication.
 
-**Cooper Reviews:**
+**the editor Reviews:**
 - Formatted output visually correct?
 - OG image matches brand?
 - Paywall position appropriate?
@@ -256,7 +256,7 @@ Every probability percentage stated in the article text must exactly match `curr
 
 **Discrepancy = STOP.** Reconcile before proceeding. Either:
 - Correct the article text to match the state file, or
-- Update the state file with the new estimate (adding a history entry) and confirm with Cooper.
+- Update the state file with the new estimate (adding a history entry) and confirm with the editor.
 
 Do not publish an article that disagrees with its own probability ledger.
 
@@ -348,7 +348,7 @@ Generate Twitter/X thread outline (5-7 tweets):
 - Calm confidence: Probability numbers carry weight, not emotional language
 - Show work: Cite sources inline (OONI, Bonbast, Polymarket)
 
-**Present to Cooper for review.** Cooper posts manually. Do not auto-post.
+**Present to the editor for review.** The editor posts manually. Do not auto-post.
 
 **Dry-run mode:** Skip this step. Social threads generated only for actual publications.
 
@@ -372,7 +372,7 @@ docs: publish SD #{issue} -- {type} on {topic}
 docs: publish SD #1 -- weekly_brief on Iran nuclear escalation
 ```
 
-**Do NOT auto-commit.** Confirm with Cooper first:
+**Do NOT auto-commit.** Confirm with the editor first:
 - "Ready to commit publication record?"
 - Show commit message
 - Wait for confirmation
@@ -381,7 +381,7 @@ docs: publish SD #1 -- weekly_brief on Iran nuclear escalation
 
 ## Anti-Patterns
 
-**Don't publish without Cooper's explicit approval at gate**
+**Don't publish without the editor's explicit approval at gate**
 - Step 2 is a hard gate. No publication without "yes".
 
 **Don't skip archive**
@@ -395,7 +395,7 @@ docs: publish SD #1 -- weekly_brief on Iran nuclear escalation
 - No 🚨, no "WW3", no panic triggers.
 
 **Don't auto-commit**
-- Confirm with Cooper. Publication commits are permanent track record entries.
+- Confirm with the editor. Publication commits are permanent track record entries.
 
 ## Outputs
 
@@ -405,11 +405,11 @@ docs: publish SD #1 -- weekly_brief on Iran nuclear escalation
 | `content/published/{issue}-{type}-{date}.md` | Archived published version |
 | `content/state/probabilities.json` | Updated with committed estimates |
 | `content/state/issues.json` | Updated issue status |
-| Social thread outline (presented to Cooper) | Twitter/X amplification |
+| Social thread outline (presented to the editor) | Twitter/X amplification |
 
 ## Notes
 
 - Substack API calls go through `publish_to_substack.py` in the project root.
-- Cooper manually pastes formatted content into Substack interface for now.
+- the editor manually pastes formatted content into Substack interface for now.
 - Full automation pending Substack API stability.
 - Dry-run mode is useful for previewing formatting before gate review.

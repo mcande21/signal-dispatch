@@ -96,7 +96,7 @@ Legion reads all domain reports and produces:
 
 ### CHECKPOINT: Signal Review
 
-Cooper reviews the signal map and decides:
+The editor reviews the signal map and decides:
 - Which signals to pursue for the next issue
 - Whether to launch `/recon` on a specific topic
 - Whether any signals warrant a breaking alert
@@ -169,7 +169,7 @@ The prediction-markets project provides 16 structured data adapters via `pm sign
 Before launching web workers, run the adapter dashboard to establish baselines:
 
 ```bash
-cd /path/to/home/projects/prediction-markets
+cd ../prediction-markets
 pm signals --check --json > /tmp/sd-scan/adapter-dashboard.json
 ```
 
@@ -241,7 +241,7 @@ Prediction market prices that diverge from our structured data assessment repres
 
 ### Baseline + Threshold Logic
 
-Every adapter has documented "normal" and "signal" ranges (from the Ghost Market research playbook at `/path/to/home/projects/prediction-markets/.claude/instructions/ghost-market-research-playbook.md`):
+Every adapter has documented "normal" and "signal" ranges (from the Ghost Market research playbook at `../prediction-markets/.claude/instructions/ghost-market-research-playbook.md`):
 
 | Adapter | Normal Range | Signal Threshold | What It Means |
 |---------|-------------|-----------------|---------------|

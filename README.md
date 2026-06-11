@@ -8,7 +8,7 @@ Geopolitical intelligence newsletter pipeline. Structured OSINT data feeds, a de
 
 ```
  Data adapters  ──►  Delta engine  ──►  Editorial workflow  ──►  Substack
- (src/adapters)      (src/delta)        (intel → draft →        (publish_to_substack.py)
+ (src/adapters)      (src/delta)        (intel → draft →
                                          review → publish)
 ```
 
@@ -66,7 +66,6 @@ Content types: **Weekly Brief** (bi-weekly), **Breaking Alert** (as needed), **D
 | `content/brand/` | Logo/profile asset generators and outputs |
 | `docs/` | Persona reference, style guide, build roadmap, per-source notes |
 | `.claude/` | Skills, missions, and project instructions for the editorial workflow |
-| `publish_to_substack.py` | Substack draft creation/publishing (footnotes, images, sections) |
 | `run-scan.sh` / `run-recon.sh` | Environmental scan / reconnaissance pipelines |
 
 ## Setup
@@ -83,18 +82,15 @@ cp .env.example .env   # fill in the API keys you need
 
 Adapters degrade gracefully: sources whose keys are missing are skipped or fall back to keyless endpoints where available.
 
+Set `SD_CONTACT_EMAIL` to your own contact address — some sources (SEC EDGAR, NWS) require a contact email in the `User-Agent` header and may reject requests without one.
+
 ### Kalshi
 
 Kalshi uses RSA-PSS request signing. Set `KALSHI_KEY_ID` and point `KALSHI_PRIVATE_KEY_PATH` at your private key file (keep it outside version control — `*.pem` is gitignored).
 
 ### Substack
 
-Publishing authenticates with a browser cookie, never stored in the repo:
-
-```bash
-export SUBSTACK_COOKIES="substack.sid=VALUE"
-python publish_to_substack.py content/drafts/{issue}-{type}.md
-```
+The publish phase formats drafts for Substack. The posting scripts themselves are kept out of the repository (gitignored); publishing authenticates with a browser cookie via the `SUBSTACK_COOKIES` environment variable — credentials are never stored in the repo.
 
 ### Delta daemon
 

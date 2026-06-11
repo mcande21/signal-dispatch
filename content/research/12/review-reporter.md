@@ -1,7 +1,7 @@
 # Reporter Review: Signal Dispatch #12 -- "The Gap"
 **Reviewer:** Emily Wong (investigative journalist)
 **Date:** 2026-05-15
-**Draft:** /path/to/home/projects/signal-dispatch/content/drafts/12-deep_dive.md
+**Draft:** content/drafts/12-deep_dive.md
 
 ---
 

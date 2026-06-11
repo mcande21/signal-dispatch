@@ -220,15 +220,15 @@ We find the upward revisions are directionally correct but overshoot by 3-8pp du
 *Consensus reached across 1,183 programs. We recommend Shepard-Commander resolve the Sahm Rule factual discrepancy, model the Section 122 expiration and Hormuz de-escalation scenarios explicitly, and reframe the February payrolls within the 14-month plateau context rather than as a standalone inflection event.*
 
 **Relevant files analyzed:**
-- `/path/to/home/projects/signal-dispatch/content/research/5/delta_summary.md`
-- `/path/to/home/projects/signal-dispatch/content/research/5/recession-synthesis.md`
-- `/path/to/home/projects/signal-dispatch/content/research/5/synthesis.md`
-- `/path/to/home/projects/signal-dispatch/content/research/5/web-research-update.md`
-- `/path/to/home/projects/signal-dispatch/content/research/5/data/fred-T10Y2Y.json`
-- `/path/to/home/projects/signal-dispatch/content/research/5/data/fred-VIXCLS.json`
-- `/path/to/home/projects/signal-dispatch/content/research/5/data/fred-DCOILWTICO.json`
-- `/path/to/home/projects/signal-dispatch/content/research/5/data/fred-UNRATE.json`
-- `/path/to/home/projects/signal-dispatch/content/research/5/data/fred-CPIAUCSL.json`
-- `/path/to/home/projects/signal-dispatch/content/research/5/data/fred-PAYEMS.json`
-- `/path/to/home/projects/signal-dispatch/content/research/5/data/eia-signals.json`
-- `/path/to/home/projects/signal-dispatch/content/research/5/data/telegram-signals.json`
+- `content/research/5/delta_summary.md`
+- `content/research/5/recession-synthesis.md`
+- `content/research/5/synthesis.md`
+- `content/research/5/web-research-update.md`
+- `content/research/5/data/fred-T10Y2Y.json`
+- `content/research/5/data/fred-VIXCLS.json`
+- `content/research/5/data/fred-DCOILWTICO.json`
+- `content/research/5/data/fred-UNRATE.json`
+- `content/research/5/data/fred-CPIAUCSL.json`
+- `content/research/5/data/fred-PAYEMS.json`
+- `content/research/5/data/eia-signals.json`
+- `content/research/5/data/telegram-signals.json`

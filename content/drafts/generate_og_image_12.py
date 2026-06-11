@@ -8,8 +8,8 @@ import os
 import random
 from PIL import Image, ImageDraw, ImageFont
 
-OUTPUT_PATH = "/path/to/home/projects/signal-dispatch/content/drafts/12-og-image.png"
-BEBAS_PATH  = "/path/to/home/projects/signal-dispatch/content/brand/BebasNeue-Regular.ttf"
+OUTPUT_PATH = "content/drafts/12-og-image.png"
+BEBAS_PATH  = "content/brand/BebasNeue-Regular.ttf"
 WIDTH, HEIGHT = 1200, 630
 
 BG_TOP    = (10, 15, 26)

@@ -8,7 +8,7 @@ version: 1.0.0
 
 *"Here's the recipe, not just the meal."*
 
-Collaborative writing phase. Cooper and Shepard draft together using research artifacts and persona voice. This is NOT agent-generated content -- it's human-AI collaborative writing where Shepard proposes sections based on research data and Cooper reviews, modifies, and approves.
+Collaborative writing phase. The editor and Shepard draft together using research artifacts and persona voice. This is NOT agent-generated content -- it's human-AI collaborative writing where Shepard proposes sections based on research data and the editor reviews, modifies, and approves.
 
 ## Invocation
 
@@ -28,7 +28,7 @@ Collaborative writing phase. Cooper and Shepard draft together using research ar
 ## Prerequisites
 
 **Must exist before starting:**
-- `content/research/{issue-number}/brief.md` -- Research phase must be complete and Cooper-approved
+- `content/research/{issue-number}/brief.md` -- Research phase must be complete and editor-approved
 - Research artifacts (data snapshots, web research notes) in research directory
 
 **Files to read before drafting:**
@@ -56,27 +56,27 @@ Collaborative writing phase. Cooper and Shepard draft together using research ar
 
 1. Read `content/state/probabilities.json` for all currently tracked outcomes and their current values
 2. Read `content/research/{issue}/delta_summary.md` for what moved since the last issue
-3. For each tracked outcome, present to Cooper:
+3. For each tracked outcome, present to the editor:
    - The event description
    - Current probability and when it was last revised
    - Relevant deltas from the summary that touch this outcome (by cluster or source)
-4. Wait for Cooper to commit his revised number for each outcome -- he goes first, based on what he saw in the delta summary
-5. After Cooper commits, Shepard may share calibration context:
+4. Wait for the editor to commit his revised number for each outcome -- he goes first, based on what he saw in the delta summary
+5. After the editor commits, Shepard may share calibration context:
    - How similar delta patterns have correlated with past revisions (if history supports it)
-   - Whether Cooper's revision is within or outside the range of historical adjustments for similar signal magnitudes
+   - Whether the editor's revision is within or outside the range of historical adjustments for similar signal magnitudes
    - Frame this as a learning observation, not a correction or recommendation
-6. Cooper may adjust his committed number after seeing calibration context, or hold it -- his call
+6. The editor may adjust his committed number after seeing calibration context, or hold it -- his call
 7. Record final values in `content/state/probabilities.json` using the extended history schema (see below)
 
-**The tone here is collaborative, not procedural.** Shepard is thinking through the evidence with Cooper, not running him through a checklist.
+**The tone here is collaborative, not procedural.** Shepard is thinking through the evidence with the editor, not running him through a checklist.
 
 #### Anti-anchoring rules
 
-- Do NOT suggest probability revision numbers before Cooper commits his
+- Do NOT suggest probability revision numbers before the editor commits his
 - Do NOT present "the system suggests..." or "based on the data, X% seems appropriate" language
-- Present raw deltas and let Cooper form his own judgment
+- Present raw deltas and let the editor form his own judgment
 - Calibration context is shown AFTER commitment as a learning tool, not a prior
-- Cooper can always override -- this is editorial judgment, not model output
+- the editor can always override -- this is editorial judgment, not model output
 
 #### Extended history schema
 
@@ -89,13 +89,13 @@ When recording a revision under this protocol, history entries take additional o
   "issue": 4,
   "note": "...",
   "cooper_initial": 0.45,
-  "calibration_shown": "Similar OONI drop in Jan 2026 correlated with +8-12pp upward revision. Cooper's +10pp is within that range.",
+  "calibration_shown": "Similar OONI drop in Jan 2026 correlated with +8-12pp upward revision. The editor's +10pp is within that range.",
   "delta_cluster": ["iran-internet", "ooni-measurement-count"]
 }
 ```
 
 Fields:
-- `cooper_initial` -- The number Cooper committed before seeing calibration context. Omit if Cooper did not revise (probability unchanged).
+- `cooper_initial` -- The number the editor committed before seeing calibration context. Omit if the editor did not revise (probability unchanged).
 - `calibration_shown` -- Free-text summary of what historical context was shared. Omit if no calibration context was available.
 - `delta_cluster` -- Array of delta cluster IDs or source names that informed this revision. Omit if unclear.
 
@@ -105,13 +105,13 @@ Fields:
 
 ### Step 1: Propose Outline
 
-Shepard reads template and research brief. Proposes section-by-section outline to Cooper:
+Shepard reads template and research brief. Proposes section-by-section outline to the editor:
 - What each section will cover
 - Key data points to include per section
 - Probability updates that map to sections
 - Estimated depth per section
 
-**Cooper reviews and approves or redirects before drafting begins.**
+**the editor reviews and approves or redirects before drafting begins.**
 
 ### Step 2: Section-by-Section Drafting
 
@@ -124,14 +124,14 @@ For each section in the template:
    - Probability format (see below)
    - Template structure for this content type
 
-2. Cooper reviews the section:
+2. The editor reviews the section:
    - Approves as-is
    - Requests modifications
    - Redirects approach
 
 3. Iterate until section approved
 
-**No section proceeds until Cooper approves.** This is collaborative writing, not sequential generation.
+**No section proceeds until the editor approves.** This is collaborative writing, not sequential generation.
 
 ### Step 3: Compile Complete Draft
 
@@ -264,7 +264,7 @@ Structured data may follow findings when data density would interrupt narrative 
 
 **Cross-reference convention.** Reference prior analysis as "Per SD #X, [finding]." Do not re-present unchanged data as new.
 
-**Multi-topic split guidance.** If the article covers 3+ distinct topics, consider companion pieces (as with SD #9 and #10). Flag during Step 1 outline review so Cooper decides before drafting.
+**Multi-topic split guidance.** If the article covers 3+ distinct topics, consider companion pieces (as with SD #9 and #10). Flag during Step 1 outline review so the editor decides before drafting.
 
 ## Output
 
@@ -289,7 +289,7 @@ content/drafts/{issue-number}-{type}.md
 ## Anti-Patterns
 
 **Don't let EDI generate the draft autonomously.**
-This is Shepard + Cooper collaborative writing. Shepard proposes sections based on research data, Cooper reviews and modifies. Not: "EDI, write the draft and return when done."
+This is Shepard + the editor collaborative writing. Shepard proposes sections based on research data, the editor reviews and modifies. Not: "EDI, write the draft and return when done."
 
 **Don't skip probability format.**
 Every estimate needs: number + basis + resolution criteria + prior (if updating). No "I assess this is likely" -- that's not a probability.
@@ -303,7 +303,7 @@ If the writing feels generic, AI-polished, or institutional-bland, read PERSONA.
 **Don't draft without reading research brief thoroughly.**
 The research phase created structured artifacts. Use them. If you find yourself making up context or guessing at data points, stop and return to the research brief.
 
-**Don't proceed without Cooper approval between sections.**
+**Don't proceed without the editor approval between sections.**
 This is not a "generate everything and present at end" workflow. Section-by-section review catches drift early.
 
 ## Workflow Summary
@@ -315,18 +315,18 @@ Read prerequisites (research brief, template, persona, style guide)
     ↓
 [If probabilities.json + delta_summary.md both exist]
 Step 0: Probability Commitment
-    - Present each tracked outcome + relevant deltas to Cooper
-    - Cooper commits revised numbers
+    - Present each tracked outcome + relevant deltas to the editor
+    - the editor commits revised numbers
     - Shepard shares calibration context (after commitment)
     - Record final values with extended history schema
     ↓
-Step 1: Propose section outline to Cooper
+Step 1: Propose section outline to the editor
     ↓
-Cooper approves or redirects
+The editor approves or redirects
     ↓
 For each section:
     - Shepard drafts based on research + persona + style
-    - Cooper reviews
+    - the editor reviews
     - Iterate until approved
     ↓
 Compile complete draft
